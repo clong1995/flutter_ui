@@ -1,4 +1,4 @@
-import 'package:example/pages/ui_panel.dart';
+import 'package:example/pages/ui_state/ui_state.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const UIPanelExample(),
+      home: const UIStateExample(),
     );
   }
 }
@@ -38,11 +38,14 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView(
         children: const [
-          Card(
-            child: Text("banner"),
+          ListTile(
+            title: Text("banner"),
           ),
-          Card(
-            child: Text("panel"),
+          ListTile(
+            title: Text("panel"),
+          ),
+          ListTile(
+            title: Text("state"),
           ),
         ],
       ),

@@ -35,6 +35,8 @@ dependencies:
     path: ../ui_banner
   ui_panel:
     path: ../ui_panel
+  ui_state:
+    path: ../ui_state
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
