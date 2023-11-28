@@ -40,8 +40,8 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
 
   @override
   void dispose() {
-    super.dispose();
     LogicDict.get<T>()?.onDispose();
     LogicDict.remove<T>();
+    super.dispose();
   }
 }

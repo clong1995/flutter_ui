@@ -30,6 +30,7 @@ class _UIBannerState extends State<UIBanner>
   void dispose() {
     super.dispose();
     pageController.dispose();
+    tabController.dispose();
   }
 
   @override
