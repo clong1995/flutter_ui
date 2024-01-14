@@ -1,7 +1,7 @@
 name: ui_panel
 description: A new Flutter project.
 version: 0.0.1
-homepage:
+homepage: ui.flutter
 
 environment:
   sdk: '>=3.1.5 <4.0.0'
