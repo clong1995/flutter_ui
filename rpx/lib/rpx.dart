@@ -34,7 +34,12 @@ class Rpx {
     if (Platform.isWindows || Platform.isMacOS) {
       _width = 375;
     }else{
-      _width = mediaQueryData.size.width;
+      Orientation orientation = mediaQueryData.orientation;
+      if(orientation == Orientation.landscape){
+        _width = mediaQueryData.size.height;
+      }else{
+        _width = mediaQueryData.size.width;
+      }
     }
   }
 }
