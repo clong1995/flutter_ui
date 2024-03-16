@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_state/state_widget.dart';
+import 'package:state/state_widget.dart';
 import 'logic.dart';
 
 class CPage extends StatelessWidget {

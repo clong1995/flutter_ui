@@ -1,6 +1,6 @@
 import 'logic.dart';
 import 'package:flutter/material.dart';
-import 'package:ui_state/state_widget.dart';
+import 'package:state/state_widget.dart';
 
 class APage extends StatelessWidget {
   const APage({super.key});

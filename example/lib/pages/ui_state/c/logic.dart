@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:ui_state/logic.dart';
+import 'package:state/logic.dart';
 
 class _State {
   List<Item> list = [];

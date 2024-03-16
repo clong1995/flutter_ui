@@ -1,4 +1,4 @@
-import 'package:ui_state/logic.dart';
+import 'package:state/logic.dart';
 
 import 'pages/d1/page.dart';
 import 'pages/d2/args.dart';

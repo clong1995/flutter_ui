@@ -1,4 +1,4 @@
-import 'package:ui_state/logic.dart';
+import 'package:state/logic.dart';
 
 //状态数据
 class _State{

@@ -1,4 +1,4 @@
-import 'package:ui_state/logic.dart';
+import 'package:state/logic.dart';
 
 class _State{
   int age = 18;

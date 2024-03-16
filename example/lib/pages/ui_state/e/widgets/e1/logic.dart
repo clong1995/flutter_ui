@@ -1,5 +1,5 @@
 import '../e2/logic.dart';
-import 'package:ui_state/logic.dart';
+import 'package:state/logic.dart';
 
 class _State {
   int count = 0;

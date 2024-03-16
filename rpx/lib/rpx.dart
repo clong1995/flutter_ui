@@ -9,15 +9,15 @@ class Rpx {
   static void init(
     BuildContext context,
   ) {
-    _setWidth(MediaQuery.of(context).size.width);
+    _setWidth(MediaQuery.of(context));
   }
 
   static Widget builder(BuildContext context, Widget child) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
-    _setWidth(mediaQueryData.size.width);
+    _setWidth(mediaQueryData);
     return MediaQuery(
       data: mediaQueryData.copyWith(
-        textScaleFactor: 1,
+        textScaler: const TextScaler.linear(1),
       ),
       child: child,
     );
@@ -30,11 +30,11 @@ class Rpx {
     return _width / 375 * size;
   }
 
-  static void _setWidth(double width) {
+  static void _setWidth(MediaQueryData mediaQueryData) {
     if (Platform.isWindows || Platform.isMacOS) {
       _width = 375;
     }else{
-      _width = width;
+      _width = mediaQueryData.size.width;
     }
   }
 }

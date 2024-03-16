@@ -1,4 +1,4 @@
-import 'package:ui_state/logic.dart';
+import 'package:state/logic.dart';
 
 
 class D3Logic extends Logic<D3Logic, dynamic> {
