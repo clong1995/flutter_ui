@@ -11,7 +11,7 @@ class E1Widget extends StatelessWidget {
     return Container(
       color: Colors.yellow,
       child: StateWidget(
-        logic: E1Logic(context),
+        logic: E1Logic.new,
         builder: (logic) => Row(
           children: [
             const Text("E1组件 "),

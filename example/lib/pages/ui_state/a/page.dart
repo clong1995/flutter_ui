@@ -20,7 +20,7 @@ class APage extends StatelessWidget {
           //1:状态组件
           StateWidget(
             //2:绑定logic和ui绑定
-            logic: ALogic(context),
+            logic: ALogic.new,
             //3:构建UI器
             builder: (logic) => ElevatedButton(
               onPressed: logic.onPressed,

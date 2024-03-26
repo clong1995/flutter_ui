@@ -18,7 +18,7 @@ class DPage extends StatelessWidget {
           const Text("简化了页面注册到路由和页面跳转的逻辑，兼容原生路由和页面跳转"),
           const Text("例子："),
           StateWidget(
-            logic: DLogic(context),
+            logic: DLogic.new,
             builder: (logic) => Column(
               children: [
                 ElevatedButton(

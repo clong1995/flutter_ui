@@ -14,7 +14,7 @@ class D3Page extends StatelessWidget {
         title: const Text("D3页面"),
       ),
       body: StateWidget(
-        logic: D3Logic(context),
+        logic: D3Logic.new,
         builder: (logic) => ElevatedButton(
           onPressed: logic.onPopPressed,
           child: const Text("返回并传回参数"),

@@ -4,7 +4,7 @@ import 'logic.dart';
 import 'src/logic_dict.dart';
 
 class StateWidget<T extends Logic> extends StatefulWidget {
-  final T logic;
+  final T Function(BuildContext context) logic;
   final Widget Function(T) builder;
 
   const StateWidget({
@@ -21,10 +21,11 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   @override
   void initState() {
     super.initState();
-    LogicDict.set<T>(widget.logic);
+    T logic = widget.logic(context);
+    LogicDict.set<T>(logic);
     //WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {});
-    widget.logic.initDict(() => setState(() {}));
-    widget.logic.onInit();
+    logic.initDict(() => setState(() {}));
+    logic.onInit();
   }
 
   @override

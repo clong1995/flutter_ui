@@ -11,7 +11,7 @@ class E2Widget extends StatelessWidget {
     return Container(
         color: Colors.green,
         child: StateWidget(
-          logic: E2Logic(context),
+          logic: E2Logic.new,
           builder: (logic) =>
               Row(
                 children: [

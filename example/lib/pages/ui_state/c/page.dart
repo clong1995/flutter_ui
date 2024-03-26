@@ -19,7 +19,7 @@ class CPage extends StatelessWidget {
           const Text("例子："),
           Expanded(
             child: StateWidget(
-              logic: CLogic(context),
+              logic: CLogic.new,
               builder: (logic) => Column(
                 children: [
                   Expanded(

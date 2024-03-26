@@ -19,7 +19,7 @@ class BPage extends StatelessWidget {
               "为提高性能，只刷新需要变化的部分。\n这些部分往往独立，可以赋予id作为标识，\n或者与业务绑定，会有业务id。"),
           const Text("例子："),
           StateWidget(
-            logic: BLogic(context),
+            logic: BLogic.new,
             builder: (logic) => Column(
               children: [
                 const Text("姓名：王小明"),

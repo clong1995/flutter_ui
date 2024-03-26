@@ -14,7 +14,7 @@ class D2Page extends StatelessWidget {
         title: const Text("D2页面"),
       ),
       body: StateWidget(
-        logic: D2Logic(context),
+        logic: D2Logic.new,
         builder: (logic) => Text("收到的参数:${logic.args?.id}"),
       ),
     );
