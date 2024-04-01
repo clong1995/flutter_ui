@@ -1,5 +1,6 @@
-import 'package:example/pages/ui_state/f/page.dart';
 import 'package:flutter/material.dart';
+
+import 'pages/ui_state/ui_state.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const FPage(),
+      home: const UIStateExample(),
     );
   }
 }
