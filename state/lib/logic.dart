@@ -25,11 +25,11 @@ abstract class Logic<T, E> {
 
   void onDispose() {}
 
-  Map<String, Object? Function(Object?)> globalFunc() => {};
+  Map<String, Future<Object?> Function(Object?)> globalFunc() => {};
 
   S? find<S>() => LogicDict.get<S>();
 
-  Object? Function(Object?)? findGlobalFunc(String funcName) =>
+  Future<Object?> Function(Object?)? findGlobalFunc(String funcName) =>
       FuncDict.get(funcName);
 
   void initDict(void Function() update) {

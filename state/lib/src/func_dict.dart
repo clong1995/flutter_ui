@@ -1,7 +1,7 @@
 class FuncDict {
-  static final Map<String, Object? Function(Object?)> _funcDict = {};
+  static final Map<String, Future<Object?> Function(Object?)> _funcDict = {};
 
-  static void set(Map<String, Object? Function(Object?)> funcDict) {
+  static void set(Map<String, Future<Object?> Function(Object?)> funcDict) {
     if (funcDict.isEmpty) return;
 
     funcDict.forEach((key, value) {
@@ -13,7 +13,7 @@ class FuncDict {
     });
   }
 
-  static Object? Function(Object?)? get(String funcName) => _funcDict[funcName];
+  static Future<Object?> Function(Object?)? get(String funcName) => _funcDict[funcName];
 
   static bool _contain(String funcName) => _funcDict.containsKey(funcName);
 
