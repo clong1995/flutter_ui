@@ -61,7 +61,7 @@ abstract class Logic<T, E> {
     );
   }
 
-  void pop<S>([S? result]) => Navigator.maybePop<S>(
+  void pop<S>([S? result]) => Navigator.pop<S>(
         _context,
         result,
       );
