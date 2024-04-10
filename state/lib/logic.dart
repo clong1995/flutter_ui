@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'src/func_dict.dart';
 import 'src/logic_dict.dart';
 
 abstract class Logic<T, E> {
@@ -27,6 +28,9 @@ abstract class Logic<T, E> {
   Map<String, Object? Function(Object?)> globalFunc() => {};
 
   S? find<S>() => LogicDict.get<S>();
+
+  Object? Function(Object?)? findGlobalFunc(String funcName) =>
+      FuncDict.get(funcName);
 
   void initDict(void Function() update) {
     if (_updateDict.containsKey("_")) {
