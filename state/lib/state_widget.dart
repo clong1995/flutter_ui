@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'logic.dart';
+import 'src/func_dict.dart';
 import 'src/logic_dict.dart';
 
 class StateWidget<T extends Logic> extends StatefulWidget {
@@ -17,7 +18,7 @@ class StateWidget<T extends Logic> extends StatefulWidget {
   State<StateWidget<T>> createState() => _StateWidgetState<T>();
 }
 
-class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
+/*class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   @override
   void initState() {
     super.initState();
@@ -42,6 +43,31 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   @override
   void dispose() {
     LogicDict.get<T>()?.onDispose();
+    LogicDict.remove<T>();
+    super.dispose();
+  }
+}*/
+
+class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
+  late T logic;
+
+  @override
+  void initState() {
+    super.initState();
+    logic = widget.logic(context);
+    LogicDict.set<T>(logic);
+    logic.initDict(() => setState(() {}));
+    logic.onInit();
+    FuncDict.set(logic.globalFunc());
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.builder(logic);
+
+  @override
+  void dispose() {
+    logic.onDispose();
+    FuncDict.remove(logic.globalFunc().keys);
     LogicDict.remove<T>();
     super.dispose();
   }

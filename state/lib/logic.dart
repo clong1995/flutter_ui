@@ -24,6 +24,8 @@ abstract class Logic<T, E> {
 
   void onDispose() {}
 
+  Map<String, Object? Function(Object?)> globalFunc() => {};
+
   S? find<S>() => LogicDict.get<S>();
 
   void initDict(void Function() update) {
@@ -49,7 +51,7 @@ abstract class Logic<T, E> {
     required Widget Function() builder,
   }) {
     return _BuildChildWidget(
-      id :id,
+      id: id,
       builder: builder,
       updateDict: _updateDict,
     );
@@ -112,5 +114,11 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
   Widget build(BuildContext context) {
     widget.updateDict[widget.id] = () => setState(() {});
     return widget.builder();
+  }
+
+  @override
+  void dispose() {
+    widget.updateDict.remove(widget.id);
+    super.dispose();
   }
 }

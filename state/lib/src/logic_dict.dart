@@ -1,4 +1,5 @@
 class LogicDict {
+  //全局logic
   static final Map<int, dynamic> _logicDict = {};
 
   static void set<T>(T logic) {
@@ -13,7 +14,6 @@ class LogicDict {
 
   static bool _contain<T>() => _logicDict.containsKey(T.hashCode);
 
-  static void remove<T>() {
-    _logicDict.remove(T.hashCode);
-  }
+  static void remove<T>() => _logicDict.remove(T.hashCode);
+
 }
