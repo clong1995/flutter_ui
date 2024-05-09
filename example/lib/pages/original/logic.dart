@@ -1,4 +1,4 @@
-part of original;
+part of 'page.dart';
 
 class _State {
   int count = 0;
