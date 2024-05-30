@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Rpx {
@@ -32,7 +29,7 @@ class Rpx {
   }
 
   static void _setWidth(MediaQueryData mediaQueryData) {
-    if (kIsWeb || Platform.isWindows || Platform.isMacOS) {
+    /*if (kIsWeb || Platform.isWindows || Platform.isMacOS) {
       _width = 375;
     } else {
       Orientation orientation = mediaQueryData.orientation;
@@ -41,6 +38,12 @@ class Rpx {
       } else {
         _width = mediaQueryData.size.width;
       }
+    }*/
+    Orientation orientation = mediaQueryData.orientation;
+    if (orientation == Orientation.landscape) {
+      _width = mediaQueryData.size.height;
+    } else {
+      _width = mediaQueryData.size.width;
     }
   }
 }
