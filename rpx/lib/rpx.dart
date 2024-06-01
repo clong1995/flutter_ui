@@ -3,9 +3,13 @@ import 'package:flutter/widgets.dart';
 class Rpx {
   static double _width = 0;
 
-  static init(BuildContext context) {
-    _width = MediaQuery.of(context).size.width;
-    //_width =  WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.width;
+  static init({double? width}) {
+    if (width != null && width != 0) {
+      _width = width;
+    } else {
+      _width = WidgetsBinding
+          .instance.platformDispatcher.views.first.physicalSize.width;
+    }
   }
 
   static double rpx(double size) {
