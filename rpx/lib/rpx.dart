@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'dart:ui';
 
 class Rpx {
   static double _width = 0;
@@ -7,8 +7,8 @@ class Rpx {
     if (width != null && width != 0) {
       _width = width;
     } else {
-      _width = WidgetsBinding
-          .instance.platformDispatcher.views.first.physicalSize.width;
+      FlutterView flutterView = PlatformDispatcher.instance.views.first;
+      _width = flutterView.physicalSize.width / flutterView.devicePixelRatio;
     }
   }
 
