@@ -26,9 +26,6 @@ abstract class Logic<T, E> {
   void onDispose() {}
 
   Map<String, Future<Object?> Function(Object?)> globalFunc() => {};
-
-  S? find<S>() => LogicDict.get<S>();
-
   Future<Object?> Function(Object?)? findGlobalFunc(String funcName) =>
       FuncDict.get(funcName);
 
@@ -39,9 +36,11 @@ abstract class Logic<T, E> {
     _updateDict["_"] = update;
   }
 
+  S? find<S>() => LogicDict.get<S>();
+
   void update([List<String>? ids]) {
     if (ids != null) {
-      _updateDict.forEach((key, func) {
+      _updateDict.forEach((String key, void Function() func) {
         if (ids.contains(key)) func.call();
       });
     } else {

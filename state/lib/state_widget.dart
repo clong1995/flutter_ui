@@ -7,46 +7,18 @@ import 'src/logic_dict.dart';
 class StateWidget<T extends Logic> extends StatefulWidget {
   final T Function(BuildContext context) logic;
   final Widget Function(T) builder;
+  final bool public;
 
   const StateWidget({
     super.key,
     required this.logic,
     required this.builder,
+    this.public = true,
   });
 
   @override
   State<StateWidget<T>> createState() => _StateWidgetState<T>();
 }
-
-/*class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
-  @override
-  void initState() {
-    super.initState();
-    T logic = widget.logic(context);
-    LogicDict.set<T>(logic);
-    //WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {});
-    logic.initDict(() => setState(() {}));
-    logic.onInit();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    T? logic = LogicDict.get<T>();
-    return logic == null
-        ? const Text(
-            "logic not found",
-            style: TextStyle(color: Colors.red),
-          )
-        : widget.builder(logic);
-  }
-
-  @override
-  void dispose() {
-    LogicDict.get<T>()?.onDispose();
-    LogicDict.remove<T>();
-    super.dispose();
-  }
-}*/
 
 class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   late T logic;
@@ -55,10 +27,12 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   void initState() {
     super.initState();
     logic = widget.logic(context);
-    LogicDict.set<T>(logic);
+    if (widget.public) {
+      LogicDict.set<T>(logic);
+      FuncDict.set(logic.globalFunc());
+    }
     logic.initDict(() => setState(() {}));
     logic.onInit();
-    FuncDict.set(logic.globalFunc());
   }
 
   @override
@@ -67,8 +41,10 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   @override
   void dispose() {
     logic.onDispose();
-    FuncDict.remove(logic.globalFunc().keys);
-    LogicDict.remove<T>();
+    if (widget.public) {
+      FuncDict.remove(logic.globalFunc().keys);
+      LogicDict.remove<T>();
+    }
     super.dispose();
   }
 }
