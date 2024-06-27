@@ -25,7 +25,7 @@ class Package {
   }
 
   //注册包，在项目初始化的时候统一注册
-  static void register(List<Register Function()> builders) {
+  static void register(Iterable<Register Function()> builders) {
     for (Register Function() register in builders) {
       Register package = register();
       if (_packages.containsKey(package.name)) {
