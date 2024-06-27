@@ -3,8 +3,8 @@ import 'dart:ui';
 class Rpx {
   static double _width = 0;
 
-  static init({double? width}) {
-    if (width != null && width != 0) {
+  static init([double? width]) {
+    if (width != null) {
       _width = width;
     } else {
       FlutterView flutterView = PlatformDispatcher.instance.views.first;
