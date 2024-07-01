@@ -1,11 +1,11 @@
 name: ui_interactive
 description: "A new Flutter project."
 version: 0.0.1
-homepage:
+homepage: flutter_ui
 
 environment:
-  sdk: '>=3.4.3 <4.0.0'
-  flutter: ">=1.17.0"
+  sdk: '>=3.3.4 <4.0.0'
+  flutter: ">=3.19.6"
 
 dependencies:
   flutter:
