@@ -259,8 +259,8 @@ class _UiTableState extends State<UiTable> {
                                   child: Container(
                                     color: Colors.orange,
                                     width: double.infinity,
-                                    height: (widget.data.length - 1) *
-                                        widget.cellHeight,
+                                    height: 100,
+                                    //height: (widget.data.length - 1) * widget.cellHeight,
                                   ),
                                 ),
                               ),
