@@ -231,13 +231,13 @@ class _UiTableState extends State<UiTable> {
                       Expanded(
                         child: Row(
                           children: [
-                            //内容右边
                             Expanded(
                               child: ListView.builder(
                                 controller: scrollVerticalRightFix,
                                 itemCount: widget.data.length - 1,
                                 itemBuilder: (BuildContext context, int index) {
                                   return Container(
+                                    color: Colors.yellow,
                                     height: widget.cellHeight,
                                     decoration: BoxDecoration(
                                       border: index == 0
