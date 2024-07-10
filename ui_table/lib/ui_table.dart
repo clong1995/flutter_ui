@@ -3,14 +3,16 @@ import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 
 class UiTable extends StatefulWidget {
   final List<double> cellsWidth;
+  final double headerHeight;
   final double cellHeight;
   final List<List<Widget>> data;
 
   const UiTable({
     super.key,
     required this.cellsWidth,
-    this.cellHeight = 40,
     required this.data,
+    this.headerHeight = 40,
+    this.cellHeight = 40,
   });
 
   @override
@@ -20,7 +22,6 @@ class UiTable extends StatefulWidget {
 class _UiTableState extends State<UiTable> {
   final BorderSide borderSize = const BorderSide(color: Colors.grey);
   final double track = 10;
-  final double topFix = 40;
   late final double leftFix;
   late final double rightFix;
 
@@ -64,7 +65,7 @@ class _UiTableState extends State<UiTable> {
       child: Column(
         children: [
           Container(
-            height: topFix,
+            height: widget.headerHeight,
             decoration: BoxDecoration(
               border: Border(
                 bottom: borderSize,
