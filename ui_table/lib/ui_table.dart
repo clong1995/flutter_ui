@@ -200,6 +200,9 @@ class _UiTableState extends State<UiTable> {
                       ),
                       SizedBox(
                         height: track,
+                        width: widget.cellsWidth
+                            .sublist(1, widget.cellsWidth.length - 1)
+                            .reduce((a, b) => a + b),
                         child: Scrollbar(
                           controller: scrollHorizontalBar,
                           thumbVisibility: true,
@@ -208,7 +211,6 @@ class _UiTableState extends State<UiTable> {
                             controller: scrollHorizontalBar,
                             child: Container(
                               color: Colors.orange,
-                              height: double.infinity,
                               width: widget.cellsWidth
                                   .sublist(1, widget.cellsWidth.length - 1)
                                   .reduce((a, b) => a + b),
