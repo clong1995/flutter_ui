@@ -8,8 +8,8 @@ class UiTable extends StatefulWidget {
 
   const UiTable({
     super.key,
-    required this.cellHeight,
     required this.cellsWidth,
+    this.cellHeight = 40,
     required this.data,
   });
 
