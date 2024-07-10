@@ -259,9 +259,9 @@ class _UiTableState extends State<UiTable> {
                                   controller: scrollVerticalBar,
                                   child: Container(
                                     color: Colors.green,
-                                    width: double.infinity,
-                                    height: 100,
-                                    //height: (widget.data.length - 1) * widget.cellHeight,
+                                    //width: double.infinity,
+                                    //height: 100,
+                                    height: (widget.data.length - 1) * widget.cellHeight,
                                   ),
                                 ),
                               ),
