@@ -206,7 +206,8 @@ class _UiTableState extends State<UiTable> {
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             controller: scrollHorizontalBar,
-                            child: SizedBox(
+                            child: Container(
+                              color: Colors.orange,
                               height: double.infinity,
                               width: widget.cellsWidth
                                   .sublist(1, widget.cellsWidth.length - 1)
@@ -255,7 +256,8 @@ class _UiTableState extends State<UiTable> {
                                 thumbVisibility: true,
                                 child: SingleChildScrollView(
                                   controller: scrollVerticalBar,
-                                  child: SizedBox(
+                                  child: Container(
+                                    color: Colors.orange,
                                     width: double.infinity,
                                     height: (widget.data.length - 1) *
                                         widget.cellHeight,
