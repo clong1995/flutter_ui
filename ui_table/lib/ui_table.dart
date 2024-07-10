@@ -251,13 +251,14 @@ class _UiTableState extends State<UiTable> {
                             ),
                             SizedBox(
                               width: track,
+                              height: (widget.data.length - 1) * widget.cellHeight,
                               child: Scrollbar(
                                 controller: scrollVerticalBar,
                                 thumbVisibility: true,
                                 child: SingleChildScrollView(
                                   controller: scrollVerticalBar,
                                   child: Container(
-                                    color: Colors.orange,
+                                    color: Colors.green,
                                     width: double.infinity,
                                     height: 100,
                                     //height: (widget.data.length - 1) * widget.cellHeight,
