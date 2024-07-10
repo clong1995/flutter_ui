@@ -120,17 +120,13 @@ class _UiTableState extends State<UiTable> {
           Expanded(
             child: Row(
               children: [
-                //内容左边
                 Container(
                   width: leftFix,
                   decoration: BoxDecoration(
-                    border: Border(
-                      right: borderSize,
-                    ),
+                    border: Border(right: borderSize),
                   ),
                   child: Column(
                     children: [
-                      //内容左边
                       Expanded(
                         child: ListView.builder(
                           controller: scrollVerticalLeftFix,
@@ -139,11 +135,8 @@ class _UiTableState extends State<UiTable> {
                             return Container(
                               height: widget.cellHeight,
                               decoration: BoxDecoration(
-                                border: index == 0
-                                    ? null
-                                    : Border(
-                                        top: borderSize,
-                                      ),
+                                border:
+                                    index == 0 ? null : Border(top: borderSize),
                               ),
                               child: widget.data[index + 1].first,
                             );
@@ -213,7 +206,8 @@ class _UiTableState extends State<UiTable> {
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             controller: scrollHorizontalBar,
-                            child: Container(
+                            child: SizedBox(
+                              height: double.infinity,
                               width: widget.cellsWidth
                                   .sublist(1, widget.cellsWidth.length - 1)
                                   .reduce((a, b) => a + b),
@@ -261,7 +255,8 @@ class _UiTableState extends State<UiTable> {
                                 thumbVisibility: true,
                                 child: SingleChildScrollView(
                                   controller: scrollVerticalBar,
-                                  child: Container(
+                                  child: SizedBox(
+                                    width: double.infinity,
                                     height: (widget.data.length - 1) *
                                         widget.cellHeight,
                                   ),
