@@ -21,7 +21,7 @@ class UiTable extends StatefulWidget {
 
 class _UiTableState extends State<UiTable> {
   final BorderSide borderSize = const BorderSide(color: Colors.grey);
-  final double track = 10;
+  final double track = 100;
   late final double leftFix;
   late final double rightFix;
 
