@@ -65,7 +65,9 @@ class _UiTableState extends State<UiTable> {
       ),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey.shade200),
+          border: Border.all(
+            color: Colors.grey.shade200,
+          ),
         ),
         child: Column(
           children: [
@@ -74,7 +76,9 @@ class _UiTableState extends State<UiTable> {
               child: Row(
                 children: [
                   _buildLeftFixPanel(),
-                  Expanded(child: _buildMovableContentPanel()),
+                  Expanded(
+                    child: _buildMovableContentPanel(),
+                  ),
                   _buildRightFixPanel(),
                 ],
               ),
@@ -102,33 +106,35 @@ class _UiTableState extends State<UiTable> {
                 itemCount: widget.data.length - 1,
                 itemBuilder: (BuildContext context, int index) => Container(
                   height: widget.cellHeight,
-                  decoration: BoxDecoration(
-                    border: index == 0
-                        ? null
-                        : Border(
+                  decoration: index == 0
+                      ? null
+                      : BoxDecoration(
+                          border: Border(
                             top: borderSize,
                           ),
-                  ),
+                        ),
                   child: Row(
                     children: widget.data[index + 1]
                         .sublist(1, widget.data[index + 1].length - 1)
                         .asMap()
                         .entries
-                        .map((MapEntry<int, Widget> e) => Container(
-                              height: double.infinity,
-                              width: widget.cellsWidth[e.key + 1],
-                              decoration: BoxDecoration(
-                                border: e.key == 0
-                                    ? null
-                                    : Border(
-                                        left: borderSize,
-                                      ),
-                              ),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: e.value,
-                              ),
-                            ))
+                        .map(
+                          (MapEntry<int, Widget> e) => Container(
+                            height: double.infinity,
+                            width: widget.cellsWidth[e.key + 1],
+                            decoration: e.key == 0
+                                ? null
+                                : BoxDecoration(
+                                    border: Border(
+                                      left: borderSize,
+                                    ),
+                                  ),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: e.value,
+                            ),
+                          ),
+                        )
                         .toList(),
                   ),
                 ),
@@ -161,7 +167,11 @@ class _UiTableState extends State<UiTable> {
       width: rightFix,
       decoration: BoxDecoration(
         border: Border(
-            left: borderSize.copyWith(width: .3, color: Colors.grey.shade300)),
+          left: borderSize.copyWith(
+            width: .3,
+            color: Colors.grey.shade300,
+          ),
+        ),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
@@ -195,13 +205,11 @@ class _UiTableState extends State<UiTable> {
                     itemCount: widget.data.length - 1,
                     itemBuilder: (BuildContext context, int index) => Container(
                       height: widget.cellHeight,
-                      decoration: BoxDecoration(
-                        border: index == 0
-                            ? null
-                            : Border(
-                                top: borderSize,
-                              ),
-                      ),
+                      decoration: index == 0
+                          ? null
+                          : BoxDecoration(
+                              border: Border(top: borderSize),
+                            ),
                       child: widget.data[index + 1].last,
                     ),
                   ),
@@ -215,7 +223,9 @@ class _UiTableState extends State<UiTable> {
                       controller: scrollVerticalBar,
                       itemCount: widget.data.length - 1,
                       itemBuilder: (BuildContext context, int index) =>
-                          SizedBox(height: widget.cellHeight),
+                          SizedBox(
+                        height: widget.cellHeight,
+                      ),
                     ),
                   ),
                 ),
