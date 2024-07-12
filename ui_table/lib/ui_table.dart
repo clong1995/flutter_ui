@@ -20,7 +20,8 @@ class UiTable extends StatefulWidget {
 }
 
 class _UiTableState extends State<UiTable> {
-  final BorderSide borderSize = const BorderSide(color: Colors.grey);
+  final BorderSide borderSize =
+      const BorderSide(color: Colors.grey, width: 0.3);
   final double track = 10;
   late final double leftFix;
   late final double rightFix;
@@ -64,212 +65,313 @@ class _UiTableState extends State<UiTable> {
       ),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
+          border: Border.all(color: Colors.grey.shade200),
         ),
         child: Column(
           children: [
-            Container(
-              height: widget.headerHeight,
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: borderSize,
-                ),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    width: leftFix,
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                      border: Border(
-                        right: borderSize,
-                      ),
-                    ),
-                    child: widget.data.first.first,
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      controller: scrollHorizontalLeftFix,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: widget.data.first.length - 2,
-                      itemBuilder: (BuildContext context, int index)=>Container(
-                        width: widget.cellsWidth[index + 1],
-                        decoration: BoxDecoration(
-                          border: index == 0
-                              ? null
-                              : Border(
-                            left: borderSize,
-                          ),
-                        ),
-                        child: widget.data.first[index + 1],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: rightFix - track,
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                      border: Border(
-                        left: borderSize,
-                      ),
-                    ),
-                    child: widget.data.first.last,
-                  ),
-                  SizedBox(width: track),
-                ],
-              ),
-            ),
+            _buildHeader(),
             Expanded(
               child: Row(
                 children: [
-                  Container(
-                    width: leftFix,
-                    decoration: BoxDecoration(
-                      border: Border(right: borderSize),
-                    ),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            controller: scrollVerticalLeftFix,
-                            itemCount: widget.data.length - 1,
-                            itemBuilder: (BuildContext context, int index) =>Container(
-                              height: widget.cellHeight,
-                              decoration: BoxDecoration(
-                                border: index == 0
-                                    ? null
-                                    : Border(top: borderSize),
-                              ),
-                              child: widget.data[index + 1].first,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: track),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            controller: scrollHorizontalCenter,
-                            child: SizedBox(
-                              width: widget.cellsWidth
-                                  .sublist(1, widget.cellsWidth.length - 1)
-                                  .reduce((a, b) => a + b),
-                              child: ListView.builder(
-                                controller: scrollVerticalCenter,
-                                itemCount: widget.data.length - 1,
-                                itemBuilder: (BuildContext context, int index)=>Container(
-                                  height: widget.cellHeight,
-                                  decoration: BoxDecoration(
-                                    border: index == 0
-                                        ? null
-                                        : Border(
-                                      top: borderSize,
-                                    ),
-                                  ),
-                                  child: Row(
-                                    children: widget.data[index + 1]
-                                        .sublist(1,
-                                        widget.data[index + 1].length - 1)
-                                        .asMap()
-                                        .entries
-                                        .map((MapEntry<int, Widget> e) =>Container(
-                                      height: double.infinity,
-                                      width: widget.cellsWidth[e.key + 1],
-                                      decoration: BoxDecoration(
-                                        border: e.key == 0
-                                            ? null
-                                            : Border(
-                                          left: borderSize,
-                                        ),
-                                      ),
-                                      child: e.value,
-                                    )).toList(),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: track,
-                          child: Scrollbar(
-                            thumbVisibility: true,
-                            controller: scrollHorizontalBar,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              controller: scrollHorizontalBar,
-                              child: SizedBox(
-                                width: widget.cellsWidth
-                                    .sublist(1, widget.cellsWidth.length - 1)
-                                    .reduce((a, b) => a + b),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: rightFix,
-                    decoration: BoxDecoration(
-                      border: Border(left: borderSize),
-                    ),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: ListView.builder(
-                                  controller: scrollVerticalRightFix,
-                                  itemCount: widget.data.length - 1,
-                                  itemBuilder:
-                                      (BuildContext context, int index) =>
-                                          Container(
-                                    height: widget.cellHeight,
-                                    decoration: BoxDecoration(
-                                      border: index == 0
-                                          ? null
-                                          : Border(
-                                              top: borderSize,
-                                            ),
-                                    ),
-                                    child: widget.data[index + 1].last,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: track,
-                                child: Scrollbar(
-                                  thumbVisibility: true,
-                                  controller: scrollVerticalBar,
-                                  child: ListView.builder(
-                                    controller: scrollVerticalBar,
-                                    itemCount: widget.data.length - 1,
-                                    itemBuilder:
-                                        (BuildContext context, int index) =>
-                                            SizedBox(height: widget.cellHeight),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: track),
-                      ],
-                    ),
-                  ),
+                  _buildLeftFixPanel(),
+                  Expanded(child: _buildMovableContentPanel()),
+                  _buildRightFixPanel(),
                 ],
               ),
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildMovableContentPanel() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            controller: scrollHorizontalCenter,
+            child: SizedBox(
+              width: widget.cellsWidth
+                  .sublist(1, widget.cellsWidth.length - 1)
+                  .reduce((a, b) => a + b),
+              child: ListView.builder(
+                controller: scrollVerticalCenter,
+                itemCount: widget.data.length - 1,
+                itemBuilder: (BuildContext context, int index) => Container(
+                  height: widget.cellHeight,
+                  decoration: BoxDecoration(
+                    border: index == 0
+                        ? null
+                        : Border(
+                            top: borderSize,
+                          ),
+                  ),
+                  child: Row(
+                    children: widget.data[index + 1]
+                        .sublist(1, widget.data[index + 1].length - 1)
+                        .asMap()
+                        .entries
+                        .map((MapEntry<int, Widget> e) => Container(
+                              height: double.infinity,
+                              width: widget.cellsWidth[e.key + 1],
+                              decoration: BoxDecoration(
+                                border: e.key == 0
+                                    ? null
+                                    : Border(
+                                        left: borderSize,
+                                      ),
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: e.value,
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: track,
+          child: Scrollbar(
+            thumbVisibility: true,
+            controller: scrollHorizontalBar,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              controller: scrollHorizontalBar,
+              child: SizedBox(
+                width: widget.cellsWidth
+                    .sublist(1, widget.cellsWidth.length - 1)
+                    .reduce((a, b) => a + b),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRightFixPanel() {
+    return Container(
+      width: rightFix,
+      decoration: BoxDecoration(
+        border: Border(
+            left: borderSize.copyWith(width: .3, color: Colors.grey.shade300)),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.01),
+            spreadRadius: 1,
+            blurRadius: 1,
+            offset: const Offset(-2, 0), // First right side shadow
+          ),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: const Offset(-3, 0), // Second right side shadow
+          ),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            spreadRadius: 1,
+            blurRadius: 6,
+            offset: const Offset(-3, 0), // Third right side shadow
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    controller: scrollVerticalRightFix,
+                    itemCount: widget.data.length - 1,
+                    itemBuilder: (BuildContext context, int index) => Container(
+                      height: widget.cellHeight,
+                      decoration: BoxDecoration(
+                        border: index == 0
+                            ? null
+                            : Border(
+                                top: borderSize,
+                              ),
+                      ),
+                      child: widget.data[index + 1].last,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: track,
+                  child: Scrollbar(
+                    thumbVisibility: true,
+                    controller: scrollVerticalBar,
+                    child: ListView.builder(
+                      controller: scrollVerticalBar,
+                      itemCount: widget.data.length - 1,
+                      itemBuilder: (BuildContext context, int index) =>
+                          SizedBox(height: widget.cellHeight),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: track),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLeftFixPanel() {
+    return Container(
+      width: leftFix,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.01),
+            spreadRadius: 1,
+            blurRadius: 1,
+            offset: const Offset(2, 0), // First right side shadow
+          ),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            spreadRadius: 1,
+            blurRadius: 3,
+            offset: const Offset(3, 0), // Second right side shadow
+          ),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.03),
+            spreadRadius: 1,
+            blurRadius: 6,
+            offset: const Offset(3, 0), // Third right side shadow
+          ),
+        ],
+        border: Border(right: borderSize.copyWith(color: Colors.grey.shade300)),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              controller: scrollVerticalLeftFix,
+              itemCount: widget.data.length - 1,
+              itemBuilder: (BuildContext context, int index) => Container(
+                height: widget.cellHeight,
+                decoration: BoxDecoration(
+                  border: index == 0 ? null : Border(top: borderSize),
+                ),
+                child: Align(
+                    alignment: Alignment.center,
+                    child: widget.data[index + 1].first),
+              ),
+            ),
+          ),
+          SizedBox(height: track),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Container(
+      height: widget.headerHeight,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          bottom: borderSize.copyWith(width: .3, color: Colors.grey.shade300),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            spreadRadius: 5,
+            blurRadius: 10,
+            offset: const Offset(0, 3), // First shadow
+          ),
+          BoxShadow(
+            color: Colors.blue.withOpacity(0.04),
+            spreadRadius: 2,
+            blurRadius: 6,
+            offset: const Offset(0, -3), // Second shadow
+          ),
+          BoxShadow(
+            color: Colors.blue.withOpacity(0.04),
+            spreadRadius: 2,
+            blurRadius: 6,
+            offset: const Offset(-3, 3), // Third shadow
+          ),
+        ],
+      ),
+      child: DefaultTextStyle(
+        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        child: Row(
+          children: [
+            _buildLeftFixHeader(),
+            Expanded(
+              child: _buildMovableHeader(),
+            ),
+            _buildRightFixHeader(),
+            SizedBox(width: track),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container _buildRightFixHeader() {
+    return Container(
+      width: rightFix - track,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border(
+          left: borderSize,
+        ),
+      ),
+      child: Align(alignment: Alignment.center, child: widget.data.first.last),
+    );
+  }
+
+  Widget _buildMovableHeader() {
+    return ListView.builder(
+      controller: scrollHorizontalLeftFix,
+      scrollDirection: Axis.horizontal,
+      itemCount: widget.data.first.length - 2,
+      itemBuilder: (BuildContext context, int index) => Container(
+        width: widget.cellsWidth[index + 1],
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: index == 0
+              ? null
+              : Border(
+                  left: borderSize,
+                ),
+        ),
+        child: Align(
+          alignment: Alignment.center,
+          child: widget.data.first[index + 1],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLeftFixHeader() {
+    return Container(
+      width: leftFix,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        border: Border(
+          right: borderSize,
+        ),
+      ),
+      child: Align(
+        alignment: Alignment.center,
+        child: widget.data.first.first,
       ),
     );
   }
