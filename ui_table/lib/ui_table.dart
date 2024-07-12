@@ -3,14 +3,16 @@ import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 
 class UiTable extends StatefulWidget {
   final List<double> cellsWidth;
+  final List<List<Widget>> data;
   final double headerHeight;
   final double cellHeight;
-  final List<List<Widget>> data;
+  final BorderSide? borderSide;
 
   const UiTable({
     super.key,
     required this.cellsWidth,
     required this.data,
+    this.borderSide,
     this.headerHeight = 40,
     this.cellHeight = 40,
   });
@@ -20,11 +22,10 @@ class UiTable extends StatefulWidget {
 }
 
 class _UiTableState extends State<UiTable> {
-  final BorderSide borderSize =
-      const BorderSide(color: Colors.grey, width: 0.3);
   final double track = 10;
   late final double leftFix;
   late final double rightFix;
+  late final BorderSide borderSide;
 
   late ScrollController scrollVerticalLeftFix;
   late ScrollController scrollVerticalRightFix;
@@ -47,6 +48,8 @@ class _UiTableState extends State<UiTable> {
     leftFix = widget.cellsWidth.first;
     rightFix = widget.cellsWidth.last + track;
 
+    borderSide = widget.borderSide ?? const BorderSide(color: Colors.grey);
+
     scrollVerticalLeftFix = _verticalControllers.addAndGet();
     scrollVerticalRightFix = _verticalControllers.addAndGet();
     scrollVerticalCenter = _verticalControllers.addAndGet();
@@ -63,33 +66,36 @@ class _UiTableState extends State<UiTable> {
       behavior: const ScrollBehavior().copyWith(
         scrollbars: false,
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.grey.shade200,
-          ),
-        ),
-        child: Column(
-          children: [
-            _buildHeader(),
-            Expanded(
-              child: Row(
-                children: [
-                  _buildLeftFixPanel(),
-                  Expanded(
-                    child: _buildMovableContentPanel(),
-                  ),
-                  _buildRightFixPanel(),
-                ],
+      child: Column(
+        children: [
+          Row(
+            children: [
+              _buildFixHeaderLeft(),
+              Expanded(
+                child: _buildFixHeaderCenter(),
               ),
-            )
-          ],
-        ),
+              _buildFixHeaderRight(),
+              SizedBox(width: track),
+            ],
+          ),
+          Expanded(
+            child: Row(
+              children: [
+                _buildLeftFixPanel(),
+                Expanded(
+                  child: _buildMovableContentPanel(),
+                ),
+                _buildRightFixPanel(),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
 
-  Widget _buildMovableContentPanel() {
+  //完成
+  Column _buildMovableContentPanel() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -110,7 +116,7 @@ class _UiTableState extends State<UiTable> {
                       ? null
                       : BoxDecoration(
                           border: Border(
-                            top: borderSize,
+                            top: borderSide,
                           ),
                         ),
                   child: Row(
@@ -126,13 +132,10 @@ class _UiTableState extends State<UiTable> {
                                 ? null
                                 : BoxDecoration(
                                     border: Border(
-                                      left: borderSize,
+                                      left: borderSide,
                                     ),
                                   ),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: e.value,
-                            ),
+                            child: e.value,
                           ),
                         )
                         .toList(),
@@ -162,38 +165,10 @@ class _UiTableState extends State<UiTable> {
     );
   }
 
-  Widget _buildRightFixPanel() {
-    return Container(
+  //完成
+  SizedBox _buildRightFixPanel() {
+    return SizedBox(
       width: rightFix,
-      decoration: BoxDecoration(
-        border: Border(
-          left: borderSize.copyWith(
-            width: .3,
-            color: Colors.grey.shade300,
-          ),
-        ),
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.01),
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: const Offset(-2, 0), // First right side shadow
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.02),
-            spreadRadius: 1,
-            blurRadius: 3,
-            offset: const Offset(-3, 0), // Second right side shadow
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.03),
-            spreadRadius: 1,
-            blurRadius: 6,
-            offset: const Offset(-3, 0), // Third right side shadow
-          ),
-        ],
-      ),
       child: Column(
         children: [
           Expanded(
@@ -205,11 +180,12 @@ class _UiTableState extends State<UiTable> {
                     itemCount: widget.data.length - 1,
                     itemBuilder: (BuildContext context, int index) => Container(
                       height: widget.cellHeight,
-                      decoration: index == 0
-                          ? null
-                          : BoxDecoration(
-                              border: Border(top: borderSize),
-                            ),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: index == 0 ? BorderSide.none : borderSide,
+                          left: borderSide,
+                        ),
+                      ),
                       child: widget.data[index + 1].last,
                     ),
                   ),
@@ -238,33 +214,10 @@ class _UiTableState extends State<UiTable> {
     );
   }
 
-  Widget _buildLeftFixPanel() {
-    return Container(
+  //完成
+  SizedBox _buildLeftFixPanel() {
+    return SizedBox(
       width: leftFix,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.01),
-            spreadRadius: 1,
-            blurRadius: 1,
-            offset: const Offset(2, 0), // First right side shadow
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.02),
-            spreadRadius: 1,
-            blurRadius: 3,
-            offset: const Offset(3, 0), // Second right side shadow
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.03),
-            spreadRadius: 1,
-            blurRadius: 6,
-            offset: const Offset(3, 0), // Third right side shadow
-          ),
-        ],
-        border: Border(right: borderSize.copyWith(color: Colors.grey.shade300)),
-      ),
       child: Column(
         children: [
           Expanded(
@@ -274,11 +227,12 @@ class _UiTableState extends State<UiTable> {
               itemBuilder: (BuildContext context, int index) => Container(
                 height: widget.cellHeight,
                 decoration: BoxDecoration(
-                  border: index == 0 ? null : Border(top: borderSize),
+                  border: Border(
+                    top: index == 0 ? BorderSide.none : borderSide,
+                    right: borderSide,
+                  ),
                 ),
-                child: Align(
-                    alignment: Alignment.center,
-                    child: widget.data[index + 1].first),
+                child: widget.data[index + 1].first,
               ),
             ),
           ),
@@ -288,101 +242,55 @@ class _UiTableState extends State<UiTable> {
     );
   }
 
-  Widget _buildHeader() {
-    return Container(
-      height: widget.headerHeight,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border(
-          bottom: borderSize.copyWith(width: .3, color: Colors.grey.shade300),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.02),
-            spreadRadius: 5,
-            blurRadius: 10,
-            offset: const Offset(0, 3), // First shadow
-          ),
-          BoxShadow(
-            color: Colors.blue.withOpacity(0.04),
-            spreadRadius: 2,
-            blurRadius: 6,
-            offset: const Offset(0, -3), // Second shadow
-          ),
-          BoxShadow(
-            color: Colors.blue.withOpacity(0.04),
-            spreadRadius: 2,
-            blurRadius: 6,
-            offset: const Offset(-3, 3), // Third shadow
-          ),
-        ],
-      ),
-      child: DefaultTextStyle(
-        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-        child: Row(
-          children: [
-            _buildLeftFixHeader(),
-            Expanded(
-              child: _buildMovableHeader(),
-            ),
-            _buildRightFixHeader(),
-            SizedBox(width: track),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Container _buildRightFixHeader() {
+  //完成
+  Container _buildFixHeaderRight() {
     return Container(
       width: rightFix - track,
-      height: double.infinity,
+      height: widget.headerHeight,
       decoration: BoxDecoration(
-        color: Colors.white,
         border: Border(
-          left: borderSize,
+          left: borderSide,
+          bottom: borderSide,
         ),
       ),
-      child: Align(alignment: Alignment.center, child: widget.data.first.last),
+      child: widget.data.first.last,
     );
   }
 
-  Widget _buildMovableHeader() {
-    return ListView.builder(
-      controller: scrollHorizontalLeftFix,
-      scrollDirection: Axis.horizontal,
-      itemCount: widget.data.first.length - 2,
-      itemBuilder: (BuildContext context, int index) => Container(
-        width: widget.cellsWidth[index + 1],
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: index == 0
-              ? null
-              : Border(
-                  left: borderSize,
-                ),
-        ),
-        child: Align(
-          alignment: Alignment.center,
+  //完成
+  SizedBox _buildFixHeaderCenter() {
+    return SizedBox(
+      height: widget.headerHeight,
+      child: ListView.builder(
+        controller: scrollHorizontalLeftFix,
+        scrollDirection: Axis.horizontal,
+        itemCount: widget.data.first.length - 2,
+        itemBuilder: (BuildContext context, int index) => Container(
+          width: widget.cellsWidth[index + 1],
+          decoration: BoxDecoration(
+            border: Border(
+              left: index == 0 ? BorderSide.none : borderSide,
+              bottom: borderSide,
+            ),
+          ),
           child: widget.data.first[index + 1],
         ),
       ),
     );
   }
 
-  Widget _buildLeftFixHeader() {
+  //完成
+  Container _buildFixHeaderLeft() {
     return Container(
       width: leftFix,
-      height: double.infinity,
+      height: widget.headerHeight,
       decoration: BoxDecoration(
         border: Border(
-          right: borderSize,
+          right: borderSide,
+          bottom: borderSide,
         ),
       ),
-      child: Align(
-        alignment: Alignment.center,
-        child: widget.data.first.first,
-      ),
+      child: widget.data.first.first,
     );
   }
 
