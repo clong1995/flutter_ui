@@ -70,22 +70,22 @@ class _UiTableState extends State<UiTable> {
         children: [
           Row(
             children: [
-              _buildFixHeaderLeft(),
+              _buildHeaderLeft(),
               Expanded(
-                child: _buildFixHeaderCenter(),
+                child: _buildHeaderCenter(),
               ),
-              _buildFixHeaderRight(),
+              _buildHeaderRight(),
               SizedBox(width: track),
             ],
           ),
           Expanded(
             child: Row(
               children: [
-                _buildLeftFixPanel(),
+                _buildBodyLeft(),
                 Expanded(
-                  child: _buildMovableContentPanel(),
+                  child: _buildBodyCenter(),
                 ),
-                _buildRightFixPanel(),
+                _buildBodyRight(),
               ],
             ),
           )
@@ -94,8 +94,8 @@ class _UiTableState extends State<UiTable> {
     );
   }
 
-  //完成
-  Column _buildMovableContentPanel() {
+  //body ====
+  Column _buildBodyCenter() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -165,8 +165,7 @@ class _UiTableState extends State<UiTable> {
     );
   }
 
-  //完成
-  SizedBox _buildRightFixPanel() {
+  SizedBox _buildBodyRight() {
     return SizedBox(
       width: rightFix,
       child: Column(
@@ -214,8 +213,7 @@ class _UiTableState extends State<UiTable> {
     );
   }
 
-  //完成
-  SizedBox _buildLeftFixPanel() {
+  SizedBox _buildBodyLeft() {
     return SizedBox(
       width: leftFix,
       child: Column(
@@ -242,8 +240,8 @@ class _UiTableState extends State<UiTable> {
     );
   }
 
-  //完成
-  Container _buildFixHeaderRight() {
+  //head ===
+  Container _buildHeaderRight() {
     return Container(
       width: rightFix - track,
       height: widget.headerHeight,
@@ -257,8 +255,7 @@ class _UiTableState extends State<UiTable> {
     );
   }
 
-  //完成
-  SizedBox _buildFixHeaderCenter() {
+  SizedBox _buildHeaderCenter() {
     return SizedBox(
       height: widget.headerHeight,
       child: ListView.builder(
@@ -279,8 +276,7 @@ class _UiTableState extends State<UiTable> {
     );
   }
 
-  //完成
-  Container _buildFixHeaderLeft() {
+  Container _buildHeaderLeft() {
     return Container(
       width: leftFix,
       height: widget.headerHeight,
