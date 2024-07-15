@@ -157,14 +157,14 @@ class _UiTableState extends State<UiTable> {
           child: Scrollbar(
             thumbVisibility: true,
             controller: scrollHorizontalBar,
-            child: SingleChildScrollView(
+            child: ListView.builder(
               scrollDirection: Axis.horizontal,
               controller: scrollHorizontalBar,
-              child: SizedBox(
-                width: widget.cellsWidth
-                    .sublist(1, widget.cellsWidth.length - 1)
-                    .reduce((a, b) => a + b),
-              ),
+              itemCount: widget.cellsWidth.length - 2,
+              itemBuilder: (BuildContext context, int index) =>
+                  SizedBox(
+                    width: widget.cellsWidth[index + 1],
+                  ),
             ),
           ),
         ),
