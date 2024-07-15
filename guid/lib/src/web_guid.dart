@@ -22,15 +22,23 @@ class Guid {
       WebBrowserInfo webBrowserInfo = await _deviceInfo.webBrowserInfo;
       input =
           "${webBrowserInfo.appCodeName ?? ""}${webBrowserInfo.appName ?? ""}${webBrowserInfo.deviceMemory ?? 0}${webBrowserInfo.platform ?? ""}${webBrowserInfo.product ?? ""}${webBrowserInfo.userAgent ?? ""}${webBrowserInfo.vendor ?? ""}${webBrowserInfo.hardwareConcurrency ?? 0}";
-      String result = context.callMethod("fingerprint");
-      input+=result;
+      input+=context.callMethod("fingerprint");
     }
     if (input.isEmpty) {
       throw "no guid";
     }
     input += defaultTargetPlatform.name;
-    List<int> bytes = md5.convert(utf8.encode(input)).bytes;
-    _id = base64.encode(bytes);
+    Uint8List bytes = utf8.encode(input);
+    Digest digest = md5.convert(bytes);
+    String md5Hash = digest.toString();
+    StringBuffer buffer = StringBuffer();
+    for (int i = 0; i < md5Hash.length; i++) {
+      buffer.write(md5Hash[i]);
+      if ((i + 1) % 4 == 0 && i != md5Hash.length - 1) {
+        buffer.write('-');
+      }
+    }
+    _id = buffer.toString();
     return _id;
   }
 
@@ -42,8 +50,9 @@ class Guid {
     String jsFnComplete = "c${_randomStr()}";
     String jsFnMd5 = "m${_randomStr()}";
     context[jsFnMd5] = (String str) {
-      List<int> bytes = md5.convert(utf8.encode(str)).bytes;
-      return base64.encode(bytes);
+      Uint8List bytes = utf8.encode(str);
+      Digest digest = md5.convert(bytes);
+      return digest.toString();
     };
 
     context[jsFnComplete] = () {

@@ -1,3 +1,0 @@
-function canvas(){
-    return "xxx";
-}
