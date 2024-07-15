@@ -62,34 +62,41 @@ class _UiTableState extends State<UiTable> {
 
   @override
   Widget build(BuildContext context) {
-    return ScrollConfiguration(
-      behavior: const ScrollBehavior().copyWith(
-        scrollbars: false,
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              _buildHeaderLeft(),
-              Expanded(
-                child: _buildHeaderCenter(),
-              ),
-              _buildHeaderRight(),
-              SizedBox(width: track),
-            ],
-          ),
-          Expanded(
-            child: Row(
+    return MediaQuery.removePadding(
+      context: context,
+      removeTop: true,
+      removeRight: true,
+      removeLeft: true,
+      removeBottom: true,
+      child: ScrollConfiguration(
+        behavior: const ScrollBehavior().copyWith(
+          scrollbars: false,
+        ),
+        child: Column(
+          children: [
+            Row(
               children: [
-                _buildBodyLeft(),
+                _buildHeaderLeft(),
                 Expanded(
-                  child: _buildBodyCenter(),
+                  child: _buildHeaderCenter(),
                 ),
-                _buildBodyRight(),
+                _buildHeaderRight(),
+                SizedBox(width: track),
               ],
             ),
-          )
-        ],
+            Expanded(
+              child: Row(
+                children: [
+                  _buildBodyLeft(),
+                  Expanded(
+                    child: _buildBodyCenter(),
+                  ),
+                  _buildBodyRight(),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

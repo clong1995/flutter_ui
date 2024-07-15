@@ -54,17 +54,17 @@ class MyHomePage extends StatelessWidget {
         Text("操作"),
       ],
       ...List.generate(30, (int index) {
-        return const [
-          Text("王小明"),
-          Text("B"),
-          Text("C"),
-          Text("D"),
-          Text("E"),
-          Text("F"),
-          Text("G"),
-          Text("H"),
-          Text("I"),
-          Text("操作"),
+        return [
+          Text("${index + 1}王小明"),
+          const Text("B"),
+          const Text("C"),
+          const Text("D"),
+          const Text("E"),
+          const Text("F"),
+          const Text("G"),
+          const Text("H"),
+          const Text("I"),
+          const Text("操作"),
         ];
       }),
     ];
