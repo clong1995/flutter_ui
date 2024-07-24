@@ -33,8 +33,10 @@ dependencies:
   #banner
   ui_banner:
     path: ../ui_banner
-  ui_panel:
-    path: ../ui_panel
+  ui_table:
+    path: ../ui_table
+  ui_adapt_box:
+    path: ../ui_adapt_box
   state:
     path: ../state
 

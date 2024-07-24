@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ui_adapt_box/ui_adapt_box.dart';
 
 import 'pages/ui_state/ui_state.dart';
+import 'pages/ui_adapt.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const UIStateExample(),
+      home: const UiAdaptBoxExample(),
     );
   }
 }

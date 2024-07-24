@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class UiAdaptBox extends StatelessWidget {
-  final Widget child;
+  final Widget Function(double scale) builder;
   final double width;
   final double height;
 
   const UiAdaptBox({
     super.key,
-    required this.child,
+    required this.builder,
     required this.width,
     required this.height,
   });
@@ -27,7 +27,7 @@ class UiAdaptBox extends StatelessWidget {
             child: SizedBox(
               width: width,
               height: this.height,
-              child: child,
+              child: builder(s),
             ),
           ),
         );

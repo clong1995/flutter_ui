@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 class Rpx {
@@ -8,7 +9,9 @@ class Rpx {
       _width = width;
     } else {
       FlutterView flutterView = PlatformDispatcher.instance.views.first;
-      _width = flutterView.physicalSize.width / flutterView.devicePixelRatio;
+      double pw = flutterView.physicalSize.width;
+      double ph = flutterView.physicalSize.height;
+      _width = min(pw, ph) / flutterView.devicePixelRatio;
     }
   }
 

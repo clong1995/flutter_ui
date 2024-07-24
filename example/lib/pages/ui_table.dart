@@ -1,0 +1,418 @@
+import 'package:flutter/material.dart';
+import 'package:ui_table/ui_table.dart';
+
+class UiTableExample extends StatelessWidget {
+  const UiTableExample({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    List<double> cellsWidth = [
+      200,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      150,
+      100,
+    ];
+
+    List<List<Widget>> data = [
+      const [
+        Text("姓名"),
+        Text("第一列"),
+        Text("第二列"),
+        Text("第三列"),
+        Text("第四列"),
+        Text("第五列"),
+        Text("第六列"),
+        Text("第七列"),
+        Text("第八列"),
+        Text("操作"),
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+      [
+        const Text("王小明"),
+        const Text("B"),
+        const Text("C"),
+        const Text("D"),
+        const Text("E"),
+        const Text("F"),
+        const Text("G"),
+        const Text("H"),
+        const Text("I"),
+        TextButton(onPressed: () {}, child: const Text("删除"))
+      ],
+    ];
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text("table"),
+      ),
+      body: UiTable(cellsWidth: cellsWidth,
+        data: data,),
+    );
+  }
+}
