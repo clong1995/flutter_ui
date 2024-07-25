@@ -31,7 +31,7 @@ class _UiWaterfallState<T> extends State<UiWaterfall<T>> {
     spacing = widget.spacing ?? 5;
     width = (widget.width - (spacing * 3)) / 2;
     LinkedScrollControllerGroup linkedScrollControllerGroup =
-    LinkedScrollControllerGroup();
+        LinkedScrollControllerGroup();
     leftScrollController = linkedScrollControllerGroup.addAndGet();
     rightScrollController = linkedScrollControllerGroup.addAndGet();
   }
@@ -52,6 +52,14 @@ class _UiWaterfallState<T> extends State<UiWaterfall<T>> {
         rightData.add(item);
         rightHeight += height;
       }
+    }
+
+    if (rightData.isNotEmpty) {
+      rightHeight += (rightData.length - 1) * spacing;
+    }
+
+    if (leftData.isNotEmpty) {
+      leftHeight += (leftData.length - 1) * spacing;
     }
 
     if (rightHeight > leftHeight) {
