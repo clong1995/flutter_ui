@@ -63,10 +63,10 @@ class _UiWaterfallState<T> extends State<UiWaterfall<T>> {
     }
 
     if (rightHeight > leftHeight) {
-      double emptyHeight = rightHeight - leftHeight;
+      double emptyHeight = rightHeight - leftHeight - spacing;
       leftData.add(UiWaterfallItem(height: emptyHeight));
     } else if (rightHeight < leftHeight) {
-      double emptyHeight = leftHeight - rightHeight;
+      double emptyHeight = leftHeight - rightHeight - spacing;
       rightData.add(UiWaterfallItem(height: emptyHeight));
     }
 
