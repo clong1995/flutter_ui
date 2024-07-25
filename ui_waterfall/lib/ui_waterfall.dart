@@ -5,7 +5,7 @@ class UiWaterfall<T> extends StatefulWidget {
   final double? spacing;
   final double width;
   final List<UiWaterfallItem<T>> data;
-  final Widget Function(T? data,double width) itemBuilder;
+  final Widget Function(T? data) itemBuilder;
 
   const UiWaterfall({
     super.key,
@@ -95,7 +95,7 @@ class _UiWaterfallState<T> extends State<UiWaterfall<T>> {
           UiWaterfallItem<T> item = listData[index];
           return SizedBox(
             height: item.height,
-            child: widget.itemBuilder(item.data,width),
+            child: widget.itemBuilder(item.data),
           );
         },
         separatorBuilder: (BuildContext context, int index) =>
