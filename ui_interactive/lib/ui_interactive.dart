@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
 
-class Interactive extends StatefulWidget {
-  final Size size;
-  final double factor;
+class UiInteractive extends StatefulWidget {
+  final double width;
+  final double height;
+
+  // final double factor;
   final double minScale;
   final double maxScale;
-  final Color drawColor;
+  final Color color;
   final Widget child;
-  final InteractiveController? controller;
+  final AlignmentGeometry alignment;
+  final UiInteractiveController? controller;
 
-  const Interactive({
+  const UiInteractive({
     super.key,
-    required this.size,
-    this.factor = .9,
-    this.drawColor = Colors.black12,
+    required this.width,
+    required this.height,
+    this.color = Colors.black12,
     required this.child,
     this.controller,
     this.minScale = .1,
     this.maxScale = 10,
+    this.alignment = Alignment.center,
   });
 
   @override
-  State<Interactive> createState() => _InteractiveState();
+  State<UiInteractive> createState() => _UiInteractiveState();
 }
 
-class _InteractiveState extends State<Interactive> {
+class _UiInteractiveState extends State<UiInteractive> {
   double cWidth = 0;
   double cHeight = 0;
   double scale = 0;
@@ -36,7 +40,7 @@ class _InteractiveState extends State<Interactive> {
   @override
   void initState() {
     super.initState();
-    widget.controller?.setListener(setAdapt, setCenter);
+    widget.controller?.setListener(setAdapt /*, setCenter*/);
   }
 
   @override
@@ -50,17 +54,37 @@ class _InteractiveState extends State<Interactive> {
           setAdapt();
           init = true;
         }
-        return InteractiveViewer(
-          transformationController: transformationController,
-          boundaryMargin: const EdgeInsets.all(double.infinity),
-          constrained: false,
-          minScale: scale * widget.minScale,
-          maxScale: scale * widget.maxScale,
-          child: Container(
-            width: widget.size.width,
-            height: widget.size.height,
-            color: widget.drawColor,
-            child: widget.child,
+        return Center(
+          child: SizedBox(
+            width: widget.width * scale,
+            height: widget.height * scale,
+            child: FittedBox(
+              child: Container(
+                color: widget.color,
+                width: widget.width,
+                height: widget.height,
+                child: InteractiveViewer(
+                  transformationController: transformationController,
+                  boundaryMargin: const EdgeInsets.all(double.infinity),
+                  constrained: false,
+                  minScale: scale * widget.minScale,
+                  maxScale: scale * widget.maxScale,
+                  child: SizedBox(
+                    width: widget.width,
+                    height: widget.height,
+                    child: OverflowBox(
+                      alignment: widget.alignment,
+                      maxWidth: double.infinity,
+                      maxHeight: double.infinity,
+                      child: UnconstrainedBox(
+                        alignment: widget.alignment,
+                        child: widget.child,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
         );
       },
@@ -68,30 +92,15 @@ class _InteractiveState extends State<Interactive> {
   }
 
   double defaultScale() {
-    double s = cWidth / widget.size.width;
-    if (widget.size.height * s > cHeight) {
-      s = cHeight / widget.size.height;
+    double s = cWidth / widget.width;
+    if (widget.height * s > cHeight) {
+      s = cHeight / widget.height;
     }
     return s;
   }
 
   void setAdapt() {
-    transformationController.value = Matrix4.identity()
-      ..scale(scale * widget.factor)
-      ..translate(
-        (cWidth / scale - widget.size.width * widget.factor) / 2,
-        (cHeight / scale - widget.size.height * widget.factor) / 2,
-      );
-  }
-
-  void setCenter() {
-    double currentScale = transformationController.value.getMaxScaleOnAxis();
-    transformationController.value = Matrix4.identity()
-      ..scale(currentScale * widget.factor)
-      ..translate(
-        (cWidth / currentScale - widget.size.width * widget.factor) / 2,
-        (cHeight / currentScale - widget.size.height * widget.factor) / 2,
-      );
+    transformationController.value = Matrix4.identity()..translate(0.0, 0.0);
   }
 
   @override
@@ -102,21 +111,22 @@ class _InteractiveState extends State<Interactive> {
   }
 }
 
-class InteractiveController {
+class UiInteractiveController {
   VoidCallback? adapt;
-  VoidCallback? center;
+
+  // VoidCallback? center;
 
   void setListener(
     VoidCallback? adapt,
-    VoidCallback? center,
+    // VoidCallback? center,
   ) {
     this.adapt = adapt;
-    this.center = center;
+    // this.center = center;
   }
 
-  void setCenter() {
+  /*void setCenter() {
     center?.call();
-  }
+  }*/
 
   void setAdapt() {
     adapt?.call();
@@ -124,6 +134,6 @@ class InteractiveController {
 
   void dispose() {
     adapt = null;
-    center = null;
+    // center = null;
   }
 }
