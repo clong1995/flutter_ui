@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 class UiInteractive extends StatefulWidget {
   final double width;
   final double height;
-
-  // final double factor;
   final double minScale;
   final double maxScale;
   final Color color;
@@ -40,7 +38,7 @@ class _UiInteractiveState extends State<UiInteractive> {
   @override
   void initState() {
     super.initState();
-    widget.controller?.setListener(setAdapt /*, setCenter*/);
+    widget.controller?.setListener(setAdapt);
   }
 
   @override
@@ -113,20 +111,11 @@ class _UiInteractiveState extends State<UiInteractive> {
 
 class UiInteractiveController {
   VoidCallback? adapt;
-
-  // VoidCallback? center;
-
   void setListener(
     VoidCallback? adapt,
-    // VoidCallback? center,
   ) {
     this.adapt = adapt;
-    // this.center = center;
   }
-
-  /*void setCenter() {
-    center?.call();
-  }*/
 
   void setAdapt() {
     adapt?.call();
@@ -134,6 +123,5 @@ class UiInteractiveController {
 
   void dispose() {
     adapt = null;
-    // center = null;
   }
 }

@@ -45,14 +45,14 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: UiAdapt(
+        width: 500,
+        height: 500,
         builder: (double scale) {
           return  Container(
             color: Colors.red,
-            child: Text("UiAdapt"),
+            child: const Text("UiAdapt"),
           );
         },
-        width: 500,
-        height: 500,
       ),
     );
   }

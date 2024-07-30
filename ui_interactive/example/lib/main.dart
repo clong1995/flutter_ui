@@ -56,7 +56,7 @@ class MyHomePage extends StatelessWidget {
                 width: 600,
                 height: 100,
                 color: Colors.red,
-                child: Text("UiInteractive"),
+                child: const Text("UiInteractive"),
               ),
             ),
           ),
@@ -65,7 +65,7 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {
                 uiInteractiveController.adapt!();
               },
-              child: Text("adapt"),
+              child: const Text("adapt"),
             ),
           )
         ],
