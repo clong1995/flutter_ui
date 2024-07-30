@@ -21,13 +21,16 @@ class UiAdapt extends StatelessWidget {
         if (this.height * s > height) {
           s = height / this.height;
         }
-        return Transform.scale(
-          scale: s,
-          child: Center(
-            child: SizedBox(
-              width: width,
-              height: this.height,
-              child: builder(s),
+        return Center(
+          child: SizedBox(
+            width: width * s,
+            height: this.height * s,
+            child: FittedBox(
+              child: SizedBox(
+                width: width,
+                height: this.height,
+                child: builder(s),
+              ),
             ),
           ),
         );
