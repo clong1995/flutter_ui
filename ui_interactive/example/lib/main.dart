@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_adapt/ui_adapt.dart';
+import 'package:ui_interactive/ui_interactive.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,22 +37,38 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final UiInteractiveController uiInteractiveController =
+        UiInteractiveController();
     return Scaffold(
-      body: UiAdapt(
-        width: 500,
-        height: 500,
-        builder: (double scale) {
-          return  Container(
-            color: Colors.red,
-            child: const Text("UiAdapt"),
-          );
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: UiInteractive(
+              width: 500,
+              height: 500,
+              controller: uiInteractiveController,
+              child: Container(
+                width: 600,
+                height: 100,
+                color: Colors.red,
+                child: const Text("UiInteractive"),
+              ),
+            ),
+          ),
+          Center(
+            child: FilledButton(
+              onPressed: () {
+                uiInteractiveController.adapt!();
+              },
+              child: const Text("adapt"),
+            ),
+          )
+        ],
       ),
     );
   }
