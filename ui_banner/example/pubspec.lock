@@ -49,6 +49,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.8"
+  device:
+    dependency: transitive
+    description:
+      path: device
+      ref: HEAD
+      resolved-ref: "7625789f81057701b8b62c4878e0ae72c0467a72"
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
+    version: "0.0.1"
   fake_async:
     dependency: transitive
     description:
