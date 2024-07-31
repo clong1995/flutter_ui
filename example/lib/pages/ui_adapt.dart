@@ -15,7 +15,7 @@ class UiAdaptBoxExample extends StatelessWidget {
         width: 100,
         height: 100,
         builder: (double scale) {
-          return Text("");
+          return const Text("");
         },
       ),
     );
