@@ -1,9 +1,8 @@
 library ui_banner;
 
 import 'dart:async';
-import 'dart:js' as js;
 
-import 'package:flutter/foundation.dart';
+import 'package:device/device.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -48,13 +47,7 @@ class _UIBannerState extends State<UIBanner>
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        MouseRegion(
-          onEnter: (PointerEnterEvent event) {
-            ticker?.cancel();
-          },
-          onExit: (PointerExitEvent event) {
-            ticker = tickerStart();
-          },
+        regionWrap(
           child: PageView.builder(
             controller: pageController,
             itemBuilder: (BuildContext context, int index) =>
@@ -101,31 +94,50 @@ class _UIBannerState extends State<UIBanner>
     });
   }
 
-  Widget regionWrap() {
+  Widget regionWrap({required Widget child}) {
     bool touch = false;
-    if (kIsWeb) {
-      var userAgent = js.context["navigator"]["userAgent"];
-
-    } else {
-      switch (defaultTargetPlatform) {
-        case TargetPlatform.android:
-          touch = true;
-          break;
-        case TargetPlatform.iOS:
-          touch = true;
-          break;
-        case TargetPlatform.windows:
-        case TargetPlatform.macOS:
-        case TargetPlatform.linux:
-        case TargetPlatform.fuchsia:
-          touch = false;
-          break;
-        default:
-          touch = true;
-          break;
-      }
+    String platform = Device.platform;
+    switch (platform) {
+      case "web-ios":
+      case "web-android":
+        touch = true;
+        break;
+      case "web-windows":
+      case "web-macOS":
+      case "web-linux":
+      case "web-fuchsia":
+        touch = false;
+        break;
+      case "android":
+      case "iOS":
+        touch = true;
+        break;
+      case "windows":
+      case "macOS":
+      case "linux":
+      case "fuchsia":
+        touch = false;
+        break;
     }
-
-    return const Text("");
+    if (touch) {
+      return GestureDetector(
+        onTapDown: (TapDownDetails detail){
+          ticker?.cancel();
+        },
+        onTapUp: (TapUpDetails detail){
+          ticker = tickerStart();
+        },
+        child: child,
+      );
+    }
+    return MouseRegion(
+      onEnter: (PointerEnterEvent event) {
+        ticker?.cancel();
+      },
+      onExit: (PointerExitEvent event) {
+        ticker = tickerStart();
+      },
+      child: child,
+    );
   }
 }
