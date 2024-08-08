@@ -126,6 +126,6 @@ class _UIBannerState extends State<UIBanner>
       }
     }
 
-    return Text("");
+    return const Text("");
   }
 }
