@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -89,13 +90,13 @@ class _Storage {
       [String? key, dynamic value]) async {
     Directory tempDir = await getTemporaryDirectory();
     String tempPath = tempDir.path;
-    File tempFile = File('$tempPath/multi_window');
+    File tempFile = File(join(tempPath,".multi_window"));
 
     bool fileExists = await tempFile.exists();
 
     if (!fileExists) {
       await tempFile.create();
-      tempFile = File('$tempPath/multi_window');
+      tempFile = File(join(tempPath,".multi_window"));
       String jsonString = jsonEncode({
         'args': null,
         'size': null,
