@@ -46,7 +46,8 @@ class MultiWindow {
             double? width = double.tryParse(arr[0]);
             double? height = double.tryParse(arr[1]);
             if (width != null && height != null) {
-              windowManager.setSize(Size(width, height));
+              await windowManager.setSize(Size(width, height));
+              await windowManager.center();
             }
           }
         }
