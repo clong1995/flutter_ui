@@ -8,7 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:window_manager/window_manager.dart';
 
 class MultiWindow {
-  static Future<void> ensureInitialized(int port) async {
+  static Future<String?> ensureInitialized(int port) async {
     await windowManager.ensureInitialized();
     bool newSession = true;
     if (defaultTargetPlatform == TargetPlatform.windows) {
@@ -30,11 +30,10 @@ class MultiWindow {
         newSession = false;
       }
     }
-    if (newSession) {
-      //原来窗口
-      await _Storage.clean();
-    } else {
+    String? arg;
+    if (!newSession){
       //新窗口
+      arg = await _Storage.get("args");
       String? max = await _Storage.get("max");
       if (max == "true") {
         windowManager.maximize();
@@ -53,6 +52,8 @@ class MultiWindow {
         }
       }
     }
+    await _Storage.clean();
+    return arg;
   }
 
   static Future<void> open({
@@ -82,9 +83,9 @@ class MultiWindow {
     }
   }
 
-  static Future<String?> get args async {
+  /*static Future<String?> get args async {
     return await _Storage.get("args");
-  }
+  }*/
 }
 
 class _Storage {

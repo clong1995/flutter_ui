@@ -10,8 +10,7 @@ String? multiWindowArgs;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await MultiWindow.ensureInitialized(4567);
-  multiWindowArgs = await MultiWindow.args;
+  multiWindowArgs = await MultiWindow.ensureInitialized(4567);
   runApp(const MyApp());
 }
 
