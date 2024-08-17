@@ -11,15 +11,24 @@ class MultiWindow {
   static Future<void> ensureInitialized(int port) async {
     await windowManager.ensureInitialized();
     bool newSession = true;
-    try {
-      RawDatagramSocket socket =
-      await RawDatagramSocket.bind(InternetAddress.loopbackIPv4, port);
-      socket.listen((event) {
-
-      });
-    } catch (e) {
-      print(e);
-      newSession = false;
+    if (defaultTargetPlatform == TargetPlatform.windows) {
+      ProcessResult result = await Process.run(
+          'powershell', ['-Command', 'netstat -aon | findstr $port']);
+      if (result.stdout.isNotEmpty) {
+        newSession = false;
+      } else {
+        RawDatagramSocket socket =
+        await RawDatagramSocket.bind(InternetAddress.loopbackIPv4, port);
+        socket.listen((event) {});
+      }
+    } else {
+      try {
+        RawDatagramSocket socket =
+        await RawDatagramSocket.bind(InternetAddress.loopbackIPv4, port);
+        socket.listen((event) {});
+      } catch (e) {
+        newSession = false;
+      }
     }
     if (newSession) {
       //原来窗口
@@ -67,15 +76,14 @@ class MultiWindow {
         'open',
         ['-n', '-a', exePath],
       );
-    }else if(defaultTargetPlatform == TargetPlatform.windows){
-      Process.start(exePath, []);
+    } else if (defaultTargetPlatform == TargetPlatform.windows) {
+      await Process.start(exePath, []);
     }
   }
 
   static Future<String?> get args async {
     return await _Storage.get("args");
   }
-
 }
 
 class _Storage {
@@ -90,13 +98,13 @@ class _Storage {
       [String? key, dynamic value]) async {
     Directory tempDir = await getTemporaryDirectory();
     String tempPath = tempDir.path;
-    File tempFile = File(join(tempPath,".multi_window"));
+    File tempFile = File(join(tempPath, ".multi_window"));
 
     bool fileExists = await tempFile.exists();
 
     if (!fileExists) {
       await tempFile.create();
-      tempFile = File(join(tempPath,".multi_window"));
+      tempFile = File(join(tempPath, ".multi_window"));
       String jsonString = jsonEncode({
         'args': null,
         'size': null,
