@@ -76,7 +76,7 @@ class MultiWindow {
         'open',
         ['-n', '-a', exePath],
       );
-    } else if (defaultTargetPlatform == TargetPlatform.windows) {
+    } else {
       await Process.start(exePath, []);
     }
   }
