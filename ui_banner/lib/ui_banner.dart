@@ -9,9 +9,11 @@ import 'package:flutter/material.dart';
 class UIBanner extends StatefulWidget {
   const UIBanner({
     super.key,
+    this.auto = false,
     required this.children,
   });
 
+  final bool auto;
   final List<Widget> children;
 
   @override
@@ -32,7 +34,9 @@ class _UIBannerState extends State<UIBanner>
       initialPage: 0,
     );
     tabController = TabController(length: widget.children.length, vsync: this);
-    ticker = tickerStart();
+    if(widget.auto){
+      ticker = tickerStart();
+    }
   }
 
   @override
