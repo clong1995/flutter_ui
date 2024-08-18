@@ -48,7 +48,7 @@ class MyHomePage extends StatelessWidget {
           SizedBox(
             height: 200,
             child: UIBanner(
-              child: [
+              children: [
                 Container(
                   color: Colors.red,
                 ),
