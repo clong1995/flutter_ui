@@ -18,6 +18,7 @@ abstract class Logic<T, E> with Lifecycle{
 
   final BuildContext _context;
 
+  @override
   BuildContext get context => _context;
 
   Logic(this._context);
