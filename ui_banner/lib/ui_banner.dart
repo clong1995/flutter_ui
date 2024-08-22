@@ -6,8 +6,8 @@ import 'package:device/device.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class UIBanner extends StatefulWidget {
-  const UIBanner({
+class UiBanner extends StatefulWidget {
+  const UiBanner({
     super.key,
     this.auto = false,
     required this.children,
@@ -17,10 +17,10 @@ class UIBanner extends StatefulWidget {
   final List<Widget> children;
 
   @override
-  State<UIBanner> createState() => _UIBannerState();
+  State<UiBanner> createState() => _UiBannerState();
 }
 
-class _UIBannerState extends State<UIBanner>
+class _UiBannerState extends State<UiBanner>
     with SingleTickerProviderStateMixin {
   late PageController pageController;
   late TabController tabController;
