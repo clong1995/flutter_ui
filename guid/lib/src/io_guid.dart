@@ -32,7 +32,7 @@ class Guid {
     if (defaultTargetPlatform == TargetPlatform.windows) {
       WindowsDeviceInfo deviceInfo = await _deviceInfo.windowsInfo;
       input =
-          "${deviceInfo.computerName}${deviceInfo.numberOfCores}${deviceInfo.systemMemoryInMegabytes}${deviceInfo.platformId}${deviceInfo.editionId}${deviceInfo.installDate}${deviceInfo.deviceId}${deviceInfo.userName}${deviceInfo.majorVersion}${deviceInfo.csdVersion}${deviceInfo.servicePackMajor}${deviceInfo.servicePackMinor}${deviceInfo.suitMask}${base64Encode(deviceInfo.digitalProductId)}${deviceInfo.productId}${deviceInfo.productName}${deviceInfo.registeredOwner}";
+          "1:${deviceInfo.computerName}2:${deviceInfo.numberOfCores}3:${deviceInfo.systemMemoryInMegabytes}4:${deviceInfo.platformId}5:${deviceInfo.editionId}6:${deviceInfo.installDate}7:${deviceInfo.deviceId}8:${deviceInfo.userName}9:${deviceInfo.majorVersion}10:${deviceInfo.csdVersion}11:${deviceInfo.servicePackMajor}12:${deviceInfo.servicePackMinor}13:${deviceInfo.suitMask}14:${base64Encode(deviceInfo.digitalProductId)}15:${deviceInfo.productId}16:${deviceInfo.productName}17:${deviceInfo.registeredOwner}";
     } else if (defaultTargetPlatform == TargetPlatform.linux) {
       LinuxDeviceInfo deviceInfo = await _deviceInfo.linuxInfo;
       input =
