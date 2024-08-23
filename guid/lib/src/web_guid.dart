@@ -16,19 +16,11 @@ class Guid {
     if (_id.isNotEmpty) {
       return _id;
     }
-    String input = "";
-    if (kIsWeb) {
-      await _injectJs();
-      WebBrowserInfo webBrowserInfo = await _deviceInfo.webBrowserInfo;
-      input =
-          "${webBrowserInfo.appCodeName ?? ""}${webBrowserInfo.appName ?? ""}${webBrowserInfo.deviceMemory ?? 0}${webBrowserInfo.platform ?? ""}${webBrowserInfo.product ?? ""}${webBrowserInfo.userAgent ?? ""}${webBrowserInfo.vendor ?? ""}${webBrowserInfo.hardwareConcurrency ?? 0}";
-      input+=context.callMethod("fingerprint");
-    }
-    if (input.isEmpty) {
-      throw "no guid";
-    }
-    input += defaultTargetPlatform.name;
-    Uint8List bytes = utf8.encode(input);
+
+
+
+
+    Uint8List bytes = utf8.encode(await info);
     Digest digest = md5.convert(bytes);
     String md5Hash = digest.toString();
     StringBuffer buffer = StringBuffer();
@@ -40,6 +32,22 @@ class Guid {
     }
     _id = buffer.toString();
     return _id;
+  }
+
+  static Future<String> get info async {
+    String input = "";
+    if (kIsWeb) {
+      await _injectJs();
+      WebBrowserInfo webBrowserInfo = await _deviceInfo.webBrowserInfo;
+      input =
+      "${webBrowserInfo.appCodeName ?? ""}${webBrowserInfo.appName ?? ""}${webBrowserInfo.deviceMemory ?? 0}${webBrowserInfo.platform ?? ""}${webBrowserInfo.product ?? ""}${webBrowserInfo.userAgent ?? ""}${webBrowserInfo.vendor ?? ""}${webBrowserInfo.hardwareConcurrency ?? 0}";
+      input+=context.callMethod("fingerprint");
+    }
+    if (input.isEmpty) {
+      throw "no guid";
+    }
+    input += defaultTargetPlatform.name;
+    return input;
   }
 
   static Future<void> _injectJs() {
