@@ -42,9 +42,20 @@ class _UiTableState extends State<UiTable> {
   final LinkedScrollControllerGroup _horizontalControllers =
       LinkedScrollControllerGroup();
 
+  late double headerHeight;
+  late double cellHeight;
+
   @override
   void initState() {
     super.initState();
+
+    headerHeight = widget.headerHeight.roundToDouble();
+    cellHeight = widget.cellHeight.roundToDouble();
+
+    for(int i = 0;i<widget.cellsWidth.length;i++){
+      widget.cellsWidth[i] = widget.cellsWidth[i].roundToDouble();
+    }
+
     leftFix = widget.cellsWidth.first;
     rightFix = widget.cellsWidth.last + track;
 
@@ -118,7 +129,7 @@ class _UiTableState extends State<UiTable> {
                 controller: scrollVerticalCenter,
                 itemCount: widget.data.length - 1,
                 itemBuilder: (BuildContext context, int index) => Container(
-                  height: widget.cellHeight,
+                  height: cellHeight,
                   decoration: index == 0
                       ? null
                       : BoxDecoration(
@@ -185,7 +196,7 @@ class _UiTableState extends State<UiTable> {
                     controller: scrollVerticalRightFix,
                     itemCount: widget.data.length - 1,
                     itemBuilder: (BuildContext context, int index) => Container(
-                      height: widget.cellHeight,
+                      height: cellHeight,
                       decoration: BoxDecoration(
                         border: Border(
                           top: index == 0 ? BorderSide.none : borderSide,
@@ -206,7 +217,7 @@ class _UiTableState extends State<UiTable> {
                       itemCount: widget.data.length - 1,
                       itemBuilder: (BuildContext context, int index) =>
                           SizedBox(
-                        height: widget.cellHeight,
+                        height: cellHeight,
                       ),
                     ),
                   ),
@@ -230,7 +241,7 @@ class _UiTableState extends State<UiTable> {
               controller: scrollVerticalLeftFix,
               itemCount: widget.data.length - 1,
               itemBuilder: (BuildContext context, int index) => Container(
-                height: widget.cellHeight,
+                height: cellHeight,
                 decoration: BoxDecoration(
                   border: Border(
                     top: index == 0 ? BorderSide.none : borderSide,
@@ -251,7 +262,7 @@ class _UiTableState extends State<UiTable> {
   Container _buildHeaderRight() {
     return Container(
       width: rightFix - track,
-      height: widget.headerHeight,
+      height: headerHeight,
       decoration: BoxDecoration(
         border: Border(
           left: borderSide,
@@ -264,7 +275,7 @@ class _UiTableState extends State<UiTable> {
 
   SizedBox _buildHeaderCenter() {
     return SizedBox(
-      height: widget.headerHeight,
+      height: headerHeight,
       child: ListView.builder(
         controller: scrollHorizontalLeftFix,
         scrollDirection: Axis.horizontal,
@@ -286,7 +297,7 @@ class _UiTableState extends State<UiTable> {
   Container _buildHeaderLeft() {
     return Container(
       width: leftFix,
-      height: widget.headerHeight,
+      height: headerHeight,
       decoration: BoxDecoration(
         border: Border(
           right: borderSide,
