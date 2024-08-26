@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:multi_window/multi_window.dart';
 
-import 'a_page.dart';
 import 'b_page.dart';
 import 'c_page.dart';
 
 //窗口传进来的参数
-String? multiWindowArgs;
+String multiWindowArgs = "";
 
-Future<void> main() async {
+Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-  multiWindowArgs = await MultiWindow.ensureInitialized(4567);
+  multiWindowArgs = await MultiWindow.ensureInitialized(args);
   runApp(const MyApp());
 }
 
@@ -30,7 +29,31 @@ class MyApp extends StatelessWidget {
         home = const CPage();
         break;
       default:
-        home = const APage();
+        home = Scaffold(
+          appBar: AppBar(
+            title: const Text("xxxxxxxx"),
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FilledButton(
+                  onPressed: () {
+                    MultiWindow.open(size: const Size(400, 400), arg: "B");
+                  },
+                  child: const Text("open B page window"),
+                ),
+                const SizedBox(height: 20),
+                FilledButton(
+                  onPressed: () {
+                    MultiWindow.open(size: const Size(0, 0), arg: "C");
+                  },
+                  child: const Text("open C page window"),
+                ),
+              ],
+            ),
+          ),
+        );
     }
 
     return MaterialApp(
@@ -43,8 +66,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
