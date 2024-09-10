@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 
@@ -41,6 +43,7 @@ class _UiTableState extends State<UiTable> {
 
   final LinkedScrollControllerGroup _horizontalControllers =
       LinkedScrollControllerGroup();
+  
 
   late double headerHeight;
   late double cellHeight;
@@ -83,30 +86,35 @@ class _UiTableState extends State<UiTable> {
         behavior: const ScrollBehavior().copyWith(
           scrollbars: false,
         ),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                _buildHeaderLeft(),
-                Expanded(
-                  child: _buildHeaderCenter(),
-                ),
-                _buildHeaderRight(),
-                SizedBox(width: track),
-              ],
-            ),
-            Expanded(
-              child: Row(
+        child: KeyboardListener(
+          autofocus: true,
+          onKeyEvent: _handleKeyEvent,
+          focusNode: FocusNode(),
+          child: Column(
+            children: [
+              Row(
                 children: [
-                  _buildBodyLeft(),
+                  _buildHeaderLeft(),
                   Expanded(
-                    child: _buildBodyCenter(),
+                    child: _buildHeaderCenter(),
                   ),
-                  _buildBodyRight(),
+                  _buildHeaderRight(),
+                  SizedBox(width: track),
                 ],
               ),
-            )
-          ],
+              Expanded(
+                child: Row(
+                  children: [
+                    _buildBodyLeft(),
+                    Expanded(
+                      child: _buildBodyCenter(),
+                    ),
+                    _buildBodyRight(),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -172,10 +180,9 @@ class _UiTableState extends State<UiTable> {
               scrollDirection: Axis.horizontal,
               controller: scrollHorizontalBar,
               itemCount: widget.cellsWidth.length - 2,
-              itemBuilder: (BuildContext context, int index) =>
-                  SizedBox(
-                    width: widget.cellsWidth[index + 1],
-                  ),
+              itemBuilder: (BuildContext context, int index) => SizedBox(
+                width: widget.cellsWidth[index + 1],
+              ),
             ),
           ),
         ),
@@ -318,5 +325,22 @@ class _UiTableState extends State<UiTable> {
     scrollHorizontalCenter.dispose();
     scrollHorizontalBar.dispose();
     super.dispose();
+  }
+
+  void _handleKeyEvent(KeyEvent event) {
+    switch (event.logicalKey.keyLabel) {
+      case 'Arrow Right':
+     _horizontalControllers.jumpTo(_horizontalControllers.offset + 10);
+        break;
+      case 'Arrow Left':
+      _horizontalControllers.jumpTo(max(0,_horizontalControllers.offset - 10));
+        break;
+      case 'Arrow Up':
+      _verticalControllers.jumpTo(max(0, _verticalControllers.offset + 10));
+        break;
+      case 'Arrow Down':
+      _verticalControllers.jumpTo(max(0, _verticalControllers.offset - 10));
+        break;
+    }
   }
 }
