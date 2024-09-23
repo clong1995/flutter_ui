@@ -13,11 +13,26 @@ class Guid {
     if (_id.isNotEmpty) {
       return _id;
     }
+    Uint8List bytes = utf8.encode(await info);
+    Digest digest = md5.convert(bytes);
+    String md5Hash = digest.toString();
+    StringBuffer buffer = StringBuffer();
+    for (int i = 0; i < md5Hash.length; i++) {
+      buffer.write(md5Hash[i]);
+      if ((i + 1) % 4 == 0 && i != md5Hash.length - 1) {
+        buffer.write('-');
+      }
+    }
+    _id = buffer.toString();
+    return _id;
+  }
+
+  static Future<String> get info async {
     String input = "";
     if (defaultTargetPlatform == TargetPlatform.windows) {
       WindowsDeviceInfo deviceInfo = await _deviceInfo.windowsInfo;
       input =
-          "${deviceInfo.computerName}${deviceInfo.numberOfCores}${deviceInfo.systemMemoryInMegabytes}${deviceInfo.platformId}${deviceInfo.editionId}${deviceInfo.installDate}${deviceInfo.deviceId}${deviceInfo.userName}${deviceInfo.majorVersion}${deviceInfo.csdVersion}${deviceInfo.servicePackMajor}${deviceInfo.servicePackMinor}${deviceInfo.suitMask}${base64Encode(deviceInfo.digitalProductId)}${deviceInfo.productId}${deviceInfo.productName}${deviceInfo.registeredOwner}";
+          "${deviceInfo.computerName}${deviceInfo.numberOfCores}${deviceInfo.systemMemoryInMegabytes}${deviceInfo.platformId}${deviceInfo.editionId}${deviceInfo.installDate}${deviceInfo.deviceId}${deviceInfo.userName}${deviceInfo.majorVersion}${deviceInfo.csdVersion}${deviceInfo.servicePackMajor}${deviceInfo.servicePackMinor}${deviceInfo.suitMask}${deviceInfo.productId}${deviceInfo.productName}${deviceInfo.registeredOwner}";
     } else if (defaultTargetPlatform == TargetPlatform.linux) {
       LinuxDeviceInfo deviceInfo = await _deviceInfo.linuxInfo;
       input =
@@ -39,17 +54,6 @@ class Guid {
       throw "no guid";
     }
     input += defaultTargetPlatform.name;
-    Uint8List bytes = utf8.encode(input);
-    Digest digest = md5.convert(bytes);
-    String md5Hash = digest.toString();
-    StringBuffer buffer = StringBuffer();
-    for (int i = 0; i < md5Hash.length; i++) {
-      buffer.write(md5Hash[i]);
-      if ((i + 1) % 4 == 0 && i != md5Hash.length - 1) {
-        buffer.write('-');
-      }
-    }
-    _id = buffer.toString();
-    return _id;
+    return input;
   }
 }

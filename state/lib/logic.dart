@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'lifecycle.dart';
 import 'src/func_dict.dart';
 import 'src/logic_dict.dart';
 
-abstract class Logic<T, E> {
+abstract class Logic<T, E> with Lifecycle{
   final Map<String, void Function()> _updateDict = {};
 
   late E _state;
@@ -17,13 +18,16 @@ abstract class Logic<T, E> {
 
   final BuildContext _context;
 
+  @override
   BuildContext get context => _context;
 
   Logic(this._context);
 
+  /*@override
   void onInit() {}
 
-  void onDispose() {}
+  @override
+  void onDispose() {}*/
 
   Map<String, Future<Object?> Function(Object?)> globalFunc() => {};
   Future<Object?> Function(Object?)? findGlobalFunc(String funcName) =>

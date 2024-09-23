@@ -6,19 +6,21 @@ import 'package:device/device.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-class UIBanner extends StatefulWidget {
-  const UIBanner({
+class UiBanner extends StatefulWidget {
+  const UiBanner({
     super.key,
-    required this.child,
+    this.auto = false,
+    required this.children,
   });
 
-  final List<Widget> child;
+  final bool auto;
+  final List<Widget> children;
 
   @override
-  State<UIBanner> createState() => _UIBannerState();
+  State<UiBanner> createState() => _UiBannerState();
 }
 
-class _UIBannerState extends State<UIBanner>
+class _UiBannerState extends State<UiBanner>
     with SingleTickerProviderStateMixin {
   late PageController pageController;
   late TabController tabController;
@@ -31,8 +33,10 @@ class _UIBannerState extends State<UIBanner>
     pageController = PageController(
       initialPage: 0,
     );
-    tabController = TabController(length: widget.child.length, vsync: this);
-    ticker = tickerStart();
+    tabController = TabController(length: widget.children.length, vsync: this);
+    if(widget.auto){
+      ticker = tickerStart();
+    }
   }
 
   @override
@@ -51,7 +55,7 @@ class _UIBannerState extends State<UIBanner>
           child: PageView.builder(
             controller: pageController,
             itemBuilder: (BuildContext context, int index) =>
-                widget.child[index % widget.child.length],
+                widget.children[index % widget.children.length],
             onPageChanged: onPageChanged,
           ),
         ),
@@ -68,7 +72,7 @@ class _UIBannerState extends State<UIBanner>
                 indicatorColor: Theme.of(context).primaryColor,
                 controller: tabController,
                 tabs: List<Widget>.generate(
-                  widget.child.length,
+                  widget.children.length,
                   (int index) => const SizedBox(width: 24),
                 ),
               ),
@@ -81,13 +85,13 @@ class _UIBannerState extends State<UIBanner>
 
   void onPageChanged(int index) {
     this.index = index;
-    tabController.animateTo(index % widget.child.length);
+    tabController.animateTo(index % widget.children.length);
   }
 
   Timer tickerStart() {
     return Timer.periodic(const Duration(seconds: 2), (Timer timer) {
       index += 1;
-      int p = index % widget.child.length;
+      int p = index % widget.children.length;
       tabController.animateTo(p);
       pageController.animateToPage(p,
           duration: kTabScrollDuration, curve: Curves.ease);

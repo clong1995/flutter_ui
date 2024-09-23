@@ -57,6 +57,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _guid = "GUID";
+  String _info = "INFO";
 
   @override
   void initState() {
@@ -82,10 +83,12 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Text(_guid),
+      body: Column(
+        mainAxisAlignment : MainAxisAlignment. center,
+        children: [
+          Text(_guid),
+          Text(_info),
+        ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -93,6 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> getGuid() async {
     _guid = await Guid.id;
+    _info = await Guid.info;
     setState(() {
 
     });
