@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:ui_adapt/ui_adapt.dart';
 
@@ -37,21 +39,55 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    int count = 68;
+
+    Size size = MediaQuery.of(context).size;
+
+    double containerWidth = size.width;
+    double containerHeight = size.height;
+
+    double bestEdge = 0.0;
+    int numSquares = 0;
+
+    for (double edge = 1.0;
+        edge <= min(containerWidth, containerHeight);
+        edge++) {
+      int countInWidth = (containerWidth / edge).floor(); // 水平方向的数量
+      int countInHeight = (containerHeight / edge).floor(); // 垂直方向的数量
+      numSquares = countInWidth * countInHeight; // 总数量
+
+      if (numSquares >= count) {
+        bestEdge = edge;
+      }
+    }
+
+    // 输出结果
+    if (bestEdge > 0) {
+      numSquares = ((containerWidth / bestEdge).floor()) *
+          ((containerHeight / bestEdge).floor());
+    }
+
     return Scaffold(
       body: UiAdapt(
-        width: 500,
-        height: 500,
+        width: containerWidth,
+        height: containerHeight,
         builder: (double scale) {
-          return  Container(
-            color: Colors.red,
-            child: const Text("UiAdapt"),
-          );
+          return Wrap(
+              alignment: WrapAlignment.center,
+              runAlignment: WrapAlignment.center,
+              children:
+                  List.generate(numSquares, (index) => index).map((int e) {
+                return Container(
+                  color: e > count ? Colors.grey : Colors.red,
+                  width: bestEdge,
+                  height: bestEdge,
+                );
+              }).toList());
         },
       ),
     );
