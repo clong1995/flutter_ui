@@ -26,7 +26,9 @@ class UiCacheImage extends StatelessWidget {
       future: _tempImage(src, fit),
       builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         } else if (snapshot.hasError) {
           //print(snapshot.error);
           return const Icon(
