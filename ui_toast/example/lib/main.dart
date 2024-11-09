@@ -34,8 +34,10 @@ class MyHomePage extends StatelessWidget {
         title: const Text("toast"),
       ),
       body: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 10,
+          runSpacing: 10,
           children: [
             FilledButton(
               onPressed: () {
