@@ -30,6 +30,7 @@ class _ToastState extends State<_Toast> {
             child: Center(
               child: IntrinsicWidth(
                 child: Container(
+                  padding: EdgeInsets.all(10),
                   constraints: const BoxConstraints(
                     minWidth: 140,
                     minHeight: 60,
