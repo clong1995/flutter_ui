@@ -59,7 +59,7 @@ class MyHomePage extends StatelessWidget {
             ),
             FilledButton(
               onPressed: () {
-                Toast.show(Toast.failure..text = "执行错误");
+                Toast.show(Toast.failure..text = "自定义文本:执行错误");
               },
               child: const Text("failure 执行错误"),
             ),
