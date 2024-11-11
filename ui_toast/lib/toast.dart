@@ -28,45 +28,47 @@ class _ToastState extends State<_Toast> {
         : AbsorbPointer(
             absorbing: true,
             child: Center(
-              child: Container(
-                constraints: const BoxConstraints(
-                  minWidth: 140,
-                  minHeight: 60,
-                ),
-                decoration: BoxDecoration(
-                  color: Color.lerp(_message!.color, Colors.white, .95),
-                  border: Border.all(
-                    color: _message!.color.withOpacity(.5),
-                    width: 1.5,
+              child: IntrinsicWidth(
+                child: Container(
+                  constraints: const BoxConstraints(
+                    minWidth: 140,
+                    minHeight: 60,
                   ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _message!.icon == Icons.sync
-                        ? SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              color: _message!.color,
-                            ),
-                          )
-                        : Icon(
-                            _message!.icon,
-                            color: _message!.color,
-                            size: 28,
-                          ),
-                    const SizedBox(width: 5),
-                    Text(
-                      _message!.text,
-                      style: TextStyle(
-                        color: _message!.color,
-                        fontSize: 15,
-                        decoration: TextDecoration.none,
-                      ),
+                  decoration: BoxDecoration(
+                    color: Color.lerp(_message!.color, Colors.white, .95),
+                    border: Border.all(
+                      color: _message!.color.withOpacity(.5),
+                      width: 1.5,
                     ),
-                  ],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _message!.icon == Icons.sync
+                          ? SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: _message!.color,
+                        ),
+                      )
+                          : Icon(
+                        _message!.icon,
+                        color: _message!.color,
+                        size: 28,
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        _message!.text,
+                        style: TextStyle(
+                          color: _message!.color,
+                          fontSize: 15,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
