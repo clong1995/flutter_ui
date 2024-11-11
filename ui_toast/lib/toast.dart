@@ -29,8 +29,10 @@ class _ToastState extends State<_Toast> {
             absorbing: true,
             child: Center(
               child: Container(
-                width: 140,
-                height: 60,
+                constraints: const BoxConstraints(
+                  minWidth: 140,
+                  minHeight: 60,
+                ),
                 decoration: BoxDecoration(
                   color: Color.lerp(_message!.color, Colors.white, .95),
                   border: Border.all(
