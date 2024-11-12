@@ -13,8 +13,18 @@ class Auth {
 
   static String get sk => _sk;
 
-  //从本地加载凭证
-  static Future<bool> load() async {
+  //加载凭证
+  static Future<bool> load({
+    String? ak,
+    String? sk,
+  }) async {
+    if (ak != null && sk != null && ak != "" && sk != "") {
+      _ak = ak;
+      _sk = sk;
+      await _set();
+      return true;
+    }
+
     String? value = await _asyncPrefs.getString(_key);
     if (value == null) {
       return false;
@@ -34,9 +44,9 @@ class Auth {
 
   //判断状态
   static bool state() => _ak != "" && _sk != "";
+}
 
-  static Future<void> _set() async {
-    String encryptText = await encrypter("$_ak-$_sk");
-    await _asyncPrefs.setString(_key, encryptText);
-  }
+Future<void> _set() async {
+  String encryptText = await encrypter("$_ak-$_sk");
+  await _asyncPrefs.setString(_key, encryptText);
 }
