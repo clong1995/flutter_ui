@@ -1,15 +1,14 @@
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:guid/guid.dart';
 
-
-Future<String> encryptText(String plainText) async {
+Future<String> encrypter(String plainText) async {
   final iv = encrypt.IV.fromLength(16);
   final encrypter = await _encrypter();
   final encrypted = encrypter.encrypt(plainText, iv: iv);
   return "${iv.base64}:${encrypted.base64}";
 }
 
-Future<String> decryptText(String encryptedText) async {
+Future<String> decrypter(String encryptedText) async {
   final parts = encryptedText.split(":");
   if (parts.length != 2) {
     return "";
