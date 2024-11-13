@@ -14,7 +14,7 @@ class Auth {
   static String get sk => _sk;
 
   //加载凭证
-  static Future<bool> load({
+  static Future<void> load({
     String? ak,
     String? sk,
   }) async {
@@ -22,18 +22,21 @@ class Auth {
       _ak = ak;
       _sk = sk;
       await _set();
-      return true;
+      return;
     }
 
     String? value = await _asyncPrefs.getString(_key);
-    if (value == null) {
-      return false;
+    if (value == null || value.isEmpty) {
+      return;
     }
     String decryptText = await decrypter(value);
-    List<String> arr = decryptText.split("-");
+    List<String> arr = decryptText.split(":");
+    if(arr.length != 2){
+      return;
+    }
     _ak = arr[0];
     _sk = arr[1];
-    return true;
+    return;
   }
 
   //清除凭证
@@ -47,6 +50,6 @@ class Auth {
 }
 
 Future<void> _set() async {
-  String encryptText = await encrypter("$_ak-$_sk");
+  String encryptText = await encrypter("$_ak:$_sk");
   await _asyncPrefs.setString(_key, encryptText);
 }
