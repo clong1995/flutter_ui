@@ -17,11 +17,14 @@ class Auth {
   static Future<void> load({
     String? ak,
     String? sk,
+    bool persist = true,
   }) async {
     if (ak != null && sk != null && ak != "" && sk != "") {
       _ak = ak;
       _sk = sk;
-      await _set();
+      if (persist) {
+        await _set();
+      }
       return;
     }
 
@@ -31,7 +34,7 @@ class Auth {
     }
     String decryptText = await decrypter(value);
     List<String> arr = decryptText.split(":");
-    if(arr.length != 2){
+    if (arr.length != 2) {
       return;
     }
     _ak = arr[0];
