@@ -23,12 +23,6 @@ abstract class Logic<T, E> with Lifecycle{
 
   Logic(this._context);
 
-  /*@override
-  void onInit() {}
-
-  @override
-  void onDispose() {}*/
-
   Map<String, Future<Object?> Function(Object?)> globalFunc() => {};
   Future<Object?> Function(Object?)? findGlobalFunc(String funcName) =>
       FuncDict.get(funcName);
@@ -42,6 +36,7 @@ abstract class Logic<T, E> with Lifecycle{
 
   S? find<S>() => LogicDict.get<S>();
 
+  @override
   void update([List<String>? ids]) {
     if (ids != null) {
       _updateDict.forEach((String key, void Function() func) {

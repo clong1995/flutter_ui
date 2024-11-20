@@ -6,4 +6,6 @@ mixin Lifecycle {
   void onDispose() {}
 
   BuildContext get context;
+
+  void update([List<String>? ids]) {}
 }
