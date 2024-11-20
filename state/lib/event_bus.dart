@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '/lifecycle.dart';
 
