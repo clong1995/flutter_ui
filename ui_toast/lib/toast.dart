@@ -30,7 +30,7 @@ class _ToastState extends State<_Toast> {
             child: Center(
               child: IntrinsicWidth(
                 child: Container(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   constraints: const BoxConstraints(
                     minWidth: 140,
                     minHeight: 60,
@@ -100,6 +100,7 @@ class Toast {
     ..autoClose = false;
 
   static void show(Message message) {
+    message.text = message.text.trim();
     _update?.call(message);
     if (message.autoClose) {
       Future.delayed(const Duration(seconds: 1), () => _update?.call(null));
