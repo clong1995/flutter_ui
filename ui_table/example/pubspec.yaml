@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   ui_table:
     path: ../../ui_table
+  rpx:
+    path: ../../rpx
 
 dev_dependencies:
   flutter_test:
