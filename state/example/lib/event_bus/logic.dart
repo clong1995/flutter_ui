@@ -17,8 +17,7 @@ class MyLogic extends Logic<MyLogic, _State> with EventBus {
   void onEvent(Event event) {}
 
   void publishMyEvent() {
-    Event event = "event1".event<String>();
-    event.load = "你好啊";
+    Event event = "event1".event<String>("你好啊");
     publish(event);
   }
 }

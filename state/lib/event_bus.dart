@@ -5,7 +5,9 @@ import 'package:flutter/foundation.dart';
 import '/lifecycle.dart';
 
 extension StringEvent on String {
-  Event event<T>() => Event<T>()..topic = this;
+  Event event<T>(T message) => Event<T>()
+    ..topic = this
+    ..message = message;
 }
 
 class Event<T> {
@@ -13,7 +15,7 @@ class Event<T> {
   String topic = "";
 
   //随同主题的消息负载
-  T? load;
+  T? message;
 }
 
 mixin EventBus on Lifecycle {
@@ -36,7 +38,8 @@ mixin EventBus on Lifecycle {
     void Function(Event event) onEvent,
   ) {
     _subscription?.cancel();
-    _subscription = _EventBus().subscribe(events).listen((event) => onEvent(event));
+    _subscription =
+        _EventBus().subscribe(events).listen((event) => onEvent(event));
   }
 
   @override
@@ -59,7 +62,7 @@ class _EventBus {
   // 发布事件
   void publish(Event event) {
     if (kDebugMode) {
-      print("publish\n topic: ${event.topic}\n load: ${event.load}");
+      print("publish\n topic: ${event.topic}\n message: ${event.message}");
     }
     _controller.add(event);
   }
