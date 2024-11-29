@@ -6,7 +6,7 @@ class LogicDict {
     if (!_contain<T>()) {
       _logicDict[T.hashCode] = logic;
     } else {
-      throw "$T : ${T.hashCode} already exists";
+      throw "$T : ${T.hashCode} : already exists";
     }
   }
 
