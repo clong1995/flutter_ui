@@ -49,9 +49,9 @@ class _UiListState extends State<UiList> {
               bottom: BorderSide(
                   color: Color.fromARGB(
                     255,
-                    borderColor.red ~/ 1.1,
-                    borderColor.green ~/ 1.1,
-                    borderColor.blue ~/ 1.1,
+                    borderColor.red ~/ 1.2,
+                    borderColor.green ~/ 1.2,
+                    borderColor.blue ~/ 1.2,
                   )),
             ),
           ),
