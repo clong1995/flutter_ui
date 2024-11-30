@@ -46,7 +46,14 @@ class _UiListState extends State<UiList> {
           decoration: BoxDecoration(
             color: widget.headColor,
             border: Border(
-              bottom: BorderSide(color: borderColor),
+              bottom: BorderSide(
+                  width: 1.5,
+                  color: Color.fromARGB(
+                    255,
+                    borderColor.red ~/ 1.2,
+                    borderColor.green ~/ 1.2,
+                    borderColor.blue ~/ 1.2,
+                  )),
             ),
           ),
           child: line(widget.head),
