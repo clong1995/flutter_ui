@@ -3,7 +3,7 @@ import 'package:state/logic.dart';
 
 class _State {}
 
-class MyLogic extends Logic<MyLogic, _State> with EventBus {
+class MyLogic extends Logic<_State> with EventBus {
   MyLogic(super.context);
 
   @override
