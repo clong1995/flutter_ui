@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class UiList extends StatefulWidget {
   final List<Widget> head;
-  final List<List<Widget>> body;
+  final List<UiListItem> body;
   final double? lineMinimumHeight;
   final Color? headColor;
   final Color? borderColor;
@@ -48,11 +48,11 @@ class _UiListState extends State<UiList> {
             border: Border(
               bottom: BorderSide(
                   color: Color.fromARGB(
-                    255,
-                    borderColor.red ~/ 1.2,
-                    borderColor.green ~/ 1.2,
-                    borderColor.blue ~/ 1.2,
-                  )),
+                255,
+                borderColor.red ~/ 1.2,
+                borderColor.green ~/ 1.2,
+                borderColor.blue ~/ 1.2,
+              )),
             ),
           ),
           child: line(widget.head),
@@ -69,7 +69,10 @@ class _UiListState extends State<UiList> {
                         bottom: BorderSide(color: borderColor),
                       ),
               ),
-              child: line(widget.body[index]),
+              child: line(
+                widget.body[index].row,
+                key: widget.body[index].key,
+              ),
             ),
           ),
         )
@@ -79,7 +82,8 @@ class _UiListState extends State<UiList> {
 
   double getWidth(int index) => index < width.length ? width[index] : 0;
 
-  Widget line(List<Widget> children) => Row(
+  Widget line(List<Widget> children, {Key? key}) => Row(
+        key: key,
         children: children.asMap().entries.map((MapEntry<int, Widget> entry) {
           double width = getWidth(entry.key);
           Widget child = Container(
@@ -98,4 +102,14 @@ class _UiListState extends State<UiList> {
           return width > 0 ? child : Expanded(child: child);
         }).toList(),
       );
+}
+
+class UiListItem {
+  final Key? key;
+  final List<Widget> row;
+
+  UiListItem({
+    this.key,
+    required this.row,
+  });
 }
