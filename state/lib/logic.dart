@@ -4,7 +4,7 @@ import 'lifecycle.dart';
 import 'src/func_dict.dart';
 import 'src/logic_dict.dart';
 
-abstract class Logic<T, E> with Lifecycle{
+abstract class Logic<T, E> with Lifecycle {
   final Map<String, void Function()> _updateDict = {};
 
   late E _state;
@@ -24,6 +24,7 @@ abstract class Logic<T, E> with Lifecycle{
   Logic(this._context);
 
   Map<String, Future<Object?> Function(Object?)> globalFunc() => {};
+
   Future<Object?> Function(Object?)? findGlobalFunc(String funcName) =>
       FuncDict.get(funcName);
 
@@ -64,7 +65,8 @@ abstract class Logic<T, E> with Lifecycle{
         result,
       );
 
-  Future<S?> push<S>(Widget Function() page, [Object? arguments]) =>
+  Future<S?> push<S extends Object?>(Widget Function() page,
+          [Object? arguments]) =>
       Navigator.push<S>(
         _context,
         MaterialPageRoute<S>(
@@ -75,7 +77,8 @@ abstract class Logic<T, E> with Lifecycle{
         ),
       );
 
-  Future<S?> pushAndRemove<S>(Widget Function() page, [Object? arguments]) =>
+  Future<S?> pushAndRemove<S extends Object?>(Widget Function() page,
+          [Object? arguments]) =>
       Navigator.pushAndRemoveUntil<S>(
         _context,
         MaterialPageRoute<S>(
@@ -85,6 +88,19 @@ abstract class Logic<T, E> with Lifecycle{
           ),
         ),
         (Route<dynamic> route) => false,
+      );
+
+  Future<S?> pushAndReplace<S extends Object?, SO extends Object?>(
+          Widget Function() page,
+          [Object? arguments]) =>
+      Navigator.pushReplacement<S, SO>(
+        _context,
+        MaterialPageRoute<S>(
+          builder: (BuildContext context) => page(),
+          settings: RouteSettings(
+            arguments: arguments,
+          ),
+        ),
       );
 
   S? arguments<S>() {
