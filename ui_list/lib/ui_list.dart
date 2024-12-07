@@ -47,12 +47,13 @@ class _UiListState extends State<UiList> {
             color: widget.headColor,
             border: Border(
               bottom: BorderSide(
-                  color: Color.fromARGB(
-                255,
-                borderColor.red ~/ 1.2,
-                borderColor.green ~/ 1.2,
-                borderColor.blue ~/ 1.2,
-              )),
+                color: Color.fromARGB(
+                  255,
+                  borderColor.red ~/ 1.2,
+                  borderColor.green ~/ 1.2,
+                  borderColor.blue ~/ 1.2,
+                ),
+              ),
             ),
           ),
           child: line(widget.head),
