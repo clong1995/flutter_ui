@@ -15,7 +15,7 @@ class StateWidget<T extends Logic> extends StatefulWidget {
     required this.logic,
     required this.builder,
     this.expose,
-    this.public = true,
+    this.public = false,
   });
 
   @override
