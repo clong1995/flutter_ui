@@ -4,6 +4,7 @@ import 'lifecycle.dart';
 import 'src/func_dict.dart';
 import 'src/logic_dict.dart';
 
+//兼容历史代码
 abstract class Logic<T,E> with Lifecycle {
   final Map<String, void Function()> _updateDict = {};
 
