@@ -70,6 +70,15 @@ class MyHomePage extends StatelessWidget {
               },
               child: const Text("loading"),
             ),
+            FilledButton(
+              onPressed: () {
+                Toast.show(Toast.choice
+                  ..callback = (bool choice) {
+                    print(choice);
+                  });
+              },
+              child: const Text("选择"),
+            ),
           ],
         ),
       ),
