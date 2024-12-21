@@ -157,11 +157,13 @@ class Toast {
       );
 }
 
+typedef ChoiceBack = void Function(bool choice);
+
 class Message {
   IconData icon = Icons.circle_outlined;
   String text = "无";
   Color color = Colors.grey;
   bool autoClose = true;
   bool choice = false;
-  void Function(bool choice) callback = (bool choice){};
+  ChoiceBack callback = (bool choice){};
 }
