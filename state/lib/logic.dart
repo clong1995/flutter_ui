@@ -37,6 +37,10 @@ abstract class Logic<E> with Lifecycle {
 
   S? find<S>() => LogicDict.get<S>();
 
+  dispose(){
+    LogicDict.remove<E>();
+  }
+
   @override
   void update([List<String>? ids]) {
     if (ids != null) {
