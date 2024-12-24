@@ -40,7 +40,10 @@ abstract class Logic<E> with Lifecycle {
   void reload<T>(Widget Function() page) {
     Widget Function() p = page;
     pushAndRemove(() => _Reload(
-          () => pushAndRemove(p),
+          () {
+            print(p);
+            //pushAndRemove(p);
+          },
           () => LogicDict.contain<T>(),
         ));
   }
