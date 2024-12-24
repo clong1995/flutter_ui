@@ -173,6 +173,7 @@ class _ReloadState extends State<_Reload> {
   }
 
   void jump() {
+    print(widget.check());
     /*if (widget.check()) {
       widget.jump();
       return;
