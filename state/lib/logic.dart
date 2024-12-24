@@ -38,11 +38,10 @@ abstract class Logic<E> with Lifecycle {
   S? find<S>() => LogicDict.get<S>();
 
   void reload<T>(Widget Function() page) {
-    Widget Function() p = page;
+    Widget p = page();
     pushAndRemove(() => _Reload(
           () {
-            print(p);
-            //pushAndRemove(p);
+            pushAndRemove(()=>p);
           },
           () => LogicDict.contain<T>(),
         ));
