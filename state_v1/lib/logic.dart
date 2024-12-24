@@ -4,8 +4,7 @@ import 'lifecycle.dart';
 import 'src/func_dict.dart';
 import 'src/logic_dict.dart';
 
-//兼容历史代码
-abstract class Logic<T,E> with Lifecycle {
+abstract class Logic<T, E> with Lifecycle {
   final Map<String, void Function()> _updateDict = {};
 
   late E _state;
@@ -38,6 +37,13 @@ abstract class Logic<T,E> with Lifecycle {
 
   S? find<S>() => LogicDict.get<S>();
 
+  void reload<T>(Widget Function() page) {
+    pushAndRemove(() => _Reload(
+          page,
+          () => LogicDict.contain<T>(),
+        ));
+  }
+
   @override
   void update([List<String>? ids]) {
     if (ids != null) {
@@ -54,6 +60,12 @@ abstract class Logic<T,E> with Lifecycle {
     required String id,
     required Widget Function() builder,
   }) {
+    for (String e in _updateDict.keys) {
+      if (id == "_" || e == id) {
+        throw "$id : already exists";
+      }
+    }
+
     return _BuildChildWidget(
       id: id,
       builder: builder,
@@ -140,4 +152,42 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
     widget.updateDict.remove(widget.id);
     super.dispose();
   }
+}
+
+class _Reload extends StatefulWidget {
+  final Widget Function() page;
+  final bool Function() check;
+
+  const _Reload(this.page, this.check);
+
+  @override
+  State<_Reload> createState() => _ReloadState();
+}
+
+class _ReloadState extends State<_Reload> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance
+        .addPostFrameCallback((Duration timeStamp) => jump());
+  }
+
+  void jump() {
+    if (widget.check()) {
+      Future.delayed(const Duration(milliseconds: 500), jump);
+      return;
+    }
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => widget.page(),
+      ),
+      (Route<dynamic> route) => false,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) => const Center(
+        child: CircularProgressIndicator(),
+      );
 }
