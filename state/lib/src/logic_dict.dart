@@ -15,4 +15,6 @@ class LogicDict {
   static bool _contain<T>() => _logicDict.containsKey(T.hashCode);
 
   static void remove<T>() => _logicDict.remove(T.hashCode);
+
+  static void removeHashCode(int hashCode) => _logicDict.remove(hashCode);
 }

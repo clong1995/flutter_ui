@@ -8,6 +8,7 @@ abstract class Logic<E> with Lifecycle {
   final Map<String, void Function()> _updateDict = {};
 
   late E _state;
+  late int _hashCode;
 
   @protected
   set state(E value) {
@@ -28,18 +29,17 @@ abstract class Logic<E> with Lifecycle {
   Future<Object?> Function(Object?)? findGlobalFunc(String funcName) =>
       FuncDict.get(funcName);
 
-  void initDict(void Function() update) {
+  void initDict<T>(void Function() update) {
     if (_updateDict.containsKey("_")) {
       return;
     }
+    _hashCode = T.hashCode;
     _updateDict["_"] = update;
   }
 
   S? find<S>() => LogicDict.get<S>();
 
-  dispose(){
-    super.onDispose();
-  }
+  dispose() => LogicDict.removeHashCode(_hashCode);
 
   @override
   void update([List<String>? ids]) {
@@ -57,6 +57,12 @@ abstract class Logic<E> with Lifecycle {
     required String id,
     required Widget Function() builder,
   }) {
+    for (String e in _updateDict.keys) {
+      if (id == "_" || e == id) {
+        throw "$id : already exists";
+      }
+    }
+
     return _BuildChildWidget(
       id: id,
       builder: builder,
