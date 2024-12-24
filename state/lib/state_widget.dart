@@ -27,6 +27,7 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
 
   @override
   void initState() {
+    print("initState");
     super.initState();
     logic = widget.logic(context);
     widget.expose?.call(logic);
@@ -43,6 +44,7 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
 
   @override
   void dispose() {
+    print("dispose");
     logic.onDispose();
     if (widget.public) {
       FuncDict.remove(logic.globalFunc().keys);
