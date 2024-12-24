@@ -168,19 +168,20 @@ class _ReloadState extends State<_Reload> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(jump);
+    WidgetsBinding.instance
+        .addPostFrameCallback((Duration timeStamp) => jump());
   }
 
-  void jump(Duration timeStamp) {
+  void jump() {
     if (widget.check()) {
       widget.jump();
       return;
     }
-    Future.delayed(const Duration(milliseconds: 500), widget.jump);
+    Future.delayed(const Duration(milliseconds: 500), jump);
   }
 
   @override
   Widget build(BuildContext context) => const Center(
-    child: CircularProgressIndicator(),
-  );
+        child: CircularProgressIndicator(),
+      );
 }
