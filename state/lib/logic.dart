@@ -38,11 +38,8 @@ abstract class Logic<E> with Lifecycle {
   S? find<S>() => LogicDict.get<S>();
 
   void reload<T>(Widget Function() page) {
-    Widget p = page();
     pushAndRemove(() => _Reload(
-          () {
-            pushAndRemove(()=>p);
-          },
+          page,
           () => LogicDict.contain<T>(),
         ));
   }
@@ -94,7 +91,7 @@ abstract class Logic<E> with Lifecycle {
       );
 
   Future<S?> pushAndRemove<S extends Object?>(Widget Function() page,
-          [Object? arguments]) {
+      [Object? arguments]) {
     return Navigator.pushAndRemoveUntil<S>(
       _context,
       MaterialPageRoute<S>(
@@ -103,7 +100,7 @@ abstract class Logic<E> with Lifecycle {
           arguments: arguments,
         ),
       ),
-          (Route<dynamic> route) => false,
+      (Route<dynamic> route) => false,
     );
   }
 
@@ -159,10 +156,10 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
 }
 
 class _Reload extends StatefulWidget {
-  final void Function() jump;
+  final Widget Function() page;
   final bool Function() check;
 
-  const _Reload(this.jump, this.check);
+  const _Reload(this.page, this.check);
 
   @override
   State<_Reload> createState() => _ReloadState();
@@ -181,7 +178,14 @@ class _ReloadState extends State<_Reload> {
       Future.delayed(const Duration(milliseconds: 500), jump);
       return;
     }
-    widget.jump();
+    // widget.jump();
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => widget.page(),
+      ),
+      (Route<dynamic> route) => false,
+    );
   }
 
   @override
