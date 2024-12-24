@@ -178,7 +178,6 @@ class _ReloadState extends State<_Reload> {
       Future.delayed(const Duration(milliseconds: 500), jump);
       return;
     }
-    // widget.jump();
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
