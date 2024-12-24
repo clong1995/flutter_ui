@@ -34,7 +34,7 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
       LogicDict.set<T>(logic);
       FuncDict.set(logic.globalFunc());
     }
-    logic.initDict<T>(() => setState(() {}));
+    logic.initDict(() => setState(() {}));
     logic.onInit();
   }
 

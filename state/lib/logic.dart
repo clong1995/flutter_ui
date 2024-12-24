@@ -8,7 +8,6 @@ abstract class Logic<E> with Lifecycle {
   final Map<String, void Function()> _updateDict = {};
 
   late E _state;
-  late int _hashCode;
 
   @protected
   set state(E value) {
@@ -29,17 +28,21 @@ abstract class Logic<E> with Lifecycle {
   Future<Object?> Function(Object?)? findGlobalFunc(String funcName) =>
       FuncDict.get(funcName);
 
-  void initDict<T>(void Function() update) {
+  void initDict(void Function() update) {
     if (_updateDict.containsKey("_")) {
       return;
     }
-    _hashCode = T.hashCode;
     _updateDict["_"] = update;
   }
 
   S? find<S>() => LogicDict.get<S>();
 
-  dispose() => LogicDict.removeHashCode(_hashCode);
+  void reload<T>(Widget Function() page) {
+    pushAndRemove(() => _Reload(
+          () => pushAndRemove(page),
+          () => LogicDict.contain<T>(),
+        ));
+  }
 
   @override
   void update([List<String>? ids]) {
@@ -149,4 +152,35 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
     widget.updateDict.remove(widget.id);
     super.dispose();
   }
+}
+
+class _Reload extends StatefulWidget {
+  final void Function() jump;
+  final bool Function() check;
+
+  const _Reload(this.jump, this.check);
+
+  @override
+  State<_Reload> createState() => _ReloadState();
+}
+
+class _ReloadState extends State<_Reload> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(jump);
+  }
+
+  void jump(Duration timeStamp) {
+    if (widget.check()) {
+      widget.jump();
+      return;
+    }
+    Future.delayed(const Duration(milliseconds: 500), widget.jump);
+  }
+
+  @override
+  Widget build(BuildContext context) => const Center(
+    child: CircularProgressIndicator(),
+  );
 }
