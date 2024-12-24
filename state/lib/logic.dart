@@ -39,7 +39,10 @@ abstract class Logic<E> with Lifecycle {
 
   S? find<S>() => LogicDict.get<S>();
 
-  dispose() => LogicDict.removeHashCode(_hashCode);
+  dispose() {
+    print(_hashCode);
+    LogicDict.removeHashCode(_hashCode);
+  }
 
   @override
   void update([List<String>? ids]) {
