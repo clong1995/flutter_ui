@@ -173,12 +173,11 @@ class _ReloadState extends State<_Reload> {
   }
 
   void jump() {
-    print(widget.check());
-    /*if (widget.check()) {
-      widget.jump();
+    if (widget.check()) {
+      Future.delayed(const Duration(milliseconds: 500), jump);
       return;
     }
-    Future.delayed(const Duration(milliseconds: 500), jump);*/
+    widget.jump();
   }
 
   @override
