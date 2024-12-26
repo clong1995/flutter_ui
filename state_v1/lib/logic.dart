@@ -51,7 +51,6 @@ abstract class Logic<T, E> with Lifecycle {
         if (ids.contains(key)) func.call();
       });
     } else {
-      _updateDict.removeWhere((key, value) => key != "_");
       _updateDict["_"]?.call();
     }
   }
@@ -59,19 +58,12 @@ abstract class Logic<T, E> with Lifecycle {
   Widget builder({
     required String id,
     required Widget Function() builder,
-  }) {
-    for (String e in _updateDict.keys) {
-      if (id == "_" || e == id) {
-        throw "$id : already exists";
-      }
-    }
-
-    return _BuildChildWidget(
-      id: id,
-      builder: builder,
-      updateDict: _updateDict,
-    );
-  }
+  }) =>
+      _BuildChildWidget(
+        id: id,
+        builder: builder,
+        updateDict: _updateDict,
+      );
 
   void pop<S>([S? result]) => Navigator.pop<S>(
         _context,
@@ -142,10 +134,18 @@ class _BuildChildWidget extends StatefulWidget {
 
 class _BuildChildWidgetState extends State<_BuildChildWidget> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    for (String e in widget.updateDict.keys) {
+      if (widget.id == "_" || e == widget.id) {
+        throw "${widget.id} : already exists";
+      }
+    }
     widget.updateDict[widget.id] = () => setState(() {});
-    return widget.builder();
   }
+
+  @override
+  Widget build(BuildContext context) => widget.builder();
 
   @override
   void dispose() {

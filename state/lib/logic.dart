@@ -83,18 +83,17 @@ abstract class Logic<E> with Lifecycle {
       );
 
   Future<S?> pushAndRemove<S extends Object?>(Widget Function() page,
-      [Object? arguments]) {
-    return Navigator.pushAndRemoveUntil<S>(
-      _context,
-      MaterialPageRoute<S>(
-        builder: (BuildContext context) => page(),
-        settings: RouteSettings(
-          arguments: arguments,
+          [Object? arguments]) =>
+      Navigator.pushAndRemoveUntil<S>(
+        _context,
+        MaterialPageRoute<S>(
+          builder: (BuildContext context) => page(),
+          settings: RouteSettings(
+            arguments: arguments,
+          ),
         ),
-      ),
-      (Route<dynamic> route) => false,
-    );
-  }
+        (Route<dynamic> route) => false,
+      );
 
   Future<S?> pushAndReplace<S extends Object?, SO extends Object?>(
           Widget Function() page,
