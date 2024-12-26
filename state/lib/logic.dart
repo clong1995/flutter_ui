@@ -51,7 +51,6 @@ abstract class Logic<E> with Lifecycle {
         if (ids.contains(key)) func.call();
       });
     } else {
-      //_updateDict.removeWhere((key, value) => key != "_");
       _updateDict["_"]?.call();
     }
   }
