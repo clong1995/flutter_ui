@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'lifecycle.dart';
@@ -37,10 +38,10 @@ abstract class Logic<T, E> with Lifecycle {
 
   S? find<S>() => LogicDict.get<S>();
 
-  void reload<T>(Widget Function() page) {
+  void reload<S>(Widget Function() page) {
     pushAndRemove(() => _Reload(
           page,
-          () => LogicDict.contain<T>(),
+          () => LogicDict.contain<S>(),
         ));
   }
 
@@ -136,6 +137,9 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
   @override
   void initState() {
     super.initState();
+    if(kDebugMode){
+      print("initState: ${widget.id}");
+    }
     for (String e in widget.updateDict.keys) {
       if (widget.id == "_" || e == widget.id) {
         throw "${widget.id} : already exists";
@@ -150,6 +154,9 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
   @override
   void dispose() {
     widget.updateDict.remove(widget.id);
+    if(kDebugMode){
+      print("dispose: ${widget.id}");
+    }
     super.dispose();
   }
 }
