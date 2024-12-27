@@ -58,5 +58,5 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
     super.dispose();
   }
 
-  String get widgetId => "${context.hashCode}\u200b_";
+  String get widgetId => "${context.hashCode}\$\$_";
 }
