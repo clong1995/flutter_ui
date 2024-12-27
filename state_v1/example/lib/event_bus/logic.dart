@@ -3,8 +3,8 @@ import 'package:state/logic.dart';
 
 class _State {}
 
-class MyLogic extends Logic<MyLogic,_State> with EventBus {
-  MyLogic(super.context);
+class EventBusLogic extends Logic<EventBusLogic,_State> with EventBus {
+  EventBusLogic(super.context);
 
   @override
   void onInit() {
@@ -14,7 +14,9 @@ class MyLogic extends Logic<MyLogic,_State> with EventBus {
   }
 
   @override
-  void onEvent(Event event) {}
+  void onEvent(Event event) {
+    print(event.topic);
+  }
 
   void publishMyEvent() {
     Event event = "event1".event<String>("你好啊");
