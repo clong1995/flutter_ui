@@ -49,10 +49,10 @@ abstract class Logic<T, E> with Lifecycle {
   void update([List<String>? ids]) {
     if (ids != null) {
       _updateDict.forEach((String key, void Function() func) {
-        print(key);
-        print(key.split("\$\$"));
-        String id = key.split("\$\$")[1];
-        if (ids.contains(id)) func.call();
+        if(key != "_"){
+          String id = key.split("\u200b")[1];
+          if (ids.contains(id)) func.call();
+        }
       });
     } else {
       _updateDict["_"]?.call();
@@ -163,7 +163,7 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
     super.dispose();
   }
 
-  String get widgetId => "${context.hashCode}\$\$${widget.id}";
+  String get widgetId => "${context.hashCode}\u200b${widget.id}";
 }
 
 class _Reload extends StatefulWidget {
