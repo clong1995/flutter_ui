@@ -49,6 +49,8 @@ abstract class Logic<T, E> with Lifecycle {
   void update([List<String>? ids]) {
     if (ids != null) {
       _updateDict.forEach((String key, void Function() func) {
+        print(key);
+        print(key.split("\$\$"));
         String id = key.split("\$\$")[1];
         if (ids.contains(id)) func.call();
       });
