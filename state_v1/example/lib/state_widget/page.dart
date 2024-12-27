@@ -8,21 +8,33 @@ class StateWidgetPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: StateWidget(
         logic: StateWidgetLogic.new,
-        builder: (logic) => Column(
-          children: [
-            logic.builder(
-              id: "count",
-              builder: () => Text("${logic.state.count}"),
-            ),
-            FilledButton(
-              onPressed: logic.onAddPressed,
-              child: const Text("+1"),
-            )
-          ],
-        ),
+        builder: (logic){
+          Widget child = logic.builder(
+            id: "count",
+            builder: () => Text("1:${logic.state.count}"),
+          );
+          return Column(
+            children: [
+              /*...["1", "2", "3"].map(
+                    (String e) => logic.builder(
+                  id: "count",
+                  builder: () => Text("$e:${logic.state.count}"),
+                ),
+              ),*/
+              child,
+              child,
+              child,
+              FilledButton(
+                onPressed: logic.onAddPressed,
+                child: const Text("+1"),
+              )
+            ],
+          );
+        },
       ),
     );
   }
