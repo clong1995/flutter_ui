@@ -137,15 +137,15 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
   @override
   void initState() {
     super.initState();
-    if(kDebugMode){
-      print("initState: ${widget.id}");
+    if (kDebugMode) {
+      print("initState: $widgetId");
     }
     for (String e in widget.updateDict.keys) {
-      if (widget.id == "_" || e == widget.id) {
-        throw "${widget.id} : already exists";
+      if (widget.id == "_" || e == widgetId) {
+        throw "$widgetId : already exists";
       }
     }
-    widget.updateDict[widget.id] = () => setState(() {});
+    widget.updateDict[widgetId] = () => setState(() {});
   }
 
   @override
@@ -153,12 +153,14 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
 
   @override
   void dispose() {
-    widget.updateDict.remove(widget.id);
-    if(kDebugMode){
-      print("dispose: ${widget.id}");
+    if (kDebugMode) {
+      print("dispose: $widgetId");
     }
+    widget.updateDict.remove(widgetId);
     super.dispose();
   }
+
+  String get widgetId => "${context.hashCode}:${widget.id}";
 }
 
 class _Reload extends StatefulWidget {

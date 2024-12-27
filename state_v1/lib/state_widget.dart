@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'logic.dart';
@@ -28,6 +29,9 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   @override
   void initState() {
     super.initState();
+    if (kDebugMode) {
+      print("initState: $widgetId");
+    }
     logic = widget.logic(context);
     widget.expose?.call(logic);
     if (widget.public) {
@@ -43,6 +47,9 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
 
   @override
   void dispose() {
+    if (kDebugMode) {
+      print("dispose: $widgetId");
+    }
     logic.onDispose();
     if (widget.public) {
       FuncDict.remove(logic.globalFunc().keys);
@@ -50,4 +57,6 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
     }
     super.dispose();
   }
+
+  String get widgetId => "${context.hashCode}:_";
 }
