@@ -2,10 +2,11 @@ name: security
 description: "A new Flutter project."
 version: 0.0.1
 homepage:
+publish_to: none
 
 environment:
-  sdk: ^3.5.4
-  flutter: ">=1.17.0"
+  sdk: ^3.6.0
+  flutter: ">=3.19.6"
 
 dependencies:
   flutter:

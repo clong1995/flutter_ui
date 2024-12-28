@@ -1,16 +1,17 @@
 name: auth
 description: "A new Flutter project."
 version: 0.0.1
-homepage:
+homepage: flutter_ui
+publish_to: none
 
 environment:
-  sdk: ^3.5.4
-  flutter: ">=1.17.0"
+  sdk: ^3.6.0
+  flutter: ">=3.19.6"
 
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: ^2.3.3
+  shared_preferences: ^2.3.4
   security:
     git:
       url: https://github.com/clong1995/flutter_ui.git

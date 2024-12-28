@@ -1,10 +1,10 @@
 name: dev_simulator
 description: A new Flutter project.
 version: 0.0.1
-homepage: ui.flutter
+homepage: flutter_ui
 
 environment:
-  sdk: '>=3.3.4 <4.0.0'
+  sdk: ^3.6.0
   flutter: ">=3.19.6"
 
 dependencies:
