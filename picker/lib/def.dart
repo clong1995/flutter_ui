@@ -3,5 +3,4 @@ class PickerFile {
   String extension = "";
   String path = "";
   int size = 0;
-  int hash = 0;
 }

@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:file_picker/file_picker.dart';
 
 import 'def.dart';
@@ -15,8 +18,7 @@ Future<PickerFile?> single([List<String>? allowedExtensions]) async {
     ..name = platformFile.name
     ..size = platformFile.size
     ..extension = platformFile.extension ?? ""
-    ..path = platformFile.path ?? ""
-    ..hash = platformFile.hashCode;
+    ..path = platformFile.path ?? "";
   return pickerFile;
 }
 
@@ -34,5 +36,30 @@ Future<List<PickerFile>> multiple([List<String>? allowedExtensions]) async {
     ..size = file.size
     ..extension = file.extension ?? ""
     ..path = file.path ?? ""
-    ..hash = file.hashCode).toList(growable: false);
+    ).toList(growable: false);
+}
+
+
+//选择目录
+Future<String?> save({
+  String? dialogTitle,
+  String? fileName,
+  required Uint8List bytes,
+}) async {
+  String? outputFile = await FilePicker.platform.saveFile(
+    dialogTitle: dialogTitle,
+    fileName: fileName,
+    bytes: bytes,
+  );
+  if(outputFile != null){
+    File file = File(outputFile);
+    await file.writeAsBytes(bytes);
+  }
+  return outputFile;
+}
+
+
+//选择目录
+Future<String?> dir() async {
+  return await FilePicker.platform.getDirectoryPath();
 }

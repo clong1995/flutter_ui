@@ -2,9 +2,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:picker/def.dart';
-import 'package:picker/dir.dart';
-import 'package:picker/file.dart';
-import 'package:picker/save.dart';
+import 'package:picker/file.dart' as file;
 
 void main() {
   runApp(const MyApp());
@@ -53,14 +51,31 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             FilledButton.icon(
               icon: Icon(Icons.image_outlined),
-              label: Text("选择图片"),
+              label: Text("拍照"),
               onPressed: () {},
+            ),
+            FilledButton.icon(
+              icon: Icon(Icons.image_outlined),
+              label: Text("单选: 选择相册图片"),
+              onPressed: () {},
+            ),
+            FilledButton.icon(
+              icon: Icon(Icons.image_outlined),
+              label: Text("多选: 选择相册图片"),
+              onPressed: () {},
+            ),
+            FilledButton.icon(
+              icon: Icon(Icons.save),
+              label: Text("保存图片到相册"),
+              onPressed: () {
+
+              },
             ),
             FilledButton.icon(
               icon: Icon(Icons.description_outlined),
               label: Text("单选: 选择任意文件"),
               onPressed: () {
-                single().then((PickerFile? file) {
+                file.single().then((PickerFile? file) {
                   setState(() {
                     singleFile = file;
                   });
@@ -72,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.file_copy_outlined),
               label: Text("多选: 选择任意文件"),
               onPressed: () {
-                multiple().then((List<PickerFile> list) {
+                file.multiple().then((List<PickerFile> list) {
                   setState(() {
                     multipleFile = list;
                   });
@@ -85,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.folder_open),
               label: Text("选择目录"),
               onPressed: () {
-                dir().then((String? p) {
+                file.dir().then((String? p) {
                   setState(() {
                     pickerDir = p;
                   });
@@ -97,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: Icon(Icons.save),
               label: Text("保存文件"),
               onPressed: () {
-                save(bytes: Uint8List(0)).then((String? out) {
+                file.save(bytes: Uint8List(0)).then((String? out) {
                   setState(() {
                     saveOut = out;
                   });
