@@ -2,8 +2,10 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'def.dart';
+import 'src/picker.dart';
 
 //单选任意单文件
 Future<PickerFile?> single([List<String>? allowedExtensions]) async {
@@ -13,13 +15,8 @@ Future<PickerFile?> single([List<String>? allowedExtensions]) async {
   if (result == null) {
     return null;
   }
-  PlatformFile platformFile = result.files.first;
-  PickerFile pickerFile = PickerFile()
-    ..name = platformFile.name
-    ..size = platformFile.size
-    ..extension = platformFile.extension ?? ""
-    ..path = platformFile.path ?? "";
-  return pickerFile;
+  XFile xf = result.files.first.xFile;
+  return pickerFile(xf);
 }
 
 //多选任意文件
@@ -31,13 +28,11 @@ Future<List<PickerFile>> multiple([List<String>? allowedExtensions]) async {
   if (result == null) {
     return [];
   }
-  return result.files
-      .map<PickerFile>((PlatformFile file) => PickerFile()
-        ..name = file.name
-        ..size = file.size
-        ..extension = file.extension ?? ""
-        ..path = file.path ?? "")
-      .toList(growable: false);
+  List<PickerFile> l = [];
+  for (PlatformFile file in result.files) {
+    l.add(await pickerFile(file.xFile));
+  }
+  return l;
 }
 
 //选择任意目录

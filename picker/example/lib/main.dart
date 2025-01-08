@@ -61,6 +61,9 @@ class _MyHomePageState extends State<MyHomePage> {
             label: Text("通过拍照选取"),
             onPressed: () async {
               cameraPickerImage = await picker_image.camera();
+              print(cameraPickerImage?.path);
+              print(cameraPickerImage?.name);
+              print(cameraPickerImage?.extension);
               setState(() {});
             },
           ),
@@ -71,6 +74,9 @@ class _MyHomePageState extends State<MyHomePage> {
             label: Text("单选: 选择相册图片"),
             onPressed: () async {
               gallerySinglePickerImage = await picker_image.single();
+              print(gallerySinglePickerImage?.path);
+              print(gallerySinglePickerImage?.name);
+              print(gallerySinglePickerImage?.extension);
               setState(() {});
             },
           ),
@@ -105,6 +111,9 @@ class _MyHomePageState extends State<MyHomePage> {
             label: Text("通过录像选取"),
             onPressed: () async {
               cameraPickerVideo = await picker_video.camera();
+              print(cameraPickerVideo?.path);
+              print(cameraPickerVideo?.name);
+              print(cameraPickerVideo?.extension);
               setState(() {});
             },
           ),
@@ -116,6 +125,9 @@ class _MyHomePageState extends State<MyHomePage> {
             label: Text("单选: 选择相册视频"),
             onPressed: () async {
               gallerySinglePickerVideo = await picker_video.single();
+              print(gallerySinglePickerVideo?.path);
+              print(gallerySinglePickerVideo?.name);
+              print(gallerySinglePickerVideo?.extension);
               setState(() {});
             },
           ),
@@ -140,6 +152,9 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () {
               picker_file.single().then((PickerFile? file) {
                 fileSinglePicker = file;
+                print(fileSinglePicker?.path);
+                print(fileSinglePicker?.name);
+                print(fileSinglePicker?.extension);
                 setState(() {});
               });
             },
