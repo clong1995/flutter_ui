@@ -94,7 +94,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 await picker_image.save(bytes: Uint8List(0));
               },
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Text("相册视频操作："),
             // 通过录像选取
             FilledButton.icon(
@@ -124,7 +126,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 await picker_video.save(bytes: Uint8List(0));
               },
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Text("任意文件操作："),
             //单选: 选择任意文件
             FilledButton.icon(

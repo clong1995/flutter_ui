@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   file_picker: ^8.1.7
   image_picker: ^1.1.2
-  image_gallery_saver: ^2.0.3
+  image_gallery_saver_plus: ^3.0.5
   path: ^1.9.0 #<==image_picker 最新支持到 1.9.0
   path_provider: ^2.1.5
 

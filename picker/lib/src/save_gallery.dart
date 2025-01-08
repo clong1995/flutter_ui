@@ -2,7 +2,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<void> saveToGallery({
@@ -17,7 +17,7 @@ Future<void> saveToGallery({
   File file = File(savePath);
   await file.writeAsBytes(bytes);
 
-  await ImageGallerySaver.saveFile(
+  await ImageGallerySaverPlus.saveFile(
     savePath,
     name: fileName,
   );
