@@ -63,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
               label: Text("通过拍照选取"),
               onPressed: () async {
                 cameraPickerImage = await picker_image.camera();
+                setState(() {});
               },
             ),
             if (cameraPickerImage != null) Text(cameraPickerImage!.path),
@@ -72,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
               label: Text("单选: 选择相册图片"),
               onPressed: () async {
                 gallerySinglePickerImage = await picker_image.single();
+                setState(() {});
               },
             ),
             if (gallerySinglePickerImage != null)
@@ -82,6 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
               label: Text("多选: 选择相册图片"),
               onPressed: () async {
                 galleryMultiplePickerImage = await picker_image.multiple();
+                setState(() {});
               },
             ),
             for (int i = 0; i < galleryMultiplePickerImage.length; i++)
@@ -104,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
               label: Text("通过录像选取"),
               onPressed: () async {
                 cameraPickerVideo = await picker_video.camera();
+                setState(() {});
               },
             ),
             if (cameraPickerVideo != null) Text(cameraPickerVideo!.path),
@@ -114,6 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
               label: Text("单选: 选择相册视频"),
               onPressed: () async {
                 gallerySinglePickerVideo = await picker_video.single();
+                setState(() {});
               },
             ),
             if (gallerySinglePickerVideo != null)
@@ -136,9 +141,8 @@ class _MyHomePageState extends State<MyHomePage> {
               label: Text("单选: 选择任意文件"),
               onPressed: () {
                 picker_file.single().then((PickerFile? file) {
-                  setState(() {
                     fileSinglePicker = file;
-                  });
+                    setState(() {});
                 });
               },
             ),
@@ -149,9 +153,8 @@ class _MyHomePageState extends State<MyHomePage> {
               label: Text("多选: 选择任意文件"),
               onPressed: () {
                 picker_file.multiple().then((List<PickerFile> list) {
-                  setState(() {
-                    fileMultiplePicker = list;
-                  });
+                  fileMultiplePicker = list;
+                  setState(() {});
                 });
               },
             ),
@@ -163,9 +166,8 @@ class _MyHomePageState extends State<MyHomePage> {
               label: Text("选择目录"),
               onPressed: () {
                 picker_file.dir().then((String? p) {
-                  setState(() {
-                    fileDirPicker = p;
-                  });
+                  fileDirPicker = p;
+                  setState(() {});
                 });
               },
             ),
