@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   //image
   PickerFile? cameraPickerImage;
   PickerFile? gallerySinglePickerImage;
-  List<PickerFile> galleryMultiplePickerImage = [];
+  List<PickerFile>? galleryMultiplePickerImage;
 
   //video
   PickerFile? cameraPickerVideo;
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //file
   PickerFile? fileSinglePicker;
-  List<PickerFile> fileMultiplePicker = [];
+  List<PickerFile>? fileMultiplePicker;
   String? fileDirPicker;
 
   @override
@@ -91,8 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
               setState(() {});
             },
           ),
-          for (int i = 0; i < galleryMultiplePickerImage.length; i++)
-            Text(galleryMultiplePickerImage[i].path),
+          if (galleryMultiplePickerImage != null)
+            for (int i = 0; i < galleryMultiplePickerImage!.length; i++)
+              Text(galleryMultiplePickerImage![i].path),
           // 保存图片到相册
           FilledButton.icon(
             icon: Icon(Icons.save),
@@ -165,14 +166,15 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.file_copy_outlined),
             label: Text("多选: 选择任意文件"),
             onPressed: () {
-              picker_file.multiple().then((List<PickerFile> list) {
+              picker_file.multiple().then((List<PickerFile>? list) {
                 fileMultiplePicker = list;
                 setState(() {});
               });
             },
           ),
-          for (int i = 0; i < fileMultiplePicker.length; i++)
-            Text(fileMultiplePicker[i].path),
+          if (fileMultiplePicker != null)
+            for (int i = 0; i < fileMultiplePicker!.length; i++)
+              Text(fileMultiplePicker![i].path),
           // 选择目录
           FilledButton.icon(
             icon: Icon(Icons.folder_open),

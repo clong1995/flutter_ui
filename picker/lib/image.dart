@@ -21,10 +21,10 @@ Future<PickerFile?> single() async {
 }
 
 //多选 从相册选择照片
-Future<List<PickerFile>> multiple() async {
+Future<List<PickerFile>?> multiple() async {
   List<XFile> list = await imagePicker.pickMultiImage();
   if (list.isEmpty) {
-    return [];
+    return null;
   }
   List<PickerFile> l = [];
   for (XFile xf in list) {

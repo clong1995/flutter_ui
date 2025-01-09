@@ -20,13 +20,13 @@ Future<PickerFile?> single([List<String>? allowedExtensions]) async {
 }
 
 //多选任意文件
-Future<List<PickerFile>> multiple([List<String>? allowedExtensions]) async {
+Future<List<PickerFile>?> multiple([List<String>? allowedExtensions]) async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     allowMultiple: true,
     allowedExtensions: allowedExtensions,
   );
   if (result == null) {
-    return [];
+    return null;
   }
   List<PickerFile> l = [];
   for (PlatformFile file in result.files) {
