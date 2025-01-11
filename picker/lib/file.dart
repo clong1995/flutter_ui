@@ -10,6 +10,7 @@ import 'src/picker.dart';
 //单选任意单文件
 Future<PickerFile?> single([List<String>? allowedExtensions]) async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
+    type: allowedExtensions == null ? FileType.any : FileType.custom,
     allowedExtensions: allowedExtensions,
   );
   if (result == null) {
@@ -23,6 +24,7 @@ Future<PickerFile?> single([List<String>? allowedExtensions]) async {
 Future<List<PickerFile>?> multiple([List<String>? allowedExtensions]) async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     allowMultiple: true,
+    type: allowedExtensions == null ? FileType.any : FileType.custom,
     allowedExtensions: allowedExtensions,
   );
   if (result == null) {
