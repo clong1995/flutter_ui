@@ -42,15 +42,59 @@ class _RegionWidgetState extends State<RegionWidget> {
         items: data.entries.map(
           (e) => AlphabetListViewItemGroup(
             tag: e.key,
-            children: e.value.map((v) {
-              return Text(v);
+            children: e.value.asMap().entries.map((entry) {
+              List<String> arr = entry.value.split("_");
+              bool first = entry.key == 0;
+              bool last = entry.key == e.value.length - 1;
+              return InkWell(
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(
+                    10,
+                    first ? 10 : 5,
+                    0,
+                    last ? 10 : 5,
+                  ),
+                  child: Text(arr[1]),
+                ),
+              );
             }),
           ),
         ),
         options: AlphabetListViewOptions(
-          listOptions: ListOptions(),
+          listOptions: ListOptions(
+            listHeaderBuilder: (BuildContext context, String symbol) =>
+                Container(
+              padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
+              color: const Color(0xFFEEEEEE),
+              child: Text(
+                symbol,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
           scrollbarOptions: ScrollbarOptions(
             symbols: symbols,
+            symbolBuilder: (BuildContext context, String symbol,
+                AlphabetScrollbarItemState state) {
+              //active
+              TextStyle activeTxtStyle = TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).primaryColor,
+              );
+              TextStyle inActiveTextStyle = TextStyle(
+                color: Colors.grey,
+              );
+              return Center(
+                child: Text(
+                  symbol,
+                  style: state == AlphabetScrollbarItemState.active
+                      ? activeTxtStyle
+                      : inActiveTextStyle,
+                ),
+              );
+            },
           ),
         ),
       ),
@@ -87,7 +131,7 @@ class _RegionWidgetState extends State<RegionWidget> {
       List<String> arr = row.split(",-,");
       if (arr.length == 2) {
         String firstLetter = PinyinHelper.getFirstWordPinyin(arr[0]);
-        link.add("${firstLetter[0].toUpperCase()}_${arr[0]}-${arr[1]}");
+        link.add("${firstLetter[0].toUpperCase()}_${arr[0]}_${arr[1]}");
       }
     }
     RegExp regExp = RegExp(r'(\d+)');

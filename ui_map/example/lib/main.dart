@@ -34,10 +34,11 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Center(
         child: FilledButton(
-            onPressed: () {
-              region(context);
-            },
-            child: Text("选择城市")),
+          onPressed: () {
+            region(context);
+          },
+          child: Text("选择城市"),
+        ),
       ),
     );
   }
