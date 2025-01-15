@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:pinyin/pinyin.dart';
 
+import '../region.dart' show Region;
+
 class RegionWidget extends StatefulWidget {
   const RegionWidget({super.key});
 
@@ -15,9 +17,9 @@ class RegionWidget extends StatefulWidget {
 class _RegionWidgetState extends State<RegionWidget> {
   //使用link来存储省份和城市因为有重复
   List<String> link = [];
-
+  String currCode = "";
   LinkedHashSet<String> regin = LinkedHashSet<String>();
-  String code = "";
+  LinkedHashSet<String> code = LinkedHashSet<String>();
 
   LinkedHashSet<String> symbols = LinkedHashSet<String>();
 
@@ -40,68 +42,98 @@ class _RegionWidgetState extends State<RegionWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("城市选择器"),
-      ),
-      body: AlphabetListView(
-        items: data.entries.map(
-          (e) => AlphabetListViewItemGroup(
-            tag: e.key,
-            children: e.value.asMap().entries.map((entry) {
-              List<String> arr = entry.value.split("_");
-              bool first = entry.key == 0;
-              bool last = entry.key == e.value.length - 1;
-              return InkWell(
-                onTap: () {
-                  onTap(arr[1], arr[2]);
-                },
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(
-                    10,
-                    first ? 10 : 5,
-                    0,
-                    last ? 10 : 5,
-                  ),
-                  child: Text(arr[1]),
-                ),
-              );
-            }),
-          ),
-        ),
-        options: AlphabetListViewOptions(
-          listOptions: ListOptions(
-            listHeaderBuilder: (BuildContext context, String symbol) =>
-                Container(
-              padding: const EdgeInsets.fromLTRB(15, 8, 0, 8),
-              color: const Color(0xFFEEEEEE),
+        leadingWidth: 115,
+        leading: Row(
+          children: [
+            SizedBox(
+              width: 10,
+            ),
+            BackButton(),
+            SizedBox(
+              width: 10,
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+              ),
+              onPressed: () {},
               child: Text(
-                symbol,
+                "返回上级",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
+          ],
+        ),
+        title: Text("城市选择器"),
+      ),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+        child: AlphabetListView(
+          items: data.entries.map(
+            (e) => AlphabetListViewItemGroup(
+              tag: e.key,
+              children: e.value.asMap().entries.map((entry) {
+                List<String> arr = entry.value.split("_");
+                bool first = entry.key == 0;
+                bool last = entry.key == e.value.length - 1;
+                return InkWell(
+                  onTap: () {
+                    onTap(arr[1], arr[2]);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(
+                      10,
+                      first ? 10 : 5,
+                      0,
+                      last ? 10 : 5,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Text(arr[1]),
+                    ),
+                  ),
+                );
+              }),
+            ),
           ),
-          scrollbarOptions: ScrollbarOptions(
-            symbols: symbols,
-            symbolBuilder: (BuildContext context, String symbol,
-                AlphabetScrollbarItemState state) {
-              //active
-              TextStyle activeTxtStyle = TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).primaryColor,
-              );
-              TextStyle inActiveTextStyle = TextStyle(
-                color: Colors.grey,
-              );
-              return Center(
+          options: AlphabetListViewOptions(
+            listOptions: ListOptions(
+              listHeaderBuilder: (BuildContext context, String symbol) =>
+                  Container(
+                padding: const EdgeInsets.fromLTRB(15, 8, 0, 8),
+                color: const Color(0xFFEEEEEE),
                 child: Text(
                   symbol,
-                  style: state == AlphabetScrollbarItemState.active
-                      ? activeTxtStyle
-                      : inActiveTextStyle,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              );
-            },
+              ),
+            ),
+            scrollbarOptions: ScrollbarOptions(
+              symbols: symbols,
+              symbolBuilder: (BuildContext context, String symbol,
+                  AlphabetScrollbarItemState state) {
+                //active
+                TextStyle activeTxtStyle = TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor,
+                );
+                TextStyle inActiveTextStyle = TextStyle(
+                  color: Colors.grey,
+                );
+                return Center(
+                  child: Text(
+                    symbol,
+                    style: state == AlphabetScrollbarItemState.active
+                        ? activeTxtStyle
+                        : inActiveTextStyle,
+                  ),
+                );
+              },
+            ),
           ),
         ),
       ),
@@ -125,7 +157,7 @@ class _RegionWidgetState extends State<RegionWidget> {
       }
     } else {
       RegExp regex = RegExp(r'(\d+?)(0+)$');
-      Match? match = regex.firstMatch(code);
+      Match? match = regex.firstMatch(currCode);
       if (match == null || match.groupCount != 2) {
         return;
       }
@@ -137,15 +169,17 @@ class _RegionWidgetState extends State<RegionWidget> {
 
       String searchEnd = "";
       //特殊省
-      if (code == "156110000" || //北京
-              code == "156120000" || //天津
-              code == "156810000" || //香港
-              code == "156310000" //上海
+      if (currCode == "156110000" || //北京
+              currCode == "156120000" || //天津
+              currCode == "156810000" || //香港
+              currCode == "156310000" //上海
           ) {
         searchEnd = "";
-      } else if (end == "0000") { //省
+      } else if (end == "0000") {
+        //省
         searchEnd = "00";
-      } else if (end == "00") { //市
+      } else if (end == "00") {
+        //市
         searchEnd = "";
       } else {
         //最后一级
@@ -156,7 +190,7 @@ class _RegionWidgetState extends State<RegionWidget> {
         String code_ = arr[2];
         if (code_.startsWith(start) &&
             code_.endsWith(searchEnd) &&
-            code_ != code) {
+            code_ != currCode) {
           String tag = e[0];
           symbols.add(tag);
           if (data[tag] == null) {
@@ -206,20 +240,26 @@ class _RegionWidgetState extends State<RegionWidget> {
   }
 
   void onTap(String name, String code) {
-    if(code == this.code){
+    if (code == currCode) {
       return;
     }
-    this.code = code;
+    currCode = code;
     regin.add(name);
+    this.code.add(code);
     if (!code.endsWith("0")) {
-      Navigator.pop(context);
-      print(regin.join("/"));
-      print(code);
+      List<Region> list = [];
+      for (var i = 0; i < regin.length; i++) {
+        list.add(Region()
+          ..code = this.code.elementAt(i)
+          ..name = regin.elementAt(i));
+      }
+      Navigator.pop<List<Region>>(context, list);
       return;
     }
     loadData();
   }
 }
+
 //156370300
 //156370303
 //北京市,-,156110000

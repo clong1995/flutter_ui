@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
+
 import 'src/region_widget.dart';
 
-Region? region(BuildContext context, {
+Future<List<Region>?> region(
+  BuildContext context, {
   String? code,
   bool rootNavigator = false,
-}) {
-  Navigator.of(context, rootNavigator: rootNavigator).push<Region>(
-    MaterialPageRoute<Region>(
+}) async {
+  return await Navigator.of(context, rootNavigator: rootNavigator)
+      .push<List<Region>>(
+    MaterialPageRoute<List<Region>>(
       builder: (BuildContext context) => RegionWidget(),
       settings: RouteSettings(
         arguments: code,
       ),
     ),
   );
-  return null;
 }
 
 class Region {
-  String name = "";
   String code = "";
+  String name = "";
 }
