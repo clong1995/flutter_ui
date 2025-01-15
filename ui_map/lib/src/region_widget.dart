@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -14,10 +16,12 @@ class _RegionWidgetState extends State<RegionWidget> {
   //使用link来存储省份和城市因为有重复
   List<String> link = [];
 
-  List<String> regin = [];
+  LinkedHashSet<String> regin = LinkedHashSet<String>();
   String code = "";
 
-  List<String> symbols = [];
+  LinkedHashSet<String> symbols = LinkedHashSet<String>();
+
+  //{S:[S_山东省_156370000,S_山西省_156370000,],H:[H_湖南省_156370000,H_湖北省_156370000,],}
   Map<String, List<String>> data = {};
 
   @override
@@ -47,6 +51,9 @@ class _RegionWidgetState extends State<RegionWidget> {
               bool first = entry.key == 0;
               bool last = entry.key == e.value.length - 1;
               return InkWell(
+                onTap: () {
+                  onTap(arr[1], arr[2]);
+                },
                 child: Container(
                   padding: EdgeInsets.fromLTRB(
                     10,
@@ -64,7 +71,7 @@ class _RegionWidgetState extends State<RegionWidget> {
           listOptions: ListOptions(
             listHeaderBuilder: (BuildContext context, String symbol) =>
                 Container(
-              padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
+              padding: const EdgeInsets.fromLTRB(15, 8, 0, 8),
               color: const Color(0xFFEEEEEE),
               child: Text(
                 symbol,
@@ -104,8 +111,8 @@ class _RegionWidgetState extends State<RegionWidget> {
   void loadData() {
     symbols.clear();
     data.clear();
-    for (String e in link) {
-      if (code.isEmpty) {
+    if (code.isEmpty) {
+      for (String e in link) {
         if (e.contains("0000")) {
           String tag = e[0];
           symbols.add(tag);
@@ -116,7 +123,51 @@ class _RegionWidgetState extends State<RegionWidget> {
           }
         }
       }
+    } else {
+      RegExp regex = RegExp(r'(\d+?)(0+)$');
+      Match? match = regex.firstMatch(code);
+      if (match == null || match.groupCount != 2) {
+        return;
+      }
+      String? start = match.group(1);
+      String? end = match.group(2);
+      if (start == null || end == null) {
+        return;
+      }
+
+      String searchEnd = "";
+      //特殊省
+      if (code == "156110000" || //北京
+              code == "156120000" || //天津
+              code == "156810000" || //香港
+              code == "156310000" //上海
+          ) {
+        searchEnd = "";
+      } else if (end == "0000") { //省
+        searchEnd = "00";
+      } else if (end == "00") { //市
+        searchEnd = "";
+      } else {
+        //最后一级
+        return;
+      }
+      for (String e in link) {
+        List<String> arr = e.split("_");
+        String code_ = arr[2];
+        if (code_.startsWith(start) &&
+            code_.endsWith(searchEnd) &&
+            code_ != code) {
+          String tag = e[0];
+          symbols.add(tag);
+          if (data[tag] == null) {
+            data[tag] = [e];
+          } else {
+            data[tag]!.add(e);
+          }
+        }
+      }
     }
+
     setState(() {});
   }
 
@@ -131,12 +182,13 @@ class _RegionWidgetState extends State<RegionWidget> {
       List<String> arr = row.split(",-,");
       if (arr.length == 2) {
         String firstLetter = PinyinHelper.getFirstWordPinyin(arr[0]);
-        link.add("${firstLetter[0].toUpperCase()}_${arr[0]}_${arr[1]}");
+        link.add(
+            "${firstLetter[0].trim().toUpperCase()}_${arr[0].trim()}_${arr[1].trim()}");
       }
     }
-    RegExp regExp = RegExp(r'(\d+)');
+    RegExp regex = RegExp(r'(\d+)');
     link.sort((a, b) {
-      // 提取首字母并转为大写
+      // 提取首字母
       String firstLetterA = a[0];
       String firstLetterB = b[0];
 
@@ -146,10 +198,31 @@ class _RegionWidgetState extends State<RegionWidget> {
       }
 
       // 如果首字母相同，按数字排序
-      int numA = int.parse(regExp.firstMatch(a)!.group(0)!);
-      int numB = int.parse(regExp.firstMatch(b)!.group(0)!);
+      int numA = int.parse(regex.firstMatch(a)!.group(0)!);
+      int numB = int.parse(regex.firstMatch(b)!.group(0)!);
       return numA.compareTo(numB);
     });
     loadData();
   }
+
+  void onTap(String name, String code) {
+    if(code == this.code){
+      return;
+    }
+    this.code = code;
+    regin.add(name);
+    if (!code.endsWith("0")) {
+      Navigator.pop(context);
+      print(regin.join("/"));
+      print(code);
+      return;
+    }
+    loadData();
+  }
 }
+//156370300
+//156370303
+//北京市,-,156110000
+//朝阳区,-,156110105
+//淄博市,-,156370300
+//张店区,-,156370303
