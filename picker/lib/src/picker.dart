@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
@@ -24,8 +23,8 @@ Future<PickerFile> pickerFile(XFile? xf) async {
       }
       pickerFile.extension = ext.replaceAll(RegExp(r'^\.+'), '');
     }
-    File file = File(pickerFile.path);
-    int fileSize = await file.length();
+
+    final fileSize =  (await  xf?.length()) ?? 0;
     pickerFile.size = fileSize;
   }
   return pickerFile;
