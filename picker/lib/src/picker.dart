@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
@@ -15,7 +17,7 @@ Future<PickerFile> pickerFile(XFile? xf) async {
       pickerFile.extension = pickerFile.name;
       pickerFile.name = "";
     } else {
-      String ext = extension(pickerFile.path);
+      String ext = extension(pickerFile.name);
       if (pickerFile.name.length > ext.length) {
         pickerFile.name =
             pickerFile.name.substring(0, pickerFile.name.length - ext.length);
@@ -23,8 +25,9 @@ Future<PickerFile> pickerFile(XFile? xf) async {
       pickerFile.extension = ext.replaceAll(RegExp(r'^\.+'), '');
     }
 
-    final fileSize =  (await  xf?.length()) ?? 0;
+    final fileSize = (await xf?.length()) ?? 0;
     pickerFile.size = fileSize;
+    pickerFile.bytes = xf?.readAsBytes ?? () async => Uint8List(0);
   }
   return pickerFile;
 }
