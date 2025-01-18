@@ -4,9 +4,11 @@ packages:
   alphabet_list_view:
     dependency: transitive
     description:
-      path: "/Users/huazhimeng/Desktop/flutter_ui/fork/alphabet_list_view"
-      relative: false
-    source: path
+      path: "."
+      ref: HEAD
+      resolved-ref: abea78bda7e34cd4ba57720ad521734258d159e0
+      url: "https://github.com/cosee/alphabet_list_view"
+    source: git
     version: "1.1.2"
   async:
     dependency: transitive

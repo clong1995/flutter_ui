@@ -1,7 +1,8 @@
 name: ui_map
 description: "A new Flutter project."
 version: 0.0.1
-homepage:
+homepage: flutter_ui
+publish_to: none
 
 environment:
   sdk: ^3.6.0
@@ -10,10 +11,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # alphabet_list_view: ^1.1.2
+  # TODO 这个库太大了，有时间把拼音内置进来
   pinyin: ^3.3.0
+  # alphabet_list_view: ^1.1.2
   alphabet_list_view:
-    path: /Users/huazhimeng/Desktop/flutter_ui/fork/alphabet_list_view
+    git:
+      url: https://github.com/cosee/alphabet_list_view
+    #path: /Users/huazhimeng/Desktop/flutter_ui/fork/alphabet_list_view
 
 dev_dependencies:
   flutter_test:
