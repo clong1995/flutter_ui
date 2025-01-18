@@ -18,6 +18,7 @@ class _RegionWidgetState extends State<RegionWidget> {
   //使用link来存储省份和城市因为有重复
   List<String> link = [];
   String currCode = "";
+
   LinkedHashSet<String> regin = LinkedHashSet<String>();
   LinkedHashSet<String> code = LinkedHashSet<String>();
 
@@ -29,110 +30,138 @@ class _RegionWidgetState extends State<RegionWidget> {
   @override
   void initState() {
     super.initState();
+
     readCsv();
   }
 
-  //山东省,-,156370000
-  //青岛市,-,156370200
-  //黄岛区,-,156370211
+  bool canPop = true;
 
-  //北京市,-,156110000
-  //丰台区,-,156110106
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leadingWidth: 115,
-        leading: Row(
-          children: [
-            SizedBox(
-              width: 10,
-            ),
-            BackButton(),
-            SizedBox(
-              width: 10,
-            ),
-            TextButton(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
+    final TextStyle bodyMedium =
+        Theme.of(context).textTheme.bodyMedium ?? TextStyle(fontSize: 13);
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        appBar: AppBar(
+          leadingWidth: 90,
+          leading: Row(
+            children: [
+              SizedBox(
+                width: 10,
               ),
-              onPressed: () {},
-              child: Text(
-                "返回上级",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
-        title: Text("城市选择器"),
-      ),
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
-        child: AlphabetListView(
-          items: data.entries.map(
-            (e) => AlphabetListViewItemGroup(
-              tag: e.key,
-              children: e.value.asMap().entries.map((entry) {
-                List<String> arr = entry.value.split("_");
-                bool first = entry.key == 0;
-                bool last = entry.key == e.value.length - 1;
-                return InkWell(
-                  onTap: () {
-                    onTap(arr[1], arr[2]);
+              if (canPop)
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
                   },
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(
-                      10,
-                      first ? 10 : 5,
-                      0,
-                      last ? 10 : 5,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: Text(arr[1]),
-                    ),
-                  ),
-                );
-              }),
-            ),
-          ),
-          options: AlphabetListViewOptions(
-            listOptions: ListOptions(
-              listHeaderBuilder: (BuildContext context, String symbol) =>
-                  Container(
-                padding: const EdgeInsets.fromLTRB(15, 8, 0, 8),
-                color: const Color(0xFFEEEEEE),
-                child: Text(
-                  symbol,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  icon: Icon(Icons.arrow_back_ios_new),
+                )
+              else ...[
+                SizedBox(
+                  width: 10,
                 ),
+                TextButton(
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                  ),
+                  onPressed: onBackTap,
+                  child: Text(
+                    "返回上级",
+                    style: bodyMedium.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              ],
+            ],
+          ),
+          title: Text(
+            "城市选择器",
+            style: bodyMedium,
+          ),
+        ),
+        body: Padding(
+          padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+          child: AlphabetListView(
+            items: data.entries.map(
+              (e) => AlphabetListViewItemGroup(
+                tag: e.key,
+                children: e.value.asMap().entries.map((entry) {
+                  List<String> arr = entry.value.split("_");
+                  bool first = entry.key == 0;
+                  bool last = entry.key == e.value.length - 1;
+                  return InkWell(
+                    onTap: () {
+                      onTap(arr[1], arr[2]);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(
+                        10,
+                        first ? 10 : 5,
+                        0,
+                        last ? 10 : 5,
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: RichText(
+                          text: TextSpan(
+                            text: arr[1],
+                            style: bodyMedium,
+                            children: _pm[arr[1]] == null
+                                ? null
+                                : <TextSpan>[
+                                    TextSpan(
+                                      text: " · ${_pm[arr[1]]}",
+                                      style: bodyMedium.copyWith(
+                                        color: Color(0xFF9E9E9E),
+                                        fontSize:
+                                            (bodyMedium.fontSize ?? 13) - 1,
+                                      ),
+                                    )
+                                  ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
               ),
             ),
-            scrollbarOptions: ScrollbarOptions(
-              symbols: symbols,
-              symbolBuilder: (BuildContext context, String symbol,
-                  AlphabetScrollbarItemState state) {
-                //active
-                TextStyle activeTxtStyle = TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
-                );
-                TextStyle inActiveTextStyle = TextStyle(
-                  color: Colors.grey,
-                );
-                return Center(
+            options: AlphabetListViewOptions(
+              listOptions: ListOptions(
+                listHeaderBuilder: (BuildContext context, String symbol) =>
+                    Container(
+                  padding: const EdgeInsets.fromLTRB(15, 8, 0, 8),
+                  color: const Color(0xFFEEEEEE),
                   child: Text(
                     symbol,
-                    style: state == AlphabetScrollbarItemState.active
-                        ? activeTxtStyle
-                        : inActiveTextStyle,
+                    style: bodyMedium.copyWith(fontWeight: FontWeight.bold),
                   ),
-                );
-              },
+                ),
+              ),
+              scrollbarOptions: ScrollbarOptions(
+                symbols: symbols,
+                symbolBuilder: (BuildContext context, String symbol,
+                    AlphabetScrollbarItemState state) {
+                  //active
+                  TextStyle activeTxtStyle = bodyMedium.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor,
+                  );
+                  TextStyle inActiveTextStyle = bodyMedium.copyWith(
+                    color: Color(0xFF9E9E9E),
+                  );
+                  return Center(
+                    child: Text(
+                      symbol,
+                      style: state == AlphabetScrollbarItemState.active
+                          ? activeTxtStyle
+                          : inActiveTextStyle,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),
@@ -201,7 +230,7 @@ class _RegionWidgetState extends State<RegionWidget> {
         }
       }
     }
-
+    canPop = (currCode == "");
     setState(() {});
   }
 
@@ -246,23 +275,72 @@ class _RegionWidgetState extends State<RegionWidget> {
     currCode = code;
     regin.add(name);
     this.code.add(code);
-    if (!code.endsWith("0")) {
+    if (!code.endsWith("0") || //最后一级行政区
+            code == "156820000" || //特殊处理澳门
+            (code.startsWith("15671") && !code.endsWith("0000")) //特殊处理台湾下的行政区
+        ) {
       List<Region> list = [];
       for (var i = 0; i < regin.length; i++) {
         list.add(Region()
           ..code = this.code.elementAt(i)
           ..name = regin.elementAt(i));
       }
+      canPop = true;
       Navigator.pop<List<Region>>(context, list);
       return;
     }
     loadData();
   }
+
+  void onBackTap() {
+    if (code.isEmpty) {
+      return;
+    }
+    code.remove(code.last);
+    regin.remove(regin.last);
+
+    if (code.isNotEmpty) {
+      currCode = code.last;
+    } else {
+      currCode = "";
+    }
+    loadData();
+  }
 }
 
-//156370300
-//156370303
-//北京市,-,156110000
-//朝阳区,-,156110105
-//淄博市,-,156370300
-//张店区,-,156370303
+Map<String, String> _pm = {
+  "北京市": "京",
+  "天津市": "津",
+  "山西省": "晋",
+  "湖南省": "湘",
+  "江西省": "赣",
+  "上海市": "沪",
+  "重庆市": "渝",
+  "河北省": "冀",
+  "台湾省": "台",
+  "辽宁省": "辽",
+  "吉林省": "吉",
+  "黑龙江省": "黑",
+  "江苏省": "苏",
+  "浙江省": "浙",
+  "安徽省": "皖",
+  "福建省": "闽",
+  "山东省": "鲁",
+  "河南省": "豫",
+  "湖北省": "鄂",
+  "青海省": "青",
+  "广东省": "粤",
+  "海南省": "琼",
+  "四川省": "川/蜀",
+  "贵州省": "黔/贵",
+  "云南省": "滇/云",
+  "陕西省": "陕/秦",
+  "甘肃省": "甘/陇",
+  "西藏自治区": "藏",
+  "广西壮族自治区": "桂",
+  "内蒙古自治区": "内蒙古",
+  "宁夏回族自治区": "宁",
+  "新疆维吾尔自治区": "新",
+  "香港特别行政区": "港",
+  "澳门特别行政区": "澳",
+};
