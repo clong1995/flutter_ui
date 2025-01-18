@@ -42,29 +42,25 @@ class _RegionWidgetState extends State<RegionWidget> {
         Theme.of(context).textTheme.bodyMedium ?? TextStyle(fontSize: 13);
     return PopScope(
       canPop: false,
+      onPopInvokedWithResult: (bool didPop, _) {
+        if (!didPop) {
+          onBackTap();
+        }
+      },
       child: Scaffold(
         appBar: AppBar(
-          leadingWidth: 90,
-          leading: Row(
-            children: [
-              SizedBox(
-                width: 10,
-              ),
-              if (canPop)
-                IconButton(
+          leadingWidth: 100,
+          leading: canPop
+              ? TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(Icons.arrow_back_ios_new),
-                )
-              else ...[
-                SizedBox(
-                  width: 10,
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
+                  child: Text(
+                    "取消",
+                    style: bodyMedium.copyWith(color: Colors.red),
                   ),
+                )
+              : TextButton(
                   onPressed: onBackTap,
                   child: Text(
                     "返回上级",
@@ -72,12 +68,9 @@ class _RegionWidgetState extends State<RegionWidget> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                )
-              ],
-            ],
-          ),
+                ),
           title: Text(
-            "城市选择器",
+            regin.isEmpty ? "城市选择器" : "已选: ${regin.join("/")}",
             style: bodyMedium,
           ),
         ),
