@@ -1,0 +1,25 @@
+import 'package:flutter/material.dart';
+
+import 'src/address_widget.dart';
+
+Future<Address?> address(
+  BuildContext context, {
+  required Future<List<Address>> Function(String keyword) datasource,
+  bool rootNavigator = false,
+}) async {
+  return await Navigator.of(context, rootNavigator: rootNavigator)
+      .push<Address>(
+    MaterialPageRoute<Address>(
+      builder: (BuildContext context) => AddressWidget(
+        datasource: datasource,
+      ),
+    ),
+  );
+}
+
+class Address {
+  String address = "";
+  String name = "";
+  String lonLat = "";
+  String typeName = "";
+}
