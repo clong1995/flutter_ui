@@ -13,7 +13,7 @@ Future<PickerFile?> camera() async {
 }
 
 //单选 从相册选择视频
-Future<PickerFile?> single() async {
+Future<PickerFile?> gallery() async {
   final XFile? xf = await imagePicker.pickVideo(source: ImageSource.gallery);
   return pickerFile(xf);
 }

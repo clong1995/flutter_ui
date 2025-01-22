@@ -125,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.video_file_outlined),
             label: Text("单选: 选择相册视频"),
             onPressed: () async {
-              gallerySinglePickerVideo = await picker_video.single();
+              gallerySinglePickerVideo = await picker_video.gallery();
               print(gallerySinglePickerVideo?.path);
               print(gallerySinglePickerVideo?.name);
               print(gallerySinglePickerVideo?.extension);

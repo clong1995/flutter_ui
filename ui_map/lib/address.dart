@@ -18,8 +18,11 @@ Future<Address?> address(
 }
 
 class Address {
+  String province = "";
+  String city = "";
+  String county = "";
   String address = "";
-  String name = "";
   String lonLat = "";
+  String name = "";
   String typeName = "";
 }

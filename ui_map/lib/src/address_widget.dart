@@ -104,42 +104,43 @@ class _AddressWidgetState extends State<AddressWidget> {
                   return Card(
                     color: Colors.white,
                     margin: EdgeInsets.only(bottom: 8),
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 8, 10, 8),
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 40,
-                            child: Center(
-                              child: Text("${index + 1}"),
+                    child: InkWell(
+                      onTap: ()=>onAddressTap(address),
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 8, 10, 8),
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 40,
+                              child: Center(
+                                child: Text("${index + 1}"),
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  address.name,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    address.name,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  address.address,
-                                ),
-                              ],
+                                  SizedBox(height: 5),
+                                  Text(
+                                    address.address,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          Text(
-                            address.typeName,
-                            style: TextStyle(
-                              color: Color(0xFF9E9E9E),
+                            Text(
+                              address.typeName,
+                              style: TextStyle(
+                                color: Color(0xFF9E9E9E),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   );
@@ -152,7 +153,7 @@ class _AddressWidgetState extends State<AddressWidget> {
     );
   }
 
-  void onInputChanged(){
+  void onInputChanged() {
     if (debounce?.isActive ?? false) debounce?.cancel();
     debounce = Timer(Duration(milliseconds: 300), () async {
       String text = controller.text.trim();
@@ -167,5 +168,9 @@ class _AddressWidgetState extends State<AddressWidget> {
         }
       }
     });
+  }
+
+  void onAddressTap(Address address){
+    Navigator.pop<Address?>(context, address);
   }
 }
