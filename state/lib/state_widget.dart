@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'logic.dart';
-import 'src/func_dict.dart';
 import 'src/logic_dict.dart';
 
 class StateWidget<T extends Logic> extends StatefulWidget {
@@ -32,7 +31,6 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
     widget.expose?.call(logic);
     if (widget.public) {
       LogicDict.set<T>(logic);
-      FuncDict.set(logic.globalFunc());
     }
     logic.initDict(() => setState(() {}));
     logic.onInit();
@@ -45,7 +43,6 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   void dispose() {
     logic.onDispose();
     if (widget.public) {
-      FuncDict.remove(logic.globalFunc().keys);
       LogicDict.remove<T>();
     }
     super.dispose();

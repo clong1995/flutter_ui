@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'lifecycle.dart';
-import 'src/func_dict.dart';
 import 'src/logic_dict.dart';
 
 abstract class Logic<E> with Lifecycle {
@@ -24,9 +23,6 @@ abstract class Logic<E> with Lifecycle {
   Logic(this._context);
 
   Map<String, Future<Object?> Function(Object?)> globalFunc() => {};
-
-  Future<Object?> Function(Object?)? findGlobalFunc(String funcName) =>
-      FuncDict.get(funcName);
 
   void initDict(void Function() update) {
     if (_updateDict.containsKey("_")) {
