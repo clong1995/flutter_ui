@@ -13,11 +13,11 @@ dependencies:
     sdk: flutter
   # TODO 这个库太大了，有时间把拼音内置进来
   pinyin: ^3.3.0
-  # alphabet_list_view: ^1.1.2
-  alphabet_list_view:
-    git:
-      url: https://github.com/cosee/alphabet_list_view
-    #path: /Users/huazhimeng/Desktop/flutter_ui/fork/alphabet_list_view
+  alphabet_list_view: ^1.1.3
+  #alphabet_list_view:
+  #  git:
+  #    url: https://github.com/cosee/alphabet_list_view
+  #    path: /Users/huazhimeng/Desktop/flutter_ui/fork/alphabet_list_view
 
 dev_dependencies:
   flutter_test:
