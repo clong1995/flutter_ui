@@ -39,7 +39,7 @@ class _RegionWidgetState extends State<RegionWidget> {
   @override
   Widget build(BuildContext context) {
     final TextStyle bodyMedium =
-        Theme.of(context).textTheme.bodyMedium ?? TextStyle(fontSize: 13);
+        Theme.of(context).textTheme.bodyMedium ?? const TextStyle(fontSize: 13);
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (bool didPop, _) {
@@ -75,7 +75,7 @@ class _RegionWidgetState extends State<RegionWidget> {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.fromLTRB(10, 0, 10, 10),
+          padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
           child: AlphabetListView(
             items: data.entries.map(
               (e) => AlphabetListViewItemGroup(
@@ -96,7 +96,7 @@ class _RegionWidgetState extends State<RegionWidget> {
                         last ? 10 : 5,
                       ),
                       child: Padding(
-                        padding: EdgeInsets.only(left: 20),
+                        padding: const EdgeInsets.only(left: 20),
                         child: RichText(
                           text: TextSpan(
                             text: arr[1],
@@ -107,7 +107,7 @@ class _RegionWidgetState extends State<RegionWidget> {
                                     TextSpan(
                                       text: " · ${_pm[arr[1]]}",
                                       style: bodyMedium.copyWith(
-                                        color: Color(0xFF9E9E9E),
+                                        color: const Color(0xFF9E9E9E),
                                         fontSize:
                                             (bodyMedium.fontSize ?? 13) - 1,
                                       ),
@@ -143,7 +143,7 @@ class _RegionWidgetState extends State<RegionWidget> {
                     color: Theme.of(context).primaryColor,
                   );
                   TextStyle inActiveTextStyle = bodyMedium.copyWith(
-                    color: Color(0xFF9E9E9E),
+                    color: const Color(0xFF9E9E9E),
                   );
                   return Center(
                     child: Text(

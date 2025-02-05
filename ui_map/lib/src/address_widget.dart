@@ -42,10 +42,10 @@ class _AddressWidgetState extends State<AddressWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("搜索地址"),
+        title: const Text("搜索地址"),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             SizedBox(
@@ -55,7 +55,7 @@ class _AddressWidgetState extends State<AddressWidget> {
                 cursorHeight: height - 8 * 2,
                 maxLines: 1,
                 decoration: InputDecoration(
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   prefixIconConstraints: BoxConstraints(
                     maxWidth: height,
                     minWidth: height,
@@ -67,7 +67,7 @@ class _AddressWidgetState extends State<AddressWidget> {
                   focusedBorder: OutlineInputBorder(
                     borderSide: borderSide,
                   ),
-                  contentPadding: EdgeInsets.symmetric(
+                  contentPadding: const EdgeInsets.symmetric(
                     horizontal: 8,
                     vertical: 8,
                   ),
@@ -87,13 +87,13 @@ class _AddressWidgetState extends State<AddressWidget> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   hintText: "输入名称或地址",
-                  hintStyle: TextStyle(
-                    color: const Color.fromRGBO(153, 153, 153, 1),
+                  hintStyle: const TextStyle(
+                    color: Color.fromRGBO(153, 153, 153, 1),
                   ),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Expanded(
@@ -103,11 +103,11 @@ class _AddressWidgetState extends State<AddressWidget> {
                   Address address = list[index];
                   return Card(
                     color: Colors.white,
-                    margin: EdgeInsets.only(bottom: 8),
+                    margin: const EdgeInsets.only(bottom: 8),
                     child: InkWell(
                       onTap: ()=>onAddressTap(address),
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 8, 10, 8),
+                        padding: const EdgeInsets.fromLTRB(0, 8, 10, 8),
                         child: Row(
                           children: [
                             SizedBox(
@@ -122,11 +122,11 @@ class _AddressWidgetState extends State<AddressWidget> {
                                 children: [
                                   Text(
                                     address.name,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  SizedBox(height: 5),
+                                  const SizedBox(height: 5),
                                   Text(
                                     address.address,
                                   ),
@@ -135,7 +135,7 @@ class _AddressWidgetState extends State<AddressWidget> {
                             ),
                             Text(
                               address.typeName,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFF9E9E9E),
                               ),
                             ),
@@ -155,7 +155,7 @@ class _AddressWidgetState extends State<AddressWidget> {
 
   void onInputChanged() {
     if (debounce?.isActive ?? false) debounce?.cancel();
-    debounce = Timer(Duration(milliseconds: 300), () async {
+    debounce = Timer(const Duration(milliseconds: 300), () async {
       String text = controller.text.trim();
       if (text.isNotEmpty) {
         int currentRequestTime = DateTime.now().millisecondsSinceEpoch;

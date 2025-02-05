@@ -10,7 +10,7 @@ Future<List<Region>?> region(
   return await Navigator.of(context, rootNavigator: rootNavigator)
       .push<List<Region>>(
     MaterialPageRoute<List<Region>>(
-      builder: (BuildContext context) => RegionWidget(),
+      builder: (BuildContext context) => const RegionWidget(),
       settings: RouteSettings(
         arguments: code,
       ),
