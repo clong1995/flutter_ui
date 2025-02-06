@@ -27,14 +27,13 @@ class _RegionWidgetState extends State<RegionWidget> {
   //{S:[S_山东省_156370000,S_山西省_156370000,],H:[H_湖南省_156370000,H_湖北省_156370000,],}
   Map<String, List<String>> data = {};
 
+  bool canPop = true;
+
   @override
   void initState() {
     super.initState();
-
     readCsv();
   }
-
-  bool canPop = true;
 
   @override
   Widget build(BuildContext context) {
@@ -223,6 +222,10 @@ class _RegionWidgetState extends State<RegionWidget> {
         }
       }
     }
+    if(data.isEmpty){
+      //最后一级
+      return;
+    }
     canPop = (currCode == "");
     setState(() {});
   }
@@ -268,10 +271,8 @@ class _RegionWidgetState extends State<RegionWidget> {
     currCode = code;
     regin.add(name);
     this.code.add(code);
-    if (!code.endsWith("0") || //最后一级行政区
-            code == "156820000" || //特殊处理澳门
-            (code.startsWith("15671") && !code.endsWith("0000")) //特殊处理台湾下的行政区
-        ) {
+    loadData();
+    if(data.isEmpty){
       List<Region> list = [];
       for (var i = 0; i < regin.length; i++) {
         list.add(Region()
@@ -282,7 +283,6 @@ class _RegionWidgetState extends State<RegionWidget> {
       Navigator.pop<List<Region>>(context, list);
       return;
     }
-    loadData();
   }
 
   void onBackTap() {
