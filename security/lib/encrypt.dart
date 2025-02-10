@@ -1,23 +1,32 @@
 import 'package:encrypt/encrypt.dart' as encrypt;
+import 'package:flutter/foundation.dart';
 import 'package:guid/guid.dart';
 
 Future<String> encrypter(String plainText) async {
-  final iv = encrypt.IV.fromLength(16);
-  final encrypter = await _encrypter();
-  final encrypted = encrypter.encrypt(plainText, iv: iv);
+  encrypt.IV iv = encrypt.IV.fromLength(16);
+  encrypt.Encrypter encrypter = await _encrypter();
+  encrypt.Encrypted encrypted = encrypter.encrypt(plainText, iv: iv);
   return "${iv.base64}:${encrypted.base64}";
 }
 
 Future<String> decrypter(String encryptedText) async {
-  final parts = encryptedText.split(":");
+  List<String> parts = encryptedText.split(":");
   if (parts.length != 2) {
     return "";
   }
-  final iv = encrypt.IV.fromBase64(parts[0]);
+  encrypt.IV iv = encrypt.IV.fromBase64(parts[0]);
   encryptedText = parts[1];
 
-  final encrypter = await _encrypter();
-  final decrypted = encrypter.decrypt64(encryptedText, iv: iv);
+  encrypt.Encrypter encrypter = await _encrypter();
+  String decrypted = "";
+  try{
+    decrypted = encrypter.decrypt64(encryptedText, iv: iv);
+  }catch(e){
+    if (kDebugMode) {
+      print(e);
+    }
+    return "";
+  }
   return decrypted;
 }
 

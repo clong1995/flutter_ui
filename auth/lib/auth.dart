@@ -32,6 +32,7 @@ class Auth {
     if (value == null || value.isEmpty) {
       return;
     }
+    
     String decryptText = await decrypter(value);
     List<String> arr = decryptText.split(":");
     if (arr.length != 2) {

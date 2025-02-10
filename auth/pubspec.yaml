@@ -16,6 +16,7 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: security
+    #path: /Users/huazhimeng/Desktop/flutter_ui/security
 
 dev_dependencies:
   flutter_test:
