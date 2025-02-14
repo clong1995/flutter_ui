@@ -58,8 +58,12 @@ class UiCacheImage extends StatelessWidget {
   }
 
   Future<Widget> _tempImage(String src, BoxFit? fit) async {
-    if (kIsWeb) { //TODO web 暂不储存
-      return Image.network(src);
+    if (kIsWeb) {
+      //TODO web 暂不储存
+      return Image.network(
+        src,
+        fit: fit,
+      );
     }
 
     String tempDirectory = await _tempDirectory();
