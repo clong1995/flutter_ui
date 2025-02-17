@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import 'lifecycle.dart';
 import 'src/logic_dict.dart';
@@ -111,6 +112,11 @@ abstract class Logic<E> with Lifecycle {
     }
     return arguments as S;
   }
+
+  /*void frameCallback(FrameCallback callback) =>
+      WidgetsBinding.instance.addPostFrameCallback(callback);*/
+  Function(FrameCallback callback, {String debugLabel}) frameCallback =
+      WidgetsBinding.instance.addPostFrameCallback;
 }
 
 class _BuildChildWidget extends StatefulWidget {
