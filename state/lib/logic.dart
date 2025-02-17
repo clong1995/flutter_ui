@@ -115,7 +115,7 @@ abstract class Logic<E> with Lifecycle {
 
   /*void frameCallback(FrameCallback callback) =>
       WidgetsBinding.instance.addPostFrameCallback(callback);*/
-  Function(FrameCallback callback, {String debugLabel}) frameCallback =
+  void Function(FrameCallback callback, {String debugLabel}) frameCallback =
       WidgetsBinding.instance.addPostFrameCallback;
 }
 
