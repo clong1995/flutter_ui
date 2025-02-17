@@ -23,7 +23,7 @@ Future<void> save({
   String? fileName,
   required Uint8List bytes,
 }) async {
-  await saveToGallery(
+  await saveVideoToGallery(
     fileName: fileName,
     bytes: bytes,
   );

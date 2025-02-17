@@ -63,12 +63,11 @@ Future<List<PickerFile>?> multiple({
 }
 
 // 保存图片到相册
-Future<void> save({
+Future<String> save({
   String? fileName,
   required Uint8List bytes,
-}) async {
-  await saveToGallery(
-    fileName: fileName,
-    bytes: bytes,
-  );
-}
+}) async =>
+    await saveImageToGallery(
+      fileName: fileName,
+      bytes: bytes,
+    );
