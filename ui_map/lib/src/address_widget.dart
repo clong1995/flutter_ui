@@ -54,6 +54,7 @@ class _AddressWidgetState extends State<AddressWidget> {
                 controller: controller,
                 cursorHeight: height - 8 * 2,
                 maxLines: 1,
+                autofocus: true,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.search),
                   prefixIconConstraints: BoxConstraints(
