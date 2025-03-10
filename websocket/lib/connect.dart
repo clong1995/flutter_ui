@@ -7,7 +7,6 @@ WebSocket? _socket;
 WebSocket? get socket => _socket;
 
 final Duration _reconnectDelay = const Duration(seconds: 1);
-
 Future<void> connect({
   required String url,
   required Function(String data) received,
@@ -25,7 +24,14 @@ Future<void> connect({
           () => connect(url: url, received: received, headers: headers),
         );
       },
-      onDone: () => println("socket done"),
+      onDone:() async {
+        println("socket done");
+        await close();
+        Future.delayed(
+          _reconnectDelay,
+              () => connect(url: url, received: received, headers: headers),
+        );
+      },
     );
   } catch (e) {
     println("socket connect: $e");
