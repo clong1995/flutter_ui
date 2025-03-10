@@ -1,7 +1,8 @@
 name: websocket
 description: "A new Flutter project."
 version: 0.0.1
-homepage:
+homepage: partner
+publish_to: none
 
 environment:
   sdk: ^3.7.0

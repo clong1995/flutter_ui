@@ -6,7 +6,10 @@ WebSocket? _socket;
 
 WebSocket? get socket => _socket;
 
-final Duration _reconnectDelay = const Duration(seconds: 1);
+const Duration _reconnectDelay = Duration(seconds: 1);
+
+bool _break = false;
+
 Future<void> connect({
   required String url,
   required Function(String data) received,
@@ -18,24 +21,27 @@ Future<void> connect({
       (data) => received(data),
       onError: (e) async {
         println("socket error: $e");
-        await close();
+        await _close();
+        if (_break) return;
         Future.delayed(
           _reconnectDelay,
           () => connect(url: url, received: received, headers: headers),
         );
       },
-      onDone:() async {
+      onDone: () async {
         println("socket done");
-        await close();
+        await _close();
+        if (_break) return;
         Future.delayed(
           _reconnectDelay,
-              () => connect(url: url, received: received, headers: headers),
+          () => connect(url: url, received: received, headers: headers),
         );
       },
     );
   } catch (e) {
     println("socket connect: $e");
-    await close();
+    await _close();
+    if (_break) return;
     Future.delayed(
       _reconnectDelay,
       () => connect(url: url, received: received, headers: headers),
@@ -44,6 +50,11 @@ Future<void> connect({
 }
 
 Future<void> close() async {
+  _break = true;
+  await _close();
+}
+
+Future<void> _close() async {
   try {
     await _socket?.close();
   } catch (e) {
