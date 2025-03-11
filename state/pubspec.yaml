@@ -4,7 +4,7 @@ version: 0.1.0
 homepage: flutter_ui
 
 environment:
-  sdk: ^3.6.0
+  sdk: ^3.7.0
   flutter: ">=3.19.6"
 
 dependencies:
