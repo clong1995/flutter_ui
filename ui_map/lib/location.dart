@@ -5,15 +5,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 final SharedPreferencesAsync _asyncPrefs = SharedPreferencesAsync();
 const String _key = "__location";
 
-Future<List<double>?> location() async {
-  String? value = await _asyncPrefs.getString(_key);
-  if (value != null && value.isEmpty) {
-    final arr = value.split(",");
-    if (arr.length == 2) {
-      double? lon = double.tryParse(arr[0]);
-      double? lat = double.tryParse(arr[1]);
-      if (lon != null && lat != null) {
-        return [lon, lat];
+Future<List<double>?> location([bool current = false]) async {
+  if(!current){
+    String? value = await _asyncPrefs.getString(_key);
+    if (value != null && value.isEmpty) {
+      final arr = value.split(",");
+      if (arr.length == 2) {
+        double? lon = double.tryParse(arr[0]);
+        double? lat = double.tryParse(arr[1]);
+        if (lon != null && lat != null) {
+          if (kDebugMode) {
+            print("cache position:$value");
+          }
+          return [lon, lat];
+        }
       }
     }
   }
@@ -52,7 +57,7 @@ Future<List<double>?> location() async {
   final lonlat = [position.longitude, position.latitude];
   await _asyncPrefs.setString(_key, lonlat.join(","));
   if (kDebugMode) {
-    print("cache position:$lonlat");
+    print("current position:$lonlat");
   }
   return lonlat;
 }
