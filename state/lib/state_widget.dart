@@ -37,6 +37,12 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    logic.onDidChanged();
+  }
+
+  @override
   Widget build(BuildContext context) => widget.builder(logic);
 
   @override
