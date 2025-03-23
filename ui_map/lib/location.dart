@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -50,5 +51,8 @@ Future<List<double>?> location() async {
   final position = await Geolocator.getCurrentPosition();
   final lonlat = [position.longitude, position.latitude];
   await _asyncPrefs.setString(_key, lonlat.join(","));
+  if (kDebugMode) {
+    print("cache position:$lonlat");
+  }
   return lonlat;
 }
