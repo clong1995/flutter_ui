@@ -8,7 +8,7 @@ const String _key = "__location";
 Future<List<double>?> location([bool current = false]) async {
   if(!current){
     String? value = await _asyncPrefs.getString(_key);
-    if (value != null && value.isEmpty) {
+    if (value != null && value.isNotEmpty) {
       final arr = value.split(",");
       if (arr.length == 2) {
         double? lon = double.tryParse(arr[0]);
