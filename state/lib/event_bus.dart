@@ -62,7 +62,11 @@ class _EventBus {
   // 发布事件
   void publish(Event event) {
     if (kDebugMode) {
-      print("publish\n topic: ${event.topic}\n message: ${event.message}");
+      print("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+      print("┃ event bus publish:");
+      print("┃ topic: ${event.topic}");
+      print("┃ message: ${event.message}");
+      print("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
     }
     _controller.add(event);
   }
