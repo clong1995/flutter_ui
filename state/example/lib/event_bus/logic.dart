@@ -8,6 +8,7 @@ class MyLogic extends Logic<_State> with EventBus {
 
   @override
   void onInit() {
+    super.onInit();
     state = _State();
     //过滤特定的event
     setInterested(["event1", "event2"], onEvent);

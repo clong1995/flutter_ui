@@ -19,7 +19,7 @@ class Event<T> {
 }
 
 mixin EventBus on Lifecycle {
-  late final  StreamSubscription _subscription;
+  late  StreamSubscription _subscription;
 
   void publish(Event logicEvent) {
     _EventBus().publish(logicEvent);
@@ -27,6 +27,7 @@ mixin EventBus on Lifecycle {
 
   void onEvent(Event event) {}
 
+  @mustCallSuper
   @override
   void onInit() {
     super.onInit();
