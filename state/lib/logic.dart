@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -9,22 +10,24 @@ abstract class Logic<E> with Lifecycle {
 
   late E _state;
 
+  @nonVirtual
   @protected
   set state(E value) {
     _state = value;
   }
 
+  @nonVirtual
   E get state => _state;
 
   final BuildContext _context;
 
+  @nonVirtual
   @override
   BuildContext get context => _context;
 
   Logic(this._context);
 
-  Map<String, Future<Object?> Function(Object?)> globalFunc() => {};
-
+  @nonVirtual
   void initDict(void Function() update) {
     if (_updateDict.containsKey("_")) {
       return;
@@ -32,8 +35,10 @@ abstract class Logic<E> with Lifecycle {
     _updateDict["_"] = update;
   }
 
+  @nonVirtual
   S? find<S>() => LogicDict.get<S>();
 
+  @nonVirtual
   void reload<T>(Widget Function() page) {
     pushAndRemove(() => _Reload(
           page,
@@ -41,6 +46,7 @@ abstract class Logic<E> with Lifecycle {
         ));
   }
 
+  @nonVirtual
   @override
   void update([List<String>? ids]) {
     if (ids != null) {
@@ -52,6 +58,8 @@ abstract class Logic<E> with Lifecycle {
     }
   }
 
+
+  @nonVirtual
   Widget builder({
     required String id,
     required Widget Function() builder,
@@ -62,11 +70,15 @@ abstract class Logic<E> with Lifecycle {
         updateDict: _updateDict,
       );
 
+
+  @nonVirtual
   void pop<S>([S? result]) => Navigator.pop<S>(
         _context,
         result,
       );
 
+
+  @nonVirtual
   Future<S?> push<S extends Object?>(Widget Function() page,
           [Object? arguments]) =>
       Navigator.push<S>(
@@ -79,6 +91,8 @@ abstract class Logic<E> with Lifecycle {
         ),
       );
 
+
+  @nonVirtual
   Future<S?> pushAndRemove<S extends Object?>(Widget Function() page,
           [Object? arguments]) =>
       Navigator.pushAndRemoveUntil<S>(
@@ -92,6 +106,8 @@ abstract class Logic<E> with Lifecycle {
         (Route<dynamic> route) => false,
       );
 
+
+  @nonVirtual
   Future<S?> pushAndReplace<S extends Object?, SO extends Object?>(
           Widget Function() page,
           [Object? arguments]) =>
@@ -105,6 +121,8 @@ abstract class Logic<E> with Lifecycle {
         ),
       );
 
+
+  @nonVirtual
   S? arguments<S>() {
     Object? arguments = ModalRoute.of(_context)?.settings.arguments;
     if (arguments == null) {
@@ -113,6 +131,8 @@ abstract class Logic<E> with Lifecycle {
     return arguments as S;
   }
 
+
+  @nonVirtual
   void Function(FrameCallback callback, {String debugLabel}) frameCallback =
       WidgetsBinding.instance.addPostFrameCallback;
 }

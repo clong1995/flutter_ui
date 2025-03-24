@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 final SharedPreferencesAsync _asyncPrefs = SharedPreferencesAsync();
 const String _key = "__location";
 
+//current: true 每次都获取当前位置
+//callback:
 Future<List<double>?> location([bool current = false]) async {
   if(!current){
     String? value = await _asyncPrefs.getString(_key);
