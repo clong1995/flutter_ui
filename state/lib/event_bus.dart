@@ -19,7 +19,7 @@ class Event<T> {
 }
 
 mixin EventBus on Lifecycle {
-  StreamSubscription? _subscription;
+  late final  StreamSubscription _subscription;
 
   void publish(Event logicEvent) {
     _EventBus().publish(logicEvent);
@@ -37,7 +37,7 @@ mixin EventBus on Lifecycle {
     List<String> events,
     void Function(Event event) onEvent,
   ) {
-    _subscription?.cancel();
+    _subscription.cancel();
     _subscription =
         _EventBus().subscribe(events).listen((event) => onEvent(event));
   }
@@ -45,7 +45,7 @@ mixin EventBus on Lifecycle {
   @override
   void onDispose() {
     super.onDispose();
-    _subscription?.cancel();
+    _subscription.cancel();
   }
 }
 
