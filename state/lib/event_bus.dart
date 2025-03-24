@@ -43,6 +43,7 @@ mixin EventBus on Lifecycle {
         _EventBus().subscribe(events).listen((event) => onEvent(event));
   }
 
+  @mustCallSuper
   @override
   void onDispose() {
     super.onDispose();
