@@ -1,30 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-final SharedPreferencesAsync _asyncPrefs = SharedPreferencesAsync();
-const String _key = "__location";
-
-//current: true 每次都获取当前位置
-//callback:
-Future<List<double>?> location([bool current = false]) async {
-  if(!current){
-    String? value = await _asyncPrefs.getString(_key);
-    if (value != null && value.isNotEmpty) {
-      final arr = value.split(",");
-      if (arr.length == 2) {
-        double? lon = double.tryParse(arr[0]);
-        double? lat = double.tryParse(arr[1]);
-        if (lon != null && lat != null) {
-          if (kDebugMode) {
-            print("cache position:$value");
-          }
-          return [lon, lat];
-        }
-      }
-    }
-  }
-
+Future<List<double>?> location() async {
   bool serviceEnabled;
   LocationPermission permission;
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -56,10 +32,6 @@ Future<List<double>?> location([bool current = false]) async {
   // When we reach here, permissions are granted and we can
   // continue accessing the position of the device.
   final position = await Geolocator.getCurrentPosition();
-  final lonlat = [position.longitude, position.latitude];
-  await _asyncPrefs.setString(_key, lonlat.join(","));
-  if (kDebugMode) {
-    print("current position:$lonlat");
-  }
-  return lonlat;
+
+  return [position.longitude, position.latitude];
 }
