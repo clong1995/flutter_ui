@@ -40,7 +40,7 @@ class _ToastState extends State<_Toast> {
                   decoration: BoxDecoration(
                     color: Color.lerp(_message!.color, Colors.white, .95),
                     border: Border.all(
-                      color: _message!.color.withOpacity(.5),
+                      color: _message!.color.withAlpha(2),
                       width: 1.5,
                     ),
                     borderRadius: BorderRadius.circular(10),

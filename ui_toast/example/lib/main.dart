@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_toast/toast.dart';
 
@@ -74,7 +75,9 @@ class MyHomePage extends StatelessWidget {
               onPressed: () {
                 Toast.show(Toast.choice
                   ..callback = (bool choice) {
-                    print(choice);
+                    if (kDebugMode) {
+                      print(choice);
+                    }
                   });
               },
               child: const Text("选择"),
