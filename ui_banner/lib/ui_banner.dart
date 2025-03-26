@@ -1,5 +1,3 @@
-library ui_banner;
-
 import 'dart:async';
 
 import 'package:device/device.dart';
