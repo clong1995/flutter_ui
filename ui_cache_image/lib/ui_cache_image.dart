@@ -104,6 +104,9 @@ class _UiCacheImageState extends State<UiCacheImage> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
+          if (kDebugMode) {
+            print(snapshot.error);
+          }
           return const Icon(Icons.broken_image);
         } else if (snapshot.hasData) {
           return snapshot.data!;

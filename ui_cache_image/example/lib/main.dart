@@ -79,22 +79,12 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(
             width: 100,
             height: 100,
-            child: UiCacheImage("http://bj-eschool.oss-cn-beijing.aliyuncs.com/test/1.jpg"),
+            child: UiCacheImage("https://picsum.photos/250?image=9"),
           ),
           SizedBox(
             width: 100,
             height: 100,
-            child: UiCacheImage("https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/2.jpg"),
-          ),
-          SizedBox(
-            width: 100,
-            height: 100,
-            child: UiCacheImage("https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/3.jpg"),
-          ),
-          SizedBox(
-            width: 100,
-            height: 100,
-            child: UiCacheImage("https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/4.jpg"),
+            child: UiCacheImage("https://docs.flutter.dev/assets/images/dash/dash-fainting.gif"),
           ),
         ],
       ),// This trailing comma makes auto-formatting nicer for build methods.
