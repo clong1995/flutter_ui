@@ -1,7 +1,7 @@
 name: ui_toast
 description: "A new Flutter project."
 version: 0.0.1
-homepage:
+homepage: flutter_ui
 
 environment:
   sdk: ^3.7.0
