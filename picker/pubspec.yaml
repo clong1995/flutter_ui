@@ -10,10 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  file_picker: ^9.0.0
+  file_picker: ^9.2.1
   image_picker: ^1.1.2
   saver_gallery: ^4.0.1
-  path: ^1.9.0 #<==image_picker 最新支持到 1.9.0
+  path: ^1.9.1
   path_provider: ^2.1.5
 
 dev_dependencies:
