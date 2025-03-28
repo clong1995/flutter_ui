@@ -1,6 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 
-Future<List<double>?> location() async {
+Future<List<double>?> location([bool current = false]) async {
   bool serviceEnabled;
   LocationPermission permission;
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -29,9 +29,19 @@ Future<List<double>?> location() async {
     return null;
   }
 
-  // When we reach here, permissions are granted and we can
-  // continue accessing the position of the device.
-  final position = await Geolocator.getCurrentPosition();
+  late final Position position;
+  if (current){ //实时精确位置：慢
+    // When we reach here, permissions are granted and we can
+    // continue accessing the position of the device.
+    position = await Geolocator.getCurrentPosition();
+  }else{ //最后一个位置：快
+    final lastPosition = await Geolocator.getLastKnownPosition();
+    if (lastPosition == null) { //没有最后一个位置
+      //重新获取实时位置
+      position = await Geolocator.getCurrentPosition();
+    }
+  }
+
 
   return [position.longitude, position.latitude];
 }
