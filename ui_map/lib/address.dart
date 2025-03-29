@@ -7,12 +7,12 @@ Future<Address?> address(
   required Future<List<Address>> Function(String keyword) datasource,
   bool rootNavigator = false,
 }) async {
-  return await Navigator.of(context, rootNavigator: rootNavigator)
-      .push<Address>(
+  return await Navigator.of(
+    context,
+    rootNavigator: rootNavigator,
+  ).push<Address>(
     MaterialPageRoute<Address>(
-      builder: (BuildContext context) => AddressWidget(
-        datasource: datasource,
-      ),
+      builder: (BuildContext context) => AddressWidget(datasource: datasource),
     ),
   );
 }
@@ -22,7 +22,7 @@ class Address {
   String city = "";
   String county = "";
   String address = "";
-  String lonLat = "";
+  List<double> lonLat = [];
   String name = "";
   String typeName = "";
 }
