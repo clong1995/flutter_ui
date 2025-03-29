@@ -11,9 +11,8 @@ Future<List<double>?> location([bool current = false]) async {
     position = await Geolocator.getCurrentPosition();
   }else{ //最后一个位置：快
     position = await Geolocator.getLastKnownPosition();
-    if(position == null){
-      return null;
-    }
+    //否则还是，实时精确位置
+    position ??= await Geolocator.getCurrentPosition();
   }
 
   return [position.longitude, position.latitude];
