@@ -29,17 +29,14 @@ Future<List<double>?> location([bool current = false]) async {
     return null;
   }
 
-  late final Position position;
+  Position? position;
   if (current){ //实时精确位置：慢
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     position = await Geolocator.getCurrentPosition();
   }else{ //最后一个位置：快
-    final lastPosition = await Geolocator.getLastKnownPosition();
-    if (lastPosition == null) { //没有最后一个位置
-      //重新获取实时位置
-      position = await Geolocator.getCurrentPosition();
-    }
+    position = await Geolocator.getLastKnownPosition();
+    position ??= await Geolocator.getCurrentPosition();
   }
 
 
