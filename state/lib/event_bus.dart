@@ -5,17 +5,24 @@ import 'package:flutter/foundation.dart';
 import '/lifecycle.dart';
 
 extension StringEvent on String {
-  Event event<T>(T message) => Event<T>()
-    ..topic = this
-    ..message = message;
+  Event event<T>([T? message]) => Event<T>(this,message);
 }
 
 class Event<T> {
   //订阅的消息主题
-  String topic = "";
+  final String _topic;
 
   //随同主题的消息负载
-  T? message;
+  final T? _message;
+
+  Event(this._topic, this._message);
+
+  //T? get message => _message;
+
+  E? message<E>() => _message as E;
+
+  String get topic => _topic;
+
 }
 
 mixin EventBus on Lifecycle {
@@ -67,7 +74,7 @@ class _EventBus {
       print("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
       print("┃ event bus publish:");
       print("┃ topic: ${event.topic}");
-      print("┃ message: ${event.message}");
+      print("┃ message: ${event.message()}");
       print("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
     }
     _controller.add(event);

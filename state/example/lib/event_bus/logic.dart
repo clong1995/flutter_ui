@@ -3,8 +3,8 @@ import 'package:state/logic.dart';
 
 class _State {}
 
-class MyLogic extends Logic<_State> with EventBus {
-  MyLogic(super.context);
+class EventBusLogic extends Logic<_State> with EventBus {
+  EventBusLogic(super.context);
 
   @override
   void onInit() {
@@ -15,10 +15,29 @@ class MyLogic extends Logic<_State> with EventBus {
   }
 
   @override
-  void onEvent(Event event) {}
+  void onEvent(Event event) {
+    switch (event.topic) {
+      case "event1":
+        print(event.message<String>());
+        break;
+      case "event2":
+        final message = event.message<List<int>>();
+        if(message != null){
+          for(int e in message){
+            print(e);
+          }
+        }
+        break;
+    }
+  }
 
-  void publishMyEvent() {
-    Event event = "event1".event<String>("你好啊");
+  void onPublishEvent1Pressed() {
+    Event event = "event1".event<String>("hello world");
+    publish(event);
+  }
+
+  void onPublishEvent2Pressed() {
+    Event event = "event2".event<List<int>>([1, 2, 3]);
     publish(event);
   }
 }
