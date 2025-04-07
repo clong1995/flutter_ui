@@ -1,7 +1,8 @@
 name: ui_captcha
 description: "A new Flutter project."
 version: 0.0.1
-homepage:
+homepage: flutter_ui
+publish_to: none
 
 environment:
   sdk: ^3.7.2
