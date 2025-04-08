@@ -26,7 +26,32 @@ class _UiWebviewState extends State<UiWebview> {
 
     controller = WebViewController();
     controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    controller.loadRequest(Uri.parse(widget.url));
+    final bridge = "_b${random}_";
+    final callback = "_cb${random}_";
+    if (isRegister) {
+      controller.addJavaScriptChannel(
+        bridge,
+        onMessageReceived: (JavaScriptMessage message) async {
+          final data = jsonDecode(message.message);
+          final callbackId = data['callbackId'];
+          final action = data['action'];
+          final param = data['param'];
+
+          final func = widget.register![action];
+          String res = "";
+          if (func == null) {
+            res = "$action : not found";
+          }
+
+          final result = await func!(param);
+          res = jsonEncode(result);
+          final script = '''
+                window.$callback('$callbackId', $res);
+              ''';
+          controller.runJavaScript(script);
+        },
+      );
+    }
     controller.setNavigationDelegate(
       NavigationDelegate(
         onProgress: (int progress) {
@@ -34,11 +59,9 @@ class _UiWebviewState extends State<UiWebview> {
         },
         onPageFinished: (String url) {
           //有函数需要调用时
-          if (widget.register != null && widget.register!.isNotEmpty) {
-            final bridge = "_b${random}_";
+          if (isRegister) {
             final callbacks = "_cbs${random}_";
-            final callback = "_cb${random}_";
-            controller.runJavaScript('''
+            final script = '''
               const $callbacks = {};
               window.$callback = (callbackId, result) =>{
                   if ($callbacks[callbackId]) {
@@ -58,36 +81,18 @@ class _UiWebviewState extends State<UiWebview> {
                       $bridge.postMessage(JSON.stringify(payload));
                   });
               }
-            ''');
-            controller.addJavaScriptChannel(
-              bridge,
-              onMessageReceived: (JavaScriptMessage message) async {
-                final data = jsonDecode(message.message);
-                final callbackId = data['callbackId'];
-                final action = data['action'];
-                final param = data['param'];
-
-                final func = widget.register![action];
-                String res = "";
-                if (func == null) {
-                  res = "$action : not found";
-                }
-
-                final result = await func!(param);
-                res = jsonEncode(result);
-                final script = '''
-                window.$callback('$callbackId', $res);
-              ''';
-                controller.runJavaScript(script);
-              },
-            );
+            ''';
+            controller.runJavaScript(script);
           }
         },
       ),
     );
+    controller.loadRequest(Uri.parse(widget.url));
   }
 
   int get random => Random().nextInt(100);
+
+  bool get isRegister =>(widget.register != null && widget.register!.isNotEmpty);
 
   @override
   Widget build(BuildContext context) => WebViewWidget(controller: controller);
