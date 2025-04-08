@@ -6,7 +6,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 class UiWebview extends StatefulWidget {
   final String url;
-  final Map<String, Future<Object?> Function(dynamic json)>? register;
+  final Map<String, Future<dynamic> Function(dynamic json)>? register;
 
   const UiWebview({super.key, required this.url, this.register});
 
