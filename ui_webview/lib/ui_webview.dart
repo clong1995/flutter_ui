@@ -4,38 +4,42 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class UiCaptcha extends StatefulWidget {
+class UiWebview extends StatefulWidget {
   final String url;
-  final Future<bool> Function(String param) verifyParam;
+  final Map<String, Future<Object?> Function(dynamic json)> register;
 
-  const UiCaptcha({super.key, required this.url, required this.verifyParam});
+  const UiWebview({super.key, required this.url, required this.register});
 
   @override
-  State<UiCaptcha> createState() => _UiCaptchaState();
+  State<UiWebview> createState() => _UiWebviewState();
 }
 
-class _UiCaptchaState extends State<UiCaptcha> {
+class _UiWebviewState extends State<UiWebview> {
   late WebViewController controller;
 
   @override
   void initState() {
     super.initState();
-    final bridge = "_b${Random().nextInt(100)}_";
+
+    final bridge = "_b${random}_";
+    final callbacks = "_cbs${random}_";
+    final callback = "_cb${random}_";
     controller = WebViewController();
     controller.runJavaScript('''
-      const _dartCallbacks = {};
-      window._dartCallback = (callbackId, result) =>{
-          if (_dartCallbacks[callbackId]) {
-              _dartCallbacks[callbackId](result);
-              delete _dartCallbacks[callbackId];
+      const $callbacks = {};
+      window.$callback = (callbackId, result) =>{
+          if ($callbacks[callbackId]) {
+              $callbacks[callbackId](result);
+              delete $callbacks[callbackId];
           }
       }
-      function verify(param) {
+      function wvCall(action,param) {
           return new Promise((resolve) => {
               const callbackId = 'cb_' + Date.now() + '_' + Math.random().toString(36).substring(2);
-              _dartCallbacks[callbackId] = resolve;
+              $callbacks[callbackId] = resolve;
               const payload = {
                   callbackId,
+                  action,
                   param,
               };
               $bridge.postMessage(JSON.stringify(payload));
@@ -47,10 +51,19 @@ class _UiCaptchaState extends State<UiCaptcha> {
       onMessageReceived: (JavaScriptMessage message) async {
         final data = jsonDecode(message.message);
         final callbackId = data['callbackId'];
+        final action = data['action'];
         final param = data['param'];
-        final result = await widget.verifyParam(param);
+
+        final func = widget.register[action];
+        String res = "";
+        if (func == null) {
+          res = "$action : not found";
+        }
+
+        final result = await func!(jsonDecode(param));
+        res = jsonEncode(result);
         final script = '''
-                window._dartCallback('$callbackId', ${result?'true':'false'});
+                window.$callback('$callbackId', $res);
               ''';
         controller.runJavaScript(script);
       },
@@ -59,6 +72,8 @@ class _UiCaptchaState extends State<UiCaptcha> {
     controller.loadRequest(Uri.parse(widget.url));
   }
 
+  int get random => Random().nextInt(100);
+
   @override
-  Widget build(BuildContext context) => WebViewWidget(controller: controller);
+  Widget build(BuildContext context) => WebViewWidget(controller: controller,);
 }

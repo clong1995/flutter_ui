@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_captcha/ui_captcha.dart';
+import 'package:ui_webview/ui_webview.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,12 +26,16 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return UiCaptcha(
-      url: 'https://web-school.hua100.net/captcha',
-      verifyParam: (String param) async {
-        //TODO 验证逻辑
-        return true;
+    return UiWebview(
+      url: 'https://pub.dev',
+      register: {
+        "test": test,
       },
     );
+  }
+
+  Future<Object?> test(dynamic json) async{
+    print(json);
+    return "你好";
   }
 }
