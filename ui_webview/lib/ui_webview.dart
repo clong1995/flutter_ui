@@ -34,7 +34,7 @@ class _UiWebviewState extends State<UiWebview> {
                 delete $callbacks[callbackId];
             }
         }
-        function wvCall(action,param) {
+        window.wv = (action,param) =>{
             return new Promise((resolve) => {
                 const callbackId = 'cb_' + Date.now() + '_' + Math.random().toString(36).substring(2);
                 $callbacks[callbackId] = resolve;
