@@ -61,7 +61,7 @@ class _UiWebviewState extends State<UiWebview> {
             res = "$action : not found";
           }
 
-          final result = await func!(jsonDecode(param));
+          final result = await func!(param);
           res = jsonEncode(result);
           final script = '''
                 window.$callback('$callbackId', $res);
