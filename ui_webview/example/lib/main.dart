@@ -27,14 +27,14 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UiWebview(
-      url: 'https://pub.dev',
+      url: 'https://web-school.hua100.net',
       register: {
         "test": test,
       },
     );
   }
 
-  Future<Object?> test(dynamic json) async{
+  Future<dynamic> test(dynamic json) async{
     print(json);
     return "你好";
   }
