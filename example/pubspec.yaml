@@ -35,8 +35,8 @@ dependencies:
     path: ../ui_banner
   ui_table:
     path: ../ui_table
-  ui_adapt_box:
-    path: ../ui_adapt_box
+  ui_adapt:
+    path: ../ui_adapt
   state:
     path: ../state
 
