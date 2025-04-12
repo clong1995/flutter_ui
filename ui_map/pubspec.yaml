@@ -15,12 +15,12 @@ dependencies:
   pinyin: ^3.3.0
   alphabet_list_view: ^1.1.4
   geolocator: ^13.0.3
-  # ui_webview:
-  #   git:
-  #     url: https://github.com/clong1995/flutter_ui.git
-  #     path: ui_webview
   ui_webview:
-    path: ../ui_webview
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_webview
+  #ui_webview:
+  #  path: ../ui_webview
 
 dev_dependencies:
   flutter_test:
