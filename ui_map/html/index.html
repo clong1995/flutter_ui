@@ -2,11 +2,31 @@
 <html lang="zh">
 <head>
     <meta charset="utf-8"/>
-    <meta name="viewport"
-          content="width = device-width,inital-scale=1.0,maximun = 1.0,user-scalable = no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>map</title>
+    <style>
+        html {
+            height: 100vh;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+        }
+    </style>
+    <script type="text/javascript"
+            src="https://api.tianditu.gov.cn/api?v=4.0&tk=37fee4f899f8565115ece5aeb7908590"></script>
+    <script>
+        let map;
+        const zoom = 12;
+
+        function onLoad() {
+            map = new T.Map('mapDiv');
+            map.centerAndZoom(new T.LngLat(116.40769, 39.89945), zoom);
+        }
+    </script>
 </head>
-<body>
-这里是地图
+<body onLoad="onLoad()">
+<div id="mapDiv" style="position:absolute;width:100%; height:100%"></div>
 </body>
 </html>

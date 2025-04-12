@@ -11,6 +11,6 @@ class MapWidget extends StatefulWidget {
 class _MapWidgetState extends State<MapWidget> {
   @override
   Widget build(BuildContext context) {
-    return const UiWebview(url: "html/index.html");
+    return const UiWebview(url: "packages/ui_map/html/index.html");
   }
 }

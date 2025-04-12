@@ -1,0 +1,2 @@
+/home/clong/Desktop/flutter_ui/ui_map/example/android/app/.cxx/Debug/6525p1e3/x86/CMakeFiles/edit_cache.dir
+/home/clong/Desktop/flutter_ui/ui_map/example/android/app/.cxx/Debug/6525p1e3/x86/CMakeFiles/rebuild_cache.dir
