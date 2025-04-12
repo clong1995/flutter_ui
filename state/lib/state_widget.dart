@@ -7,13 +7,11 @@ class StateWidget<T extends Logic> extends StatefulWidget {
   final T Function(BuildContext context) logic;
   final Widget Function(T) builder;
   final bool public;
-  final void Function(T)? expose;
 
   const StateWidget({
     super.key,
     required this.logic,
     required this.builder,
-    this.expose,
     this.public = false,
   });
 
@@ -28,7 +26,6 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   void initState() {
     super.initState();
     logic = widget.logic(context);
-    widget.expose?.call(logic);
     if (widget.public) {
       LogicDict.set<T>(logic);
     }
