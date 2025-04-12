@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:state/event_bus.dart';
 import 'package:state/logic.dart';
 
@@ -18,13 +19,17 @@ class EventBusLogic extends Logic<_State> with EventBus {
   void onEvent(Event event) {
     switch (event.topic) {
       case "event1":
-        print(event.message<String>());
+        if (kDebugMode) {
+          print(event.message<String>());
+        }
         break;
       case "event2":
         final message = event.message<List<int>>();
         if(message != null){
           for(int e in message){
-            print(e);
+            if (kDebugMode) {
+              print(e);
+            }
           }
         }
         break;

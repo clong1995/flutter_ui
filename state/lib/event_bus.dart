@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import '/lifecycle.dart';
 
 extension StringEvent on String {
-  Event event<T>([T? message]) => Event<T>(this,message);
+  Event event<T>([T? message]) => Event<T>(this, message);
 }
 
 class Event<T> {
@@ -22,11 +22,10 @@ class Event<T> {
   E? message<E>() => _message as E;
 
   String get topic => _topic;
-
 }
 
 mixin EventBus on Lifecycle {
-  late  StreamSubscription _subscription;
+  late StreamSubscription _subscription;
 
   void publish(Event logicEvent) {
     _EventBus().publish(logicEvent);
@@ -38,16 +37,12 @@ mixin EventBus on Lifecycle {
   @override
   void onInit() {
     super.onInit();
-    _subscription = _EventBus().subscribe().listen((event) => onEvent(event));
+    _subscription = _EventBus().subscribe().listen(onEvent);
   }
 
-  void setInterested(
-    List<String> events,
-    void Function(Event event) onEvent,
-  ) {
+  void setInterested(List<String> events, void Function(Event event) onEvent) {
     _subscription.cancel();
-    _subscription =
-        _EventBus().subscribe(events).listen((event) => onEvent(event));
+    _subscription = _EventBus().subscribe(events).listen(onEvent);
   }
 
   @mustCallSuper
@@ -71,17 +66,18 @@ class _EventBus {
   // 发布事件
   void publish(Event event) {
     if (kDebugMode) {
-      print("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+      print("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
       print("┃ event bus publish:");
       print("┃ topic: ${event.topic}");
       print("┃ message: ${event.message()}");
-      print("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+      print("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
     }
     _controller.add(event);
   }
 
   // 订阅事件
-  Stream<Event> subscribe([List<String>? topics]) => topics == null
-      ? _controller.stream
-      : _controller.stream.where((event) => topics.contains(event.topic));
+  Stream<Event> subscribe([List<String>? topics]) =>
+      topics == null
+          ? _controller.stream
+          : _controller.stream.where((event) => topics.contains(event.topic));
 }

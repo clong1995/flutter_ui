@@ -39,12 +39,8 @@ abstract class Logic<E> with Lifecycle {
   S? find<S>() => LogicDict.get<S>();
 
   @nonVirtual
-  void reload<T>(Widget Function() page) {
-    pushAndRemove(() => _Reload(
-          page,
-          () => LogicDict.contain<T>(),
-        ));
-  }
+  void reload<T>(Widget Function() page) =>
+      pushAndRemove(() => _Reload(page, LogicDict.contain<T>));
 
   @nonVirtual
   @override
@@ -58,69 +54,49 @@ abstract class Logic<E> with Lifecycle {
     }
   }
 
+  @nonVirtual
+  Widget builder({required String id, required Widget Function() builder}) =>
+      _BuildChildWidget(id: id, builder: builder, updateDict: _updateDict);
 
   @nonVirtual
-  Widget builder({
-    required String id,
-    required Widget Function() builder,
-  }) =>
-      _BuildChildWidget(
-        id: id,
-        builder: builder,
-        updateDict: _updateDict,
-      );
-
+  void pop<S>([S? result]) => Navigator.pop<S>(_context, result);
 
   @nonVirtual
-  void pop<S>([S? result]) => Navigator.pop<S>(
-        _context,
-        result,
-      );
-
-
-  @nonVirtual
-  Future<S?> push<S extends Object?>(Widget Function() page,
-          [Object? arguments]) =>
-      Navigator.push<S>(
-        _context,
-        MaterialPageRoute<S>(
-          builder: (BuildContext context) => page(),
-          settings: RouteSettings(
-            arguments: arguments,
-          ),
-        ),
-      );
-
+  Future<S?> push<S extends Object?>(
+    Widget Function() page, [
+    Object? arguments,
+  ]) => Navigator.push<S>(
+    _context,
+    MaterialPageRoute<S>(
+      builder: (BuildContext context) => page(),
+      settings: RouteSettings(arguments: arguments),
+    ),
+  );
 
   @nonVirtual
-  Future<S?> pushAndRemove<S extends Object?>(Widget Function() page,
-          [Object? arguments]) =>
-      Navigator.pushAndRemoveUntil<S>(
-        _context,
-        MaterialPageRoute<S>(
-          builder: (BuildContext context) => page(),
-          settings: RouteSettings(
-            arguments: arguments,
-          ),
-        ),
-        (Route<dynamic> route) => false,
-      );
-
+  Future<S?> pushAndRemove<S extends Object?>(
+    Widget Function() page, [
+    Object? arguments,
+  ]) => Navigator.pushAndRemoveUntil<S>(
+    _context,
+    MaterialPageRoute<S>(
+      builder: (BuildContext context) => page(),
+      settings: RouteSettings(arguments: arguments),
+    ),
+    (Route<dynamic> route) => false,
+  );
 
   @nonVirtual
   Future<S?> pushAndReplace<S extends Object?, SO extends Object?>(
-          Widget Function() page,
-          [Object? arguments]) =>
-      Navigator.pushReplacement<S, SO>(
-        _context,
-        MaterialPageRoute<S>(
-          builder: (BuildContext context) => page(),
-          settings: RouteSettings(
-            arguments: arguments,
-          ),
-        ),
-      );
-
+    Widget Function() page, [
+    Object? arguments,
+  ]) => Navigator.pushReplacement<S, SO>(
+    _context,
+    MaterialPageRoute<S>(
+      builder: (BuildContext context) => page(),
+      settings: RouteSettings(arguments: arguments),
+    ),
+  );
 
   @nonVirtual
   S? arguments<S>() {
@@ -130,7 +106,6 @@ abstract class Logic<E> with Lifecycle {
     }
     return arguments as S;
   }
-
 
   @nonVirtual
   void Function(FrameCallback callback, {String debugLabel}) frameCallback =
@@ -188,8 +163,9 @@ class _ReloadState extends State<_Reload> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance
-        .addPostFrameCallback((Duration timeStamp) => jump());
+    WidgetsBinding.instance.addPostFrameCallback(
+      (Duration timeStamp) => jump(),
+    );
   }
 
   void jump() {
@@ -199,15 +175,12 @@ class _ReloadState extends State<_Reload> {
     }
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(
-        builder: (BuildContext context) => widget.page(),
-      ),
+      MaterialPageRoute(builder: (BuildContext context) => widget.page()),
       (Route<dynamic> route) => false,
     );
   }
 
   @override
-  Widget build(BuildContext context) => const Center(
-        child: CircularProgressIndicator(),
-      );
+  Widget build(BuildContext context) =>
+      const Center(child: CircularProgressIndicator());
 }
