@@ -15,10 +15,12 @@ dependencies:
   pinyin: ^3.3.0
   alphabet_list_view: ^1.1.4
   geolocator: ^13.0.3
-  #alphabet_list_view:
-  #  git:
-  #    url: https://github.com/cosee/alphabet_list_view
-  #    path: /Users/huazhimeng/Desktop/flutter_ui/fork/alphabet_list_view
+  # ui_webview:
+  #   git:
+  #     url: https://github.com/clong1995/flutter_ui.git
+  #     path: ui_webview
+  ui_webview:
+    path: ../ui_webview
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +45,7 @@ flutter:
   # https://flutter.dev/to/resolution-aware-images
   assets:
     - csv/AdminCode.csv
+    - html/index.html
 
   # To add custom fonts to your package, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

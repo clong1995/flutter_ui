@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ui_map/region.dart';
+import 'package:ui_map/map.dart';
+// import 'package:ui_map/region.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +32,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    /*return Scaffold(
       body: Center(
         child: FilledButton(
           onPressed: () {
@@ -40,6 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Text("选择城市"),
         ),
       ),
-    );
+    );*/
+    return MapWidget();
   }
 }

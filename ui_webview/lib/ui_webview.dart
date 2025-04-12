@@ -87,7 +87,11 @@ class _UiWebviewState extends State<UiWebview> {
         },
       ),
     );
-    controller.loadRequest(Uri.parse(widget.url));
+    if(widget.url.startsWith("http://") || widget.url.startsWith("https://")){
+      controller.loadRequest(Uri.parse(widget.url));
+    }else{
+      controller.loadFlutterAsset(widget.url);
+    }
   }
 
   int get random => Random().nextInt(100);
