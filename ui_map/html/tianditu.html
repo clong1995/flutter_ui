@@ -13,20 +13,22 @@
             margin: 0;
             height: 100vh;
         }
+
+        .tdt-control-copyright{
+            display:none;
+        }
     </style>
     <script type="text/javascript"
-            src="https://api.tianditu.gov.cn/api?v=4.0&tk=37fee4f899f8565115ece5aeb7908590"></script>
+            src="http://api.tianditu.gov.cn/api?v=4.0&tk=37fee4f899f8565115ece5aeb7908590"></script>
     <script>
         let map;
-        const zoom = 12;
-
         function onLoad() {
             map = new T.Map('mapDiv');
-            map.centerAndZoom(new T.LngLat(116.40769, 39.89945), zoom);
+            map.centerAndZoom(new T.LngLat(116.391, 39.907), 12);
         }
     </script>
 </head>
 <body onLoad="onLoad()">
-<div id="mapDiv" style="position:absolute;width:100%; height:100%"></div>
+<div id="mapDiv" style="position:absolute;width:100vw; height:100vh"></div>
 </body>
 </html>
