@@ -121,11 +121,24 @@ class _AddressWidgetState extends State<AddressWidget> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    address.name,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        address.name,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      const Icon(Icons.route, size: 14, color: Color(0xFF757575)),
+                                      const Text(
+                                        "xxx km",
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          color: Color(0xFF757575),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                   const SizedBox(height: 5),
                                   Text(
