@@ -94,7 +94,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
   }
 
   Future<String> _tempDirectory() async {
-    if(_cacheDirectory.isNotEmpty){
+    if (_cacheDirectory.isNotEmpty) {
       return _cacheDirectory;
     }
     final dir = await getTemporaryDirectory();
@@ -113,26 +113,24 @@ class _UiCacheImageState extends State<UiCacheImage> {
   }*/
 
   @override
-  Widget build(BuildContext context) {
-    print("---build----");
-    return FutureBuilder<Widget>(
-      future: futureImage,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          if (kDebugMode) {
-            print(snapshot.error);
+  Widget build(BuildContext context) =>
+      FutureBuilder<Widget>(
+        future: futureImage,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            if (kDebugMode) {
+              print(snapshot.error);
+            }
+            return const Icon(Icons.broken_image);
+          } else if (snapshot.hasData) {
+            return snapshot.data!;
+          } else {
+            return const Icon(Icons.image);
           }
-          return const Icon(Icons.broken_image);
-        } else if (snapshot.hasData) {
-          return snapshot.data!;
-        } else {
-          return const Icon(Icons.image);
-        }
-      },
-    );
-  }
+        },
+      )
 }
 
 /*class _CacheEntry {
