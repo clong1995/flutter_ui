@@ -7,39 +7,44 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
 
+String _cacheDirectory = "";
+
 class UiCacheImage extends StatefulWidget {
   final String src;
   final BoxFit? fit;
-  const UiCacheImage(this.src,{super.key, this.fit});
+
+  const UiCacheImage(this.src, {super.key, this.fit});
 
   @override
   State<UiCacheImage> createState() => _UiCacheImageState();
 }
 
 class _UiCacheImageState extends State<UiCacheImage> {
-  static const Duration cacheDuration = Duration(minutes: 5);
-  static final Map<String, _CacheEntry> imageCache = {};
+  /*static const Duration cacheDuration = Duration(minutes: 5);
+  static final Map<String, _CacheEntry> imageCache = {};*/
 
   late Future<Widget> futureImage;
 
   @override
   void initState() {
     super.initState();
-    cleanUpCache(); // 初始化时清理过期缓存
-    futureImage = getCachedImage(widget.src, widget.fit);
+    //cleanUpCache(); // 初始化时清理过期缓存
+    futureImage = _cachedImage(widget.src, widget.fit);
   }
 
   @override
   void didUpdateWidget(covariant UiCacheImage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.src != widget.src || oldWidget.fit != widget.fit) {
-      setState(() {
-        futureImage = getCachedImage(widget.src, widget.fit);
-      });
+      if (kDebugMode) {
+        print("image changed");
+      }
+      futureImage = _cachedImage(widget.src, widget.fit);
+      setState(() {});
     }
   }
 
-  Future<Widget> getCachedImage(String src, BoxFit? fit) {
+  /*Future<Widget> getCachedImage(String src, BoxFit? fit) {
     final now = DateTime.now();
     // 如果缓存存在并未过期，则返回缓存，并刷新过期时间
     if (imageCache.containsKey(src)) {
@@ -57,9 +62,9 @@ class _UiCacheImageState extends State<UiCacheImage> {
     imageCache[src] = _CacheEntry(future, now.add(cacheDuration));
 
     return future;
-  }
+  }*/
 
-  static Future<Widget> _tempImage(String src, BoxFit? fit) async {
+  Future<Widget> _cachedImage(String src, BoxFit? fit) async {
     if (kIsWeb) {
       return Image.network(src, fit: fit);
     }
@@ -72,29 +77,40 @@ class _UiCacheImageState extends State<UiCacheImage> {
       return Image.file(imageFile, fit: fit);
     }
 
+    //请求新的图片
+    if (kDebugMode) {
+      print("request new image");
+    }
     Response response = await get(Uri.parse(src));
     if (response.statusCode == 200) {
       await imageFile.writeAsBytes(response.bodyBytes);
       return Image.memory(response.bodyBytes, fit: fit);
     }
 
+    if (kDebugMode) {
+      print("request new image error: ${response.statusCode}");
+    }
     return const Icon(Icons.image_outlined);
   }
 
-  static Future<String> _tempDirectory() async {
+  Future<String> _tempDirectory() async {
+    if(_cacheDirectory.isNotEmpty){
+      return _cacheDirectory;
+    }
     final dir = await getTemporaryDirectory();
-    return dir.path;
+    _cacheDirectory = dir.path;
+    return _cacheDirectory;
   }
 
-  static String _md5str(String input) {
+  String _md5str(String input) {
     return md5.convert(utf8.encode(input)).toString();
   }
 
   /// 清理过期的缓存项
-  void cleanUpCache() {
+  /*void cleanUpCache() {
     final now = DateTime.now();
     imageCache.removeWhere((_, entry) => entry.expiry.isBefore(now));
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -118,9 +134,9 @@ class _UiCacheImageState extends State<UiCacheImage> {
   }
 }
 
-class _CacheEntry {
+/*class _CacheEntry {
   Future<Widget> imageFuture;
   DateTime expiry;
 
   _CacheEntry(this.imageFuture, this.expiry);
-}
+}*/
