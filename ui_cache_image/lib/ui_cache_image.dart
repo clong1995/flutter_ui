@@ -113,24 +113,23 @@ class _UiCacheImageState extends State<UiCacheImage> {
   }*/
 
   @override
-  Widget build(BuildContext context) =>
-      FutureBuilder<Widget>(
-        future: futureImage,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            if (kDebugMode) {
-              print(snapshot.error);
-            }
-            return const Icon(Icons.broken_image);
-          } else if (snapshot.hasData) {
-            return snapshot.data!;
-          } else {
-            return const Icon(Icons.image);
-          }
-        },
-      )
+  Widget build(BuildContext context) => FutureBuilder<Widget>(
+    future: futureImage,
+    builder: (context, snapshot) {
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (snapshot.hasError) {
+        if (kDebugMode) {
+          print(snapshot.error);
+        }
+        return const Icon(Icons.broken_image);
+      } else if (snapshot.hasData) {
+        return snapshot.data!;
+      } else {
+        return const Icon(Icons.image);
+      }
+    },
+  );
 }
 
 /*class _CacheEntry {
