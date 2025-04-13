@@ -114,6 +114,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
 
   @override
   Widget build(BuildContext context) {
+    print("---build----");
     return FutureBuilder<Widget>(
       future: futureImage,
       builder: (context, snapshot) {
