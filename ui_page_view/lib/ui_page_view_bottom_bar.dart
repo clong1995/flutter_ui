@@ -19,7 +19,7 @@ class UiPageViewBottomBar extends StatefulWidget {
 }
 
 class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
-  int index = 0;
+  int currIndex = 0;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -28,31 +28,31 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
     padding: widget.padding,
     child: Row(
       children:
-          widget.items
-              .asMap()
-              .entries
-              .map(
-                (e) =>
-                    e.value.isSpacer == true
-                        ? e.value.item
-                        : Expanded(
-                          child: InkWell(
-                            onTap:
-                                e.value.onTap == null
-                                    ? null
-                                    : () {
-                                      index = e.key;
-                                      setState(() {});
-                                      e.value.onTap!(index);
-                                    },
-                            child:
-                                index == e.key
-                                    ? e.value.selectedItem ?? e.value.item
-                                    : e.value.item,
-                          ),
-                        ),
-              )
-              .toList(),
+          widget.items.asMap().entries.map((e) {
+            var index = e.key;
+            final value = e.value;
+            if (e.value.isSpacer == true) {
+              index--;
+            }
+            return value.isSpacer == true
+                ? value.item
+                : Expanded(
+                  child: InkWell(
+                    onTap:
+                        value.onTap == null
+                            ? null
+                            : () {
+                              currIndex = index;
+                              setState(() {});
+                              value.onTap!(index);
+                            },
+                    child:
+                        currIndex == index
+                            ? value.selectedItem ?? value.item
+                            : value.item,
+                  ),
+                );
+          }).toList(),
     ),
   );
 }
