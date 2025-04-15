@@ -4,12 +4,14 @@ class UiPageViewBottomBar extends StatefulWidget {
   final double height;
   final Decoration? decoration;
   final List<UiPageViewBottomBarItem> items;
+  final EdgeInsetsGeometry? padding;
 
   const UiPageViewBottomBar({
     super.key,
     required this.height,
     required this.decoration,
     required this.items,
+    this.padding,
   });
 
   @override
@@ -23,8 +25,8 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
   Widget build(BuildContext context) => Container(
     height: widget.height,
     decoration: widget.decoration,
+    padding: widget.padding,
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children:
           widget.items
               .asMap()
@@ -33,19 +35,21 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
                 (e) =>
                     e.value.isSpacer == true
                         ? e.value.item
-                        : InkWell(
-                          onTap:
-                              e.value.onTap == null
-                                  ? null
-                                  : () {
-                                    index = e.key;
-                                    setState(() {});
-                                    e.value.onTap!(index);
-                                  },
-                          child:
-                              index == e.key
-                                  ? e.value.selectedItem ?? e.value.item
-                                  : e.value.item,
+                        : Expanded(
+                          child: InkWell(
+                            onTap:
+                                e.value.onTap == null
+                                    ? null
+                                    : () {
+                                      index = e.key;
+                                      setState(() {});
+                                      e.value.onTap!(index);
+                                    },
+                            child:
+                                index == e.key
+                                    ? e.value.selectedItem ?? e.value.item
+                                    : e.value.item,
+                          ),
                         ),
               )
               .toList(),
@@ -54,7 +58,7 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
 }
 
 class UiPageViewBottomBarItem {
-  final bool? isSpacer; //用于做特殊的间隔，点击不会有任何效果，建议是空白组件
+  final bool? isSpacer;
   final Widget item;
   final Widget? selectedItem;
   final void Function(int)? onTap;
