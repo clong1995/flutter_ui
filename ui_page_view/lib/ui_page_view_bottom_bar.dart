@@ -17,7 +17,6 @@ class UiPageViewBottomBar extends StatefulWidget {
 }
 
 class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
-
   int index = 0;
 
   @override
@@ -60,10 +59,10 @@ class UiPageViewBottomBarItem {
   final Widget? selectedItem;
   final void Function(int)? onTap;
 
-  UiPageViewBottomBarItem(
-    this.item,
+  UiPageViewBottomBarItem({
+    required this.item,
     this.selectedItem,
     this.onTap,
     this.isSpacer,
-  );
+  });
 }
