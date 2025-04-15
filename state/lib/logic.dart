@@ -104,7 +104,10 @@ abstract class Logic<E> with Lifecycle {
     if (arguments == null) {
       return null;
     }
-    return arguments as S;
+    if (arguments is S) {
+      return arguments as S;
+    }
+    return null;
   }
 
   @nonVirtual
