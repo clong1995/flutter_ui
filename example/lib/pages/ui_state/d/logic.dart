@@ -10,7 +10,7 @@ class _State {
   String? res;
 }
 
-class DLogic extends Logic<DLogic, _State> {
+class DLogic extends Logic< _State> {
   DLogic(super.context) {
     super.state = _State();
   }

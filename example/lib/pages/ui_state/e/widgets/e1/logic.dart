@@ -5,7 +5,7 @@ class _State {
   int count = 0;
 }
 
-class E1Logic extends Logic<E1Logic, _State> {
+class E1Logic extends Logic<_State> {
   E1Logic(super.context) {
     super.state = _State();
   }

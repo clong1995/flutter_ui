@@ -6,7 +6,7 @@ class _State{
 }
 
 //logic和state绑定
-class ALogic extends Logic<ALogic, _State> {
+class ALogic extends Logic<_State> {
   ALogic(super._context){
     super.state = _State();
   }

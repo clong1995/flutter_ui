@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ui_adapt_box/ui_adapt_box.dart';
 
 import 'pages/ui_adapt.dart';
 

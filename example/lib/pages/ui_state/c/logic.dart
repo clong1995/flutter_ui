@@ -18,10 +18,11 @@ class Item {
   });
 }
 
-class CLogic extends Logic<CLogic, _State> {
-  CLogic(super.context) {
-    super.state = _State();
+class CLogic extends Logic<_State> {
+  CLogic(super._context){
+    state = _State();
   }
+
 
   @override
   void onInit() {
