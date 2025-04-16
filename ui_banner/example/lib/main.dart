@@ -46,6 +46,19 @@ class MyHomePage extends StatelessWidget {
               ],
             ),
           ),
+          //===> 离开本页面会暂停
+          FilledButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Scaffold(
+                      appBar: AppBar(),
+                    ),
+                  ),
+                );
+              },
+              child: Text("离开本页面会暂停"))
         ],
       ),
     );

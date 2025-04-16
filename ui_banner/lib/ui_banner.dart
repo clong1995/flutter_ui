@@ -8,7 +8,7 @@ class UiBanner extends StatefulWidget {
   const UiBanner({
     super.key,
     required this.children,
-    this.auto = false,
+    this.auto = true,
     this.indicator = true,
     this.scrollDirection = Axis.horizontal,
   });
@@ -23,15 +23,20 @@ class UiBanner extends StatefulWidget {
 }
 
 class _UiBannerState extends State<UiBanner>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late PageController pageController;
   late TabController indicatorController;
   Timer? ticker;
   int index = 0;
+  bool isScrolling = true;
+  bool isCurrentPage = true;
 
   @override
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance.addObserver(this);
+
     pageController = PageController(initialPage: 0);
     indicatorController = TabController(
       length: widget.children.length,
@@ -46,11 +51,42 @@ class _UiBannerState extends State<UiBanner>
   @override
   void dispose() {
     super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
     pageController.dispose();
     if (widget.indicator) {
       indicatorController.dispose();
     }
-    ticker?.cancel();
+    if (widget.auto) {
+      ticker?.cancel();
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (widget.auto) {
+      if (state == AppLifecycleState.inactive ||
+          state == AppLifecycleState.paused) {
+        ticker?.cancel();
+      } else if (state == AppLifecycleState.resumed) {
+        ticker = tickerStart();
+      }
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    bool isCurrent = ModalRoute.of(context)?.isCurrent ?? false;
+    if (isCurrent && !isCurrentPage) {
+      //防止重复启动
+      isCurrentPage = true;
+      ticker = tickerStart();
+    } else {
+      if (!isCurrent) {
+        ticker?.cancel();
+        isCurrentPage = false;
+      }
+    }
   }
 
   @override
@@ -94,17 +130,18 @@ class _UiBannerState extends State<UiBanner>
   }
 
   void onPageChanged(int index) {
-    this.index = index;
     if (widget.indicator) {
+      this.index = index;
       indicatorController.animateTo(index % widget.children.length);
     }
   }
 
   Timer tickerStart() {
+    ticker?.cancel();
     return Timer.periodic(const Duration(seconds: 2), (Timer timer) {
-      index += 1;
-      int p = index % widget.children.length;
       if (widget.indicator) {
+        index += 1;
+        int p = index % widget.children.length;
         indicatorController.animateTo(p);
       }
       pageController.nextPage(duration: kTabScrollDuration, curve: Curves.ease);
@@ -139,20 +176,28 @@ class _UiBannerState extends State<UiBanner>
     if (touch) {
       return GestureDetector(
         onTapDown: (TapDownDetails detail) {
-          ticker?.cancel();
+          if (widget.auto) {
+            ticker?.cancel();
+          }
         },
         onTapUp: (TapUpDetails detail) {
-          ticker = tickerStart();
+          if (widget.auto) {
+            ticker = tickerStart();
+          }
         },
         child: child,
       );
     }
     return MouseRegion(
       onEnter: (PointerEnterEvent event) {
-        ticker?.cancel();
+        if (widget.auto) {
+          ticker?.cancel();
+        }
       },
       onExit: (PointerExitEvent event) {
-        ticker = tickerStart();
+        if (widget.auto) {
+          ticker = tickerStart();
+        }
       },
       child: child,
     );
