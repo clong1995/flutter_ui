@@ -1,21 +1,23 @@
 import 'package:geolocator/geolocator.dart';
 
-Future<List<double>?> location([bool current = false]) async {
+Position? _position;
+//type:
+//cache 最快 缓存（last和current都会更新这个位置）
+//last 快 最后一个位置
+//current 慢 实时位置
+Future<List<double>?> location([String type = "cache"]) async {
   final p = await _permission();
   if (!p) return null;
-
-  Position? position;
-  if (current){ //实时精确位置：慢
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
-    position = await Geolocator.getCurrentPosition();
-  }else{ //最后一个位置：快
-    position = await Geolocator.getLastKnownPosition();
-    //否则还是，实时精确位置
-    position ??= await Geolocator.getCurrentPosition();
+  if(type == "cache"){
+    _position ??= await Geolocator.getLastKnownPosition();
+    _position ??= await Geolocator.getCurrentPosition();
+  }else if(type == "last"){
+    _position = await Geolocator.getLastKnownPosition();
+    _position ??= await Geolocator.getCurrentPosition();
+  }else {
+    _position = await Geolocator.getCurrentPosition();
   }
-
-  return [position.longitude, position.latitude];
+  return _position == null?null:[_position!.longitude, _position!.latitude];
 }
 
 Future<bool> _permission() async {
