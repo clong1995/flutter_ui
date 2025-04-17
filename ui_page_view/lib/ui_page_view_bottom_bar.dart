@@ -4,6 +4,7 @@ class UiPageViewBottomBar extends StatefulWidget {
   final double height;
   final Decoration? decoration;
   final List<UiPageViewBottomBarItem> items;
+  final PageController controller;
   final EdgeInsetsGeometry? padding;
 
   const UiPageViewBottomBar({
@@ -12,6 +13,7 @@ class UiPageViewBottomBar extends StatefulWidget {
     required this.decoration,
     required this.items,
     this.padding,
+    required this.controller,
   });
 
   @override
@@ -20,18 +22,18 @@ class UiPageViewBottomBar extends StatefulWidget {
 
 class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
   var currIndex = 0;
-  List<UiPageViewBottomBarItem> items = [];
+  final List<UiPageViewBottomBarItem> items = [];
 
   @override
   void initState() {
-    var index = -1;
-    for (var i = 0; i < widget.items.length; i++) {
-      if (widget.items[i].isSpacer != true) {
-        index++;
-      }
-      widget.items[i].index = index;
-    }
     super.initState();
+    indexItem();
+  }
+
+  @override
+  void didUpdateWidget(covariant UiPageViewBottomBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    indexItem();
   }
 
   @override
@@ -48,14 +50,14 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
                         ? e.item
                         : Expanded(
                           child: InkWell(
-                            onTap:
-                                e.onTap == null
-                                    ? null
-                                    : () {
-                                      currIndex = e.index;
-                                      setState(() {});
-                                      e.onTap!(e.index);
-                                    },
+                            onTap: () {
+                              if (currIndex == e.index) {
+                                return;
+                              }
+                              currIndex = e.index;
+                              setState(() {});
+                              widget.controller.jumpToPage(e.index);
+                            },
                             child:
                                 currIndex == e.index
                                     ? e.selectedItem ?? e.item
@@ -66,19 +68,27 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
               .toList(),
     ),
   );
+
+  void indexItem(){
+    var index = -1;
+    for (var i = 0; i < widget.items.length; i++) {
+      if (widget.items[i].isSpacer != true) {
+        index++;
+        widget.items[i].index = index;
+      }
+    }
+  }
 }
 
 class UiPageViewBottomBarItem {
   final bool? isSpacer;
   final Widget item;
   final Widget? selectedItem;
-  final void Function(int)? onTap;
   int index = 0;
 
   UiPageViewBottomBarItem({
     required this.item,
     this.selectedItem,
-    this.onTap,
     this.isSpacer,
   });
 }
