@@ -4,7 +4,7 @@ class _State {
   List<Item> list = [];
 }
 
-class FLogic extends Logic<FLogic, _State> {
+class FLogic extends Logic<_State> {
   FLogic(super.context);
 
   @override

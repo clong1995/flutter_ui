@@ -5,7 +5,7 @@ class _State{
   int salary = 10000;
 }
 
-class BLogic extends Logic<BLogic, _State> {
+class BLogic extends Logic< _State> {
   BLogic(super.context) {
     super.state = _State();
   }

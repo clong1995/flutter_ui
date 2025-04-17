@@ -13,8 +13,8 @@ class UIBannerExample extends StatelessWidget {
       ),
       body: const AspectRatio(
         aspectRatio: 1,
-        child: UIBanner(
-          child: [
+        child: UiBanner(
+          children: [
             Text("1"),
             Text("2"),
             Text("3"),

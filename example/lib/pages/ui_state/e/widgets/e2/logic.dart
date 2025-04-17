@@ -6,7 +6,7 @@ class _State {
 }
 
 
-class E2Logic extends Logic<E2Logic, _State> {
+class E2Logic extends Logic<_State> {
   E2Logic(super.context) {
     super.state = _State();
   }

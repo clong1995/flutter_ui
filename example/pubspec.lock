@@ -54,7 +54,7 @@ packages:
     description:
       path: device
       ref: HEAD
-      resolved-ref: fac71c164de57c74e6b14aa60f55a12ed5bd197e
+      resolved-ref: "2abe1043ad5a34a036f81aac48a42ea6e004e131"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
@@ -183,7 +183,7 @@ packages:
       path: "../state"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.2.1"
   stream_channel:
     dependency: transitive
     description:
@@ -229,7 +229,7 @@ packages:
       path: "../ui_banner"
       relative: true
     source: path
-    version: "0.0.2"
+    version: "0.1.0"
   ui_table:
     dependency: "direct main"
     description:
@@ -254,5 +254,5 @@ packages:
     source: hosted
     version: "14.3.1"
 sdks:
-  dart: ">=3.7.0 <4.0.0"
+  dart: ">=3.7.2 <4.0.0"
   flutter: ">=3.19.6"
