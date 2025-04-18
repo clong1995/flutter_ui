@@ -12,8 +12,9 @@ String _cacheDirectory = "";
 class UiCacheImage extends StatefulWidget {
   final String src;
   final BoxFit? fit;
+  final bool? thumbnail;
 
-  const UiCacheImage(this.src, {super.key, this.fit});
+  const UiCacheImage(this.src, {super.key, this.fit, this.thumbnail});
 
   @override
   State<UiCacheImage> createState() => _UiCacheImageState();
@@ -25,21 +26,27 @@ class _UiCacheImageState extends State<UiCacheImage> {
 
   late Future<Widget> futureImage;
 
+  late String src;
+
   @override
   void initState() {
     super.initState();
+    src = widget.src;
+    if (widget.thumbnail == true) {
+      src += "?x-oss-process=style/thumbnail";
+    }
     //cleanUpCache(); // 初始化时清理过期缓存
-    futureImage = _cachedImage(widget.src, widget.fit);
+    futureImage = _cachedImage(src, widget.fit);
   }
 
   @override
   void didUpdateWidget(covariant UiCacheImage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.src != widget.src || oldWidget.fit != widget.fit) {
+    if (oldWidget.src != src || oldWidget.fit != widget.fit) {
       if (kDebugMode) {
         print("image changed");
       }
-      futureImage = _cachedImage(widget.src, widget.fit);
+      futureImage = _cachedImage(src, widget.fit);
       setState(() {});
     }
   }

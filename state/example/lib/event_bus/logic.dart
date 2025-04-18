@@ -5,12 +5,13 @@ import 'package:state/logic.dart';
 class _State {}
 
 class EventBusLogic extends Logic<_State> with EventBus {
-  EventBusLogic(super.context);
+  EventBusLogic(super.context) {
+    state = _State();
+  }
 
   @override
   void onInit() {
     super.onInit();
-    state = _State();
     //过滤特定的event
     setInterested(["event1", "event2"], onEvent);
   }
@@ -25,8 +26,8 @@ class EventBusLogic extends Logic<_State> with EventBus {
         break;
       case "event2":
         final message = event.message<List<int>>();
-        if(message != null){
-          for(int e in message){
+        if (message != null) {
+          for (int e in message) {
             if (kDebugMode) {
               print(e);
             }
