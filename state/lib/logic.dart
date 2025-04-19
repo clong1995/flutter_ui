@@ -55,7 +55,7 @@ abstract class Logic<E> with Lifecycle {
   }
 
   @nonVirtual
-  Widget builder({required String id, required Widget Function() builder}) =>
+  Widget builder({required String id, required Widget Function(BuildContext context) builder}) =>
       _BuildChildWidget(id: id, builder: builder, updateDict: _updateDict);
 
   @nonVirtual
@@ -118,7 +118,7 @@ abstract class Logic<E> with Lifecycle {
 class _BuildChildWidget extends StatefulWidget {
   final String id;
   final Map<String, void Function()> updateDict;
-  final Widget Function() builder;
+  final Widget Function(BuildContext context) builder;
 
   const _BuildChildWidget({
     required this.id,
@@ -143,7 +143,7 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
   }
 
   @override
-  Widget build(BuildContext context) => widget.builder();
+  Widget build(BuildContext context) => widget.builder(context);
 
   @override
   void dispose() {
