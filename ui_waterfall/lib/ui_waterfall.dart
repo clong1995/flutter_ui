@@ -75,10 +75,7 @@ class _UiWaterfallState<T> extends State<UiWaterfall<T>> {
         SizedBox(width: spacing),
         SizedBox(
           width: width,
-          child: listView(
-            controller: leftScrollController,
-            listData: leftData,
-          ),
+          child: listView(controller: leftScrollController, listData: leftData),
         ),
         SizedBox(width: spacing),
         SizedBox(
@@ -96,28 +93,25 @@ class _UiWaterfallState<T> extends State<UiWaterfall<T>> {
   ListView listView({
     required ScrollController controller,
     required List<UiWaterfallItem<T>> listData,
-  }) =>
-      ListView.separated(
-        controller: controller,
-        itemBuilder: (BuildContext context, int index) {
-          UiWaterfallItem<T> item = listData[index];
-          return SizedBox(
-            height: item.height,
-            child: widget.itemBuilder(item.data),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) =>
-            SizedBox(height: spacing),
-        itemCount: listData.length,
+  }) => ListView.separated(
+    padding: EdgeInsets.zero,
+    controller: controller,
+    itemBuilder: (BuildContext context, int index) {
+      UiWaterfallItem<T> item = listData[index];
+      return SizedBox(
+        height: item.height,
+        child: widget.itemBuilder(item.data),
       );
+    },
+    separatorBuilder:
+        (BuildContext context, int index) => SizedBox(height: spacing),
+    itemCount: listData.length,
+  );
 }
 
 class UiWaterfallItem<T> {
   double height;
   T? data;
 
-  UiWaterfallItem({
-    required this.height,
-    this.data,
-  });
+  UiWaterfallItem({required this.height, this.data});
 }
