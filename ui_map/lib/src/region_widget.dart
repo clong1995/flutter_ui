@@ -8,7 +8,10 @@ import 'package:pinyin/pinyin.dart';
 import '../region.dart' show Region;
 
 class RegionWidget extends StatefulWidget {
-  const RegionWidget({super.key});
+  final String? region;
+  final Future<String?> Function()? location;
+
+  const RegionWidget({super.key, this.region, this.location});
 
   @override
   State<RegionWidget> createState() => _RegionWidgetState();
@@ -16,10 +19,11 @@ class RegionWidget extends StatefulWidget {
 
 class _RegionWidgetState extends State<RegionWidget> {
   //使用link来存储省份和城市因为有重复
-  List<String> link = [];
+  List<String> link = []; //大写首拼音_地区名_编号
   String currCode = "";
+  String jumpCode = ""; //用来高亮跳转到的
 
-  LinkedHashSet<String> regin = LinkedHashSet<String>();
+  LinkedHashSet<String> region = LinkedHashSet<String>();
   LinkedHashSet<String> code = LinkedHashSet<String>();
 
   LinkedHashSet<String> symbols = LinkedHashSet<String>();
@@ -29,10 +33,18 @@ class _RegionWidgetState extends State<RegionWidget> {
 
   bool canPop = true;
 
+  ScrollController scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
-    readCsv();
+    readCsv().then((_) {
+      if (widget.region != null) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          jumpTo(widget.region!);
+        });
+      }
+    });
   }
 
   @override
@@ -49,33 +61,47 @@ class _RegionWidgetState extends State<RegionWidget> {
       child: Scaffold(
         appBar: AppBar(
           leadingWidth: 100,
-          leading: canPop
-              ? TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text(
-                    "取消",
-                    style: bodyMedium.copyWith(color: Colors.red),
-                  ),
-                )
-              : TextButton(
-                  onPressed: onBackTap,
-                  child: Text(
-                    "返回上级",
-                    style: bodyMedium.copyWith(
-                      fontWeight: FontWeight.bold,
+          leading:
+              canPop
+                  ? TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "取消",
+                      style: bodyMedium.copyWith(color: Colors.red),
+                    ),
+                  )
+                  : TextButton(
+                    onPressed: onBackTap,
+                    child: Text(
+                      "返回上级",
+                      style: bodyMedium.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
-                ),
+          actions:
+              widget.location == null
+                  ? null
+                  : [
+                    TextButton(
+                      onPressed: onLocationPressed,
+                      child: const Row(
+                        children: [
+                          Icon(Icons.location_searching, size: 14),
+                          Text("定位"),
+                        ],
+                      ),
+                    ),
+                  ],
           title: Text(
-            regin.isEmpty ? "城市选择器" : "已选: ${regin.join("/")}",
+            region.isEmpty ? "城市选择器" : "已选: ${region.join("/")}",
             style: bodyMedium,
           ),
         ),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
           child: AlphabetListView(
+            scrollController: scrollController,
             items: data.entries.map(
               (e) => AlphabetListViewItemGroup(
                 tag: e.key,
@@ -83,11 +109,17 @@ class _RegionWidgetState extends State<RegionWidget> {
                   List<String> arr = entry.value.split("_");
                   bool first = entry.key == 0;
                   bool last = entry.key == e.value.length - 1;
+                  bool jump =
+                      jumpCode.isNotEmpty && entry.value.endsWith(jumpCode);
                   return InkWell(
                     onTap: () {
                       onTap(arr[1], arr[2]);
                     },
                     child: Container(
+                      color:
+                          jump
+                              ? Theme.of(context).primaryColor.withAlpha(20)
+                              : null,
                       padding: EdgeInsets.fromLTRB(
                         10,
                         first ? 10 : 5,
@@ -99,19 +131,25 @@ class _RegionWidgetState extends State<RegionWidget> {
                         child: RichText(
                           text: TextSpan(
                             text: arr[1],
-                            style: bodyMedium,
-                            children: _pm[arr[1]] == null
-                                ? null
-                                : <TextSpan>[
-                                    TextSpan(
-                                      text: " · ${_pm[arr[1]]}",
-                                      style: bodyMedium.copyWith(
-                                        color: const Color(0xFF9E9E9E),
-                                        fontSize:
-                                            (bodyMedium.fontSize ?? 13) - 1,
-                                      ),
+                            style:
+                                jump
+                                    ? bodyMedium.apply(
+                                      color: Theme.of(context).primaryColor,
                                     )
-                                  ],
+                                    : bodyMedium,
+                            children:
+                                _pm[arr[1]] == null
+                                    ? null
+                                    : <TextSpan>[
+                                      TextSpan(
+                                        text: " · ${_pm[arr[1]]}",
+                                        style: bodyMedium.copyWith(
+                                          color: const Color(0xFF9E9E9E),
+                                          fontSize:
+                                              (bodyMedium.fontSize ?? 13) - 1,
+                                        ),
+                                      ),
+                                    ],
                           ),
                         ),
                       ),
@@ -122,20 +160,23 @@ class _RegionWidgetState extends State<RegionWidget> {
             ),
             options: AlphabetListViewOptions(
               listOptions: ListOptions(
-                listHeaderBuilder: (BuildContext context, String symbol) =>
-                    Container(
-                  padding: const EdgeInsets.fromLTRB(15, 8, 0, 8),
-                  color: const Color(0xFFEEEEEE),
-                  child: Text(
-                    symbol,
-                    style: bodyMedium.copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ),
+                listHeaderBuilder:
+                    (BuildContext context, String symbol) => Container(
+                      padding: const EdgeInsets.fromLTRB(15, 8, 0, 8),
+                      color: const Color(0xFFEEEEEE),
+                      child: Text(
+                        symbol,
+                        style: bodyMedium.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ),
               ),
               scrollbarOptions: ScrollbarOptions(
                 symbols: symbols,
-                symbolBuilder: (BuildContext context, String symbol,
-                    AlphabetScrollbarItemState state) {
+                symbolBuilder: (
+                  BuildContext context,
+                  String symbol,
+                  AlphabetScrollbarItemState state,
+                ) {
                   //active
                   TextStyle activeTxtStyle = bodyMedium.copyWith(
                     fontWeight: FontWeight.bold,
@@ -147,9 +188,10 @@ class _RegionWidgetState extends State<RegionWidget> {
                   return Center(
                     child: Text(
                       symbol,
-                      style: state == AlphabetScrollbarItemState.active
-                          ? activeTxtStyle
-                          : inActiveTextStyle,
+                      style:
+                          state == AlphabetScrollbarItemState.active
+                              ? activeTxtStyle
+                              : inActiveTextStyle,
                     ),
                   );
                 },
@@ -191,10 +233,11 @@ class _RegionWidgetState extends State<RegionWidget> {
       String searchEnd = "";
       //特殊省
       if (currCode == "156110000" || //北京
-              currCode == "156120000" || //天津
-              currCode == "156810000" || //香港
-              currCode == "156310000" //上海
-          ) {
+          currCode == "156120000" || //天津
+          currCode == "156810000" || //香港
+          currCode ==
+              "156310000" //上海
+              ) {
         searchEnd = "";
       } else if (end == "0000") {
         //省
@@ -222,7 +265,7 @@ class _RegionWidgetState extends State<RegionWidget> {
         }
       }
     }
-    if(data.isEmpty){
+    if (data.isEmpty) {
       //最后一级
       return;
     }
@@ -231,8 +274,9 @@ class _RegionWidgetState extends State<RegionWidget> {
   }
 
   Future<void> readCsv() async {
-    String content =
-        await rootBundle.loadString('packages/ui_map/csv/AdminCode.csv');
+    String content = await rootBundle.loadString(
+      'packages/ui_map/csv/AdminCode.csv',
+    );
     List<String> lines = content.split('\n');
     for (String row in lines) {
       if (row.startsWith("中国")) {
@@ -242,7 +286,8 @@ class _RegionWidgetState extends State<RegionWidget> {
       if (arr.length == 2) {
         String firstLetter = PinyinHelper.getFirstWordPinyin(arr[0]);
         link.add(
-            "${firstLetter[0].trim().toUpperCase()}_${arr[0].trim()}_${arr[1].trim()}");
+          "${firstLetter[0].trim().toUpperCase()}_${arr[0].trim()}_${arr[1].trim()}",
+        );
       }
     }
     RegExp regex = RegExp(r'(\d+)');
@@ -264,20 +309,23 @@ class _RegionWidgetState extends State<RegionWidget> {
     loadData();
   }
 
+  String getCode(String name) {
+    return "";
+  }
+
   void onTap(String name, String code) {
     if (code == currCode) {
       return;
     }
-    currCode = code;
-    regin.add(name);
-    this.code.add(code);
-    loadData();
-    if(data.isEmpty){
+    loadUiData(name, code);
+    if (data.isEmpty) {
       List<Region> list = [];
-      for (var i = 0; i < regin.length; i++) {
-        list.add(Region()
-          ..code = this.code.elementAt(i)
-          ..name = regin.elementAt(i));
+      for (var i = 0; i < region.length; i++) {
+        list.add(
+          Region()
+            ..code = this.code.elementAt(i)
+            ..name = region.elementAt(i),
+        );
       }
       canPop = true;
       Navigator.pop<List<Region>>(context, list);
@@ -285,12 +333,19 @@ class _RegionWidgetState extends State<RegionWidget> {
     }
   }
 
+  void loadUiData(String name, String code) {
+    currCode = code;
+    region.add(name);
+    this.code.add(code);
+    loadData();
+  }
+
   void onBackTap() {
     if (code.isEmpty) {
       return;
     }
     code.remove(code.last);
-    regin.remove(regin.last);
+    region.remove(region.last);
 
     if (code.isNotEmpty) {
       currCode = code.last;
@@ -298,6 +353,56 @@ class _RegionWidgetState extends State<RegionWidget> {
       currCode = "";
     }
     loadData();
+  }
+
+  Future<void> onLocationPressed() async {
+    if (widget.location == null) {
+      return;
+    }
+    final region = await widget.location!();
+    if (region == null) {
+      return;
+    }
+    jumpTo(region);
+  }
+
+  void jumpTo(String region) {
+    if (region.isEmpty) {
+      return;
+    }
+    final arr = region.split("/");
+    if (arr.isEmpty) {
+      return;
+    }
+
+    String tempCode = "";
+    for (var v in arr) {
+      for (var v1 in link) {
+        final brr = v1.split("_");
+        if (brr.length != 3) {
+          return;
+        }
+        final name = brr[1];
+        final code = brr[2];
+        if (v == name) {
+          if (tempCode.isNotEmpty) {
+            if (code.startsWith(tempCode)) {
+              tempCode = code.replaceAll(RegExp(r'0+$'), '');
+              //高亮
+              jumpCode = code;
+              loadUiData(name, code);
+              continue;
+            }
+          } else {
+            tempCode = code.replaceAll(RegExp(r'0+$'), '');
+            loadUiData(name, code);
+            continue;
+          }
+        }
+      }
+    }
+    //退一级
+    onBackTap();
   }
 }
 

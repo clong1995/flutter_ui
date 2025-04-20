@@ -4,16 +4,18 @@ import 'src/region_widget.dart';
 
 Future<List<Region>?> region(
   BuildContext context, {
-  String? code,
+  String? region, //如：山东省/青岛市/黄岛区
+  Future<String?> Function()? location, //如：返回 山东省/青岛市/黄岛区
   bool rootNavigator = false,
 }) async {
-  return await Navigator.of(context, rootNavigator: rootNavigator)
-      .push<List<Region>>(
+  return await Navigator.of(
+    context,
+    rootNavigator: rootNavigator,
+  ).push<List<Region>>(
     MaterialPageRoute<List<Region>>(
-      builder: (BuildContext context) => const RegionWidget(),
-      settings: RouteSettings(
-        arguments: code,
-      ),
+      builder:
+          (BuildContext context) =>
+              RegionWidget(region: region, location: location),
     ),
   );
 }

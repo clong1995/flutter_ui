@@ -1,6 +1,6 @@
 name: ui_map
 description: "A new Flutter project."
-version: 0.0.1
+version: 0.1.0
 homepage: flutter_ui
 publish_to: none
 
@@ -11,10 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # TODO 这个库太大了，有时间把拼音内置进来
   pinyin: ^3.3.0
   alphabet_list_view: ^1.1.4
-  geolocator: ^13.0.3
+  geolocator: ^14.0.0
   ui_webview:
     git:
       url: https://github.com/clong1995/flutter_ui.git
