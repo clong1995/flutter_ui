@@ -1,16 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import '../distance.dart';
 
 import '../address.dart';
 
 class AddressWidget extends StatefulWidget {
   final Future<List<Address>> Function(String keyword) datasource;
+  final Future<List<double>?> Function()? location;
 
-  const AddressWidget({
-    super.key,
-    required this.datasource,
-  });
+  const AddressWidget({super.key, required this.datasource, this.location});
 
   @override
   State<AddressWidget> createState() => _AddressWidgetState();
@@ -22,12 +21,18 @@ class _AddressWidgetState extends State<AddressWidget> {
   TextEditingController controller = TextEditingController();
 
   List<Address> list = [];
+  List<double>? lonLat;
   Timer? debounce;
   int lastRequestTime = 0;
 
   @override
   void initState() {
     super.initState();
+    if (widget.location != null) {
+      widget.location!().then((value) {
+        lonLat = value;
+      });
+    }
     controller.addListener(onInputChanged);
   }
 
@@ -41,9 +46,7 @@ class _AddressWidgetState extends State<AddressWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("搜索地址"),
-      ),
+      appBar: AppBar(title: const Text("搜索地址")),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
@@ -63,11 +66,10 @@ class _AddressWidgetState extends State<AddressWidget> {
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: borderSide.copyWith(
-                        color: borderSide.color.withAlpha(124)),
+                      color: borderSide.color.withAlpha(124),
+                    ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: borderSide,
-                  ),
+                  focusedBorder: OutlineInputBorder(borderSide: borderSide),
                   contentPadding: const EdgeInsets.symmetric(
                     horizontal: 8,
                     vertical: 8,
@@ -94,9 +96,7 @@ class _AddressWidgetState extends State<AddressWidget> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
                 itemCount: list.length,
@@ -106,16 +106,14 @@ class _AddressWidgetState extends State<AddressWidget> {
                     color: Colors.white,
                     margin: const EdgeInsets.only(bottom: 8),
                     child: InkWell(
-                      onTap: ()=>onAddressTap(address),
+                      onTap: () => onAddressTap(address),
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 8, 10, 8),
                         child: Row(
                           children: [
                             SizedBox(
                               width: 40,
-                              child: Center(
-                                child: Text("${index + 1}"),
-                              ),
+                              child: Center(child: Text("${index + 1}")),
                             ),
                             Expanded(
                               child: Column(
@@ -130,28 +128,30 @@ class _AddressWidgetState extends State<AddressWidget> {
                                         ),
                                       ),
                                       const SizedBox(width: 10),
-                                      const Icon(Icons.route, size: 14, color: Color(0xFF757575)),
-                                      const Text(
-                                        "xxx km",
-                                        style: TextStyle(
-                                          fontSize: 11,
+                                      if (widget.location != null)
+                                        const Icon(
+                                          Icons.route,
+                                          size: 14,
                                           color: Color(0xFF757575),
                                         ),
-                                      ),
+                                      if (widget.location != null)
+                                        Text(
+                                          "${getDistance(address.lonLat)} km",
+                                          style: const TextStyle(
+                                            fontSize: 11,
+                                            color: Color(0xFF757575),
+                                          ),
+                                        ),
                                     ],
                                   ),
                                   const SizedBox(height: 5),
-                                  Text(
-                                    address.address,
-                                  ),
+                                  Text(address.address),
                                 ],
                               ),
                             ),
                             Text(
                               address.typeName,
-                              style: const TextStyle(
-                                color: Color(0xFF9E9E9E),
-                              ),
+                              style: const TextStyle(color: Color(0xFF9E9E9E)),
                             ),
                           ],
                         ),
@@ -184,7 +184,14 @@ class _AddressWidgetState extends State<AddressWidget> {
     });
   }
 
-  void onAddressTap(Address address){
+  String getDistance(List<double> lonLat) {
+    if (this.lonLat == null) {
+      return "";
+    }
+    return (distance(this.lonLat!, lonLat) / 1000).toStringAsFixed(2);
+  }
+
+  void onAddressTap(Address address) {
     Navigator.pop<Address?>(context, address);
   }
 }

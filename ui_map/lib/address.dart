@@ -6,13 +6,16 @@ Future<Address?> address(
   BuildContext context, {
   required Future<List<Address>> Function(String keyword) datasource,
   bool rootNavigator = false,
+  Future<List<double>?> Function()? location,
 }) async {
   return await Navigator.of(
     context,
     rootNavigator: rootNavigator,
   ).push<Address>(
     MaterialPageRoute<Address>(
-      builder: (BuildContext context) => AddressWidget(datasource: datasource),
+      builder:
+          (BuildContext context) =>
+              AddressWidget(datasource: datasource, location: location),
     ),
   );
 }
