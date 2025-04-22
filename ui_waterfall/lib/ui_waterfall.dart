@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 
 class UiWaterfall<T> extends StatefulWidget {
   final double? spacing;
-  final double width;
   final List<UiWaterfallItem<T>> data;
   final Widget Function(T? data) itemBuilder;
 
@@ -12,7 +11,6 @@ class UiWaterfall<T> extends StatefulWidget {
     required this.data,
     required this.itemBuilder,
     this.spacing,
-    required this.width,
   });
 
   @override
@@ -20,7 +18,7 @@ class UiWaterfall<T> extends StatefulWidget {
 }
 
 class _UiWaterfallState<T> extends State<UiWaterfall<T>> {
-  late double width;
+  // late double width;
   late double spacing;
   late ScrollController leftScrollController;
   late ScrollController rightScrollController;
@@ -29,7 +27,6 @@ class _UiWaterfallState<T> extends State<UiWaterfall<T>> {
   void initState() {
     super.initState();
     spacing = widget.spacing ?? 5;
-    width = (widget.width - (spacing * 3)) / 2;
     LinkedScrollControllerGroup linkedScrollControllerGroup =
         LinkedScrollControllerGroup();
     leftScrollController = linkedScrollControllerGroup.addAndGet();
@@ -70,48 +67,76 @@ class _UiWaterfallState<T> extends State<UiWaterfall<T>> {
       rightData.add(UiWaterfallItem(height: emptyHeight));
     }
 
-    return Row(
-      children: [
-        SizedBox(width: spacing),
-        SizedBox(
-          width: width,
-          child: listView(controller: leftScrollController, listData: leftData),
+    return CustomScrollView(
+      physics: const AlwaysScrollableScrollPhysics(
+        parent: BouncingScrollPhysics(),
+      ),
+      slivers: [
+        CupertinoSliverRefreshControl(onRefresh: () async {}),
+        SliverList(
+          delegate: SliverChildBuilderDelegate((context, index) {
+            final item = widget.data[index];
+            return Row(
+              children: [
+                SizedBox(
+                  width: item.width,
+                  height: item.height,
+                  child: widget.itemBuilder(item.data),
+                ),
+              ],
+            );
+          }, childCount: (widget.data.length / 2).ceil()),
         ),
-        SizedBox(width: spacing),
-        SizedBox(
-          width: width,
-          child: listView(
-            controller: rightScrollController,
-            listData: rightData,
-          ),
-        ),
-        SizedBox(width: spacing),
       ],
     );
+
+    /*Row(
+          children: [
+            SizedBox(
+              width: width,
+              child: listView(
+                controller: leftScrollController,
+                listData: leftData,
+              ),
+            ),
+            SizedBox(width: spacing),
+            SizedBox(
+              width: width,
+              child: listView(
+                controller: rightScrollController,
+                listData: rightData,
+              ),
+            ),
+          ],
+        );*/
   }
 
-  ListView listView({
+  Widget listView({
     required ScrollController controller,
     required List<UiWaterfallItem<T>> listData,
-  }) => ListView.separated(
-    padding: EdgeInsets.zero,
-    controller: controller,
-    itemBuilder: (BuildContext context, int index) {
-      UiWaterfallItem<T> item = listData[index];
-      return SizedBox(
-        height: item.height,
-        child: widget.itemBuilder(item.data),
-      );
-    },
-    separatorBuilder:
-        (BuildContext context, int index) => SizedBox(height: spacing),
-    itemCount: listData.length,
+  }) => ScrollConfiguration(
+    behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+    child: ListView.separated(
+      padding: EdgeInsets.zero,
+      controller: controller,
+      itemBuilder: (BuildContext context, int index) {
+        UiWaterfallItem<T> item = listData[index];
+        return SizedBox(
+          height: item.height,
+          child: widget.itemBuilder(item.data),
+        );
+      },
+      separatorBuilder:
+          (BuildContext context, int index) => SizedBox(height: spacing),
+      itemCount: listData.length,
+    ),
   );
 }
 
 class UiWaterfallItem<T> {
+  double width;
   double height;
   T? data;
 
-  UiWaterfallItem({required this.height, this.data});
+  UiWaterfallItem({required this.width, required this.height, this.data});
 }
