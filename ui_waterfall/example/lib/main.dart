@@ -28,18 +28,18 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: UiWaterfall<Color>(
+      body: UiWaterfall<String>(
         data: [
-          UiWaterfallItem(height: 100, data: Colors.red),
-          UiWaterfallItem(height: 120, data: Colors.green),
-          UiWaterfallItem(height: 90, data: Colors.blue),
-          UiWaterfallItem(height: 130, data: Colors.yellow),
-          UiWaterfallItem(height: 100, data: Colors.orange),
-          UiWaterfallItem(height: 110, data: Colors.pink),
-          UiWaterfallItem(height: 120, data: Colors.grey),
-          UiWaterfallItem(height: 100, data: Colors.amber),
+          "https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/1_s_958x1280.png",
+          "https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/2_s_598x335.png",
+          "https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/3_s_889x500.png",
+          "https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/4_s_500x750.png",
+          "https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/5_s_750x500.png",
+          "https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/6_s_960x1280.png",
+          "https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/7_s_500x332.png",
+          "https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/8_s_690x1227.png",
         ],
-        itemBuilder: (data) => Container(color: data),
+        itemBuilder: (data) => Image.network(data, fit: BoxFit.fitWidth),
       ),
     );
   }
