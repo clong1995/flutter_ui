@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: UiWaterfall<Data>(
         data: data,
-        itemBuilder: (data) => itemWidget(data),
+        itemBuilder: (e) => itemWidget(e),
       ),
     );
   }
