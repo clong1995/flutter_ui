@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 
-class UiWaterfall<T extends UiWaterfallItem> extends StatefulWidget {
+class UiWaterfall<UiWaterfallItem> extends StatefulWidget {
   final int crossAxisCount;
   final double mainAxisSpacing;
   final double crossAxisSpacing;
-  final List<T> data;
+  final List<UiWaterfallItem> data;
 
   //如果有网络加载的图片
   //图片地址最好为 : https://www.abc.com/xxx_s_958x1280.png
   //其中 958 和 1280 是图片的尺寸，在builder的时候，算出比例使用 AspectRatio 提前设置图片尺寸和位置
   //达到实现高性能布局，防止因为图片加载而引起的多次全局重绘
-  final Widget Function(T data) itemBuilder;
+  final Widget Function(UiWaterfallItem data) itemBuilder;
 
   const UiWaterfall({
     super.key,
@@ -22,25 +22,25 @@ class UiWaterfall<T extends UiWaterfallItem> extends StatefulWidget {
   });
 
   @override
-  State<UiWaterfall<T>> createState() => _UiWaterfallState<T>();
+  State<UiWaterfall<UiWaterfallItem>> createState() => _UiWaterfallState<UiWaterfallItem>();
 }
 
-class _UiWaterfallState<T extends UiWaterfallItem>
-    extends State<UiWaterfall<T>> {
+class _UiWaterfallState<UiWaterfallItem>
+    extends State<UiWaterfall<UiWaterfallItem>> {
   List<SizedBox> virtualColumn = [];
-  List<_ChildCol<T>> fallColumns = [];
+  List<_ChildCol<UiWaterfallItem>> fallColumns = [];
 
   @override
   void initState() {
     super.initState();
     //实际列
-    fallColumns = List.generate(widget.crossAxisCount, (_) => _ChildCol<T>());
+    fallColumns = List.generate(widget.crossAxisCount, (_) => _ChildCol<UiWaterfallItem>());
     //虚拟列
     virtualWidget(widget.data);
   }
 
   @override
-  void didUpdateWidget(covariant UiWaterfall<T> oldWidget) {
+  void didUpdateWidget(covariant UiWaterfall<UiWaterfallItem> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.crossAxisCount != widget.crossAxisCount ||
         oldWidget.mainAxisSpacing != widget.mainAxisSpacing ||
@@ -53,7 +53,7 @@ class _UiWaterfallState<T extends UiWaterfallItem>
         //需要清空所有数据重新布局，计算压力很大
         fallColumns = List.generate(
           widget.crossAxisCount,
-          (_) => _ChildCol<T>(),
+              (_) => _ChildCol<UiWaterfallItem>(),
         );
         //虚拟列
         virtualWidget(widget.data);
@@ -85,26 +85,26 @@ class _UiWaterfallState<T extends UiWaterfallItem>
   }
 
   //在 list1 但不在 list2 的元素
-  List<T> diff(List<T> list1, List<T> list2) {
+  List<UiWaterfallItem> diff(List<UiWaterfallItem> list1, List<UiWaterfallItem> list2) {
     return list1
         .where((item1) => !list2.any((item2) => item2.id == item1.id))
         .toList();
   }
 
   //生成虚拟列
-  void virtualWidget(List<T> data) {
+  void virtualWidget(List<UiWaterfallItem> data) {
     List<GlobalKey> virtualKeys = List.generate(
       data.length,
-      (_) => GlobalKey(),
+          (_) => GlobalKey(),
     );
     virtualColumn =
         data.indexed
             .map(
               (e) => SizedBox(
-                key: virtualKeys[e.$1],
-                child: widget.itemBuilder(e.$2),
-              ),
-            )
+            key: virtualKeys[e.$1],
+            child: widget.itemBuilder(e.$2),
+          ),
+        )
             .toList();
 
     //计算尺寸
@@ -112,7 +112,7 @@ class _UiWaterfallState<T extends UiWaterfallItem>
       for (int i = 0; i < virtualKeys.length; i++) {
         final key = virtualKeys[i];
         final RenderBox? box =
-            key.currentContext?.findRenderObject() as RenderBox?;
+        key.currentContext?.findRenderObject() as RenderBox?;
 
         final size = box?.size ?? Size.zero;
 
@@ -139,13 +139,13 @@ class _UiWaterfallState<T extends UiWaterfallItem>
         child: LayoutBuilder(
           builder:
               (context, constraints) => SizedBox(
-                width:
-                    (constraints.maxWidth / widget.crossAxisCount) -
-                    ((widget.crossAxisCount - 1) * widget.mainAxisSpacing) / 2,
-                child: SingleChildScrollView(
-                  child: Column(children: virtualColumn),
-                ),
-              ),
+            width:
+            (constraints.maxWidth / widget.crossAxisCount) -
+                ((widget.crossAxisCount - 1) * widget.mainAxisSpacing) / 2,
+            child: SingleChildScrollView(
+              child: Column(children: virtualColumn),
+            ),
+          ),
         ),
       ),
       CustomScrollView(
@@ -168,7 +168,7 @@ class _UiWaterfallState<T extends UiWaterfallItem>
                 return SliverList(
                   key: ValueKey("${widget.crossAxisCount}-$col"),
                   delegate: SliverChildBuilderDelegate(
-                    (context, row) => Padding(
+                        (context, row) => Padding(
                       key: ValueKey(column[row].data.id),
                       padding: EdgeInsets.only(bottom: widget.crossAxisSpacing),
                       child: widget.itemBuilder(column[row].data),
@@ -184,7 +184,7 @@ class _UiWaterfallState<T extends UiWaterfallItem>
     ],
   );
 
-  _ChildCol<T> colIndex(List<_ChildCol<T>> childCols) {
+  _ChildCol<UiWaterfallItem> colIndex(List<_ChildCol<UiWaterfallItem>> childCols) {
     int minIndex = 0;
     for (int i = 1; i < childCols.length; i++) {
       if (childCols[i].height < childCols[minIndex].height) {
@@ -195,8 +195,9 @@ class _UiWaterfallState<T extends UiWaterfallItem>
   }
 }
 
-class UiWaterfallItem {
+class UiWaterfallItem<T> {
   String id = "";
+  late T data;
 }
 
 /*class _VirtualChild {
@@ -204,13 +205,13 @@ class UiWaterfallItem {
   late GlobalKey key;
 }*/
 
-class _Child<T extends UiWaterfallItem> {
+class _Child<UiWaterfallItem> {
   Size size = Size.zero;
-  late T data;
+  late UiWaterfallItem data;
 }
 
-class _ChildCol<T extends UiWaterfallItem> {
+class _ChildCol<UiWaterfallItem> {
   double get height =>
       list.map((e) => e.size.height).fold(0, (prev, current) => prev + current);
-  final List<_Child<T>> list = [];
+  final List<_Child<UiWaterfallItem>> list = [];
 }
