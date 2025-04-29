@@ -1,6 +1,6 @@
 name: ui_waterfall
 description: "A new Flutter project."
-version: 0.0.3
+version: 0.1.0
 homepage: flutter_ui
 
 environment:
@@ -10,7 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  linked_scroll_controller: ^0.2.0
 
 dev_dependencies:
   flutter_test:
