@@ -196,9 +196,7 @@ class _UiWaterfallState<T extends UiWaterfallItem>
 }
 
 class UiWaterfallItem {
-  String id;
-
-  UiWaterfallItem(this.id);
+  String id = "";
 }
 
 /*class _VirtualChild {
