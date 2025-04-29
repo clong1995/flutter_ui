@@ -27,15 +27,16 @@ class UiWaterfall<T extends UiWaterfallItem> extends StatefulWidget {
 
 class _UiWaterfallState<T extends UiWaterfallItem>
     extends State<UiWaterfall<T>> {
-  List<_Child> childKeys = [];
   List<SizedBox> virtualColumn = [];
   List<_ChildCol<T>> fallColumns = [];
 
   @override
   void initState() {
     super.initState();
-    loadData();
-    WidgetsBinding.instance.addPostFrameCallback(layout);
+    //实际列
+    fallColumns = List.generate(widget.crossAxisCount, (_) => _ChildCol<T>());
+    //虚拟列
+    virtualWidget(widget.data);
   }
 
   @override
@@ -46,50 +47,88 @@ class _UiWaterfallState<T extends UiWaterfallItem>
         oldWidget.crossAxisSpacing != widget.crossAxisSpacing ||
         oldWidget.itemBuilder != widget.itemBuilder ||
         oldWidget.data != widget.data) {
-      loadData();
-      WidgetsBinding.instance.addPostFrameCallback(layout);
+      if (oldWidget.crossAxisCount != widget.crossAxisCount) {
+        //全量
+        //列数量变话
+        //需要清空所有数据重新布局，计算压力很大
+        fallColumns = List.generate(
+          widget.crossAxisCount,
+          (_) => _ChildCol<T>(),
+        );
+        //虚拟列
+        virtualWidget(widget.data);
+      } else {
+        //增量
+
+        //在旧的(oldWidget)中但不在新的(widget)中的元素
+        //减少的
+        final reduce = diff(oldWidget.data, widget.data);
+        //删除减少的
+        for (var cols in fallColumns) {
+          final ids = reduce.map((e) => e.id).toList();
+          removeItems(cols.list, ids);
+        }
+
+        //在新的(widget)中但不在旧的(oldWidget)中的元素
+        //增加的
+        final increase = diff(widget.data, oldWidget.data);
+        //增加增加的
+        virtualWidget(increase);
+      }
       setState(() {});
     }
   }
 
-  void loadData() {
-    //
-    fallColumns = List.generate(widget.crossAxisCount, (_) => _ChildCol<T>());
-    //
-    childKeys = List.generate(
-      widget.data.length,
-      (_) => _Child()..key = GlobalKey(),
+  void removeItems(List<_Child> list, List<String> keys) {
+    final idsSet = keys.toSet();
+    list.removeWhere((item) => idsSet.contains(item.data.id));
+  }
+
+  //在 list1 但不在 list2 的元素
+  List<T> diff(List<T> list1, List<T> list2) {
+    return list1
+        .where((item1) => !list2.any((item2) => item2.id == item1.id))
+        .toList();
+  }
+
+  //生成虚拟列
+  void virtualWidget(List<T> data) {
+    List<GlobalKey> virtualKeys = List.generate(
+      data.length,
+      (_) => GlobalKey(),
     );
     virtualColumn =
-        widget.data.indexed
+        data.indexed
             .map(
               (e) => SizedBox(
-                key: childKeys[e.$1].key,
+                key: virtualKeys[e.$1],
                 child: widget.itemBuilder(e.$2),
               ),
             )
             .toList();
-  }
 
-  void layout(Duration duration) {
-    for (int i = 0; i < childKeys.length; i++) {
-      final _Child child = childKeys[i];
-      final RenderBox? box =
-          child.key.currentContext?.findRenderObject() as RenderBox?;
-      if (box != null) {
-        child.size = box.size;
+    //计算尺寸
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      for (int i = 0; i < virtualKeys.length; i++) {
+        final key = virtualKeys[i];
+        final RenderBox? box =
+            key.currentContext?.findRenderObject() as RenderBox?;
+
+        final size = box?.size ?? Size.zero;
+
+        final shortCol = colIndex(fallColumns);
+        //这里可能需要去重
+        shortCol.list.add(
+          _Child()
+            ..data = data[i]
+            ..size = size,
+        );
       }
-
-      //找到最小的那列
-      final col = colIndex(fallColumns);
-      col.height += child.size.height;
-      col.list.add(widget.data[i]);
-    }
-    //释放布局资源
-    virtualColumn = [];
-    childKeys.clear();
-
-    setState(() {});
+      //释放布局资源
+      virtualColumn = [];
+      virtualKeys.clear();
+      setState(() {});
+    });
   }
 
   @override
@@ -127,12 +166,12 @@ class _UiWaterfallState<T extends UiWaterfallItem>
               } else {
                 final column = fallColumns[(col / 2).toInt()].list;
                 return SliverList(
-                  // key: ValueKey("${widget.crossAxisCount}-$col"),
+                  key: ValueKey("${widget.crossAxisCount}-$col"),
                   delegate: SliverChildBuilderDelegate(
                     (context, row) => Padding(
-                      key: ValueKey(column[row].key),
+                      key: ValueKey(column[row].data.id),
                       padding: EdgeInsets.only(bottom: widget.crossAxisSpacing),
-                      child: widget.itemBuilder(column[row]),
+                      child: widget.itemBuilder(column[row].data),
                     ),
                     childCount: column.length,
                   ),
@@ -157,17 +196,23 @@ class _UiWaterfallState<T extends UiWaterfallItem>
 }
 
 class UiWaterfallItem {
-  dynamic key;
+  String id;
 
-  UiWaterfallItem(this.key);
+  UiWaterfallItem(this.id);
 }
 
-class _Child {
+/*class _VirtualChild {
   Size size = Size.zero;
   late GlobalKey key;
+}*/
+
+class _Child<T extends UiWaterfallItem> {
+  Size size = Size.zero;
+  late T data;
 }
 
-class _ChildCol<T> {
-  double height = 0;
-  final List<T> list = [];
+class _ChildCol<T extends UiWaterfallItem> {
+  double get height =>
+      list.map((e) => e.size.height).fold(0, (prev, current) => prev + current);
+  final List<_Child<T>> list = [];
 }
