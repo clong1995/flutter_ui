@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
-class UiWaterfall<T extends UiWaterfallItem> extends StatefulWidget {
+class UiWaterfall<T> extends StatefulWidget {
   final int crossAxisCount;
   final double mainAxisSpacing;
   final double crossAxisSpacing;
-  final List<T> data;
+  final List<UiWaterfallItem<T>> data;
 
   //如果有网络加载的图片
   //图片地址最好为 : https://www.abc.com/xxx_s_958x1280.png
@@ -25,7 +25,7 @@ class UiWaterfall<T extends UiWaterfallItem> extends StatefulWidget {
   State<UiWaterfall<T>> createState() => _UiWaterfallState<T>();
 }
 
-class _UiWaterfallState<T extends UiWaterfallItem>
+class _UiWaterfallState<T>
     extends State<UiWaterfall<T>> {
   List<SizedBox> virtualColumn = [];
   List<_ChildCol<T>> fallColumns = [];
@@ -85,14 +85,14 @@ class _UiWaterfallState<T extends UiWaterfallItem>
   }
 
   //在 list1 但不在 list2 的元素
-  List<T> diff(List<T> list1, List<T> list2) {
+  List<UiWaterfallItem<T>> diff(List<UiWaterfallItem<T>> list1, List<UiWaterfallItem<T>> list2) {
     return list1
         .where((item1) => list2.any((item2) => item2.id == item1.id))
         .toList();
   }
 
   //生成虚拟列
-  void virtualWidget(List<T> data) {
+  void virtualWidget(List<UiWaterfallItem<T>> data) {
     List<GlobalKey> virtualKeys = List.generate(
       data.length,
           (_) => GlobalKey(),
@@ -102,7 +102,7 @@ class _UiWaterfallState<T extends UiWaterfallItem>
             .map(
               (e) => SizedBox(
             key: virtualKeys[e.$1],
-            child: widget.itemBuilder(e.$2),
+            child: widget.itemBuilder(e.$2.data),
           ),
         )
             .toList();
@@ -120,7 +120,7 @@ class _UiWaterfallState<T extends UiWaterfallItem>
         //这里可能需要去重
         shortCol.list.add(
           _Child()
-            ..data = data[i]
+            ..data = data[i].data
             ..size = size,
         );
       }
@@ -169,7 +169,7 @@ class _UiWaterfallState<T extends UiWaterfallItem>
                   key: ValueKey("${widget.crossAxisCount}-$col"),
                   delegate: SliverChildBuilderDelegate(
                         (context, row) => Padding(
-                      key: ValueKey(column[row].data.id),
+                      key: ValueKey(column[row].data),
                       padding: EdgeInsets.only(bottom: widget.crossAxisSpacing),
                       child: widget.itemBuilder(column[row].data),
                     ),
@@ -197,6 +197,7 @@ class _UiWaterfallState<T extends UiWaterfallItem>
 
 class UiWaterfallItem<T> {
   String id = "";
+  late T data;
 }
 
 
