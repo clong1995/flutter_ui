@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 
-class UiWaterfall<UiWaterfallItem> extends StatefulWidget {
+class UiWaterfall<T extends UiWaterfallItem> extends StatefulWidget {
   final int crossAxisCount;
   final double mainAxisSpacing;
   final double crossAxisSpacing;
-  final List<UiWaterfallItem> data;
+  final List<T> data;
 
   //如果有网络加载的图片
   //图片地址最好为 : https://www.abc.com/xxx_s_958x1280.png
   //其中 958 和 1280 是图片的尺寸，在builder的时候，算出比例使用 AspectRatio 提前设置图片尺寸和位置
   //达到实现高性能布局，防止因为图片加载而引起的多次全局重绘
-  final Widget Function(UiWaterfallItem data) itemBuilder;
+  final Widget Function(T data) itemBuilder;
 
   const UiWaterfall({
     super.key,
@@ -22,25 +22,25 @@ class UiWaterfall<UiWaterfallItem> extends StatefulWidget {
   });
 
   @override
-  State<UiWaterfall<UiWaterfallItem>> createState() => _UiWaterfallState<UiWaterfallItem>();
+  State<UiWaterfall<T>> createState() => _UiWaterfallState<T>();
 }
 
-class _UiWaterfallState<UiWaterfallItem>
-    extends State<UiWaterfall<UiWaterfallItem>> {
+class _UiWaterfallState<T extends UiWaterfallItem>
+    extends State<UiWaterfall<T>> {
   List<SizedBox> virtualColumn = [];
-  List<_ChildCol<UiWaterfallItem>> fallColumns = [];
+  List<_ChildCol<T>> fallColumns = [];
 
   @override
   void initState() {
     super.initState();
     //实际列
-    fallColumns = List.generate(widget.crossAxisCount, (_) => _ChildCol<UiWaterfallItem>());
+    fallColumns = List.generate(widget.crossAxisCount, (_) => _ChildCol<T>());
     //虚拟列
     virtualWidget(widget.data);
   }
 
   @override
-  void didUpdateWidget(covariant UiWaterfall<UiWaterfallItem> oldWidget) {
+  void didUpdateWidget(covariant UiWaterfall<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.crossAxisCount != widget.crossAxisCount ||
         oldWidget.mainAxisSpacing != widget.mainAxisSpacing ||
@@ -53,7 +53,7 @@ class _UiWaterfallState<UiWaterfallItem>
         //需要清空所有数据重新布局，计算压力很大
         fallColumns = List.generate(
           widget.crossAxisCount,
-              (_) => _ChildCol<UiWaterfallItem>(),
+              (_) => _ChildCol<T>(),
         );
         //虚拟列
         virtualWidget(widget.data);
@@ -85,14 +85,14 @@ class _UiWaterfallState<UiWaterfallItem>
   }
 
   //在 list1 但不在 list2 的元素
-  List<UiWaterfallItem> diff(List<UiWaterfallItem> list1, List<UiWaterfallItem> list2) {
+  List<T> diff(List<T> list1, List<T> list2) {
     return list1
-        .where((item1) => !list2.any((item2) => item2.id == item1.id))
+        .where((item1) => list2.any((item2) => item2.id == item1.id))
         .toList();
   }
 
   //生成虚拟列
-  void virtualWidget(List<UiWaterfallItem> data) {
+  void virtualWidget(List<T> data) {
     List<GlobalKey> virtualKeys = List.generate(
       data.length,
           (_) => GlobalKey(),
@@ -184,7 +184,7 @@ class _UiWaterfallState<UiWaterfallItem>
     ],
   );
 
-  _ChildCol<UiWaterfallItem> colIndex(List<_ChildCol<UiWaterfallItem>> childCols) {
+  _ChildCol<T> colIndex(List<_ChildCol<T>> childCols) {
     int minIndex = 0;
     for (int i = 1; i < childCols.length; i++) {
       if (childCols[i].height < childCols[minIndex].height) {
@@ -197,13 +197,8 @@ class _UiWaterfallState<UiWaterfallItem>
 
 class UiWaterfallItem<T> {
   String id = "";
-  late T data;
 }
 
-/*class _VirtualChild {
-  Size size = Size.zero;
-  late GlobalKey key;
-}*/
 
 class _Child<UiWaterfallItem> {
   Size size = Size.zero;
