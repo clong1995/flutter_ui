@@ -30,7 +30,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final RegExp regExp = RegExp(r'_([\d]+)x([\d]+)\.$');
+  final RegExp regExp = RegExp(r'_(\d+)x(\d+)\.$');
 
   List<UiWaterfallItem<Data>> data = [
     UiWaterfallItem()
