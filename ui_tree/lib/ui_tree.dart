@@ -16,9 +16,9 @@ class UiTree<T> extends StatefulWidget {
 
   const UiTree({
     super.key,
+    this.indent = 10.0,
     required this.data,
     required this.itemBuilder,
-    this.indent = 10.0,
     this.onTap,
   });
 
