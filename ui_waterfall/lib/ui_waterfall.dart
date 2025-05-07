@@ -25,8 +25,7 @@ class UiWaterfall<T> extends StatefulWidget {
   State<UiWaterfall<T>> createState() => _UiWaterfallState<T>();
 }
 
-class _UiWaterfallState<T>
-    extends State<UiWaterfall<T>> {
+class _UiWaterfallState<T> extends State<UiWaterfall<T>> {
   List<SizedBox> virtualColumn = [];
   List<_ChildCol<T>> fallColumns = [];
 
@@ -42,41 +41,8 @@ class _UiWaterfallState<T>
   @override
   void didUpdateWidget(covariant UiWaterfall<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.crossAxisCount != widget.crossAxisCount ||
-        oldWidget.mainAxisSpacing != widget.mainAxisSpacing ||
-        oldWidget.crossAxisSpacing != widget.crossAxisSpacing ||
-        oldWidget.itemBuilder != widget.itemBuilder ||
-        oldWidget.data != widget.data) {
-      if (oldWidget.crossAxisCount != widget.crossAxisCount) {
-        //全量
-        //列数量变话
-        //需要清空所有数据重新布局，计算压力很大
-        fallColumns = List.generate(
-          widget.crossAxisCount,
-              (_) => _ChildCol<T>(),
-        );
-        //虚拟列
-        virtualWidget(widget.data);
-      } else {
-        //增量
-
-        //在旧的(oldWidget)中但不在新的(widget)中的元素
-        //减少的
-        final reduce = diff(oldWidget.data, widget.data);
-        //删除减少的
-        for (var cols in fallColumns) {
-          final ids = reduce.map((e) => e.id).toList();
-          removeItems(cols.list, ids);
-        }
-
-        //在新的(widget)中但不在旧的(oldWidget)中的元素
-        //增加的
-        final increase = diff(widget.data, oldWidget.data);
-        //增加增加的
-        virtualWidget(increase);
-      }
-      setState(() {});
-    }
+    fallColumns = List.generate(widget.crossAxisCount, (_) => _ChildCol<T>());
+    virtualWidget(widget.data);
   }
 
   void removeItems(List<_Child> list, List<String> keys) {
@@ -85,7 +51,10 @@ class _UiWaterfallState<T>
   }
 
   //在 list1 但不在 list2 的元素
-  List<UiWaterfallItem<T>> diff(List<UiWaterfallItem<T>> list1, List<UiWaterfallItem<T>> list2) {
+  List<UiWaterfallItem<T>> diff(
+    List<UiWaterfallItem<T>> list1,
+    List<UiWaterfallItem<T>> list2,
+  ) {
     return list1
         .where((item1) => list2.any((item2) => item2.id == item1.id))
         .toList();
@@ -95,16 +64,16 @@ class _UiWaterfallState<T>
   void virtualWidget(List<UiWaterfallItem<T>> data) {
     List<GlobalKey> virtualKeys = List.generate(
       data.length,
-          (_) => GlobalKey(),
+      (_) => GlobalKey(),
     );
     virtualColumn =
         data.indexed
             .map(
               (e) => SizedBox(
-            key: virtualKeys[e.$1],
-            child: widget.itemBuilder(e.$2.data),
-          ),
-        )
+                key: virtualKeys[e.$1],
+                child: widget.itemBuilder(e.$2.data),
+              ),
+            )
             .toList();
 
     //计算尺寸
@@ -112,7 +81,7 @@ class _UiWaterfallState<T>
       for (int i = 0; i < virtualKeys.length; i++) {
         final key = virtualKeys[i];
         final RenderBox? box =
-        key.currentContext?.findRenderObject() as RenderBox?;
+            key.currentContext?.findRenderObject() as RenderBox?;
 
         final size = box?.size ?? Size.zero;
 
@@ -139,13 +108,13 @@ class _UiWaterfallState<T>
         child: LayoutBuilder(
           builder:
               (context, constraints) => SizedBox(
-            width:
-            (constraints.maxWidth / widget.crossAxisCount) -
-                ((widget.crossAxisCount - 1) * widget.mainAxisSpacing) / 2,
-            child: SingleChildScrollView(
-              child: Column(children: virtualColumn),
-            ),
-          ),
+                width:
+                    (constraints.maxWidth / widget.crossAxisCount) -
+                    ((widget.crossAxisCount - 1) * widget.mainAxisSpacing) / 2,
+                child: SingleChildScrollView(
+                  child: Column(children: virtualColumn),
+                ),
+              ),
         ),
       ),
       CustomScrollView(
@@ -168,7 +137,7 @@ class _UiWaterfallState<T>
                 return SliverList(
                   key: ValueKey("${widget.crossAxisCount}-$col"),
                   delegate: SliverChildBuilderDelegate(
-                        (context, row) => Padding(
+                    (context, row) => Padding(
                       key: ValueKey(column[row].data),
                       padding: EdgeInsets.only(bottom: widget.crossAxisSpacing),
                       child: widget.itemBuilder(column[row].data),
@@ -199,7 +168,6 @@ class UiWaterfallItem<T> {
   String id = "";
   late T data;
 }
-
 
 class _Child<UiWaterfallItem> {
   Size size = Size.zero;
