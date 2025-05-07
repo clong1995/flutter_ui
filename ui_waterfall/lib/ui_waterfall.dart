@@ -45,20 +45,20 @@ class _UiWaterfallState<T> extends State<UiWaterfall<T>> {
     virtualWidget(widget.data);
   }
 
-  void removeItems(List<_Child> list, List<String> keys) {
+  /*void removeItems(List<_Child> list, List<String> keys) {
     final idsSet = keys.toSet();
     list.removeWhere((item) => idsSet.contains(item.data.id));
-  }
+  }*/
 
   //在 list1 但不在 list2 的元素
-  List<UiWaterfallItem<T>> diff(
+  /*List<UiWaterfallItem<T>> diff(
     List<UiWaterfallItem<T>> list1,
     List<UiWaterfallItem<T>> list2,
   ) {
     return list1
         .where((item1) => list2.any((item2) => item2.id == item1.id))
         .toList();
-  }
+  }*/
 
   //生成虚拟列
   void virtualWidget(List<UiWaterfallItem<T>> data) {
