@@ -79,9 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: UiTree<Data>(
         data: data,
-        itemBuilder:
-            (e, length, level, expand, selected) =>
-                itemBuilder(e, length, level, expand, selected),
+        itemBuilder:itemBuilder,
         onTap: (String id) {
           print(id);
         },
