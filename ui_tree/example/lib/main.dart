@@ -8,7 +8,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -35,54 +34,92 @@ class _MyHomePageState extends State<MyHomePage> {
   List<UiTreeItem<Data>> data = [
     UiTreeItem()
       ..id = "A"
-      ..data = (Data()..title = "让对方韬光"),
+      ..data = (Data()..title = "A 一级标题"),
     UiTreeItem()
       ..id = "B"
       ..pid = "A"
-      ..data = (Data()..title = "了皮"),
+      ..data = (Data()..title = "B 二级标题"),
     UiTreeItem()
       ..id = "C"
       ..pid = "A"
-      ..data = (Data()..title = "下次v不"),
+      ..data = (Data()..title = "C 二级标题"),
     UiTreeItem()
       ..id = "D"
       ..pid = "A"
-      ..data = (Data()..title = "让独特"),
+      ..data = (Data()..title = "D 二级标题"),
     UiTreeItem()
       ..id = "E"
-      ..data = (Data()..title = "土肥圆轨"),
+      ..data = (Data()..title = "E 二级标题"),
     UiTreeItem()
       ..id = "F"
       ..pid = "E"
-      ..data = (Data()..title = "为儿童与"),
+      ..data = (Data()..title = "F 二级标题"),
     UiTreeItem()
       ..id = "G"
       ..pid = "E"
-      ..data = (Data()..title = "日发出通过"),
+      ..data = (Data()..title = "G 三级标题"),
     UiTreeItem()
       ..id = "H"
       ..pid = "G"
-      ..data = (Data()..title = "红酒"),
+      ..data = (Data()..title = "H 四级标题"),
     UiTreeItem()
       ..id = "I"
-      ..data = (Data()..title = "哦古hi就"),
+      ..pid = "G"
+      ..data = (Data()..title = "I 四级标题"),
     UiTreeItem()
       ..id = "J"
-      ..data = (Data()..title = "就哭了"),
+      ..data = (Data()..title = "J 一级标题"),
+    UiTreeItem()
+      ..id = "K"
+      ..data = (Data()..title = "K 一级标题"),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: UiTree<Data>(data: data, itemBuilder: (e) => itemWidget(e)),
+      body: UiTree<Data>(
+        data: data,
+        itemBuilder:
+            (e, length, level, expand, selected) =>
+                itemBuilder(e, length, level, expand, selected),
+        onTap: (String id) {
+          print(id);
+        },
+      ),
     );
   }
 
-  Widget itemWidget(Data data) {
-    return Text(data.title);
+  Widget itemBuilder(
+    Data data,
+    int length,
+    int level,
+    bool expand,
+    bool selected,
+  ) {
+    final selectedFontColor = selected ? Colors.white : Colors.black;
+    final selectedBackgroundColor = selected ? Colors.red : Colors.transparent;
+    return Container(
+      decoration: BoxDecoration(color: selectedBackgroundColor),
+      child: Row(
+        children: [
+          if (length != 0)
+            Icon(
+              expand ? Icons.arrow_drop_down : Icons.arrow_right,
+              size: 15,
+              color: selectedFontColor,
+            ),
+          Expanded(
+            child: Text(
+              "${data.title}-$level-$expand-$length",
+              style: TextStyle(color: selectedFontColor),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
-class Data extends UiTreeItem {
+class Data {
   String title = "";
 }
