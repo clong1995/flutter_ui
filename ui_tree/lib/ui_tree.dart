@@ -4,6 +4,7 @@ class UiTree<T> extends StatefulWidget {
   final double indent;
   final List<UiTreeItem<T>> data;
   final Widget Function(
+    BuildContext context,
     T data,
     int length,
     int level,
@@ -79,6 +80,7 @@ class _UiTreeState<T> extends State<UiTree<T>> {
               setState(() {});
             },
             child: widget.itemBuilder(
+              context,
               tree.item.data,
               tree.children.length,
               tree.level,
