@@ -18,6 +18,10 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_webview
+  ui_toast:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_toast
   #ui_webview:
   #  path: ../ui_webview
 
