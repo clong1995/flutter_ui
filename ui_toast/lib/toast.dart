@@ -136,10 +136,13 @@ class Toast {
     ..choice = true;
 
   static void show(Message message) {
+    if(_update == null){
+      return;
+    }
     message.text = message.text.trim();
-    _update?.call(message);
+    _update!.call(message);
     if (message.autoClose) {
-      Future.delayed(const Duration(seconds: 1), () => _update?.call(null));
+      Future.delayed(const Duration(seconds: 1), () => _update!.call(null));
     }
   }
 

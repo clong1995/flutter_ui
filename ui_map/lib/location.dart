@@ -26,6 +26,7 @@ Future<bool> _permission() async {
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
     //Location services are disabled
+
     return false;
   }
 
