@@ -19,7 +19,7 @@ class Event<T> {
 
   //T? get message => _message;
 
-  E? message<E>() => _message as E;
+  E? message<E>() => _message == null ? null : _message as E;
 
   String get topic => _topic;
 }
