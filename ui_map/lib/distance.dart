@@ -2,6 +2,9 @@ import 'dart:math';
 
 const double _r = 6371000; // 地球半径，单位是米
 double distance(List<double> lonLat1, List<double> lonLat2) {
+  if(lonLat1.length != 2 || lonLat2.length != 2){
+    return 0.0;
+  }
   // 将经纬度转换为弧度
   double phi1 = _radians(lonLat1[1]);
   double phi2 = _radians(lonLat2[1]);
