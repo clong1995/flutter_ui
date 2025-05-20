@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:ui_toast/toast.dart';
 
@@ -9,29 +11,31 @@ Position? _position;
 Future<List<double>?> location([String type = "cache"]) async {
   final p = await _permission();
   if (!p) return null;
-  if(type == "cache"){
+  if (type == "cache") {
     _position ??= await Geolocator.getLastKnownPosition();
     _position ??= await Geolocator.getCurrentPosition();
-  }else if(type == "last"){
+  } else if (type == "last") {
     _position = await Geolocator.getLastKnownPosition();
     _position ??= await Geolocator.getCurrentPosition();
-  }else {
+  } else {
     _position = await Geolocator.getCurrentPosition();
   }
-  return _position == null?null:[_position!.longitude, _position!.latitude];
+  return _position == null ? null : [_position!.longitude, _position!.latitude];
 }
 
 Future<bool> _permission() async {
-  bool serviceEnabled;
-  LocationPermission permission;
-  serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (Platform.isLinux) {
+    return false;
+  }
+
+  final serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
     //Location services are disabled
     Toast.show(Toast.info..text = "location service disabled");
     return false;
   }
 
-  permission = await Geolocator.checkPermission();
+  LocationPermission permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
@@ -52,7 +56,6 @@ Future<bool> _permission() async {
     Toast.show(Toast.info..text = "location permissions are denied forever");
     return false;
   }
-
 
   return true;
 }
