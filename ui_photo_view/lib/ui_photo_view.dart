@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
-class PhotoViewer extends StatefulWidget {
+class PhotoView extends StatefulWidget {
   final List<String> images;
   final int index;
   final void Function(int)? onChanged;
 
-  const PhotoViewer({
+  const PhotoView({
     super.key,
     required this.images,
     this.index = 0,
@@ -15,10 +15,10 @@ class PhotoViewer extends StatefulWidget {
   });
 
   @override
-  State<PhotoViewer> createState() => _PhotoViewerState();
+  State<PhotoView> createState() => _PhotoViewState();
 }
 
-class _PhotoViewerState extends State<PhotoViewer> {
+class _PhotoViewState extends State<PhotoView> {
   late int currIndex;
   late List<String> images;
 
@@ -53,7 +53,7 @@ void photoViewerPage({
 }) => Navigator.of(context).push(
   MaterialPageRoute(
     builder: (BuildContext context) => Scaffold(
-      body: PhotoViewer(images: images, index: index, onChanged: onChanged),
+      body: PhotoView(images: images, index: index, onChanged: onChanged),
     ),
   ),
 );
