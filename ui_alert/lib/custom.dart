@@ -39,13 +39,13 @@ class CustomContent extends StatelessWidget {
         Container(
           color: const Color.fromRGBO(245, 245, 245, 1),
           height: 35,
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             children: [
               Container(
                 height: 15,
                 width: 3,
-                margin: EdgeInsets.only(right: 5),
+                margin: const EdgeInsets.only(right: 5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(1.5),
                   color: Theme.of(context).primaryColor,
@@ -53,15 +53,21 @@ class CustomContent extends StatelessWidget {
               ),
               Text(
                 title,
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
         ),
-        Padding(padding: EdgeInsets.fromLTRB(15, 10, 15, 0), child: child),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+          child: child,
+        ),
         Container(
           height: 50,
-          padding: EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

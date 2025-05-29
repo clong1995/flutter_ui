@@ -28,7 +28,7 @@ Future<bool?> confirm({
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(
+          const Padding(
             padding: Config.bottomPadding,
             child: Icon(Icons.notifications_active_outlined, size: 36),
           ),

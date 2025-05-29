@@ -13,14 +13,14 @@ class AlertTitle extends StatelessWidget {
       color: const Color.fromRGBO(245, 245, 245, 1),
       height: 35,
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       margin: Config.bottomPadding,
       child: Row(
         children: [
           Container(
             height: 15,
             width: 3,
-            margin: EdgeInsets.only(right: 5),
+            margin: const EdgeInsets.only(right: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(1.5),
               color: Theme.of(context).primaryColor,
@@ -30,7 +30,11 @@ class AlertTitle extends StatelessWidget {
           const Spacer(),
           IconButton(
             onPressed: () => Navigator.pop(context, false),
-            icon: Icon(Icons.close_rounded, color: Colors.black, size: 14),
+            icon: const Icon(
+              Icons.close_rounded,
+              color: Colors.black,
+              size: 14,
+            ),
           ),
         ],
       ),

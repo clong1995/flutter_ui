@@ -27,7 +27,7 @@ Future<bool?> delete({
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(
+          const Padding(
             padding: Config.bottomPadding,
             child: Icon(
               Icons.delete_forever_outlined,
