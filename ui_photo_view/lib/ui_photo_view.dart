@@ -45,7 +45,7 @@ class _UiPhotoViewState extends State<UiPhotoView> {
   );
 }
 
-void uIPhotoViewerPage({
+void uiPhotoViewerPage({
   required BuildContext context,
   required List<String> images,
   int index = 0,
@@ -90,7 +90,7 @@ class UiPhotoViewerGrid extends StatelessWidget {
   );
 
   Widget imageBuilder(BuildContext context, int index) => GestureDetector(
-    onTap: () => uIPhotoViewerPage(
+    onTap: () => uiPhotoViewerPage(
       context: context,
       images: images,
       index: index,
