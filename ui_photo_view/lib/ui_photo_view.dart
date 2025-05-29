@@ -45,7 +45,7 @@ class _UiPhotoViewState extends State<UiPhotoView> {
   );
 }
 
-void uiPhotoViewerPage({
+void uiPhotoViewPage({
   required BuildContext context,
   required List<String> images,
   int index = 0,
@@ -58,14 +58,14 @@ void uiPhotoViewerPage({
   ),
 );
 
-class UiPhotoViewerGrid extends StatelessWidget {
+class UiPhotoViewGrid extends StatelessWidget {
   final List<String> images;
   final int crossAxisCount;
   final double mainAxisSpacing;
   final double crossAxisSpacing;
   final void Function(int)? onChanged;
 
-  const UiPhotoViewerGrid({
+  const UiPhotoViewGrid({
     super.key,
     required this.images,
     this.crossAxisCount = 3,
@@ -90,7 +90,7 @@ class UiPhotoViewerGrid extends StatelessWidget {
   );
 
   Widget imageBuilder(BuildContext context, int index) => GestureDetector(
-    onTap: () => uiPhotoViewerPage(
+    onTap: () => uiPhotoViewPage(
       context: context,
       images: images,
       index: index,
