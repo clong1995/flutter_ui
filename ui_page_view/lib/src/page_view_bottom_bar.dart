@@ -10,7 +10,7 @@ class PageViewBottomBar extends StatefulWidget {
   const PageViewBottomBar({
     super.key,
     required this.height,
-    required this.decoration,
+    this.decoration,
     required this.items,
     this.padding,
     required this.controller,
@@ -69,7 +69,7 @@ class _PageViewBottomBarState extends State<PageViewBottomBar> {
     ),
   );
 
-  void indexItem(){
+  void indexItem() {
     var index = -1;
     for (var i = 0; i < widget.items.length; i++) {
       if (widget.items[i].isSpacer != true) {
