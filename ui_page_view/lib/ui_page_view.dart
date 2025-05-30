@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class UiPageView extends StatefulWidget {
   final int length;
-  final void Function(int index)? listener;
+  final void Function(int index)? onChanged;
   final Widget Function(TabController controller) child;
 
   const UiPageView({
     super.key,
-    this.listener,
+    this.onChanged,
     required this.child,
     required this.length,
   });
@@ -24,8 +24,8 @@ class _UiPageViewState extends State<UiPageView>
   void initState() {
     super.initState();
     _tabController = TabController(length: widget.length, vsync: this);
-    if(widget.listener != null){
-      _tabController.addListener(() => widget.listener!(_tabController.index));
+    if(widget.onChanged != null){
+      _tabController.addListener(() => widget.onChanged!(_tabController.index));
     }
   }
 
