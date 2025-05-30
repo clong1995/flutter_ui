@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:ui_cache_image/ui_cache_image.dart';
 
+//PhotoView 的实现
 class UiPhotoView extends StatefulWidget {
   final List<String> images;
   final int index;
@@ -37,65 +37,11 @@ class _UiPhotoViewState extends State<UiPhotoView> {
       }
       currIndex = index;
       return PhotoViewGalleryPageOptions(
+        //TODO 这里要变成缓存，但是缓存没有imageProvider
         imageProvider: NetworkImage(images[index]),
       );
     },
     itemCount: images.length,
     pageController: PageController(initialPage: widget.index),
-  );
-}
-
-void uiPhotoViewPage({
-  required BuildContext context,
-  required List<String> images,
-  int index = 0,
-  void Function(int)? onChanged,
-}) => Navigator.of(context).push(
-  MaterialPageRoute(
-    builder: (BuildContext context) => Scaffold(
-      body: UiPhotoView(images: images, index: index, onChanged: onChanged),
-    ),
-  ),
-);
-
-class UiPhotoViewGrid extends StatelessWidget {
-  final List<String> images;
-  final int crossAxisCount;
-  final double mainAxisSpacing;
-  final double crossAxisSpacing;
-  final void Function(int)? onChanged;
-
-  const UiPhotoViewGrid({
-    super.key,
-    required this.images,
-    this.crossAxisCount = 3,
-    this.mainAxisSpacing = 5,
-    this.crossAxisSpacing = 5,
-    this.onChanged,
-  });
-
-  @override
-  Widget build(BuildContext context) => GridView.builder(
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    primary: false,
-    padding: EdgeInsets.zero,
-    itemCount: images.length,
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: crossAxisCount,
-      mainAxisSpacing: mainAxisSpacing,
-      crossAxisSpacing: crossAxisSpacing,
-    ),
-    itemBuilder: imageBuilder,
-  );
-
-  Widget imageBuilder(BuildContext context, int index) => GestureDetector(
-    onTap: () => uiPhotoViewPage(
-      context: context,
-      images: images,
-      index: index,
-      onChanged: onChanged,
-    ),
-    child: UiCacheImage(images[index], fit: BoxFit.cover, thumbnail: true),
   );
 }
