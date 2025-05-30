@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'config.dart';
+import 'alert_config.dart';
 
 class AlertTitle extends StatelessWidget {
   final String text;
@@ -14,7 +14,7 @@ class AlertTitle extends StatelessWidget {
       height: 35,
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      margin: Config.bottomPadding,
+      margin: AlertConfig.bottomPadding,
       child: Row(
         children: [
           Container(

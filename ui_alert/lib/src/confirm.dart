@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
 
-import 'src/alert_cancel_button.dart';
-import 'src/alert_confirm_button.dart';
-import 'src/alert_title.dart';
-import 'src/config.dart';
+import 'widget/alert_cancel_button.dart';
+import 'widget/alert_confirm_button.dart';
+import 'widget/alert_title.dart';
+import 'widget/alert_config.dart';
 
 Future<bool?> confirm({
   required BuildContext context,
   String? content,
-  bool useRootNavigator = true,
-}) async => showDialog<bool>(
+  bool root = true,
+}) => showDialog<bool>(
   context: context,
-  barrierColor: Config.barrierColor,
+  barrierColor: AlertConfig.barrierColor,
   barrierDismissible: false,
-  useRootNavigator: useRootNavigator,
+  useRootNavigator: root,
   builder: (BuildContext context) => AlertDialog(
     clipBehavior: Clip.antiAlias,
     title: const AlertTitle(text: "确认提示:"),
-    titleTextStyle: Config.titleStyle,
-    titlePadding: Config.titlePadding,
-    contentPadding: Config.contentPadding,
+    titleTextStyle: AlertConfig.titleStyle,
+    titlePadding: AlertConfig.titlePadding,
+    contentPadding: AlertConfig.contentPadding,
     content: Container(
-      width: Config.width,
-      padding: Config.bottomPadding,
-      decoration: Config.decoration,
+      width: AlertConfig.width,
+      padding: AlertConfig.bottomPadding,
+      decoration: AlertConfig.decoration,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
           const Padding(
-            padding: Config.bottomPadding,
+            padding: AlertConfig.bottomPadding,
             child: Icon(Icons.notifications_active_outlined, size: 36),
           ),
           Text(content ?? "确定要执行吗?"),

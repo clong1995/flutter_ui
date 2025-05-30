@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Config {
+class AlertConfig {
   static const double width = 200;
   static final TextStyle titleStyle = TextStyle(color: Colors.grey.shade700);
 
