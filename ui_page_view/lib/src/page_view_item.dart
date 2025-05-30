@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class UiPageViewItem extends StatefulWidget {
+class PageViewItem extends StatefulWidget {
   final Widget child;
   final bool keepAlive;
   final bool nestRoute;
 
-  const UiPageViewItem({
+  const PageViewItem({
     super.key,
     required this.child,
     this.keepAlive = false,
@@ -13,10 +13,10 @@ class UiPageViewItem extends StatefulWidget {
   });
 
   @override
-  State<UiPageViewItem> createState() => _UiPageViewItemState();
+  State<PageViewItem> createState() => _PageViewItemState();
 }
 
-class _UiPageViewItemState extends State<UiPageViewItem>
+class _PageViewItemState extends State<PageViewItem>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => widget.keepAlive;

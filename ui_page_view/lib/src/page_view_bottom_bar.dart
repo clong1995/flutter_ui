@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class UiPageViewBottomBar extends StatefulWidget {
+class PageViewBottomBar extends StatefulWidget {
   final double height;
   final Decoration? decoration;
-  final List<UiPageViewBottomBarItem> items;
+  final List<PageViewBottomBarItem> items;
   final PageController controller;
   final EdgeInsetsGeometry? padding;
 
-  const UiPageViewBottomBar({
+  const PageViewBottomBar({
     super.key,
     required this.height,
     required this.decoration,
@@ -17,12 +17,12 @@ class UiPageViewBottomBar extends StatefulWidget {
   });
 
   @override
-  State<UiPageViewBottomBar> createState() => _UiPageViewBottomBarState();
+  State<PageViewBottomBar> createState() => _PageViewBottomBarState();
 }
 
-class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
+class _PageViewBottomBarState extends State<PageViewBottomBar> {
   var currIndex = 0;
-  final List<UiPageViewBottomBarItem> items = [];
+  final List<PageViewBottomBarItem> items = [];
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
   }
 
   @override
-  void didUpdateWidget(covariant UiPageViewBottomBar oldWidget) {
+  void didUpdateWidget(covariant PageViewBottomBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     indexItem();
   }
@@ -80,13 +80,13 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
   }
 }
 
-class UiPageViewBottomBarItem {
+class PageViewBottomBarItem {
   final bool? isSpacer;
   final Widget item;
   final Widget? selectedItem;
   int index = 0;
 
-  UiPageViewBottomBarItem({
+  PageViewBottomBarItem({
     required this.item,
     this.selectedItem,
     this.isSpacer,

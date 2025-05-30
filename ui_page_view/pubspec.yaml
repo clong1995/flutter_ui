@@ -1,10 +1,10 @@
 name: ui_page_view
 description: "A new Flutter project."
-version: 0.0.3
+version: 0.0.4
 homepage:
 
 environment:
-  sdk: ^3.7.2
+  sdk: ^3.8.0
   flutter: ">=3.19.6"
 
 dependencies:
