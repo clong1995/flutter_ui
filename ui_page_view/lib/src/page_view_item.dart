@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// 还可以充当 Keep alive 功能的容器
 class PageViewItem extends StatefulWidget {
   final Widget child;
   final bool keepAlive;
