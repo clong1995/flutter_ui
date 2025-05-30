@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'photo_view.dart';
 
-void pushPhotoViewPage({
+Future<void> pushPhotoViewPage({
   required BuildContext context,
   required List<String> images,
   int index = 0,
