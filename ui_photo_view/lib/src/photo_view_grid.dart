@@ -4,14 +4,14 @@ import 'package:ui_cache_image/ui_cache_image.dart';
 
 import 'push_photo_view_page.dart';
 
-class UiPhotoViewGrid extends StatelessWidget {
+class PhotoViewGrid extends StatelessWidget {
   final List<String> images;
   final int crossAxisCount;
   final double mainAxisSpacing;
   final double crossAxisSpacing;
   final void Function(int)? onChanged;
 
-  const UiPhotoViewGrid({
+  const PhotoViewGrid({
     super.key,
     required this.images,
     this.crossAxisCount = 3,

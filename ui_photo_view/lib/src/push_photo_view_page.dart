@@ -11,7 +11,7 @@ void pushPhotoViewPage({
 }) => Navigator.of(context).push(
   MaterialPageRoute(
     builder: (BuildContext context) => Scaffold(
-      body: UiPhotoView(images: images, index: index, onChanged: onChanged),
+      body: PhotoView(images: images, index: index, onChanged: onChanged),
     ),
   ),
 );

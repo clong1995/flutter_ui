@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
 //PhotoView 的实现
-class UiPhotoView extends StatefulWidget {
+class PhotoView extends StatefulWidget {
   final List<String> images;
   final int index;
   final void Function(int)? onChanged;
 
-  const UiPhotoView({
+  const PhotoView({
     super.key,
     required this.images,
     this.index = 0,
@@ -15,10 +15,10 @@ class UiPhotoView extends StatefulWidget {
   });
 
   @override
-  State<UiPhotoView> createState() => _UiPhotoViewState();
+  State<PhotoView> createState() => _PhotoViewState();
 }
 
-class _UiPhotoViewState extends State<UiPhotoView> {
+class _PhotoViewState extends State<PhotoView> {
   late int currIndex;
   late List<String> images;
 
