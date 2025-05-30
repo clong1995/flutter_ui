@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
-import 'ui_photo_view_page.dart';
+import 'push_photo_view_page.dart';
 
 class UiPhotoViewGrid extends StatelessWidget {
   final List<String> images;
@@ -36,7 +36,7 @@ class UiPhotoViewGrid extends StatelessWidget {
   );
 
   Widget imageBuilder(BuildContext context, int index) => GestureDetector(
-    onTap: () => uiPhotoViewPage(
+    onTap: () => pushPhotoViewPage(
       context: context,
       images: images,
       index: index,
