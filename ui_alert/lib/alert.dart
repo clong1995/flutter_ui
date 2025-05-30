@@ -29,4 +29,10 @@ class Alert {
     required String content,
     bool root = true,
   }) => alert.info(context: context, content: content, root: root);
+
+  static Widget customContent({
+    required String title,
+    required Widget child,
+    List<Widget>? action,
+  }) => alert.CustomContent(title: title, action: action, child: child);
 }
