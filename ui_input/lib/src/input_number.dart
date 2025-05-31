@@ -52,14 +52,13 @@ class _InputNumberState<T extends num> extends State<InputNumber<T>>
 
   @override
   void didChangeMetrics() {
-    final bottomInset =
-        WidgetsBinding
-            .instance
-            .platformDispatcher
-            .views
-            .first
-            .viewInsets
-            .bottom;
+    final bottomInset = WidgetsBinding
+        .instance
+        .platformDispatcher
+        .views
+        .first
+        .viewInsets
+        .bottom;
     bool isKeyboardVisible = bottomInset > 0;
 
     if (!isKeyboardVisible && focusNode.hasFocus) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Input extends StatefulWidget {
+class InputText extends StatefulWidget {
   final double? width;
   final double? height;
   final int maxLines;
@@ -17,7 +17,7 @@ class Input extends StatefulWidget {
   final bool autofocus;
   final bool obscureText;
 
-  const Input({
+  const InputText({
     super.key,
     this.width,
     this.height,
@@ -36,10 +36,10 @@ class Input extends StatefulWidget {
   });
 
   @override
-  State<Input> createState() => _InputState();
+  State<InputText> createState() => _InputTextState();
 }
 
-class _InputState extends State<Input> {
+class _InputTextState extends State<InputText> {
   late BorderSide borderSide;
   late TextStyle style;
   late TextEditingController controller;
@@ -66,7 +66,7 @@ class _InputState extends State<Input> {
   }
 
   @override
-  void didUpdateWidget(Input oldWidget) {
+  void didUpdateWidget(InputText oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.text != null) {
       controller.text = widget.text!;
@@ -91,12 +91,11 @@ class _InputState extends State<Input> {
       maxLines: maxLines,
       keyboardType: widget.keyboardType,
       inputFormatters: widget.inputFormatters,
-      onChanged:
-      widget.onChanged == null
+      onChanged: widget.onChanged == null
           ? null
           : (String text_) {
-        widget.onChanged!(text_);
-      },
+              widget.onChanged!(text_);
+            },
       autofocus: widget.autofocus,
       decoration: InputDecoration(
         prefixIcon: widget.prefix,
@@ -116,33 +115,31 @@ class _InputState extends State<Input> {
           borderRadius: BorderRadius.circular(5),
         ),
         hintText: widget.hint,
-        hintStyle:
-        widget.hint == null
+        hintStyle: widget.hint == null
             ? null
             : const TextStyle(
-          color: Color.fromRGBO(153, 153, 153, 1),
-          fontSize: 14,
-        ),
-        suffixIcon:
-        widget.clear
+                color: Color.fromRGBO(153, 153, 153, 1),
+                fontSize: 14,
+              ),
+        suffixIcon: widget.clear
             ? IconButton(
-          onPressed: controller.clear,
-          icon: const Icon(Icons.clear),
-        )
+                onPressed: controller.clear,
+                icon: const Icon(Icons.clear),
+              )
             : widget.obscureText
             ? IconButton(
-          onPressed: () {
-            obscure = !obscure;
-            setState(() {});
-          },
-          icon: Icon(
-            obscure
-                ? Icons.visibility_off_outlined
-                : Icons.visibility_outlined,
-            size: 16,
-            color: Colors.grey,
-          ),
-        )
+                onPressed: () {
+                  obscure = !obscure;
+                  setState(() {});
+                },
+                icon: Icon(
+                  obscure
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  size: 16,
+                  color: Colors.grey,
+                ),
+              )
             : null,
       ),
     ),
