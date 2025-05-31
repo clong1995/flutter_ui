@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class InputNum<T extends num> extends StatefulWidget {
+class InputNumber<T extends num> extends StatefulWidget {
   final double? width;
   final double? height;
   final T num;
@@ -9,7 +9,7 @@ class InputNum<T extends num> extends StatefulWidget {
   final bool autofocus;
   final TextStyle? style;
 
-  const InputNum({
+  const InputNumber({
     super.key,
     this.width,
     this.height,
@@ -20,10 +20,10 @@ class InputNum<T extends num> extends StatefulWidget {
   });
 
   @override
-  State<InputNum<T>> createState() => _InputNumState<T>();
+  State<InputNumber<T>> createState() => _InputNumberState<T>();
 }
 
-class _InputNumState<T extends num> extends State<InputNum<T>>
+class _InputNumberState<T extends num> extends State<InputNumber<T>>
     with WidgetsBindingObserver {
   late TextEditingController controller;
 
@@ -46,7 +46,7 @@ class _InputNumState<T extends num> extends State<InputNum<T>>
 
     height = widget.height ?? 32;
     width = widget.width ?? 85;
-    style = widget.style ?? TextStyle(fontSize: 14);
+    style = widget.style ?? const TextStyle(fontSize: 14);
     controller = TextEditingController(text: "${widget.num}");
   }
 
