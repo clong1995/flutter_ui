@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ui_alert/ui_alert.dart' show alertCustom;
 import 'package:ui_webview/ui_webview.dart';
 
-Future<void> captcha({
+Future<void> uiCaptcha({
   required BuildContext context,
   required Future<bool> Function(String json) verify,
   double width = 300,
