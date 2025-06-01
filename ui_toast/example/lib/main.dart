@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:ui_toast/toast.dart';
+import 'package:ui_toast/ui_toast.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      builder: Toast.builder,
+      builder: uiToastBuilder,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
@@ -42,39 +42,39 @@ class MyHomePage extends StatelessWidget {
           children: [
             FilledButton(
               onPressed: () {
-                Toast.show(Toast.success);
+                UiToast.show(UiToast.success);
               },
               child: const Text("success"),
             ),
             FilledButton(
               onPressed: () {
-                Toast.show(Toast.info);
+                UiToast.show(UiToast.info);
               },
               child: const Text("info"),
             ),
             FilledButton(
               onPressed: () {
-                Toast.show(Toast.failure);
+                UiToast.show(UiToast.failure);
               },
               child: const Text("failure"),
             ),
             FilledButton(
               onPressed: () {
-                Toast.show(Toast.failure..text = "自定义文本:执行错误");
+                UiToast.show(UiToast.failure..text = "自定义文本:执行错误");
               },
               child: const Text("failure 执行错误"),
             ),
             FilledButton(
               onPressed: () {
-                Toast.show(Toast.loading);
-                Future.delayed(const Duration(seconds: 2), Toast.dismiss);
+                UiToast.show(UiToast.loading);
+                Future.delayed(const Duration(seconds: 2), UiToast.dismiss);
               },
               child: const Text("loading"),
             ),
             FilledButton(
               onPressed: () {
-                Toast.show(Toast.choice
-                  ..callback = (bool choice) {
+                UiToast.show(UiToast.choice
+                  ..choiceCallback = (bool choice) {
                     if (kDebugMode) {
                       print(choice);
                     }
