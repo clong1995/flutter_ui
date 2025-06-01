@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
@@ -8,16 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:ui' as ui;
 
 String _cacheDirectory = "";
 
 class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
   final String src;
 
-  UiCacheImageProvider({
-    required this.src,
-  });
+  UiCacheImageProvider(this.src);
 
   @override
   Future<UiCacheImageProvider> obtainKey(ImageConfiguration configuration) {
@@ -27,9 +25,9 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
   // Flutter 3.0+ 使用 loadBuffer 或 loadImage
   @override
   ImageStreamCompleter loadImage(
-      UiCacheImageProvider key,
-      ImageDecoderCallback decode,
-      ) {
+    UiCacheImageProvider key,
+    ImageDecoderCallback decode,
+  ) {
     final chunkEvents = StreamController<ImageChunkEvent>();
     return MultiFrameImageStreamCompleter(
       chunkEvents: chunkEvents.stream,
@@ -40,10 +38,10 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
   }
 
   Future<ui.Codec> _loadAsync(
-      UiCacheImageProvider key,
-      StreamController<ImageChunkEvent> chunkEvents,
-      ImageDecoderCallback decode,
-      ) async {
+    UiCacheImageProvider key,
+    StreamController<ImageChunkEvent> chunkEvents,
+    ImageDecoderCallback decode,
+  ) async {
     try {
       String tempDirectory = await _tempDirectory();
       String md5str = _md5str(src);
@@ -97,9 +95,7 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
   }
 }
 
-
 String _md5str(String input) => md5.convert(utf8.encode(input)).toString();
-
 
 Future<String> _tempDirectory() async {
   if (_cacheDirectory.isNotEmpty) {
