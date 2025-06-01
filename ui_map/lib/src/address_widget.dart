@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'distance.dart';
+import 'package:nav/nav.dart';
 
 import 'address.dart';
+import 'distance.dart';
 
 class AddressWidget extends StatefulWidget {
   final Future<List<Address>> Function(String keyword) datasource;
@@ -192,6 +193,6 @@ class _AddressWidgetState extends State<AddressWidget> {
   }
 
   void onAddressTap(Address address) {
-    Navigator.pop<Address?>(context, address);
+    Nav.pop<Address?>(context, result: address);
   }
 }

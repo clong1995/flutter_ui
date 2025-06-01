@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:nav/nav.dart';
 import 'package:pinyin/pinyin.dart';
 
 import 'region.dart' show Region;
@@ -65,7 +66,7 @@ class _RegionWidgetState extends State<RegionWidget> {
               canPop
                   ? TextButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Nav.pop(context);
                     },
                     child: Text(
                       "取消",
@@ -328,7 +329,7 @@ class _RegionWidgetState extends State<RegionWidget> {
         );
       }
       canPop = true;
-      Navigator.pop<List<Region>>(context, list);
+      Nav.pop<List<Region>>(context, result: list);
       return;
     }
   }

@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:nav/nav.dart';
 
 import 'address_widget.dart';
 
 Future<Address?> address(
   BuildContext context, {
   required Future<List<Address>> Function(String keyword) datasource,
-  bool rootNavigator = false,
+  bool root = false,
   Future<List<double>?> Function()? location,
-}) async {
-  return await Navigator.of(
-    context,
-    rootNavigator: rootNavigator,
-  ).push<Address>(
-    MaterialPageRoute<Address>(
-      builder:
-          (BuildContext context) =>
-              AddressWidget(datasource: datasource, location: location),
-    ),
-  );
-}
+}) => Nav.push<Address>(
+  context,
+  root: root,
+  () => AddressWidget(datasource: datasource, location: location),
+);
 
 class Address {
   String province = "";
