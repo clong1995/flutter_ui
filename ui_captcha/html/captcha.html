@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>captcha</title>
+    <style>
+        html {
+            height: 100vh;
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+    <script>
+        const prefix = "hkhgge";
+        const sceneId = "wzl1ia5t";
+    </script>
+    <script>
+        window.AliyunCaptchaConfig = {
+            region: "cn",
+            prefix: prefix,
+        };
+    </script>
+    <script type="text/javascript" src="https://o.alicdn.com/captcha-frontend/aliyunCaptcha/AliyunCaptcha.js"></script>
+</head>
+<body>
+<div id="captcha-element"></div>
+<script type="text/javascript">
+    let captcha;
+    window.initAliyunCaptcha({
+        SceneId: sceneId,
+        mode: 'embed',
+        element: '#captcha-element',
+        captchaVerifyCallback: captchaVerifyCallback,
+        onBizResultCallback: onBizResultCallback,
+        getInstance: getInstance,
+        immediate: true,
+    });
+
+    function getInstance(instance) {
+        captcha = instance;
+    }
+
+    async function captchaVerifyCallback(captchaVerifyParam) {
+        const res = await wv("verify",captchaVerifyParam);
+        return {
+            captchaResult: res,
+            bizResult: res,
+        };
+    }
+
+    function onBizResultCallback(bizResult) {
+        console.log("结果");
+    }
+
+</script>
+</body>
+</html>

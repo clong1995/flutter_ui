@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_alert/ui_alert.dart' show custom;
+import 'package:ui_alert/ui_alert.dart' show alertCustom;
 import 'package:ui_webview/ui_webview.dart';
 
 Future<void> captcha({
@@ -7,7 +7,7 @@ Future<void> captcha({
   required Future<bool> Function(String json) verify,
   double width = 300,
   double height = 420,
-}) async => await custom(
+}) async => await alertCustom(
   context: context,
   child: _Captcha(verify: verify, width: width, height: height),
 );
@@ -27,7 +27,7 @@ class _Captcha extends StatelessWidget {
       children: [
         Expanded(
           child: UiWebview(
-            url: "packages/system/html/captcha.html",
+            url: "packages/ui_captcha/html/captcha.html",
             register: {
               "verify": (dynamic data) async {
                 bool res = await verify(data);
@@ -39,12 +39,12 @@ class _Captcha extends StatelessWidget {
             },
           ),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         FilledButton(
           onPressed: () => Navigator.pop(context),
           child: const Text("取消验证"),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
       ],
     ),
   );
