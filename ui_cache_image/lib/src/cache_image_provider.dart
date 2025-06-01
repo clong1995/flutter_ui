@@ -13,10 +13,10 @@ import 'dart:ui' as ui;
 String _cacheDirectory = "";
 
 class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
-  final String cacheKey;
+  final String src;
 
   UiCacheImageProvider({
-    required this.cacheKey,
+    required this.src,
   });
 
   @override
@@ -35,7 +35,7 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
       chunkEvents: chunkEvents.stream,
       codec: _loadAsync(key, chunkEvents, decode),
       scale: 1.0,
-      debugLabel: 'AsyncImageProvider($cacheKey)',
+      debugLabel: 'AsyncImageProvider($src)',
     );
   }
 
@@ -45,9 +45,8 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
       ImageDecoderCallback decode,
       ) async {
     try {
-      // TODO 调用传入的 loader 函数获取 Codec
       String tempDirectory = await _tempDirectory();
-      String md5str = _md5str(cacheKey);
+      String md5str = _md5str(src);
       File imageFile = File('$tempDirectory/$md5str');
       if (await imageFile.exists()) {
         final bytes = await imageFile.readAsBytes();
@@ -58,7 +57,7 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
         print("request new image");
       }
 
-      Response response = await get(Uri.parse(cacheKey));
+      Response response = await get(Uri.parse(src));
       if (response.statusCode == 200) {
         await imageFile.writeAsBytes(response.bodyBytes);
         return await _bytesToCodec(response.bodyBytes);
@@ -82,11 +81,11 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is UiCacheImageProvider && other.cacheKey == cacheKey;
+    return other is UiCacheImageProvider && other.src == src;
   }
 
   @override
-  int get hashCode => cacheKey.hashCode;
+  int get hashCode => src.hashCode;
 
   Future<ui.Codec> _bytesToCodec(Uint8List bytes) async {
     final buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
