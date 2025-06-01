@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:picker/ui_pick_file.dart';
+import 'package:ui_pick_file/ui_pick_file.dart';
 
 void main() {
   runApp(const MyApp());
