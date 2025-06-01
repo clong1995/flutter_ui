@@ -216,6 +216,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.16.0"
+  nav:
+    dependency: transitive
+    description:
+      path: nav
+      ref: HEAD
+      resolved-ref: "8ee02ae274711bb309e2dc965834583d730cd5a7"
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
+    version: "0.0.1"
   path:
     dependency: transitive
     description:
@@ -321,7 +330,7 @@ packages:
     description:
       path: ui_toast
       ref: HEAD
-      resolved-ref: d7a8dcee805e585a868f0afd1a0d66ec5b8211d6
+      resolved-ref: "8ee02ae274711bb309e2dc965834583d730cd5a7"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.2"
@@ -330,7 +339,7 @@ packages:
     description:
       path: ui_webview
       ref: HEAD
-      resolved-ref: d7a8dcee805e585a868f0afd1a0d66ec5b8211d6
+      resolved-ref: "8ee02ae274711bb309e2dc965834583d730cd5a7"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
