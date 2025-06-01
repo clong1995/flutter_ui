@@ -4,7 +4,7 @@ import 'widget/config.dart';
 import 'widget/confirm_button.dart';
 import 'widget/title.dart';
 
-Future<bool?> info({
+Future<bool?> alertInfo({
   required BuildContext context,
   required String content,
   bool root = true,
