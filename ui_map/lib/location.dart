@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:geolocator/geolocator.dart';
-import 'package:ui_toast/toast.dart';
+import 'package:ui_toast/ui_toast.dart';
 
 Position? _position;
 //type:
@@ -31,7 +31,7 @@ Future<bool> _permission() async {
   final serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
     //Location services are disabled
-    Toast.show(Toast.info..text = "location service disabled");
+    UiToast.show(UiToast.info..text = "location service disabled");
     return false;
   }
 
@@ -45,7 +45,7 @@ Future<bool> _permission() async {
       // returned true. According to Android guidelines
       // your App should show an explanatory UI now.
       //Location permissions are denied
-      Toast.show(Toast.info..text = "location  permissions are denied");
+      UiToast.show(UiToast.info..text = "location  permissions are denied");
       return false;
     }
   }
@@ -53,7 +53,9 @@ Future<bool> _permission() async {
   if (permission == LocationPermission.deniedForever) {
     // Permissions are denied forever, handle appropriately.
     //Location permissions are permanently denied, we cannot request permissions.
-    Toast.show(Toast.info..text = "location permissions are denied forever");
+    UiToast.show(
+      UiToast.info..text = "location permissions are denied forever",
+    );
     return false;
   }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_map/map.dart';
+import 'package:ui_map/map_view.dart';
 // import 'package:ui_map/region.dart';
 
 void main() {
@@ -42,6 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );*/
-    return MapWidget();
+    return MapViewWidget();
   }
 }
