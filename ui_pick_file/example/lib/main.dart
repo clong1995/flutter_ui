@@ -1,10 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:picker/def.dart';
-import 'package:picker/file.dart' as picker_file;
-import 'package:picker/image.dart' as picker_image;
-import 'package:picker/video.dart' as picker_video;
+import 'package:picker/ui_pick_file.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.camera_alt_outlined),
             label: Text("通过拍照选取"),
             onPressed: () async {
-              cameraPickerImage = await picker_image.camera();
+              cameraPickerImage = await PickImage.camera();
               setState(() {});
             },
           ),
@@ -70,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.image_outlined),
             label: Text("单选: 选择相册图片"),
             onPressed: () async {
-              gallerySinglePickerImage = await picker_image.single();
+              gallerySinglePickerImage = await PickImage.single();
               setState(() {});
             },
           ),
@@ -81,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.photo_library_outlined),
             label: Text("多选: 选择相册图片"),
             onPressed: () async {
-              galleryMultiplePickerImage = await picker_image.multiple();
+              galleryMultiplePickerImage = await PickImage.multiple();
               setState(() {});
             },
           ),
@@ -93,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.save),
             label: Text("保存图片到相册"),
             onPressed: () async {
-              await picker_image.save(bytes: Uint8List(0));
+              await PickImage.save(bytes: Uint8List(0));
             },
           ),
           SizedBox(
@@ -105,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.video_camera_back_outlined),
             label: Text("通过录像选取"),
             onPressed: () async {
-              cameraPickerVideo = await picker_video.camera();
+              cameraPickerVideo = await PickVideo.camera();
               setState(() {});
             },
           ),
@@ -116,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.video_file_outlined),
             label: Text("单选: 选择相册视频"),
             onPressed: () async {
-              gallerySinglePickerVideo = await picker_video.gallery();
+              gallerySinglePickerVideo = await PickVideo.gallery();
               setState(() {});
             },
           ),
@@ -127,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.save),
             label: Text("保存视频到相册"),
             onPressed: () async {
-              await picker_video.save(bytes: Uint8List(0));
+              await PickVideo.save(bytes: Uint8List(0));
             },
           ),
           SizedBox(
@@ -139,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.description_outlined),
             label: Text("单选: 选择任意文件"),
             onPressed: () {
-              picker_file.single().then((PickerFile? file) {
+              PickFile.single().then((PickerFile? file) {
                 fileSinglePicker = file;
                 setState(() {});
               });
@@ -151,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.file_copy_outlined),
             label: Text("多选: 选择任意文件"),
             onPressed: () {
-              picker_file.multiple().then((List<PickerFile>? list) {
+              PickFile.multiple().then((List<PickerFile>? list) {
                 fileMultiplePicker = list;
                 setState(() {});
               });
@@ -165,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.folder_open),
             label: Text("选择目录"),
             onPressed: () {
-              picker_file.dir().then((String? p) {
+              PickFile.dir().then((String? p) {
                 fileDirPicker = p;
                 setState(() {});
               });
@@ -177,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.save),
             label: Text("保存文件"),
             onPressed: () {
-              picker_file.save(bytes: Uint8List(0));
+              PickFile.save(bytes: Uint8List(0));
             },
           ),
         ],

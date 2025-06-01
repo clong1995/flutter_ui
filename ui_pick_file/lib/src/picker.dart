@@ -3,7 +3,8 @@ import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
-import '../def.dart';
+
+import '../ui_pick_file.dart' show PickerFile;
 
 final ImagePicker imagePicker = ImagePicker();
 
