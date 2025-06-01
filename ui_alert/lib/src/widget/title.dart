@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'alert_config.dart';
+import 'config.dart';
 
-class AlertTitle extends StatelessWidget {
+class TitleWidget extends StatelessWidget {
   final String text;
 
-  const AlertTitle({super.key, required this.text});
+  const TitleWidget({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class AlertTitle extends StatelessWidget {
       height: 35,
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      margin: AlertConfig.bottomPadding,
+      margin: Config.bottomPadding,
       child: Row(
         children: [
           Container(

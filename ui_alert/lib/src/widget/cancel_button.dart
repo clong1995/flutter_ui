@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AlertCancelButton extends StatelessWidget {
-  const AlertCancelButton({super.key});
+class CancelButton extends StatelessWidget {
+  const CancelButton({super.key});
 
   @override
   Widget build(BuildContext context) {

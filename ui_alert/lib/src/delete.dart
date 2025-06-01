@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 
-import 'widget/alert_cancel_button.dart';
-import 'widget/alert_title.dart';
-import 'widget/alert_config.dart';
+import 'widget/cancel_button.dart';
+import 'widget/title.dart';
+import 'widget/config.dart';
 
-Future<bool?> delete({
+Future<bool?> alertDelete({
   required BuildContext context,
   String? content,
   bool root = true,
 }) async => showDialog<bool>(
   context: context,
-  barrierColor: AlertConfig.barrierColor,
+  barrierColor: Config.barrierColor,
   barrierDismissible: false,
   useRootNavigator: root,
   builder: (BuildContext context) => AlertDialog(
     clipBehavior: Clip.antiAlias,
-    title: const AlertTitle(text: "删除提示:"),
-    titleTextStyle: AlertConfig.titleStyle,
-    titlePadding: AlertConfig.titlePadding,
-    contentPadding: AlertConfig.contentPadding,
+    title: const TitleWidget(text: "删除提示:"),
+    titleTextStyle: Config.titleStyle,
+    titlePadding: Config.titlePadding,
+    contentPadding: Config.contentPadding,
     content: Container(
-      width: AlertConfig.width,
-      padding: AlertConfig.bottomPadding,
-      decoration: AlertConfig.decoration,
+      width: Config.width,
+      padding: Config.bottomPadding,
+      decoration: Config.decoration,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
           const Padding(
-            padding: AlertConfig.bottomPadding,
+            padding: Config.bottomPadding,
             child: Icon(
               Icons.delete_forever_outlined,
               size: 36,
@@ -40,7 +40,7 @@ Future<bool?> delete({
       ),
     ),
     actions: <Widget>[
-      const AlertCancelButton(),
+      const CancelButton(),
       FilledButton(
         style: FilledButton.styleFrom(
           backgroundColor: Colors.red.withAlpha(20),

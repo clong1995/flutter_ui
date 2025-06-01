@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'widget/alert_config.dart';
+import 'widget/config.dart';
 
-Future<T?> custom<T>({
+Future<T?> alertCustom<T>({
   required BuildContext context,
   required Widget child,
   bool root = true,
 }) async => showDialog<T>(
   context: context,
-  barrierColor: AlertConfig.barrierColor,
+  barrierColor: Config.barrierColor,
   barrierDismissible: false,
   useRootNavigator: root,
   builder: (BuildContext context) => AlertDialog(

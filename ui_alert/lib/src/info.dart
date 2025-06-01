@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'widget/alert_confirm_button.dart';
-import 'widget/alert_title.dart';
-import 'widget/alert_config.dart';
+import 'widget/config.dart';
+import 'widget/confirm_button.dart';
+import 'widget/title.dart';
 
 Future<bool?> info({
   required BuildContext context,
@@ -10,22 +10,22 @@ Future<bool?> info({
   bool root = true,
 }) async => showDialog<bool>(
   context: context,
-  barrierColor: AlertConfig.barrierColor,
+  barrierColor: Config.barrierColor,
   barrierDismissible: false,
   useRootNavigator: root,
   builder: (BuildContext context) => AlertDialog(
     clipBehavior: Clip.antiAlias,
-    title: const AlertTitle(text: "特别提示:"),
-    titleTextStyle: AlertConfig.titleStyle,
-    titlePadding: AlertConfig.titlePadding,
-    contentPadding: AlertConfig.contentPadding,
+    title: const TitleWidget(text: "特别提示:"),
+    titleTextStyle: Config.titleStyle,
+    titlePadding: Config.titlePadding,
+    contentPadding: Config.contentPadding,
     content: Container(
-      width: AlertConfig.width,
-      padding: AlertConfig.bottomPadding,
-      decoration: AlertConfig.decoration,
+      width: Config.width,
+      padding: Config.bottomPadding,
+      decoration: Config.decoration,
       alignment: Alignment.center,
       child: Text(content),
     ),
-    actions: const <Widget>[AlertConfirmButton()],
+    actions: const <Widget>[ConfirmButton()],
   ),
 );
