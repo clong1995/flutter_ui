@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:ui_cache_image/ui_cache_image.dart';
 
 //PhotoView 的实现
 class PhotoView extends StatefulWidget {
@@ -38,7 +39,7 @@ class _PhotoViewState extends State<PhotoView> {
       currIndex = index;
       return PhotoViewGalleryPageOptions(
         //TODO 这里要变成缓存，但是缓存没有imageProvider
-        imageProvider: NetworkImage(images[index]),
+        imageProvider: UiCacheImageProvider(images[index]),
       );
     },
     itemCount: images.length,
