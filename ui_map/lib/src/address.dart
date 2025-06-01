@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'src/address_widget.dart';
+import 'address_widget.dart';
 
 Future<Address?> address(
   BuildContext context, {

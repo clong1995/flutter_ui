@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ui_map/map_view.dart';
+import 'package:ui_map/ui_map.dart';
 // import 'package:ui_map/region.dart';
 
 void main() {

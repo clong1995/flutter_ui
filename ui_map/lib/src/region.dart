@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'src/region_widget.dart';
+import 'region_widget.dart';
 
 Future<List<Region>?> region(
   BuildContext context, {

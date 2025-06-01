@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import '../distance.dart';
+import 'distance.dart';
 
-import '../address.dart';
+import 'address.dart';
 
 class AddressWidget extends StatefulWidget {
   final Future<List<Address>> Function(String keyword) datasource;

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:pinyin/pinyin.dart';
 
-import '../region.dart' show Region;
+import 'region.dart' show Region;
 
 class RegionWidget extends StatefulWidget {
   final String? region;
