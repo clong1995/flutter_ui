@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-abstract class Snack {
+class Snack {
   static void show({
     required BuildContext context,
     required Widget content,
