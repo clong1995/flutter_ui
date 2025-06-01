@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ui_webview/ui_webview.dart';
 
-class MapViewWidget extends StatefulWidget {
-  const MapViewWidget({super.key});
+class MapView extends StatefulWidget {
+  const MapView({super.key});
 
   @override
-  State<MapViewWidget> createState() => _MapViewWidgetState();
+  State<MapView> createState() => _MapViewState();
 }
 
-class _MapViewWidgetState extends State<MapViewWidget> {
+class _MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     return const UiWebview(url: "packages/ui_map/html/tianditu.html");

@@ -42,6 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );*/
-    return MapViewWidget();
+    return MapView();
   }
 }
