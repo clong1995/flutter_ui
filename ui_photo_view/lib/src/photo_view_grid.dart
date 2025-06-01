@@ -42,6 +42,6 @@ class PhotoViewGrid extends StatelessWidget {
       index: index,
       onChanged: onChanged,
     ),
-    child: UiCacheImage(images[index], fit: BoxFit.cover, thumbnail: true),
+    child: UiCacheImage(images[index], fit: BoxFit.cover),
   );
 }
