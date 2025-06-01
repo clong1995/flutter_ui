@@ -1,100 +1,70 @@
-//Message? _message;
 import 'package:flutter/material.dart';
 
-import '../ui_toast.dart' show UiToastMessage;
+import 'toast_widget.dart';
 
-void Function(UiToastMessage?)? update;
+class UiToast {
+  static UiToastMessage get success =>
+      UiToastMessage()
+        ..icon = const Icon(Icons.check_circle_outline, color: Colors.green)
+        ..text = "成功"
+        ..color = Colors.green;
 
-class ToastWidget extends StatefulWidget {
-  const ToastWidget({super.key});
+  static UiToastMessage get info =>
+      UiToastMessage()
+        ..icon = const Icon(Icons.info_outline, color: Colors.orange)
+        ..text = "提示"
+        ..color = Colors.orange;
 
-  @override
-  State<ToastWidget> createState() => ToastWidgetState();
+  static UiToastMessage get failure =>
+      UiToastMessage()
+        ..icon = const Icon(Icons.cancel_outlined, color: Colors.red)
+        ..text = "失败"
+        ..color = Colors.red;
+
+  static UiToastMessage get loading =>
+      UiToastMessage()
+        ..icon = const SizedBox(
+          width: 20,
+          height: 20,
+          child: CircularProgressIndicator(color: Colors.blue),
+        )
+        ..text = "加载中"
+        ..color = Colors.blue
+        ..autoClose = false;
+
+  static UiToastMessage get choice =>
+      UiToastMessage()
+        ..icon = const Icon(Icons.help_outline, color: Colors.blue)
+        ..text = "选择"
+        ..color = Colors.blue
+        ..autoClose = false
+        ..choiceCallback = (bool choice) {};
+
+  static void show(UiToastMessage message) {
+    if (update == null) {
+      return;
+    }
+    message.text = message.text.trim();
+    update!.call(message);
+    if (message.autoClose) {
+      Future.delayed(const Duration(seconds: 1), () => update!.call(null));
+    }
+  }
+
+  static void dismiss() => update?.call(null);
 }
 
-class ToastWidgetState extends State<ToastWidget> {
-  UiToastMessage? message;
+Widget uiToastBuilder(BuildContext context, Widget? child) => Stack(
+  children: [
+    child ?? const SizedBox.shrink(),
+    const Positioned.fill(child: ToastWidget()),
+  ],
+);
 
-  @override
-  void initState() {
-    super.initState();
-    update = (UiToastMessage? meg) {
-      setState(() {
-        message = meg;
-      });
-    };
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return message == null
-        ? const SizedBox.shrink()
-        : AbsorbPointer(
-      absorbing: message!.choiceCallback == null,
-      child: Container(
-        color:
-        message!.choiceCallback != null
-            ? const Color(0x80000000)
-            : null,
-        alignment: Alignment.center,
-        child: IntrinsicWidth(
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            constraints: const BoxConstraints(minWidth: 140, minHeight: 60),
-            decoration: BoxDecoration(
-              color: Color.lerp(message!.color, Colors.white, .95),
-              border: Border.all(
-                color: message!.color.withAlpha(2),
-                width: 1.5,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    message!.icon,
-                    const SizedBox(width: 5),
-                    Text(
-                      message!.text,
-                      style: TextStyle(
-                        color: message!.color,
-                        fontSize: 15,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                  ],
-                ),
-                if (message!.choiceCallback != null)
-                  const SizedBox(height: 5),
-                if (message!.choiceCallback != null)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          message!.choiceCallback!(false);
-                          update?.call(null);
-                        },
-                        child: const Text("取消"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          message!.choiceCallback!(true);
-                          update?.call(null);
-                        },
-                        child: const Text("确定"),
-                      ),
-                    ],
-                  ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+class UiToastMessage {
+  Widget icon = const Icon(Icons.circle_outlined);
+  String text = "无";
+  Color color = Colors.grey;
+  bool autoClose = true;
+  void Function(bool choice)? choiceCallback;
 }
