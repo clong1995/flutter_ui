@@ -197,7 +197,7 @@ packages:
     description:
       path: ui_alert
       ref: HEAD
-      resolved-ref: "7becd72a017678253c8a4dabec2011822dc7921f"
+      resolved-ref: "3d558f1fa710c160a5690cb388eced81d143a244"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
@@ -206,7 +206,7 @@ packages:
     description:
       path: ui_webview
       ref: HEAD
-      resolved-ref: "7becd72a017678253c8a4dabec2011822dc7921f"
+      resolved-ref: "3d558f1fa710c160a5690cb388eced81d143a244"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"

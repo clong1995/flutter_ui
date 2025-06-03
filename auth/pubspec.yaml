@@ -5,13 +5,13 @@ homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.8.0
   flutter: ">=3.19.6"
 
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: ^2.5.2
+  shared_preferences: ^2.5.3
   security:
     git:
       url: https://github.com/clong1995/flutter_ui.git
