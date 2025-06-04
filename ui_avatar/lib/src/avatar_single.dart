@@ -29,13 +29,14 @@ class AvatarSingle extends StatelessWidget {
           decoration: BoxDecoration(
             // shape: BoxShape.circle,
             border: border,
-            borderRadius: BorderRadius.circular(size/10),
+            borderRadius: BorderRadius.circular(size / 10),
           ),
           child: Padding(
             padding: EdgeInsets.all(padding),
             child: (imageUrl == null || imageUrl == "")
                 ? Icon(Icons.person, color: Colors.grey, size: size / 1.3)
-                : ClipOval(
+                : ClipRRect(
+                    borderRadius: BorderRadius.circular(size / 10),
                     child: imageUrl!.startsWith("http")
                         ? UiCacheImage(imageUrl!, fit: BoxFit.fill)
                         : Image.asset(
