@@ -26,22 +26,24 @@ class Avatar extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 1,
         child: DecoratedBox(
-          decoration: BoxDecoration(shape: BoxShape.circle, border: border),
+          decoration: BoxDecoration(
+            // shape: BoxShape.circle,
+            border: border,
+            borderRadius: BorderRadius.circular(size/10),
+          ),
           child: Padding(
             padding: EdgeInsets.all(padding),
-            child:
-                (imageUrl == null || imageUrl == "")
-                    ? Icon(Icons.person, color: Colors.grey, size: size / 1.3)
-                    : ClipOval(
-                      child:
-                          imageUrl!.startsWith("http")
-                              ? UiCacheImage(imageUrl!, fit: BoxFit.fill)
-                              : Image.asset(
-                                imageUrl!,
-                                fit: BoxFit.fill,
-                                package: package,
-                              ),
-                    ),
+            child: (imageUrl == null || imageUrl == "")
+                ? Icon(Icons.person, color: Colors.grey, size: size / 1.3)
+                : ClipOval(
+                    child: imageUrl!.startsWith("http")
+                        ? UiCacheImage(imageUrl!, fit: BoxFit.fill)
+                        : Image.asset(
+                            imageUrl!,
+                            fit: BoxFit.fill,
+                            package: package,
+                          ),
+                  ),
           ),
         ),
       ),
