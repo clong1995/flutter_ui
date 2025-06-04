@@ -31,6 +31,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
   void initState() {
     super.initState();
     //cleanUpCache(); // 初始化时清理过期缓存
+    src = widget.src;
     futureImage = _cachedImage(widget.src, widget.fit);
   }
 
