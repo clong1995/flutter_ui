@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'avatar.dart';
+import 'avatar_single.dart';
 
 class AvatarStack extends StatelessWidget {
   final int max;
@@ -37,7 +37,7 @@ class AvatarStack extends StatelessWidget {
               int index = entry.key;
               return Positioned(
                 left: (index * height) - index * offset,
-                child: Avatar(
+                child: AvatarSingle(
                   imageUrl: entry.value,
                   size: height,
                   border: Border.all(color: Colors.white, width: 2),
