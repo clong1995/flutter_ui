@@ -6,7 +6,7 @@ import 'logic.dart';
 StateWidget eventBusPage() => StateWidget<EventBusLogic>(
   logic: EventBusLogic.new,
   builder:
-      (logic) => Scaffold(
+      (context,logic) => Scaffold(
         body: Column(
           mainAxisAlignment : MainAxisAlignment. center,
           children: [

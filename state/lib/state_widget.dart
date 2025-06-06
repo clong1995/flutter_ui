@@ -5,7 +5,7 @@ import 'src/logic_dict.dart';
 
 class StateWidget<T extends Logic> extends StatefulWidget {
   final T Function(BuildContext context) logic;
-  final Widget Function(T) builder;
+  final Widget Function(BuildContext context, T) builder;
   final bool public;
 
   const StateWidget({
@@ -40,7 +40,7 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   }
 
   @override
-  Widget build(BuildContext context) => widget.builder(logic);
+  Widget build(BuildContext context) => widget.builder(context,logic);
 
   @override
   void dispose() {
