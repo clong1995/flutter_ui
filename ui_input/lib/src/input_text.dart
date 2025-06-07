@@ -16,6 +16,7 @@ class InputText extends StatefulWidget {
   final bool clear;
   final bool autofocus;
   final bool obscureText;
+  final EdgeInsetsGeometry? padding;
 
   const InputText({
     super.key,
@@ -33,6 +34,7 @@ class InputText extends StatefulWidget {
     this.clear = false,
     this.autofocus = false,
     this.obscureText = false,
+    this.padding,
   });
 
   @override
@@ -80,68 +82,76 @@ class _InputTextState extends State<InputText> {
   }
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-    width: widget.width,
-    height: height,
-    child: TextField(
-      controller: controller,
-      cursorHeight: (height ?? 24) * .7,
-      obscureText: obscure,
-      style: style,
-      maxLines: maxLines,
-      keyboardType: widget.keyboardType,
-      inputFormatters: widget.inputFormatters,
-      onChanged: widget.onChanged == null
-          ? null
-          : (String text_) {
-              widget.onChanged!(text_);
-            },
-      autofocus: widget.autofocus,
-      decoration: InputDecoration(
-        prefixIcon: widget.prefix,
-        prefixIconConstraints: const BoxConstraints(),
-        enabledBorder: OutlineInputBorder(
-          borderSide: borderSide.copyWith(
-            color: borderSide.color.withAlpha(127),
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(borderSide: borderSide),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-        fillColor: Colors.white,
-        hoverColor: Colors.transparent,
-        filled: true,
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(5),
+  Widget build(BuildContext context) =>
+      SizedBox(
+        width: widget.width,
+        height: height,
+        child: TextField(
+          controller: controller,
+          cursorHeight: (height ?? 24) * .7,
+          obscureText: obscure,
+          style: style,
+          maxLines: maxLines,
+          keyboardType: widget.keyboardType,
+          inputFormatters: widget.inputFormatters,
+          onChanged: widget.onChanged == null
+              ? null
+              : (String text_) {
+            widget.onChanged!(text_);
+          },
+          autofocus: widget.autofocus,
+          decoration: InputDecoration(
+              prefixIcon: widget.prefix,
+              prefixIconConstraints: const BoxConstraints(),
+              enabledBorder: OutlineInputBorder(
+                borderSide: borderSide.copyWith(
+                  color: borderSide.color.withAlpha(127),
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(borderSide: borderSide),
+              contentPadding: widget.padding ??
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+              fillColor: Colors.white,
+              hoverColor: Colors.transparent,
+          filled: true,
+          border: OutlineInputBorder(
+              borderSide: BorderSide.none,
+              borderRadius: BorderRadius.circular(5),
         ),
         hintText: widget.hint,
         hintStyle: widget.hint == null
             ? null
             : const TextStyle(
-                color: Color.fromRGBO(153, 153, 153, 1),
-                fontSize: 14,
-              ),
+          color: Color.fromRGBO(153, 153, 153, 1),
+          fontSize: 14,
+        ),
         suffixIcon: widget.clear
             ? IconButton(
-                onPressed: controller.clear,
-                icon: const Icon(Icons.clear),
-              )
+          onPressed: controller.clear,
+          icon: const Icon(Icons.clear),
+        )
             : widget.obscureText
             ? IconButton(
-                onPressed: () {
-                  obscure = !obscure;
-                  setState(() {});
-                },
-                icon: Icon(
-                  obscure
-                      ? Icons.visibility_off_outlined
-                      : Icons.visibility_outlined,
-                  size: 16,
-                  color: Colors.grey,
-                ),
-              )
+          onPressed: () {
+            obscure = !obscure;
+            setState(() {});
+          },
+          icon: Icon(
+            obscure
+                ? Icons.visibility_off_outlined
+                : Icons.visibility_outlined,
+            size: 16,
+            color: Colors.grey,
+          ),
+        )
             : null,
-      ),
-    ),
+      )
+
+  ,
+
+  )
+
+  ,
+
   );
 }
