@@ -52,34 +52,27 @@ class _MyHomePageState extends State<MyHomePage> {
           const SizedBox(
             width: 100,
             height: 100,
-            child: UiCacheImage("https://picsum.photos/250?image=9"),
+            child: UiCacheImage("https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/2.jpg"),
           ),
           const SizedBox(
             width: 100,
             height: 100,
             child: UiCacheImage("https://docs.flutter.dev/assets/images/dash/dash-fainting.gif"),
           ),
-          FilledButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const NewPage()),
-                );
-              },
-              child: Text("new page")),
+          const SizedBox(
+            width: 100,
+            height: 100,
+            child: UiCacheImage("https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/7.jpeg"),
+          ),
+          SizedBox(
+            width: 100,
+            height: 100,
+            child: Image(
+              image: UiCacheImageProvider("https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/7.jpeg"),
+            ),
+          ),
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
-
-class NewPage extends StatelessWidget {
-  const NewPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
     );
   }
 }

@@ -1,16 +1,13 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'dart:ui' as ui;
 
-import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
-import 'package:path_provider/path_provider.dart';
 
-String _cacheDirectory = "";
+import 'common.dart';
 
 class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
   final String src;
@@ -18,11 +15,9 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
   UiCacheImageProvider(this.src);
 
   @override
-  Future<UiCacheImageProvider> obtainKey(ImageConfiguration configuration) {
-    return SynchronousFuture<UiCacheImageProvider>(this);
-  }
+  Future<UiCacheImageProvider> obtainKey(ImageConfiguration configuration) =>
+      SynchronousFuture<UiCacheImageProvider>(this);
 
-  // Flutter 3.0+ 使用 loadBuffer 或 loadImage
   @override
   ImageStreamCompleter loadImage(
     UiCacheImageProvider key,
@@ -43,34 +38,37 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
     ImageDecoderCallback decode,
   ) async {
     try {
-      String tempDirectory = await _tempDirectory();
-      String md5str = _md5str(src);
-      File imageFile = File('$tempDirectory/$md5str');
+      final tempDir = await tempDirectory();
+      final md5 = md5str(src);
+      final imageFile = File('$tempDir/$md5');
       if (await imageFile.exists()) {
-        final bytes = await imageFile.readAsBytes();
-        return await _bytesToCodec(bytes);
+        try {
+          final bytes = await imageFile.readAsBytes();
+          return await ui.instantiateImageCodec(bytes);
+        } catch (e) {
+          debugPrint('cache image error $e');
+          await imageFile.delete();
+        }
       }
+
       //请求新的图片
-      if (kDebugMode) {
-        print("request new image");
+      debugPrint("request new image");
+
+      final response = await get(Uri.parse(src));
+      if (response.statusCode != 200) {
+        throw Exception('status code: ${response.statusCode}');
+      } else if (response.bodyBytes.isEmpty) {
+        throw Exception('response body is empty');
       }
 
-      Response response = await get(Uri.parse(src));
-      if (response.statusCode == 200) {
-        await imageFile.writeAsBytes(response.bodyBytes);
-        return await _bytesToCodec(response.bodyBytes);
-      }
-
-      if (kDebugMode) {
-        print("request new image error: ${response.statusCode}");
-      }
-      final ByteData data = await rootBundle.load("images/image.png");
-      final Uint8List bytes = data.buffer.asUint8List();
-      return await _bytesToCodec(bytes);
+      await imageFile.writeAsBytes(response.bodyBytes);
+      return await ui.instantiateImageCodec(response.bodyBytes);
     } catch (e) {
-      // 处理加载错误
-      debugPrint('Failed to load image: $e');
-      rethrow;
+      final data = await rootBundle.load(
+        "packages/ui_cache_image/images/image.png",
+      );
+      final bytes = data.buffer.asUint8List();
+      return await ui.instantiateImageCodec(bytes);
     } finally {
       await chunkEvents.close();
     }
@@ -84,24 +82,4 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
 
   @override
   int get hashCode => src.hashCode;
-
-  Future<ui.Codec> _bytesToCodec(Uint8List bytes) async {
-    final buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
-    final descriptor = await ui.ImageDescriptor.encoded(buffer);
-    final codec = await descriptor.instantiateCodec();
-    buffer.dispose();
-    descriptor.dispose();
-    return codec;
-  }
-}
-
-String _md5str(String input) => md5.convert(utf8.encode(input)).toString();
-
-Future<String> _tempDirectory() async {
-  if (_cacheDirectory.isNotEmpty) {
-    return _cacheDirectory;
-  }
-  final dir = await getTemporaryDirectory();
-  _cacheDirectory = dir.path;
-  return _cacheDirectory;
 }

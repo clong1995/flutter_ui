@@ -38,7 +38,6 @@ class _PhotoViewState extends State<PhotoView> {
       }
       currIndex = index;
       return PhotoViewGalleryPageOptions(
-        //TODO 这里要变成缓存，但是缓存没有imageProvider
         imageProvider: UiCacheImageProvider(images[index]),
       );
     },

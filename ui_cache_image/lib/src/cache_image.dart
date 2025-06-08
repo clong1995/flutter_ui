@@ -1,13 +1,10 @@
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:path_provider/path_provider.dart';
 
-String _cacheDirectory = "";
+import 'common.dart';
 
 class UiCacheImage extends StatefulWidget {
   final String src;
@@ -39,9 +36,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
   void didUpdateWidget(covariant UiCacheImage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.src != src || oldWidget.fit != widget.fit) {
-      if (kDebugMode) {
-        print("image changed");
-      }
+      debugPrint("image changed");
       futureImage = _cachedImage(src, widget.fit);
       setState(() {});
     }
@@ -72,41 +67,26 @@ class _UiCacheImageState extends State<UiCacheImage> {
       return Image.network(src, fit: fit);
     }
 
-    String tempDirectory = await _tempDirectory();
-    String md5str = _md5str(src);
-    File imageFile = File('$tempDirectory/$md5str');
+    final tempDir = await tempDirectory();
+    final md5 = md5str(src);
+    final imageFile = File('$tempDir/$md5');
 
     if (await imageFile.exists()) {
       return Image.file(imageFile, fit: fit);
     }
 
     //请求新的图片
-    if (kDebugMode) {
-      print("request new image");
-    }
-    Response response = await get(Uri.parse(src));
+    debugPrint("request new image");
+
+    final response = await get(Uri.parse(src));
     if (response.statusCode == 200) {
       await imageFile.writeAsBytes(response.bodyBytes);
       return Image.memory(response.bodyBytes, fit: fit);
     }
 
-    if (kDebugMode) {
-      print("request new image error: ${response.statusCode}");
-    }
+    debugPrint("request new image error: ${response.statusCode}");
+
     return const Icon(Icons.image_outlined);
-  }
-
-  Future<String> _tempDirectory() async {
-    if (_cacheDirectory.isNotEmpty) {
-      return _cacheDirectory;
-    }
-    final dir = await getTemporaryDirectory();
-    _cacheDirectory = dir.path;
-    return _cacheDirectory;
-  }
-
-  String _md5str(String input) {
-    return md5.convert(utf8.encode(input)).toString();
   }
 
   /// 清理过期的缓存项
@@ -122,9 +102,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
       if (snapshot.connectionState == ConnectionState.waiting) {
         return const Center(child: CircularProgressIndicator());
       } else if (snapshot.hasError) {
-        if (kDebugMode) {
-          print(snapshot.error);
-        }
+        debugPrint(snapshot.error.toString());
         return const Icon(Icons.broken_image);
       } else if (snapshot.hasData) {
         return snapshot.data!;

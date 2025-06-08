@@ -1,6 +1,6 @@
 name: ui_cache_image
 description: "A new Flutter project."
-version: 0.1.0
+version: 0.2.0
 homepage: flutter_ui
 
 environment:
@@ -31,7 +31,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   #
   assets:
-     - images/image.png
+     - images/
   # For details regarding assets in packages, see
   # https://flutter.dev/to/asset-from-package
   #
