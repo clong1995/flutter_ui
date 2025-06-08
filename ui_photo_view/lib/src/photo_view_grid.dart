@@ -32,16 +32,16 @@ class PhotoViewGrid extends StatelessWidget {
       mainAxisSpacing: mainAxisSpacing,
       crossAxisSpacing: crossAxisSpacing,
     ),
-    itemBuilder: imageBuilder,
+    itemBuilder: (context, index) => GestureDetector(
+      onTap: () => onImageTap(context, index),
+      child: UiCacheImage(images[index], fit: BoxFit.cover),
+    ),
   );
 
-  Widget imageBuilder(BuildContext context, int index) => GestureDetector(
-    onTap: () => pushPhotoViewPage(
-      context: context,
-      images: images,
-      index: index,
-      onChanged: onChanged,
-    ),
-    child: UiCacheImage(images[index], fit: BoxFit.cover),
+  void onImageTap(BuildContext context, int index) => pushPhotoViewPage(
+    context: context,
+    images: images,
+    index: index,
+    onChanged: onChanged,
   );
 }
