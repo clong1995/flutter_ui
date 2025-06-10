@@ -5,8 +5,8 @@ import 'package:ui_webview/ui_webview.dart';
 Future<void> uiCaptcha({
   required BuildContext context,
   required Future<bool> Function(String json) verify,
-  double width = 300,
-  double height = 420,
+  double width = 340,
+  double height = 340,
 }) async => await alertCustom(
   context: context,
   child: _Captcha(verify: verify, width: width, height: height),
@@ -20,7 +20,7 @@ class _Captcha extends StatelessWidget {
   const _Captcha({required this.verify, required this.width, required this.height});
 
   @override
-  Widget build(BuildContext context) => SizedBox(
+  Widget build(BuildContext context) => Container(
     width: width,
     height: height,
     child: Column(
@@ -40,9 +40,9 @@ class _Captcha extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 5),
-        FilledButton(
+        TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text("取消验证"),
+          child: const Text("取消验证",),
         ),
         const SizedBox(height: 10),
       ],
