@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 
@@ -5,6 +6,10 @@ class Rpx {
   static double _width = 0;
 
   static init([double? width]) {
+    if (Platform.isAndroid || Platform.isIOS) {
+      return;
+    }
+
     if (width != null) {
       _width = width;
     } else {
