@@ -46,7 +46,7 @@ class Auth {
   //清除凭证
   static Future<void> clean() async {
     _ak = _sk = "";
-    _asyncPrefs.setString(_key,"");
+    await _asyncPrefs.setString(_key,"");
   }
 
   //判断状态
