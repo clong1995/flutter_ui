@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'widget/config.dart';
+import 'widget/title.dart';
 
 Future<T?> alertCustom<T>({
   required BuildContext context,
@@ -20,13 +21,13 @@ Future<T?> alertCustom<T>({
 );
 
 class CustomContent extends StatelessWidget {
-  final String title;
+  final String? title;
   final Widget child;
   final List<Widget>? action;
 
   const CustomContent({
     super.key,
-    required this.title,
+    this.title,
     required this.child,
     this.action,
   });
@@ -36,31 +37,7 @@ class CustomContent extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          color: const Color.fromRGBO(245, 245, 245, 1),
-          height: 35,
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Row(
-            children: [
-              Container(
-                height: 15,
-                width: 3,
-                margin: const EdgeInsets.only(right: 5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1.5),
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-              Text(
-                title,
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
+        if (title != null) TitleWidget(text: title!),
         Padding(
           padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
           child: child,

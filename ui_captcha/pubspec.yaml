@@ -15,9 +15,10 @@ dependencies:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_webview
   ui_alert:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: ui_alert
+    #git:
+    #  url: https://github.com/clong1995/flutter_ui.git
+    #  path: ui_alert
+    path: /Users/markeckles/Desktop/flutter_ui/ui_alert
 
 dev_dependencies:
   flutter_test:
