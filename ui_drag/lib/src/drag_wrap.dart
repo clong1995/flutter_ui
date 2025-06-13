@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
-class Wrap extends StatefulWidget {
+class DragWrap extends StatefulWidget {
   final MaterialApp app;
 
-  const Wrap(this.app, {super.key});
+  const DragWrap(this.app, {super.key});
 
   @override
-  State<Wrap> createState() => _AppState();
+  State<DragWrap> createState() => _AppState();
 }
 
-class _AppState extends State<Wrap> with WindowListener {
+class _AppState extends State<DragWrap> with WindowListener {
   @override
   void initState() {
     super.initState();
