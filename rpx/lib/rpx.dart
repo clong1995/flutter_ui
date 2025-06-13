@@ -6,7 +6,7 @@ class Rpx {
   static double _width = 0;
 
   static init([double? width]) {
-    if (Platform.isAndroid || Platform.isIOS) {
+    if (Platform.isMacOS || Platform.isLinux || Platform.isWindows) {
       return;
     }
 
