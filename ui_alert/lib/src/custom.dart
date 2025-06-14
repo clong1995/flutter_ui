@@ -39,7 +39,7 @@ class CustomContent extends StatelessWidget {
       children: [
         if (title != null) TitleWidget(text: title!),
         Padding(
-          padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
+          padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
           child: child,
         ),
         Container(
