@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             "3":"测试3",
           },
           onChanged: (value){
-            print(value);
+            debugPrint(value);
           },
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.

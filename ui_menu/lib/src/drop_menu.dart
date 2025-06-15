@@ -56,7 +56,7 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
               },
               child: Container(
                 height: widget.height ?? 30,
-                padding: EdgeInsets.only(left: 10, top: 5, right: 5, bottom: 5),
+                padding: const EdgeInsets.only(left: 10, top: 5, right: 5, bottom: 5),
                 width: widget.width,
                 decoration: BoxDecoration(
                   border: Border.all(color: const Color(0x42000000)),
@@ -72,10 +72,11 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
                         child: Text(
                           value == null ? "未选择" : widget.items[value]!,
                           overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(height: 1),
                         ),
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.arrow_drop_down,
                       color: Colors.black87,
                       size: 20,
