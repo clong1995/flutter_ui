@@ -14,10 +14,10 @@ class UiDropMenu<T> extends StatefulWidget {
     this.width,
     this.height,
     this.onChanged,
-  }) /*: assert(
-         value == null || !items.containsKey(value),
+  }) : assert(
+         !(value == null || !items.containsKey(value)),
          'the provided value: $value is not in items',
-       )*/;
+       );
 
   @override
   State<UiDropMenu<T>> createState() => _UiDropMenuState<T>();
