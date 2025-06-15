@@ -17,17 +17,16 @@ class UiPopMenu<T> extends StatelessWidget {
     final key = GlobalKey();
     return InkWell(
       key: key,
-      onTap:
-          onTap == null
-              ? null
-              : () async {
-                T? result = await _showPopupMenu<T>(
-                  key: key,
-                  context: context,
-                  items: items,
-                );
-                onTap!(result);
-              },
+      onTap: onTap == null
+          ? null
+          : () async {
+              T? result = await _showPopupMenu<T>(
+                key: key,
+                context: context,
+                items: items,
+              );
+              onTap!(result);
+            },
       child: child,
     );
   }
@@ -52,17 +51,16 @@ Future<T?> _showPopupMenu<T>({
       offset.dx + renderBox.size.width,
       offset.dy + height * items.length,
     ),
-    items:
-        items.entries
-            .map(
-              (e) => PopupMenuItem<T>(
-                height: height,
-                padding: EdgeInsets.zero,
-                value: e.key,
-                child: e.value,
-              ),
-            )
-            .toList(),
+    items: items.entries
+        .map(
+          (e) => PopupMenuItem<T>(
+            height: height,
+            padding: EdgeInsets.zero,
+            value: e.key,
+            child: e.value,
+          ),
+        )
+        .toList(),
   );
 
   return result;
