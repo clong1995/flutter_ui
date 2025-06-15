@@ -7,17 +7,17 @@ class UiDropMenu<T> extends StatefulWidget {
   final double? width;
   final double? height;
 
-  UiDropMenu({
+  const UiDropMenu({
     super.key,
     this.value,
     required this.items,
     this.width,
     this.height,
     this.onChanged,
-  }) : assert(
+  }) /*: assert(
          !(value == null || !items.containsKey(value)),
          'the provided value: $value is not in items',
-       );
+       )*/;
 
   @override
   State<UiDropMenu<T>> createState() => _UiDropMenuState<T>();
@@ -56,7 +56,12 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
               },
               child: Container(
                 height: widget.height ?? 30,
-                padding: const EdgeInsets.only(left: 10, top: 5, right: 5, bottom: 5),
+                padding: const EdgeInsets.only(
+                  left: 10,
+                  top: 5,
+                  right: 5,
+                  bottom: 5,
+                ),
                 width: widget.width,
                 decoration: BoxDecoration(
                   border: Border.all(color: const Color(0x42000000)),
@@ -70,7 +75,7 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
                     Expanded(
                       child: Center(
                         child: Text(
-                          value == null ? "未选择" : widget.items[value]!,
+                          value == null ? "未选择" : widget.items[value] ?? "无选项",
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(height: 1),
                         ),
