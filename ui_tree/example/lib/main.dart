@@ -80,8 +80,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: UiTree(
         data: data,
         itemBuilder: itemBuilder,
-        onTap: (String id) {
-          print(id);
+        onTap: (UiTreeItem item) {
+          print(item.title);
         },
       ),
     );

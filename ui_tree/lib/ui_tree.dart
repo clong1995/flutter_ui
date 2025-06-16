@@ -14,7 +14,7 @@ class UiTree extends StatefulWidget {
   )
   itemBuilder;
 
-  final void Function(String id)? onTap;
+  final void Function(UiTreeItem item)? onTap;
 
   const UiTree({
     super.key,
@@ -71,7 +71,7 @@ class _UiTreeState extends State<UiTree> {
           GestureDetector(
             onTap: () {
               if (selectedId != tree.item.id) {
-                widget.onTap?.call(tree.item.id);
+                widget.onTap?.call(tree.item);
               }
               selectedId = tree.item.id;
               if (tree.expand) {
