@@ -1,11 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class UiTree<T> extends StatefulWidget {
+class UiTree extends StatefulWidget {
   final double indent;
-  final List<UiTreeItem<T>> data;
+  final List<UiTreeItem> data;
   final Widget Function(
     BuildContext context,
-    T data,
+    String title,
     int length,
     int level,
     bool expand,
@@ -24,11 +25,11 @@ class UiTree<T> extends StatefulWidget {
   });
 
   @override
-  State<UiTree<T>> createState() => _UiTreeState<T>();
+  State<UiTree> createState() => _UiTreeState();
 }
 
-class _UiTreeState<T> extends State<UiTree<T>> {
-  List<_Tree<T>> treeList = [];
+class _UiTreeState extends State<UiTree> {
+  List<_Tree> treeList = [];
 
   String selectedId = "";
 
@@ -42,10 +43,11 @@ class _UiTreeState<T> extends State<UiTree<T>> {
 
   @override
   @override
-  void didUpdateWidget(UiTree<T> oldWidget) {
+  void didUpdateWidget(UiTree oldWidget) {
     super.didUpdateWidget(oldWidget);
-    //TODO 这里可以把 UiTreeItem 中的 T data 改为 String data，然后重写 ==，使用 listEquals 比较
-    buildTree();
+    if (!listEquals(widget.data, oldWidget.data)) {
+      buildTree();
+    }
   }
 
   @override
@@ -59,7 +61,7 @@ class _UiTreeState<T> extends State<UiTree<T>> {
     );
   }
 
-  Widget buildItem(_Tree<T> tree) {
+  Widget buildItem(_Tree tree) {
     tree.selected = selectedId == tree.item.id;
     return Padding(
       padding: EdgeInsets.only(left: widget.indent * tree.level),
@@ -89,7 +91,7 @@ class _UiTreeState<T> extends State<UiTree<T>> {
             },
             child: widget.itemBuilder(
               context,
-              tree.item.data,
+              tree.item.title,
               tree.children.length,
               tree.level,
               tree.expand,
@@ -108,9 +110,10 @@ class _UiTreeState<T> extends State<UiTree<T>> {
   }
 
   void buildTree() {
-    final Map<String, _Tree<T>> nodeMap = {};
+    treeList.clear();
+    final Map<String, _Tree> nodeMap = {};
     for (var item in widget.data) {
-      nodeMap[item.id] = _Tree<T>()
+      nodeMap[item.id] = _Tree()
         ..item = item
         ..children = [];
     }
@@ -135,16 +138,26 @@ class _UiTreeState<T> extends State<UiTree<T>> {
   }
 }
 
-class UiTreeItem<T> {
+class UiTreeItem {
   String id = "";
   String pid = "";
-  late T data;
+  String title = "";
+
+  @override
+  bool operator == (Object other) =>
+      other is UiTreeItem &&
+      id == other.id &&
+      pid == other.pid &&
+      title == other.title;
+
+  @override
+  int get hashCode => id.hashCode ^ pid.hashCode ^ title.hashCode;
 }
 
-class _Tree<T> {
+class _Tree {
   int level = 0;
   bool expand = false;
   bool selected = false;
-  late UiTreeItem<T> item;
-  List<_Tree<T>> children = [];
+  late UiTreeItem item;
+  List<_Tree> children = [];
 }

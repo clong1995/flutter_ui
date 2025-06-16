@@ -31,53 +31,53 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final RegExp regExp = RegExp(r'_(\d+)x(\d+)\.$');
 
-  List<UiTreeItem<Data>> data = [
+  List<UiTreeItem> data = [
     UiTreeItem()
       ..id = "A"
-      ..data = (Data()..title = "A 一级标题"),
+      ..title = "A 一级标题",
     UiTreeItem()
       ..id = "B"
       ..pid = "A"
-      ..data = (Data()..title = "B 二级标题"),
+      ..title = "B 二级标题",
     UiTreeItem()
       ..id = "C"
       ..pid = "A"
-      ..data = (Data()..title = "C 二级标题"),
+      ..title = "C 二级标题",
     UiTreeItem()
       ..id = "D"
       ..pid = "A"
-      ..data = (Data()..title = "D 二级标题"),
+      ..title = "D 二级标题",
     UiTreeItem()
       ..id = "E"
-      ..data = (Data()..title = "E 一级标题"),
+      ..title = "E 一级标题",
     UiTreeItem()
       ..id = "F"
       ..pid = "E"
-      ..data = (Data()..title = "F 二级标题"),
+      ..title = "F 二级标题",
     UiTreeItem()
       ..id = "G"
       ..pid = "E"
-      ..data = (Data()..title = "G 三级标题"),
+      ..title = "G 三级标题",
     UiTreeItem()
       ..id = "H"
       ..pid = "G"
-      ..data = (Data()..title = "H 四级标题"),
+      ..title = "H 四级标题",
     UiTreeItem()
       ..id = "I"
       ..pid = "G"
-      ..data = (Data()..title = "I 四级标题"),
+      ..title = "I 四级标题",
     UiTreeItem()
       ..id = "J"
-      ..data = (Data()..title = "J 一级标题"),
+      ..title = "J 一级标题",
     UiTreeItem()
       ..id = "K"
-      ..data = (Data()..title = "K 一级标题"),
+      ..title = "K 一级标题",
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: UiTree<Data>(
+      body: UiTree(
         data: data,
         itemBuilder: itemBuilder,
         onTap: (String id) {
@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget itemBuilder(
     BuildContext context,
-    Data data,
+    String title,
     int length,
     int level,
     bool expand,
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           Expanded(
             child: Text(
-              "${data.title}-$level-$expand-$length",
+              "$data-$level-$expand-$length",
               style: TextStyle(color: selectedFontColor),
             ),
           ),
