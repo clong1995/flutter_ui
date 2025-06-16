@@ -99,9 +99,13 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
               child: MenuItemButton(
                 style: MenuItemButton.styleFrom(padding: EdgeInsets.zero),
                 onPressed: () {
+                  if (e.key == value) {
+                    return;
+                  }
                   setState(() {
                     value = e.key;
                   });
+                  widget.onChanged?.call(value);
                 },
                 child: Center(child: Text(e.value)),
               ),
