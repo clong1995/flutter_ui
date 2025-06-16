@@ -42,11 +42,11 @@ class _UiTreeState extends State<UiTree> {
   }
 
   @override
-  @override
   void didUpdateWidget(UiTree oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (!listEquals(widget.data, oldWidget.data)) {
       buildTree();
+      setState(() {});
     }
   }
 
@@ -144,7 +144,7 @@ class UiTreeItem {
   String title = "";
 
   @override
-  bool operator == (Object other) =>
+  bool operator ==(Object other) =>
       other is UiTreeItem &&
       id == other.id &&
       pid == other.pid &&
