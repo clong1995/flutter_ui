@@ -41,6 +41,14 @@ class _UiTreeState<T> extends State<UiTree<T>> {
   }
 
   @override
+  @override
+  void didUpdateWidget(UiTree<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    //TODO 这里可以把 UiTreeItem 中的 T data 改为 String data，然后重写 ==，使用 listEquals 比较
+    buildTree();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: EdgeInsets.zero,
@@ -102,10 +110,9 @@ class _UiTreeState<T> extends State<UiTree<T>> {
   void buildTree() {
     final Map<String, _Tree<T>> nodeMap = {};
     for (var item in widget.data) {
-      nodeMap[item.id] =
-          _Tree<T>()
-            ..item = item
-            ..children = [];
+      nodeMap[item.id] = _Tree<T>()
+        ..item = item
+        ..children = [];
     }
 
     for (var item in widget.data) {
