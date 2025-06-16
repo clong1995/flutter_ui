@@ -88,13 +88,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget itemBuilder(
-    BuildContext context,
-    String title,
-    int length,
-    int level,
-    bool expand,
-    bool selected,
-  ) {
+      BuildContext context,
+      UiTreeItem item,
+      int length,
+      int level,
+      bool expand,
+      bool selected,
+      ) {
     final selectedFontColor = selected ? Colors.white : Colors.black;
     final selectedBackgroundColor = selected ? Colors.red : Colors.transparent;
     return Container(
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           Expanded(
             child: Text(
-              "$data-$level-$expand-$length",
+              "${item.title}-$level-$expand-$length",
               style: TextStyle(color: selectedFontColor),
             ),
           ),

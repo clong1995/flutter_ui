@@ -6,7 +6,7 @@ class UiTree extends StatefulWidget {
   final List<UiTreeItem> data;
   final Widget Function(
     BuildContext context,
-    String title,
+    UiTreeItem item,
     int length,
     int level,
     bool expand,
@@ -91,7 +91,7 @@ class _UiTreeState extends State<UiTree> {
             },
             child: widget.itemBuilder(
               context,
-              tree.item.title,
+              tree.item,
               tree.children.length,
               tree.level,
               tree.expand,
