@@ -91,42 +91,43 @@ class _UiBannerState extends State<UiBanner>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        regionWrap(
-          child: PageView.builder(
-            itemCount: null,
-            scrollDirection: widget.scrollDirection,
-            controller: pageController,
-            itemBuilder:
-                (BuildContext context, int index) =>
-                    widget.children[index % widget.children.length],
-            onPageChanged: onPageChanged,
-          ),
-        ),
-        if (widget.indicator)
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: IgnorePointer(
-                child: TabBar(
-                  tabAlignment: TabAlignment.center,
-                  labelPadding: EdgeInsets.zero,
-                  dividerHeight: 0,
-                  indicatorColor: Theme.of(context).primaryColor,
-                  controller: indicatorController,
-                  tabs: List<Widget>.generate(
-                    widget.children.length,
-                    (int index) => const SizedBox(width: 24),
-                  ),
+    return widget.children.isEmpty
+        ? const SizedBox.shrink()
+        : Stack(
+            children: [
+              regionWrap(
+                child: PageView.builder(
+                  itemCount: null,
+                  scrollDirection: widget.scrollDirection,
+                  controller: pageController,
+                  itemBuilder: (BuildContext context, int index) =>
+                      widget.children[index % widget.children.length],
+                  onPageChanged: onPageChanged,
                 ),
               ),
-            ),
-          ),
-      ],
-    );
+              if (widget.indicator)
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: IgnorePointer(
+                      child: TabBar(
+                        tabAlignment: TabAlignment.center,
+                        labelPadding: EdgeInsets.zero,
+                        dividerHeight: 0,
+                        indicatorColor: Theme.of(context).primaryColor,
+                        controller: indicatorController,
+                        tabs: List<Widget>.generate(
+                          widget.children.length,
+                          (int index) => const SizedBox(width: 24),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ],
+          );
   }
 
   void onPageChanged(int index) {
@@ -139,6 +140,9 @@ class _UiBannerState extends State<UiBanner>
   Timer tickerStart() {
     ticker?.cancel();
     return Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+      if (widget.children.isEmpty) {
+        return;
+      }
       if (widget.indicator) {
         index += 1;
         int p = index % widget.children.length;
