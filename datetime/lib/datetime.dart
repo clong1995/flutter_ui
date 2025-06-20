@@ -1,4 +1,5 @@
 import 'package:jiffy/jiffy.dart';
+import 'package:flutter/material.dart';
 
 class Datetime {
   static String toStr(DateTime dateTime, [String? pattern]) {
@@ -20,25 +21,27 @@ class Datetime {
     return Jiffy.parseFromDateTime(dateTime).format(pattern: p);
   }
 
+  static String toTimeStr(TimeOfDay time) => '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
+
   static DateTime add(
-    DateTime dateTime, {
-    int years = 0,
-    int months = 0,
-    int weeks = 0,
-    int days = 0,
-    int hours = 0,
-    int minutes = 0,
-    int seconds = 0,
-  }) => Jiffy.parseFromDateTime(dateTime)
+      DateTime dateTime, {
+        int years = 0,
+        int months = 0,
+        int weeks = 0,
+        int days = 0,
+        int hours = 0,
+        int minutes = 0,
+        int seconds = 0,
+      }) => Jiffy.parseFromDateTime(dateTime)
       .add(
-        years: years,
-        months: months,
-        weeks: weeks,
-        days: days,
-        hours: hours,
-        minutes: minutes,
-        seconds: seconds,
-      )
+    years: years,
+    months: months,
+    weeks: weeks,
+    days: days,
+    hours: hours,
+    minutes: minutes,
+    seconds: seconds,
+  )
       .dateTime;
 
   static String fromNow(DateTime dateTime, [DateTime? now]) {
@@ -83,8 +86,8 @@ class Datetime {
     }
   }
 
-  // 计算距离当前时间过了多长时间
-  /*static String fromNow(DateTime dateTime, [DateTime? now]) {
+// 计算距离当前时间过了多长时间
+/*static String fromNow(DateTime dateTime, [DateTime? now]) {
     now ??= DateTime.now();
     final duration = now.difference(dateTime);
 
