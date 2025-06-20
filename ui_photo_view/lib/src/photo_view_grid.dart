@@ -34,7 +34,7 @@ class PhotoViewGrid extends StatelessWidget {
     ),
     itemBuilder: (context, index) => GestureDetector(
       onTap: () => onImageTap(context, index),
-      child: UiCacheImage(images[index], fit: BoxFit.cover),
+      child: UiCacheImage(images[index], fit: BoxFit.contain),
     ),
   );
 
