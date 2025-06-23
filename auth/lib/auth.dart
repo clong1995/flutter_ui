@@ -7,7 +7,7 @@ final SharedPreferencesAsync _asyncPrefs = SharedPreferencesAsync();
 
 String _ak = "";
 String _sk = "";
-List<String> _permission = [];
+List<String> _role = [];
 
 class Auth {
   static String get ak => _ak;
@@ -33,7 +33,7 @@ class Auth {
     if (value == null || value.isEmpty) {
       return;
     }
-    
+
     String decryptText = await decrypter(value);
     List<String> arr = decryptText.split(":");
     if (arr.length != 2) {
@@ -47,16 +47,16 @@ class Auth {
   //清除凭证
   static Future<void> clean() async {
     _ak = _sk = "";
-    await _asyncPrefs.setString(_key,"");
+    await _asyncPrefs.setString(_key, "");
   }
 
   //判断状态
   static bool state() => _ak != "" && _sk != "";
 
-  static bool allow(String permission) =>_permission.contains(permission);
+  static bool allow(String role) => _role.contains(role);
 
-  static set permission (List<String> p){
-    _permission = p;
+  static set role(List<String> r) {
+    _role = r;
   }
 }
 
