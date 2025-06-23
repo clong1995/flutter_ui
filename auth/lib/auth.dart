@@ -53,7 +53,7 @@ class Auth {
   //判断状态
   static bool state() => _ak != "" && _sk != "";
 
-  static bool allow(String role) => _role.contains(role);
+  static bool allow(List<String> role) => role.any((element) => _role.contains(element));
 
   static set role(List<String> r) => _role = r;
 }
