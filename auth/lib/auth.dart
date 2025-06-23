@@ -55,9 +55,7 @@ class Auth {
 
   static bool allow(String role) => _role.contains(role);
 
-  static set role(List<String> r) {
-    _role = r;
-  }
+  static set role(List<String> r) => _role = r;
 }
 
 Future<void> _set() async {
