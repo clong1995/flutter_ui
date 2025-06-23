@@ -7,6 +7,7 @@ final SharedPreferencesAsync _asyncPrefs = SharedPreferencesAsync();
 
 String _ak = "";
 String _sk = "";
+List<String> _permission = [];
 
 class Auth {
   static String get ak => _ak;
@@ -51,6 +52,12 @@ class Auth {
 
   //判断状态
   static bool state() => _ak != "" && _sk != "";
+
+  static bool allow(String permission) =>_permission.contains(permission);
+
+  static set permission (List<String> p){
+    _permission = p;
+  }
 }
 
 Future<void> _set() async {

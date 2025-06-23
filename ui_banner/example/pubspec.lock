@@ -54,7 +54,7 @@ packages:
     description:
       path: device
       ref: HEAD
-      resolved-ref: "3d558f1fa710c160a5690cb388eced81d143a244"
+      resolved-ref: e75c9ca8971293c0a735a4e32b1e1b96dce2f313
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
