@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
-class CheckButton extends StatefulWidget {
+class CheckButton<T> extends StatefulWidget {
   final String title;
+  final T value;
   final bool checked;
-  final void Function(bool)? onTap;
+  final void Function(T)? onTap;
 
   const CheckButton({
     super.key,
     required this.title,
+    required this.value,
     this.checked = false,
     this.onTap,
   });
 
   @override
-  State<CheckButton> createState() => _CheckButtonState();
+  State<CheckButton<T>> createState() => _CheckButtonState<T>();
 }
 
-class _CheckButtonState extends State<CheckButton> {
+class _CheckButtonState<T> extends State<CheckButton<T>> {
   bool checked = false;
 
   @override
@@ -26,7 +28,7 @@ class _CheckButtonState extends State<CheckButton> {
   }
 
   @override
-  void didUpdateWidget(CheckButton oldWidget) {
+  void didUpdateWidget(CheckButton<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     checked = widget.checked;
   }
@@ -47,7 +49,7 @@ class _CheckButtonState extends State<CheckButton> {
                 ? null
                 : () {
                   checked = !checked;
-                  widget.onTap!(checked);
+                  widget.onTap!(widget.value);
                   setState(() {});
                 },
         child: Row(
