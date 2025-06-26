@@ -44,7 +44,7 @@ class ToastWidgetState extends State<ToastWidget> {
             decoration: BoxDecoration(
               color: Color.lerp(message!.color, Colors.white, .95),
               border: Border.all(
-                color: message!.color.withAlpha(2),
+                color: message!.color,
                 width: 1.5,
               ),
               borderRadius: BorderRadius.circular(10),
