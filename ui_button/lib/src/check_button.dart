@@ -36,22 +36,22 @@ class _CheckButtonState<T> extends State<CheckButton<T>> {
   @override
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
-    Container child = Container(
-      constraints: const BoxConstraints(minHeight: 24),
-      decoration: BoxDecoration(
-        color: checked ? color.withAlpha(25) : Colors.white,
-        borderRadius: BorderRadius.circular(5),
-        border: Border.all(color: checked ? color : Colors.grey),
-      ),
-      child: InkWell(
-        onTap:
-            widget.onTap == null
-                ? null
-                : () {
-                  checked = !checked;
-                  widget.onTap!(widget.value);
-                  setState(() {});
-                },
+    Widget child = InkWell(
+      onTap:
+      widget.onTap == null
+          ? null
+          : () {
+        checked = !checked;
+        widget.onTap!(widget.value);
+        setState(() {});
+      },
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 24),
+        decoration: BoxDecoration(
+          color: checked ? color.withAlpha(25) : Colors.white,
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(color: checked ? color : Colors.grey),
+        ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,12 +60,12 @@ class _CheckButtonState<T> extends State<CheckButton<T>> {
               width: 24,
               alignment: Alignment.center,
               child:
-                  checked
-                      ? Icon(Icons.check_box, color: color)
-                      : const Icon(
-                        Icons.check_box_outlined,
-                        color: Colors.grey,
-                      ),
+              checked
+                  ? Icon(Icons.check_box, color: color)
+                  : const Icon(
+                Icons.check_box_outlined,
+                color: Colors.grey,
+              ),
             ),
             Text(widget.title, style: TextStyle(color: checked ? color : null)),
             const SizedBox(width: 5),
