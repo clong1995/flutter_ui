@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../ui_pick_file.dart' show PickerFile;
@@ -25,7 +26,7 @@ class PickImage {
   }
 
   //单选 从相册选择照片
-  static  Future<PickerFile?> single({
+  static Future<PickerFile?> single({
     double? maxWidth,
     double? maxHeight,
     int? imageQuality,
@@ -40,7 +41,7 @@ class PickImage {
   }
 
   //多选 从相册选择照片
-  static  Future<List<PickerFile>?> multiple({
+  static Future<List<PickerFile>?> multiple({
     double? maxWidth,
     double? maxHeight,
     int? imageQuality,
@@ -64,6 +65,14 @@ class PickImage {
   }
 
   // 保存图片到相册
-  static Future<String> save({String? fileName, required Uint8List bytes}) async =>
-      await saveImageToGallery(fileName: fileName, bytes: bytes);
+  static Future<String> save({
+    String? fileName,
+    required Uint8List bytes,
+  }) async => await saveImageToGallery(fileName: fileName, bytes: bytes);
+
+  static Future<void> saveUrl({String? fileName, required String url}) async {
+    final response = await get(Uri.parse(url));
+    final bytes = response.bodyBytes;
+    await save(bytes: bytes, fileName: fileName);
+  }
 }

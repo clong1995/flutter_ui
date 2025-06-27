@@ -1,6 +1,6 @@
 name: ui_pick_file
 description: "A new Flutter project."
-version: 0.0.1
+version: 0.1.0
 homepage: flutter_ui
 
 environment:
@@ -15,6 +15,7 @@ dependencies:
   saver_gallery: ^4.0.1
   path: ^1.9.1
   path_provider: ^2.1.5
+  http: ^1.4.0
 
 dev_dependencies:
   flutter_test:
