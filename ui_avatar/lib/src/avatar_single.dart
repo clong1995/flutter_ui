@@ -38,10 +38,10 @@ class AvatarSingle extends StatelessWidget {
                 : ClipRRect(
                     borderRadius: BorderRadius.circular(size / 10),
                     child: imageUrl!.startsWith("http")
-                        ? UiCacheImage(imageUrl!, fit: BoxFit.fill)
+                        ? UiCacheImage(imageUrl!, fit: BoxFit.cover)
                         : Image.asset(
                             imageUrl!,
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                             package: package,
                           ),
                   ),

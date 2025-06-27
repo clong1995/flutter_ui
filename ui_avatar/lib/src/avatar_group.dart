@@ -50,7 +50,7 @@ class AvatarGroup extends StatelessWidget {
                 width: avatarSize,
                 height: avatarSize,
                 padding: const EdgeInsets.all(1),
-                child: UiCacheImage(e),
+                child: UiCacheImage(e,fit: BoxFit.cover,),
               ),
             )
             .toList(),
