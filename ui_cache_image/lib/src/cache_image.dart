@@ -35,8 +35,9 @@ class _UiCacheImageState extends State<UiCacheImage> {
   @override
   void didUpdateWidget(covariant UiCacheImage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.src != src || oldWidget.fit != widget.fit) {
+    if (oldWidget.src != widget.src || oldWidget.fit != widget.fit) {
       debugPrint("image changed");
+      src = widget.src;
       futureImage = _cachedImage(src, widget.fit);
       setState(() {});
     }
