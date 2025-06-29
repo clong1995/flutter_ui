@@ -23,8 +23,7 @@ class InputNumber<T extends num> extends StatefulWidget {
   State<InputNumber<T>> createState() => _InputNumberState<T>();
 }
 
-class _InputNumberState<T extends num> extends State<InputNumber<T>>
-    with WidgetsBindingObserver {
+class _InputNumberState<T extends num> extends State<InputNumber<T>> {
   late TextEditingController controller;
 
   late RegExp reg;
@@ -32,12 +31,9 @@ class _InputNumberState<T extends num> extends State<InputNumber<T>>
   late double width;
   late TextStyle style;
 
-  final FocusNode focusNode = FocusNode();
-
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
     if (widget.num is int) {
       reg = RegExp(r'[0-9\-]');
     } else if (widget.num is double) {
@@ -48,29 +44,6 @@ class _InputNumberState<T extends num> extends State<InputNumber<T>>
     width = widget.width ?? 85;
     style = widget.style ?? const TextStyle(fontSize: 14);
     controller = TextEditingController(text: "${widget.num}");
-  }
-
-  @override
-  void didChangeMetrics() {
-    final bottomInset = WidgetsBinding
-        .instance
-        .platformDispatcher
-        .views
-        .first
-        .viewInsets
-        .bottom;
-    bool isKeyboardVisible = bottomInset > 0;
-
-    if (!isKeyboardVisible && focusNode.hasFocus) {
-      focusNode.unfocus();
-    }
-  }
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    focusNode.dispose();
-    super.dispose();
   }
 
   @override
@@ -100,7 +73,6 @@ class _InputNumberState<T extends num> extends State<InputNumber<T>>
             cursorHeight: height * .7,
             style: style,
             maxLines: 1,
-            focusNode: focusNode,
             readOnly: widget.onChanged == null,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [FilteringTextInputFormatter.allow(reg)],
