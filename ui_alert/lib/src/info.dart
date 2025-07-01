@@ -23,7 +23,7 @@ Future<bool?> alertInfo({
       // width: Config.width,
       child: DecoratedBox(
         decoration: Config.decoration,
-        child: Center(child: Text(content)),
+        child: Text(content),
       ),
     ),
     actions: const <Widget>[ConfirmButton()],
