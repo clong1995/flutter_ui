@@ -30,9 +30,13 @@ Future<bool?> alertConfirm({
         children: [
           const Padding(
             padding: Config.bottomPadding,
-            child: Icon(Icons.notifications_active_outlined, size: 36),
+            child: Icon(
+              Icons.notifications_active_outlined,
+              size: 36,
+              color: Colors.orange,
+            ),
           ),
-          Text(content ?? "确定要执行吗?"),
+          Text(content?? "确定要执行吗?"),
         ],
       ),
     ),
