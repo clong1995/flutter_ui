@@ -20,10 +20,12 @@ Future<bool?> alertInfo({
     titlePadding: Config.titlePadding,
     contentPadding: Config.contentPadding,
     content: SizedBox(
-      // width: Config.width,
-      child: DecoratedBox(
-        decoration: Config.decoration,
-        child: Text(content),
+      width: Config.width,
+      child: Column(
+        children: [
+          Text(content),
+          const Divider(),
+        ],
       ),
     ),
     actions: const <Widget>[ConfirmButton()],
