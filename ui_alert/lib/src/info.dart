@@ -19,20 +19,15 @@ Future<bool?> alertInfo({
     titleTextStyle: Config.titleStyle,
     titlePadding: Config.titlePadding,
     contentPadding: Config.contentPadding,
-    /*content: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: Config.width,
-          padding: Config.bottomPadding,
+    content: SizedBox(
+      width: Config.width,
+      child: Padding(
+        padding: Config.bottomPadding,
+        child: DecoratedBox(
           decoration: Config.decoration,
-          alignment: Alignment.center,
-          child: Text(content),
+          child: Center(child: Text(content)),
         ),
-      ],
-    ),*/
-    content: DecoratedBox(
-      decoration: Config.decoration,
+      ),
     ),
     actions: const <Widget>[ConfirmButton()],
   ),
