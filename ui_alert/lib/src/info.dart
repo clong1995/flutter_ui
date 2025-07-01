@@ -31,7 +31,7 @@ Future<bool?> alertInfo({
         ),
       ],
     ),*/
-    content: SizedBox(),
+    content: Container(),
     actions: const <Widget>[ConfirmButton()],
   ),
 );
