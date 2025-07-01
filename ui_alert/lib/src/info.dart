@@ -20,7 +20,7 @@ Future<bool?> alertInfo({
     titlePadding: Config.titlePadding,
     contentPadding: Config.contentPadding,
     content: SizedBox(
-      width: Config.width,
+      // width: Config.width,
       child: Padding(
         padding: Config.bottomPadding,
         child: DecoratedBox(
