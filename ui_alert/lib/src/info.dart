@@ -22,6 +22,8 @@ Future<bool?> alertInfo({
     content: SizedBox(
       width: Config.width,
       child: Column(
+        mainAxisAlignment : MainAxisAlignment.center,
+        mainAxisSize : MainAxisSize.min,
         children: [
           Text(content),
           const Divider(),
