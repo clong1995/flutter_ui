@@ -21,12 +21,9 @@ Future<bool?> alertInfo({
     contentPadding: Config.contentPadding,
     content: SizedBox(
       // width: Config.width,
-      child: Padding(
-        padding: Config.bottomPadding,
-        child: DecoratedBox(
-          decoration: Config.decoration,
-          child: Center(child: Text(content)),
-        ),
+      child: DecoratedBox(
+        decoration: Config.decoration,
+        child: Center(child: Text(content)),
       ),
     ),
     actions: const <Widget>[ConfirmButton()],
