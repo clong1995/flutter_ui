@@ -4,7 +4,7 @@ import 'package:gpt_markdown/gpt_markdown.dart';
 class UiMarkdown extends StatelessWidget {
   final String data;
 
-  const UiMarkdown({super.key, required this.data});
+  const UiMarkdown(this.data,{super.key});
 
   @override
   Widget build(BuildContext context) => GptMarkdown(data);
