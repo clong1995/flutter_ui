@@ -52,17 +52,12 @@ class _MyHomePageState extends State<MyHomePage> {
           const SizedBox(
             width: 100,
             height: 100,
-            child: UiCacheImage("https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/2.jpg"),
+            child: UiCacheImage("https://jixiao-storage.oss-cn-beijing.aliyuncs.com/avatar/⏝ⅥⅥ⊢∩,U⏡⚶_0_s_512x508.jpg"),
           ),
           const SizedBox(
             width: 100,
             height: 100,
             child: UiCacheImage("https://docs.flutter.dev/assets/images/dash/dash-fainting.gif"),
-          ),
-          const SizedBox(
-            width: 100,
-            height: 100,
-            child: UiCacheImage("https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/7.jpeg"),
           ),
           SizedBox(
             width: 100,

@@ -64,6 +64,12 @@ class _UiCacheImageState extends State<UiCacheImage> {
   }*/
 
   Future<Widget> _cachedImage(String src, BoxFit? fit) async {
+
+    /* final encodedUrl = Uri.encodeFull(src);
+    final encodedUrl = src;
+    print(encodedUrl);
+    print(Uri.encodeFull(src));*/
+
     if (kIsWeb) {
       return Image.network(src, fit: fit);
     }
