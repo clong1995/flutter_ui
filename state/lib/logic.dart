@@ -8,7 +8,14 @@ import 'src/logic_dict.dart';
 abstract class Logic<T> with Lifecycle {
   final Map<String, void Function()> _updateDict = {};
 
-  late final T _state;
+  @nonVirtual
+  @protected
+  late final T state;
+
+  bool public = false;
+
+
+ /* late final T _state;
 
   @nonVirtual
   @protected
@@ -17,7 +24,7 @@ abstract class Logic<T> with Lifecycle {
   }
 
   @nonVirtual
-  T get state => _state;
+  T get state => _state;*/
 
   final BuildContext _context;
 

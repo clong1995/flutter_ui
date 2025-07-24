@@ -6,13 +6,13 @@ import 'src/logic_dict.dart';
 class StateWidget<T extends Logic> extends StatefulWidget {
   final T Function(BuildContext context) logic;
   final Widget Function(BuildContext context, T) builder;
-  final bool public;
+  // final bool public;
 
   const StateWidget({
     super.key,
     required this.logic,
     required this.builder,
-    this.public = false,
+    // this.public = false,
   });
 
   @override
@@ -26,7 +26,7 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   void initState() {
     super.initState();
     logic = widget.logic(context);
-    if (widget.public) {
+    if (logic.public) {
       LogicDict.set<T>(logic);
     }
     logic.initDict(() => setState(() {}));
@@ -45,7 +45,7 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   @override
   void dispose() {
     logic.onDispose();
-    if (widget.public) {
+    if (logic.public) {
       LogicDict.remove<T>();
     }
     super.dispose();
