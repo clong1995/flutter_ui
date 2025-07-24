@@ -9,7 +9,6 @@ abstract class Logic<T> with Lifecycle {
   final Map<String, void Function()> _updateDict = {};
 
   @nonVirtual
-  @protected
   late final T state;
 
   @nonVirtual
