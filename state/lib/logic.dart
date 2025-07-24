@@ -12,6 +12,7 @@ abstract class Logic<T> with Lifecycle {
   @protected
   late final T state;
 
+  @nonVirtual
   bool public = false;
 
 
