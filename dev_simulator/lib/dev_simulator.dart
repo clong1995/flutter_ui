@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 //尺寸: 340 * 740
 class DevSimulator extends StatelessWidget {
-  const DevSimulator(this.builder, {super.key});
+  final bool web; //模拟web
+  const DevSimulator(this.builder, {super.key, this.web = false});
 
   final Widget Function(BuildContext) builder;
 
@@ -20,11 +21,39 @@ class DevSimulator extends StatelessWidget {
             child: MediaQuery(
               data: mediaQueryData.copyWith(
                 viewPadding: mediaQueryData.padding.copyWith(
-                  top: paddingTop,
+                  top: web == true ? 0 : paddingTop,
                   bottom: paddingBottom,
                 ),
               ),
-              child: Builder(builder: builder),
+              child: Column(
+                children: [
+                  if (web == true)
+                    Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.only(top: paddingTop),
+                      height: paddingTop * 2,
+                      alignment: Alignment.center,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        height: paddingTop * .85,
+                        width: mediaQueryData.size.width * .95,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(227, 227, 227, 1),
+                          //border: Border.all(color: Colors.grey.shade300),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(Icons.lock,color: Colors.green,size: 14,),
+                            const Expanded(child: Center(child: Text("apply.com"),)),
+                            Icon(Icons.refresh,size: 14,color: Colors.grey.shade700,),
+                          ],
+                        ),
+                      ),
+                    ),
+                  Expanded(child: Builder(builder: builder)),
+                ],
+              ),
             ),
           ),
           //top
@@ -42,7 +71,7 @@ class DevSimulator extends StatelessWidget {
                 ),
                 Container(
                   width: mediaQueryData.size.width / 2,
-                  height: paddingTop * .9,
+                  // height: paddingTop * 95,
                   decoration: const BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.only(
@@ -56,33 +85,21 @@ class DevSimulator extends StatelessWidget {
                     children: [
                       const Spacer(),
                       Container(
-                        width: 12,
-                        height: 12,
-                        margin: const EdgeInsets.only(right: 5),
+                        width: 50,
+                        height: 6,
+                        margin: const EdgeInsets.symmetric(horizontal: 5),
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade900,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                      ),
-                      Container(
-                        width: 60,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade900,
+                          color: Colors.grey.shade800,
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
                       Expanded(
                         child: Align(
                           alignment: Alignment.centerLeft,
-                          child: Container(
-                            width: 10,
-                            height: 10,
-                            margin: const EdgeInsets.symmetric(horizontal: 5),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade900,
-                              borderRadius: BorderRadius.circular(5),
-                            ),
+                          child: Icon(
+                            Icons.circle,
+                            color: Colors.grey.shade900,
+                            size: 14,
                           ),
                         ),
                       ),
@@ -130,6 +147,3 @@ class DevSimulator extends StatelessWidget {
     );
   }
 }
-
-// 34
-// 896 740
