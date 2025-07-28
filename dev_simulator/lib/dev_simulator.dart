@@ -35,10 +35,14 @@ class DevSimulator extends StatelessWidget {
             height: paddingTop,
             child: Row(
               children: [
-                const Expanded(child: Center(child: Text("14:15"))),
+                const Expanded(
+                  child: Center(
+                    child: Text("14:15", style: TextStyle(fontSize: 12)),
+                  ),
+                ),
                 Container(
                   width: mediaQueryData.size.width / 2,
-                  height: paddingTop,
+                  height: paddingTop * .9,
                   decoration: const BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.only(
@@ -46,18 +50,11 @@ class DevSimulator extends StatelessWidget {
                       bottomRight: Radius.circular(22),
                     ),
                   ),
+                  margin: EdgeInsets.only(bottom: paddingTop * .1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        width: 12,
-                        height: 12,
-                        margin: const EdgeInsets.only(right: 5),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade900,
-                          borderRadius: BorderRadius.circular(6),
-                        ),
-                      ),
+                      const Spacer(),
                       Container(
                         width: 12,
                         height: 12,
@@ -75,21 +72,18 @@ class DevSimulator extends StatelessWidget {
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
-                      Container(
-                        width: 10,
-                        height: 10,
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade900,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                      Container(
-                        width: 15,
-                        height: 15,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade900,
-                          borderRadius: BorderRadius.circular(7.5),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            width: 10,
+                            height: 10,
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade900,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -99,13 +93,13 @@ class DevSimulator extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Icon(Icons.signal_cellular_alt, size: 20),
+                      Icon(Icons.signal_cellular_alt, size: 17),
                       SizedBox(width: 5),
-                      Icon(Icons.wifi, size: 20),
+                      Icon(Icons.wifi, size: 17),
                       SizedBox(width: 5),
                       RotatedBox(
                         quarterTurns: 1,
-                        child: Icon(Icons.battery_5_bar, size: 20),
+                        child: Icon(Icons.battery_5_bar, size: 18),
                       ),
                       SizedBox(width: 10),
                     ],
