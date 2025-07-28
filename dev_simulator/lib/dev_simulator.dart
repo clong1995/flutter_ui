@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 //尺寸: 340 * 740
 class DevSimulator extends StatelessWidget {
   final bool web; //模拟web
-  const DevSimulator(this.builder, {super.key, this.web = false});
+  final String webTitle; //模拟web
+  const DevSimulator(
+    this.builder, {
+    super.key,
+    this.web = false,
+    this.webTitle = "example.com",
+  });
 
   final Widget Function(BuildContext) builder;
 
@@ -44,9 +50,19 @@ class DevSimulator extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            const Icon(Icons.lock,color: Colors.green,size: 14,),
-                            const Expanded(child: Center(child: Text("apply.com"),)),
-                            Icon(Icons.refresh,size: 14,color: Colors.grey.shade700,),
+                            const Icon(
+                              Icons.lock,
+                              color: Colors.green,
+                              size: 14,
+                            ),
+                            Expanded(
+                              child: Center(child: Text(webTitle)),
+                            ),
+                            Icon(
+                              Icons.refresh,
+                              size: 14,
+                              color: Colors.grey.shade700,
+                            ),
                           ],
                         ),
                       ),
