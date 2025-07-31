@@ -5,17 +5,25 @@ import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 
 class UiTable extends StatefulWidget {
   final List<double> cellsWidth;
-  final List<List<Widget>> data;
+  final UiTableItem head;
+  final List<UiTableItem> data;
   final double headerHeight;
+  final Color? headColor;
   final double cellHeight;
-  final BorderSide? borderSide;
+  final Color? borderColor;
+  final Color? evenColor;
+  final Color? oddColor;
 
   const UiTable({
     super.key,
     required this.cellsWidth,
+    required this.head,
     required this.data,
-    this.borderSide,
+    this.borderColor,
+    this.headColor,
     this.headerHeight = 40,
+    this.evenColor,
+    this.oddColor,
     this.cellHeight = 40,
   });
 
@@ -43,7 +51,6 @@ class _UiTableState extends State<UiTable> {
 
   final LinkedScrollControllerGroup _horizontalControllers =
       LinkedScrollControllerGroup();
-  
 
   late double headerHeight;
   late double cellHeight;
@@ -55,14 +62,14 @@ class _UiTableState extends State<UiTable> {
     headerHeight = widget.headerHeight.roundToDouble();
     cellHeight = widget.cellHeight.roundToDouble();
 
-    for(int i = 0;i<widget.cellsWidth.length;i++){
+    for (int i = 0; i < widget.cellsWidth.length; i++) {
       widget.cellsWidth[i] = widget.cellsWidth[i].roundToDouble();
     }
 
     leftFix = widget.cellsWidth.first;
     rightFix = widget.cellsWidth.last + track;
 
-    borderSide = widget.borderSide ?? const BorderSide(color: Colors.grey);
+    borderSide = BorderSide(color: widget.borderColor ?? Colors.grey);
 
     scrollVerticalLeftFix = _verticalControllers.addAndGet();
     scrollVerticalRightFix = _verticalControllers.addAndGet();
@@ -83,9 +90,7 @@ class _UiTableState extends State<UiTable> {
       removeLeft: true,
       removeBottom: true,
       child: ScrollConfiguration(
-        behavior: const ScrollBehavior().copyWith(
-          scrollbars: false,
-        ),
+        behavior: const ScrollBehavior().copyWith(scrollbars: false),
         child: KeyboardListener(
           autofocus: true,
           onKeyEvent: _handleKeyEvent,
@@ -95,9 +100,7 @@ class _UiTableState extends State<UiTable> {
               Row(
                 children: [
                   _buildHeaderLeft(),
-                  Expanded(
-                    child: _buildHeaderCenter(),
-                  ),
+                  Expanded(child: _buildHeaderCenter()),
                   _buildHeaderRight(),
                   SizedBox(width: track),
                 ],
@@ -106,19 +109,20 @@ class _UiTableState extends State<UiTable> {
                 child: Row(
                   children: [
                     _buildBodyLeft(),
-                    Expanded(
-                      child: _buildBodyCenter(),
-                    ),
+                    Expanded(child: _buildBodyCenter()),
                     _buildBodyRight(),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+  Color? indexColor(int index) =>
+      index.isEven ? widget.evenColor : widget.oddColor;
 
   //body ====
   Column _buildBodyCenter() {
@@ -130,43 +134,41 @@ class _UiTableState extends State<UiTable> {
             scrollDirection: Axis.horizontal,
             controller: scrollHorizontalCenter,
             child: SizedBox(
-              width: widget.cellsWidth
-                  .sublist(1, widget.cellsWidth.length - 1)
-                  .reduce((a, b) => a + b),
+              width: widget.cellsWidth.sublist(1, widget.cellsWidth.length - 1).reduce((a, b) => a + b),
               child: ListView.builder(
                 controller: scrollVerticalCenter,
-                itemCount: widget.data.length - 1,
-                itemBuilder: (BuildContext context, int index) => Container(
-                  height: cellHeight,
-                  decoration: index == 0
-                      ? null
-                      : BoxDecoration(
-                          border: Border(
-                            top: borderSide,
-                          ),
-                        ),
-                  child: Row(
-                    children: widget.data[index + 1]
-                        .sublist(1, widget.data[index + 1].length - 1)
-                        .asMap()
-                        .entries
-                        .map(
-                          (MapEntry<int, Widget> e) => Container(
-                            height: double.infinity,
-                            width: widget.cellsWidth[e.key + 1],
-                            decoration: e.key == 0
-                                ? null
-                                : BoxDecoration(
-                                    border: Border(
-                                      left: borderSide,
+                itemCount: widget.data.length - 2,
+                itemBuilder: (BuildContext context, int index) {
+                  final item = widget.data[index];
+                  return Container(
+                    key: ValueKey("body-center-${item.key}"),
+                    height: cellHeight,
+                    decoration: BoxDecoration(
+                      color: indexColor(index),
+                      border: index == 0 ? null : Border(top: borderSide),
+                    ),
+                    child: Row(
+                      children: item.row
+                          .sublist(1, item.row.length - 1)
+                          .asMap()
+                          .entries
+                          .map(
+                            (MapEntry<int, Widget> e) => Container(
+                              alignment: Alignment.center,
+                              height: double.infinity,
+                              width: widget.cellsWidth[e.key + 1],
+                              decoration: e.key == 0
+                                  ? null
+                                  : BoxDecoration(
+                                      border: Border(left: borderSide),
                                     ),
-                                  ),
-                            child: e.value,
-                          ),
-                        )
-                        .toList(),
-                  ),
-                ),
+                              child: e.value,
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -180,9 +182,8 @@ class _UiTableState extends State<UiTable> {
               scrollDirection: Axis.horizontal,
               controller: scrollHorizontalBar,
               itemCount: widget.cellsWidth.length - 2,
-              itemBuilder: (BuildContext context, int index) => SizedBox(
-                width: widget.cellsWidth[index + 1],
-              ),
+              itemBuilder: (BuildContext context, int index) =>
+                  SizedBox(width: widget.cellsWidth[index + 1]),
             ),
           ),
         ),
@@ -201,17 +202,23 @@ class _UiTableState extends State<UiTable> {
                 Expanded(
                   child: ListView.builder(
                     controller: scrollVerticalRightFix,
-                    itemCount: widget.data.length - 1,
-                    itemBuilder: (BuildContext context, int index) => Container(
-                      height: cellHeight,
-                      decoration: BoxDecoration(
-                        border: Border(
-                          top: index == 0 ? BorderSide.none : borderSide,
-                          left: borderSide,
+                    itemCount: widget.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final item = widget.data[index];
+                      return Container(
+                        key: ValueKey("body-right-${item.key}"),
+                        alignment: Alignment.center,
+                        height: cellHeight,
+                        decoration: BoxDecoration(
+                          color: indexColor(index),
+                          border: Border(
+                            top: index == 0 ? BorderSide.none : borderSide,
+                            left: borderSide,
+                          ),
                         ),
-                      ),
-                      child: widget.data[index + 1].last,
-                    ),
+                        child: item.row.last,
+                      );
+                    },
                   ),
                 ),
                 SizedBox(
@@ -221,11 +228,9 @@ class _UiTableState extends State<UiTable> {
                     controller: scrollVerticalBar,
                     child: ListView.builder(
                       controller: scrollVerticalBar,
-                      itemCount: widget.data.length - 1,
+                      itemCount: widget.data.length,
                       itemBuilder: (BuildContext context, int index) =>
-                          SizedBox(
-                        height: cellHeight,
-                      ),
+                          SizedBox(height: cellHeight),
                     ),
                   ),
                 ),
@@ -246,17 +251,23 @@ class _UiTableState extends State<UiTable> {
           Expanded(
             child: ListView.builder(
               controller: scrollVerticalLeftFix,
-              itemCount: widget.data.length - 1,
-              itemBuilder: (BuildContext context, int index) => Container(
-                height: cellHeight,
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: index == 0 ? BorderSide.none : borderSide,
-                    right: borderSide,
+              itemCount: widget.data.length,
+              itemBuilder: (BuildContext context, int index) {
+                final item = widget.data[index];
+                return Container(
+                  key: ValueKey("body-left-${item.key}"),
+                  height: cellHeight,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: indexColor(index),
+                    border: Border(
+                      top: index == 0 ? BorderSide.none : borderSide,
+                      right: borderSide,
+                    ),
                   ),
-                ),
-                child: widget.data[index + 1].first,
-              ),
+                  child: item.row.first,
+                );
+              },
             ),
           ),
           SizedBox(height: track),
@@ -271,31 +282,32 @@ class _UiTableState extends State<UiTable> {
       width: rightFix - track,
       height: headerHeight,
       decoration: BoxDecoration(
-        border: Border(
-          left: borderSide,
-          bottom: borderSide,
-        ),
+        color: widget.headColor,
+        border: Border(left: borderSide, bottom: borderSide),
       ),
-      child: widget.data.first.last,
+      alignment: Alignment.center,
+      child: widget.head.row.last,
     );
   }
 
-  SizedBox _buildHeaderCenter() {
-    return SizedBox(
+  Container _buildHeaderCenter() {
+    return Container(
       height: headerHeight,
+      color: widget.headColor,
       child: ListView.builder(
         controller: scrollHorizontalLeftFix,
         scrollDirection: Axis.horizontal,
-        itemCount: widget.data.first.length - 2,
+        itemCount: widget.head.row.length - 2,
         itemBuilder: (BuildContext context, int index) => Container(
           width: widget.cellsWidth[index + 1],
+          alignment: Alignment.center,
           decoration: BoxDecoration(
             border: Border(
               left: index == 0 ? BorderSide.none : borderSide,
               bottom: borderSide,
             ),
           ),
-          child: widget.data.first[index + 1],
+          child: widget.head.row[index + 1],
         ),
       ),
     );
@@ -305,13 +317,12 @@ class _UiTableState extends State<UiTable> {
     return Container(
       width: leftFix,
       height: headerHeight,
+      alignment: Alignment.center,
       decoration: BoxDecoration(
-        border: Border(
-          right: borderSide,
-          bottom: borderSide,
-        ),
+        color: widget.headColor,
+        border: Border(right: borderSide, bottom: borderSide),
       ),
-      child: widget.data.first.first,
+      child: widget.head.row.first,
     );
   }
 
@@ -330,17 +341,26 @@ class _UiTableState extends State<UiTable> {
   void _handleKeyEvent(KeyEvent event) {
     switch (event.logicalKey.keyLabel) {
       case 'Arrow Right':
-     _horizontalControllers.jumpTo(_horizontalControllers.offset + 10);
+        _horizontalControllers.jumpTo(_horizontalControllers.offset + 10);
         break;
       case 'Arrow Left':
-      _horizontalControllers.jumpTo(max(0,_horizontalControllers.offset - 10));
+        _horizontalControllers.jumpTo(
+          max(0, _horizontalControllers.offset - 10),
+        );
         break;
       case 'Arrow Up':
-      _verticalControllers.jumpTo(max(0, _verticalControllers.offset + 10));
+        _verticalControllers.jumpTo(max(0, _verticalControllers.offset + 10));
         break;
       case 'Arrow Down':
-      _verticalControllers.jumpTo(max(0, _verticalControllers.offset - 10));
+        _verticalControllers.jumpTo(max(0, _verticalControllers.offset - 10));
         break;
     }
   }
+}
+
+class UiTableItem {
+  final String? key;
+  final List<Widget> row;
+
+  UiTableItem({this.key, required this.row});
 }

@@ -32,9 +32,7 @@ class _UiListState extends State<UiList> {
     super.initState();
     width = widget.width ?? [];
     borderColor = widget.borderColor ?? Colors.grey.shade300;
-    constraints = BoxConstraints(
-      minHeight: widget.lineMinimumHeight ?? 30,
-    );
+    constraints = BoxConstraints(minHeight: widget.lineMinimumHeight ?? 30);
   }
 
   @override
@@ -61,56 +59,49 @@ class _UiListState extends State<UiList> {
         Expanded(
           child: ListView.builder(
             itemCount: widget.body.length,
-            itemBuilder: (BuildContext context, int index) => Container(
-              constraints: constraints,
-              decoration: BoxDecoration(
-                border: index == widget.body.length - 1
-                    ? null
-                    : Border(
-                        bottom: BorderSide(color: borderColor),
-                      ),
-              ),
-              child: line(
-                widget.body[index].row,
-                key: widget.body[index].key,
-              ),
-            ),
+            itemBuilder: (BuildContext context, int index) {
+              final item = widget.body[index];
+              return Container(
+                key: ValueKey(item.key),
+                constraints: constraints,
+                decoration: BoxDecoration(
+                  border: index == widget.body.length - 1
+                      ? null
+                      : Border(bottom: BorderSide(color: borderColor)),
+                ),
+                child: line(item.row),
+              );
+            },
           ),
-        )
+        ),
       ],
     );
   }
 
   double getWidth(int index) => index < width.length ? width[index] : 0;
 
-  Widget line(List<Widget> children, {Key? key}) => Row(
-        key: key,
-        children: children.asMap().entries.map((MapEntry<int, Widget> entry) {
-          double width = getWidth(entry.key);
-          Widget child = Container(
-            constraints: constraints,
-            width: width > 0 ? width : null,
-            decoration: entry.key == widget.head.length - 1
-                ? null
-                : BoxDecoration(
-                    border: Border(
-                      right: BorderSide(color: borderColor),
-                    ),
-                  ),
-            child: entry.value,
-          );
-
-          return width > 0 ? child : Expanded(child: child);
-        }).toList(),
+  Widget line(List<Widget> children) => Row(
+    children: children.asMap().entries.map((MapEntry<int, Widget> entry) {
+      double width = getWidth(entry.key);
+      Widget child = Container(
+        constraints: constraints,
+        width: width > 0 ? width : null,
+        decoration: entry.key == widget.head.length - 1
+            ? null
+            : BoxDecoration(
+                border: Border(right: BorderSide(color: borderColor)),
+              ),
+        child: entry.value,
       );
+
+      return width > 0 ? child : Expanded(child: child);
+    }).toList(),
+  );
 }
 
 class UiListItem {
-  final Key? key;
+  final String? key;
   final List<Widget> row;
 
-  UiListItem({
-    this.key,
-    required this.row,
-  });
+  UiListItem({this.key, required this.row});
 }
