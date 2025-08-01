@@ -134,7 +134,9 @@ class _UiTableState extends State<UiTable> {
             scrollDirection: Axis.horizontal,
             controller: scrollHorizontalCenter,
             child: SizedBox(
-              width: widget.cellsWidth.sublist(1, widget.cellsWidth.length - 1).reduce((a, b) => a + b),
+              width: widget.cellsWidth
+                  .sublist(1, widget.cellsWidth.length - 1)
+                  .reduce((a, b) => a + b),
               child: ListView.builder(
                 controller: scrollVerticalCenter,
                 itemCount: widget.data.length - 2,
@@ -192,52 +194,47 @@ class _UiTableState extends State<UiTable> {
   }
 
   SizedBox _buildBodyRight() {
+    //widget.cellsWidth.last
     return SizedBox(
       width: rightFix,
-      child: Column(
+      child: Row(
         children: [
-          Expanded(
-            child: Row(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    controller: scrollVerticalRightFix,
-                    itemCount: widget.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final item = widget.data[index];
-                      return Container(
-                        key: ValueKey("body-right-${item.key}"),
-                        alignment: Alignment.center,
-                        height: cellHeight,
-                        decoration: BoxDecoration(
-                          color: indexColor(index),
-                          border: Border(
-                            top: index == 0 ? BorderSide.none : borderSide,
-                            left: borderSide,
-                          ),
-                        ),
-                        child: item.row.last,
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: track,
-                  child: Scrollbar(
-                    thumbVisibility: true,
-                    controller: scrollVerticalBar,
-                    child: ListView.builder(
-                      controller: scrollVerticalBar,
-                      itemCount: widget.data.length,
-                      itemBuilder: (BuildContext context, int index) =>
-                          SizedBox(height: cellHeight),
+          if (widget.cellsWidth.last != 0)
+            Expanded(
+              child: ListView.builder(
+                controller: scrollVerticalRightFix,
+                itemCount: widget.data.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final item = widget.data[index];
+                  return Container(
+                    key: ValueKey("body-right-${item.key}"),
+                    alignment: Alignment.center,
+                    height: cellHeight,
+                    decoration: BoxDecoration(
+                      color: indexColor(index),
+                      border: Border(
+                        top: index == 0 ? BorderSide.none : borderSide,
+                        left: borderSide,
+                      ),
                     ),
-                  ),
-                ),
-              ],
+                    child: item.row.last,
+                  );
+                },
+              ),
+            ),
+          SizedBox(
+            width: track,
+            child: Scrollbar(
+              thumbVisibility: true,
+              controller: scrollVerticalBar,
+              child: ListView.builder(
+                controller: scrollVerticalBar,
+                itemCount: widget.data.length,
+                itemBuilder: (BuildContext context, int index) =>
+                    SizedBox(height: cellHeight),
+              ),
             ),
           ),
-          SizedBox(height: track),
         ],
       ),
     );
@@ -277,9 +274,12 @@ class _UiTableState extends State<UiTable> {
   }
 
   //head ===
-  Container _buildHeaderRight() {
+  Widget _buildHeaderRight() {
+    if (widget.cellsWidth.last == 0){
+      return SizedBox.shrink();
+    }
     return Container(
-      width: rightFix - track,
+      width: rightFix,
       height: headerHeight,
       decoration: BoxDecoration(
         color: widget.headColor,
