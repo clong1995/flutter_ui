@@ -52,17 +52,16 @@ class Datetime {
   }
 
   //某季度的起始日期和结束日期
-  static List<String> rangeOfQuarter(DateTime dateTime) {
-    int year = dateTime.year;
-    switch (Jiffy.parseFromDateTime(dateTime).quarter) {
+  static List<String> rangeOfQuarter(int quarter) {
+    switch (quarter) {
       case 1:
-        return ["$year-01-01", "$year-03-31"];
+        return ["01-01", "03-31"];
       case 2:
-        return ["$year-04-01", "$year-06-30"];
+        return ["04-01", "06-30"];
       case 3:
-        return ["$year-07-01", "$year-09-30"];
+        return ["07-01", "09-30"];
       case 4:
-        return ["$year-10-01", "$year-12-31"];
+        return ["10-01", "12-31"];
     }
     return [];
   }
