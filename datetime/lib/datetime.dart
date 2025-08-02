@@ -114,4 +114,12 @@ class Datetime {
     }
     return "";
   }*/
+
+  static int lastDayOfMonth(int year, int month) {
+    final beginningOfNextMonth = (month < 12)
+        ? DateTime(year, month + 1, 1)
+        : DateTime(year + 1, 1, 1);
+    final lastDay = beginningOfNextMonth.subtract(const Duration(days: 1));
+    return lastDay.day;
+  }
 }
