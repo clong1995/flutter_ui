@@ -23,6 +23,13 @@ Future<List<double>?> location([String type = "cache"]) async {
   return _position == null ? null : [_position!.longitude, _position!.latitude];
 }
 
+//检查是否有权限了，因为安卓合规要弹一次自定义窗口，避免重复弹出
+Future<bool> checkPermission() async {
+  final permission = await Geolocator.checkPermission();
+  return permission == LocationPermission.always ||
+      permission == LocationPermission.whileInUse;
+}
+
 Future<bool> _permission() async {
   if (Platform.isLinux) {
     return false;
