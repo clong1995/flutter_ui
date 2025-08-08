@@ -14,7 +14,7 @@ class PhotoViewGrid extends StatelessWidget {
 
   const PhotoViewGrid({
     super.key,
-    this.thumbnail = false,
+    this.thumbnail = true,
     required this.images,
     this.crossAxisCount = 3,
     this.mainAxisSpacing = 5,
