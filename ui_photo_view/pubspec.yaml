@@ -1,6 +1,6 @@
 name: ui_photo_view
 description: "A new Flutter project."
-version: 0.0.3
+version: 0.1.0
 homepage:
 
 environment:
@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   photo_view: ^0.15.0
+  image_gallery_saver_plus: ^4.0.1
+  http: ^1.4.0
   ui_cache_image:
     git:
       url: https://github.com/clong1995/flutter_ui.git

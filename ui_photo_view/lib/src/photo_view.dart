@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
@@ -31,17 +33,62 @@ class _PhotoViewState extends State<PhotoView> {
   }
 
   @override
-  Widget build(BuildContext context) => PhotoViewGallery.builder(
-    builder: (BuildContext context, int index) {
-      if (currIndex != index) {
-        widget.onChanged?.call(index);
-      }
-      currIndex = index;
-      return PhotoViewGalleryPageOptions(
-        imageProvider: UiCacheImageProvider(images[index]),
-      );
-    },
-    itemCount: images.length,
-    pageController: PageController(initialPage: widget.index),
-  );
+  Widget build(BuildContext context) {
+    final padding = MediaQuery.of(context).padding;
+    return Stack(
+      children: [
+        PhotoViewGallery.builder(
+          onPageChanged: (index) {
+            currIndex = index;
+          },
+          builder: (BuildContext context, int index) {
+            if (currIndex != index) {
+              widget.onChanged?.call(index);
+            }
+            currIndex = index;
+            return PhotoViewGalleryPageOptions(
+              imageProvider: UiCacheImageProvider(images[index]),
+            );
+          },
+          itemCount: images.length,
+          pageController: PageController(initialPage: widget.index),
+        ),
+        Positioned(
+          top: padding.top,
+          left: padding.left + 10,
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Colors.white,
+            ),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: const Icon(Icons.arrow_back_ios_new),
+                ),
+                IconButton(onPressed: ()=>saveImage(images[currIndex]), icon: const Icon(Icons.save_alt)),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<void> saveImage(String imageUrl) async {
+    final response = await get(Uri.parse(imageUrl));
+    final bytes = response.bodyBytes;
+    final result = await ImageGallerySaverPlus.saveImage(bytes, quality: 100);
+
+    if (result['isSuccess'] == true) {
+      snackBar("保存成功");
+    } else {
+      snackBar("保存失败");
+    }
+  }
+
+  void snackBar(String str) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(str)));
+  }
 }

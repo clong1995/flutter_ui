@@ -95,10 +95,10 @@ packages:
     dependency: transitive
     description:
       name: http
-      sha256: "2c11f3f94c687ee9bad77c171151672986360b2b001d109814ee7140b2cf261b"
+      sha256: bb2ce4590bc2667c96f318d68cac1b5a7987ec819351d32b1c987239a815e007
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.0"
+    version: "1.5.0"
   http_parser:
     dependency: transitive
     description:
@@ -107,6 +107,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  image_gallery_saver_plus:
+    dependency: transitive
+    description:
+      name: image_gallery_saver_plus
+      sha256: "199b9e24f8d85e98f11e3d35571ab68ae50626ad40e2bb85c84383f69a6950ad"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.1"
   leak_tracker:
     dependency: transitive
     description:
@@ -168,7 +176,7 @@ packages:
     description:
       path: nav
       ref: HEAD
-      resolved-ref: bc255ef1a37f9d44362f59b034c654250d9e6284
+      resolved-ref: "97f0eb374874efe719c697a0e867d6511c92ffee"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
@@ -318,17 +326,17 @@ packages:
     description:
       path: ui_cache_image
       ref: HEAD
-      resolved-ref: bc255ef1a37f9d44362f59b034c654250d9e6284
+      resolved-ref: "97f0eb374874efe719c697a0e867d6511c92ffee"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.2.0"
+    version: "0.2.1"
   ui_photo_view:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "0.0.3"
+    version: "0.1.0"
   vector_math:
     dependency: transitive
     description:

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:saver_gallery/saver_gallery.dart';
+import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 
 Future<String> saveImageToGallery({
   String? fileName,
@@ -12,13 +12,12 @@ Future<String> saveImageToGallery({
   if (fileName == null || fileName.isEmpty) {
     fileName = "${DateTime.now().millisecondsSinceEpoch}";
   }
-  final result = await SaverGallery.saveImage(
+  final result = await ImageGallerySaverPlus.saveImage(
     bytes,
-    fileName: fileName,
-    skipIfExists: false,
+    quality: 100,
+    name: fileName,
   );
-  // result.isSuccess
-  if (result.isSuccess) {
+  if (result['isSuccess'] == true) {
     return "";
   }
   return result.errorMessage ?? "saver gallery error";
@@ -36,12 +35,11 @@ Future<String> saveVideoToGallery({
   File file = File(savePath);
   await file.writeAsBytes(bytes);
 
-  final result = await SaverGallery.saveFile(
-    filePath: file.path,
-    fileName: fileName,
-    skipIfExists: false,
+  final result = await ImageGallerySaverPlus.saveFile(
+    file.path,
+    name: fileName,
   );
-  if (result.isSuccess) {
+  if (result['isSuccess'] == true) {
     return "";
   }
   return result.errorMessage ?? "saver gallery error";
