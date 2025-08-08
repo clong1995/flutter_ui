@@ -54,8 +54,8 @@ class _PhotoViewState extends State<PhotoView> {
           pageController: PageController(initialPage: widget.index),
         ),
         Positioned(
-          top: padding.top,
-          left: padding.left + 10,
+          top: padding.top + 15,
+          left: padding.left + 15,
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
@@ -64,10 +64,15 @@ class _PhotoViewState extends State<PhotoView> {
             child: Row(
               children: [
                 IconButton(
+                  padding: EdgeInsets.all(5),
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.arrow_back_ios_new),
                 ),
-                IconButton(onPressed: ()=>saveImage(images[currIndex]), icon: const Icon(Icons.save_alt)),
+                IconButton(
+                  padding: EdgeInsets.all(5),
+                  onPressed: () => saveImage(images[currIndex]),
+                  icon: const Icon(Icons.save_alt),
+                ),
               ],
             ),
           ),
