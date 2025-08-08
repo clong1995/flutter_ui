@@ -64,12 +64,12 @@ class _PhotoViewState extends State<PhotoView> {
             child: Row(
               children: [
                 IconButton(
-                  padding: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(10),
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.arrow_back_ios_new),
                 ),
                 IconButton(
-                  padding: const EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(10),
                   onPressed: () => saveImage(images[currIndex]),
                   icon: const Icon(Icons.save_alt),
                 ),
