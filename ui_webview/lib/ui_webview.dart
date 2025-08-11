@@ -18,6 +18,8 @@ class UiWebview extends StatefulWidget {
 class _UiWebviewState extends State<UiWebview> {
   late WebViewController controller;
 
+  bool pageReady = false;
+
   @override
   void initState() {
     super.initState();
@@ -52,6 +54,15 @@ class _UiWebviewState extends State<UiWebview> {
         },
       );
     }
+    final ready = "_r${random}_";
+    controller.addJavaScriptChannel(
+        ready,
+        onMessageReceived: (JavaScriptMessage message) async {
+          setState(() {
+            pageReady = true;
+          });
+        }
+    );
     controller.setNavigationDelegate(
       NavigationDelegate(
         onProgress: (int progress) {
@@ -68,7 +79,8 @@ class _UiWebviewState extends State<UiWebview> {
                       $callbacks[callbackId](result);
                       delete $callbacks[callbackId];
                   }
-              }
+              };
+              
               window.wv = (action,param) =>{
                   return new Promise((resolve) => {
                       const callbackId = 'cb_' + Date.now() + '_' + Math.random().toString(36).substring(2);
@@ -80,7 +92,18 @@ class _UiWebviewState extends State<UiWebview> {
                       };
                       $bridge.postMessage(JSON.stringify(payload));
                   });
-              }
+              };
+              
+              (function() {
+                function sendReady() {
+                  $ready.postMessage("");
+                }
+                if (document.readyState === "complete") {
+                  sendReady();
+                } else {
+                  window.addEventListener("load", sendReady);
+                }
+              })();
             ''';
             controller.runJavaScript(script);
           }
@@ -99,5 +122,13 @@ class _UiWebviewState extends State<UiWebview> {
   bool get isRegister =>(widget.register != null && widget.register!.isNotEmpty);
 
   @override
-  Widget build(BuildContext context) => WebViewWidget(controller: controller);
+  Widget build(BuildContext context) => Stack(
+    children: [
+      WebViewWidget(controller: controller),
+      if (!pageReady)
+        const Positioned.fill(
+          child: Center(child: CircularProgressIndicator()),
+        ),
+    ],
+  );
 }

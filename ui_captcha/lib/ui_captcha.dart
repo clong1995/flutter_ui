@@ -20,7 +20,7 @@ class _Captcha extends StatelessWidget {
   const _Captcha({required this.verify, required this.width, required this.height});
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => SizedBox(
     width: width,
     height: height,
     child: Column(

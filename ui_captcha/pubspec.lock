@@ -197,16 +197,16 @@ packages:
     description:
       path: ui_alert
       ref: HEAD
-      resolved-ref: "971ce917ffb13d6bc0c6f757cc4da0a91051d4d8"
+      resolved-ref: "25d0864d3502230812ab1d2ed5a172af1ba2832a"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.0.1"
+    version: "0.1.1"
   ui_webview:
     dependency: "direct main"
     description:
       path: ui_webview
       ref: HEAD
-      resolved-ref: "971ce917ffb13d6bc0c6f757cc4da0a91051d4d8"
+      resolved-ref: "25d0864d3502230812ab1d2ed5a172af1ba2832a"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
@@ -238,26 +238,26 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_android
-      sha256: f6e6afef6e234801da77170f7a1847ded8450778caf2fe13979d140484be3678
+      sha256: "414174cacd339046a1a6dbf93cac62422194c676fed11119ccf228b81640e887"
       url: "https://pub.dev"
     source: hosted
-    version: "4.7.0"
+    version: "4.9.1"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
       name: webview_flutter_platform_interface
-      sha256: f0dc2dc3a2b1e3a6abdd6801b9355ebfeb3b8f6cde6b9dc7c9235909c4a1f147
+      sha256: "63d26ee3aca7256a83ccb576a50272edd7cfc80573a4305caa98985feb493ee0"
       url: "https://pub.dev"
     source: hosted
-    version: "2.13.1"
+    version: "2.14.0"
   webview_flutter_wkwebview:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
-      sha256: a3d461fe3467014e05f3ac4962e5fdde2a4bf44c561cb53e9ae5c586600fdbc3
+      sha256: fb46db8216131a3e55bcf44040ca808423539bc6732e7ed34fb6d8044e3d512f
       url: "https://pub.dev"
     source: hosted
-    version: "3.22.0"
+    version: "3.23.0"
 sdks:
   dart: ">=3.8.0 <4.0.0"
   flutter: ">=3.27.0"
