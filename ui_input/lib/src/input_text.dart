@@ -17,6 +17,7 @@ class InputText extends StatefulWidget {
   final bool autofocus;
   final bool obscureText;
   final EdgeInsetsGeometry? padding;
+  final bool? selection;
 
   const InputText({
     super.key,
@@ -35,6 +36,7 @@ class InputText extends StatefulWidget {
     this.autofocus = false,
     this.obscureText = false,
     this.padding,
+    this.selection,
   });
 
   @override
@@ -86,6 +88,7 @@ class _InputTextState extends State<InputText> {
     width: widget.width,
     height: height,
     child: TextField(
+      enableInteractiveSelection: widget.selection,
       controller: controller,
       cursorHeight: (height ?? 24) * .7,
       obscureText: obscure,
