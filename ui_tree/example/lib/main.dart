@@ -32,46 +32,46 @@ class _MyHomePageState extends State<MyHomePage> {
   final RegExp regExp = RegExp(r'_(\d+)x(\d+)\.$');
 
   List<UiTreeItem> data = [
-    UiTreeItem()
+    UiTreeItem<String>()
       ..id = "A"
-      ..title = "A 一级标题",
-    UiTreeItem()
+      ..data = "A 一级标题",
+    UiTreeItem<String>()
       ..id = "B"
       ..pid = "A"
-      ..title = "B 二级标题",
-    UiTreeItem()
+      ..data = "B 二级标题",
+    UiTreeItem<String>()
       ..id = "C"
       ..pid = "A"
-      ..title = "C 二级标题",
-    UiTreeItem()
+      ..data = "C 二级标题",
+    UiTreeItem<String>()
       ..id = "D"
       ..pid = "A"
-      ..title = "D 二级标题",
-    UiTreeItem()
+      ..data = "D 二级标题",
+    UiTreeItem<String>()
       ..id = "E"
-      ..title = "E 一级标题",
-    UiTreeItem()
+      ..data = "E 一级标题",
+    UiTreeItem<String>()
       ..id = "F"
       ..pid = "E"
-      ..title = "F 二级标题",
-    UiTreeItem()
+      ..data = "F 二级标题",
+    UiTreeItem<String>()
       ..id = "G"
       ..pid = "E"
-      ..title = "G 三级标题",
-    UiTreeItem()
+      ..data = "G 三级标题",
+    UiTreeItem<String>()
       ..id = "H"
       ..pid = "G"
-      ..title = "H 四级标题",
-    UiTreeItem()
+      ..data = "H 四级标题",
+    UiTreeItem<String>()
       ..id = "I"
       ..pid = "G"
-      ..title = "I 四级标题",
-    UiTreeItem()
+      ..data = "I 四级标题",
+    UiTreeItem<String>()
       ..id = "J"
-      ..title = "J 一级标题",
-    UiTreeItem()
+      ..data = "J 一级标题",
+    UiTreeItem<String>()
       ..id = "K"
-      ..title = "K 一级标题",
+      ..data = "K 一级标题",
   ];
 
   @override
@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
         data: data,
         itemBuilder: itemBuilder,
         onTap: (UiTreeItem item) {
-          print(item.title);
+          print(item.data);
         },
       ),
     );
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           Expanded(
             child: Text(
-              "${item.title}-$level-$expand-$length",
+              "${item.data}-$level-$expand-$length",
               style: TextStyle(color: selectedFontColor),
             ),
           ),

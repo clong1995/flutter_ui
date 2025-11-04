@@ -138,20 +138,42 @@ class _UiTreeState extends State<UiTree> {
   }
 }
 
-class UiTreeItem {
+/*class UiTreeItem<T>{
   String id = "";
   String pid = "";
-  String title = "";
+  T? data;
 
   @override
   bool operator ==(Object other) =>
       other is UiTreeItem &&
       id == other.id &&
       pid == other.pid &&
-      title == other.title;
+      data == other.data;
 
   @override
-  int get hashCode => id.hashCode ^ pid.hashCode ^ title.hashCode;
+  int get hashCode => id.hashCode ^ pid.hashCode ^ data.hashCode;
+}*/
+
+class UiTreeItem<T extends Comparable<T>> implements Comparable<UiTreeItem<T>>{
+  String id = "";
+  String pid = "";
+  T? data;
+
+  @override
+  int compareTo(UiTreeItem<T> other) {
+
+    final idCompare = id.compareTo(other.id);
+    if (idCompare != 0) return idCompare;
+
+    final pidCompare = pid.compareTo(other.pid);
+    if (pidCompare != 0) return pidCompare;
+
+    if (data == null && other.data == null) return 0;
+    if (data == null) return -1;
+    if (other.data == null) return 1;
+
+    return data!.compareTo(other.data!);
+  }
 }
 
 class _Tree {
