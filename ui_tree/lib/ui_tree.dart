@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class UiTree extends StatefulWidget {
+class UiTree<T extends Comparable<T>> extends StatefulWidget {
   final double indent;
-  final List<UiTreeItem> data;
+  final List<UiTreeItem<T>> data;
   final Widget Function(
     BuildContext context,
-    UiTreeItem item,
+    UiTreeItem<T> item,
     int length,
     int level,
     bool expand,
@@ -14,7 +14,7 @@ class UiTree extends StatefulWidget {
   )
   itemBuilder;
 
-  final void Function(UiTreeItem item)? onTap;
+  final void Function(UiTreeItem<T> item)? onTap;
 
   const UiTree({
     super.key,
@@ -25,11 +25,11 @@ class UiTree extends StatefulWidget {
   });
 
   @override
-  State<UiTree> createState() => _UiTreeState();
+  State<UiTree<T>> createState() => _UiTreeState<T>();
 }
 
-class _UiTreeState extends State<UiTree> {
-  List<_Tree> treeList = [];
+class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
+  List<_Tree<T>> treeList = [];
 
   String selectedId = "";
 
@@ -42,7 +42,7 @@ class _UiTreeState extends State<UiTree> {
   }
 
   @override
-  void didUpdateWidget(UiTree oldWidget) {
+  void didUpdateWidget(UiTree<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (!listEquals(widget.data, oldWidget.data)) {
       buildTree();
@@ -61,7 +61,7 @@ class _UiTreeState extends State<UiTree> {
     );
   }
 
-  Widget buildItem(_Tree tree) {
+  Widget buildItem(_Tree<T> tree) {
     tree.selected = selectedId == tree.item.id;
     return Padding(
       padding: EdgeInsets.only(left: widget.indent * tree.level),
@@ -111,9 +111,9 @@ class _UiTreeState extends State<UiTree> {
 
   void buildTree() {
     treeList.clear();
-    final Map<String, _Tree> nodeMap = {};
+    final Map<String, _Tree<T>> nodeMap = {};
     for (var item in widget.data) {
-      nodeMap[item.id] = _Tree()
+      nodeMap[item.id] = _Tree<T>()
         ..item = item
         ..children = [];
     }
@@ -154,32 +154,34 @@ class _UiTreeState extends State<UiTree> {
   int get hashCode => id.hashCode ^ pid.hashCode ^ data.hashCode;
 }*/
 
-class UiTreeItem<T extends Comparable<T>> implements Comparable<UiTreeItem<T>>{
+class UiTreeItem<T extends Comparable<T>> {
   String id = "";
   String pid = "";
   T? data;
 
   @override
-  int compareTo(UiTreeItem<T> other) {
-
-    final idCompare = id.compareTo(other.id);
-    if (idCompare != 0) return idCompare;
-
-    final pidCompare = pid.compareTo(other.pid);
-    if (pidCompare != 0) return pidCompare;
-
-    if (data == null && other.data == null) return 0;
-    if (data == null) return -1;
-    if (other.data == null) return 1;
-
-    return data!.compareTo(other.data!);
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is UiTreeItem<T> &&
+        id == other.id &&
+        pid == other.pid &&
+        isDataEqual(other);
   }
+
+  bool isDataEqual(UiTreeItem<T> other) {
+    if (data == null && other.data == null) return true;
+    if (data == null || other.data == null) return false;
+    return data!.compareTo(other.data!) == 0;
+  }
+
+  @override
+  int get hashCode => Object.hash(id, pid, data);
 }
 
-class _Tree {
+class _Tree<T extends Comparable<T>> {
   int level = 0;
   bool expand = false;
   bool selected = false;
-  late UiTreeItem item;
-  List<_Tree> children = [];
+  late UiTreeItem<T> item;
+  List<_Tree<T>> children = [];
 }

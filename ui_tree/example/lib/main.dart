@@ -31,7 +31,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final RegExp regExp = RegExp(r'_(\d+)x(\d+)\.$');
 
-  List<UiTreeItem> data = [
+  List<UiTreeItem<String>> data = [
     UiTreeItem<String>()
       ..id = "A"
       ..data = "A 一级标题",
@@ -77,10 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: UiTree(
+      body: UiTree<String>(
         data: data,
         itemBuilder: itemBuilder,
-        onTap: (UiTreeItem item) {
+        onTap: (UiTreeItem<String> item) {
           print(item.data);
         },
       ),
@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget itemBuilder(
       BuildContext context,
-      UiTreeItem item,
+      UiTreeItem<String> item,
       int length,
       int level,
       bool expand,
