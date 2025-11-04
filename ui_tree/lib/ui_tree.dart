@@ -155,19 +155,19 @@ class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
 }*/
 
 class UiTreeItem<T extends Comparable<T>> {
-  String id = "";
-  String pid = "";
-  T? data;
+  String id;
+  String pid;
+  T data;
+
+  UiTreeItem({required this.id, this.pid = "", required this.data});
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! UiTreeItem<T>) return false;
-
-    final dataEqual = (data == null && other.data == null) ||
-        (data != null && other.data != null && data!.compareTo(other.data!) == 0);
-
-    return id == other.id && pid == other.pid && dataEqual;
+    return id == other.id &&
+        pid == other.pid &&
+        (data.compareTo(other.data) == 0);
   }
 
   @override
