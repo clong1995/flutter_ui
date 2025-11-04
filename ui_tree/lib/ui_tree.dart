@@ -162,16 +162,12 @@ class UiTreeItem<T extends Comparable<T>> {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is UiTreeItem<T> &&
-        id == other.id &&
-        pid == other.pid &&
-        isDataEqual(other);
-  }
+    if (other is! UiTreeItem<T>) return false;
 
-  bool isDataEqual(UiTreeItem<T> other) {
-    if (data == null && other.data == null) return true;
-    if (data == null || other.data == null) return false;
-    return data!.compareTo(other.data!) == 0;
+    final dataEqual = (data == null && other.data == null) ||
+        (data != null && other.data != null && data!.compareTo(other.data!) == 0);
+
+    return id == other.id && pid == other.pid && dataEqual;
   }
 
   @override
