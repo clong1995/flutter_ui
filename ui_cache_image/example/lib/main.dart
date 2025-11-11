@@ -40,6 +40,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final images = [
+    "https://jixiao-storage.oss-cn-beijing.aliyuncs.com/avatar/⏝ⅥⅥ⊢∩,U⏡⚶_0_s_512x508.jpg",
+    "https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
+    "https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/7.jpeg",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,23 +55,24 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         children: [
-          const SizedBox(
-            width: 100,
-            height: 100,
-            child: UiCacheImage("https://jixiao-storage.oss-cn-beijing.aliyuncs.com/avatar/⏝ⅥⅥ⊢∩,U⏡⚶_0_s_512x508.jpg"),
-          ),
-          const SizedBox(
-            width: 100,
-            height: 100,
-            child: UiCacheImage("https://docs.flutter.dev/assets/images/dash/dash-fainting.gif"),
-          ),
-          SizedBox(
+          FilledButton(
+              onPressed: () {
+                setState(() {});
+              },
+              child: const Text("reload")),
+          ...images.map((e) => SizedBox(
+                width: 100,
+                height: 100,
+                child: UiCacheImage(e),
+              )),
+          /*SizedBox(
             width: 100,
             height: 100,
             child: Image(
-              image: UiCacheImageProvider("https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/7.jpeg"),
+              image: UiCacheImageProvider(
+                  ),
             ),
-          ),
+          ),*/
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

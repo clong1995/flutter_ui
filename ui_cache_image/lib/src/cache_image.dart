@@ -17,19 +17,19 @@ class UiCacheImage extends StatefulWidget {
 }
 
 class _UiCacheImageState extends State<UiCacheImage> {
-  /*static const Duration cacheDuration = Duration(minutes: 5);
-  static final Map<String, _CacheEntry> imageCache = {};*/
 
-  late Future<Widget> futureImage;
-
-  late String src;
+  Widget? image;
+  bool loading = true;
 
   @override
   void initState() {
     super.initState();
-    //cleanUpCache(); // 初始化时清理过期缓存
-    src = widget.src;
-    futureImage = _cachedImage(widget.src, widget.fit);
+    loadImage();
+  }
+
+  void loadImage() async {
+    image = await cachedImage(widget.src, widget.fit);
+    setState(() => loading = false);
   }
 
   @override
@@ -37,39 +37,12 @@ class _UiCacheImageState extends State<UiCacheImage> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.src != widget.src || oldWidget.fit != widget.fit) {
       debugPrint("image changed");
-      src = widget.src;
-      futureImage = _cachedImage(src, widget.fit);
-      setState(() {});
+      setState(() => loading = true);
+      loadImage();
     }
   }
 
-  /*Future<Widget> getCachedImage(String src, BoxFit? fit) {
-    final now = DateTime.now();
-    // 如果缓存存在并未过期，则返回缓存，并刷新过期时间
-    if (imageCache.containsKey(src)) {
-      final cacheEntry = imageCache[src]!;
-      if (cacheEntry.expiry.isAfter(now)) {
-        cacheEntry.expiry = now.add(cacheDuration); // 刷新过期时间
-        return cacheEntry.imageFuture;
-      } else {
-        imageCache.remove(src); // 过期，移除缓存
-      }
-    }
-
-    // 如果没有缓存或已过期，重新加载
-    final future = _tempImage(src, fit);
-    imageCache[src] = _CacheEntry(future, now.add(cacheDuration));
-
-    return future;
-  }*/
-
-  Future<Widget> _cachedImage(String src, BoxFit? fit) async {
-
-    /* final encodedUrl = Uri.encodeFull(src);
-    final encodedUrl = src;
-    print(encodedUrl);
-    print(Uri.encodeFull(src));*/
-
+  Future<Widget> cachedImage(String src, BoxFit? fit) async {
     if (kIsWeb) {
       return Image.network(src, fit: fit);
     }
@@ -96,33 +69,9 @@ class _UiCacheImageState extends State<UiCacheImage> {
     return const Icon(Icons.image_outlined);
   }
 
-  /// 清理过期的缓存项
-  /*void cleanUpCache() {
-    final now = DateTime.now();
-    imageCache.removeWhere((_, entry) => entry.expiry.isBefore(now));
-  }*/
-
   @override
-  Widget build(BuildContext context) => FutureBuilder<Widget>(
-    future: futureImage,
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Center(child: CircularProgressIndicator());
-      } else if (snapshot.hasError) {
-        debugPrint(snapshot.error.toString());
-        return const Icon(Icons.broken_image);
-      } else if (snapshot.hasData) {
-        return snapshot.data!;
-      } else {
-        return const Icon(Icons.image);
-      }
-    },
-  );
+  Widget build(BuildContext context){
+    if (loading) return const Center(child: CircularProgressIndicator());
+    return image ?? const Icon(Icons.broken_image);
+  }
 }
-
-/*class _CacheEntry {
-  Future<Widget> imageFuture;
-  DateTime expiry;
-
-  _CacheEntry(this.imageFuture, this.expiry);
-}*/
