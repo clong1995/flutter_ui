@@ -24,6 +24,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
   @override
   void initState() {
     super.initState();
+    //print("initState");
     loadImage();
   }
 
@@ -71,6 +72,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
 
   @override
   Widget build(BuildContext context){
+    //print(loading);
     if (loading) return const Center(child: CircularProgressIndicator());
     return image ?? const Icon(Icons.broken_image);
   }

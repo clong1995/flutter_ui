@@ -64,6 +64,7 @@ class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
   Widget buildItem(_Tree<T> tree) {
     tree.selected = selectedId == tree.item.id;
     return Padding(
+      key: ValueKey(tree.item.id),
       padding: EdgeInsets.only(left: widget.indent * tree.level),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -17,6 +17,7 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_cache_image
+    #path: /Users/markeckles/Desktop/flutter_ui/ui_cache_image
   nav:
     git:
       url: https://github.com/clong1995/flutter_ui.git
