@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class UiTree<T extends Comparable<T>> extends StatefulWidget {
   final double indent;
+  final String selectedId;
   final List<UiTreeItem<T>> data;
   final Widget Function(
     BuildContext context,
@@ -19,6 +20,7 @@ class UiTree<T extends Comparable<T>> extends StatefulWidget {
   const UiTree({
     super.key,
     this.indent = 10.0,
+    this.selectedId = "",
     required this.data,
     required this.itemBuilder,
     this.onTap,
@@ -44,7 +46,9 @@ class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
   @override
   void didUpdateWidget(UiTree<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (!listEquals(widget.data, oldWidget.data)) {
+    if (!listEquals(widget.data, oldWidget.data) ||
+        widget.indent != oldWidget.indent ||
+        widget.selectedId != oldWidget.selectedId) {
       buildTree();
       setState(() {});
     }
@@ -111,6 +115,7 @@ class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
   }
 
   void buildTree() {
+    selectedId = widget.selectedId;
     treeList.clear();
     final Map<String, _Tree<T>> nodeMap = {};
     for (var item in widget.data) {

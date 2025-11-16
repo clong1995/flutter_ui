@@ -1,7 +1,7 @@
 name: ui_tree
 description: "A new Flutter project."
-version: 0.2.3
-homepage:
+version: 0.2.4
+homepage: flutter_ui
 
 environment:
   sdk: ^3.8.0
