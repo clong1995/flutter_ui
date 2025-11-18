@@ -24,8 +24,9 @@ class UiBanner extends StatefulWidget {
 
 class _UiBannerState extends State<UiBanner>
     with SingleTickerProviderStateMixin, WidgetsBindingObserver {
-  late PageController pageController;
-  late TabController indicatorController;
+  PageController? pageController;
+  TabController? indicatorController;
+
   Timer? ticker;
   int index = 0;
   bool isScrolling = true;
@@ -34,17 +35,19 @@ class _UiBannerState extends State<UiBanner>
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addObserver(this);
+    _init();
+  }
 
-    pageController = PageController(initialPage: 0);
-    indicatorController = TabController(
-      length: widget.children.length,
-      vsync: this,
-    );
-
-    if (widget.auto) {
-      ticker = tickerStart();
+  @override
+  void didUpdateWidget(UiBanner oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.children.length != widget.children.length ||
+        oldWidget.auto != widget.auto ||
+        oldWidget.indicator != widget.indicator ||
+        oldWidget.scrollDirection != widget.scrollDirection) {
+      _dispose();
+      _init();
     }
   }
 
@@ -52,18 +55,38 @@ class _UiBannerState extends State<UiBanner>
   void dispose() {
     super.dispose();
     WidgetsBinding.instance.removeObserver(this);
-    pageController.dispose();
+    _dispose();
+  }
+
+  void _init(){
+    if (widget.children.length > 1) {
+      pageController = PageController(initialPage: 0);
+    }
+
     if (widget.indicator) {
-      indicatorController.dispose();
+      indicatorController = TabController(
+        length: widget.children.length,
+        vsync: this,
+      );
     }
-    if (widget.auto) {
-      ticker?.cancel();
+
+    if (widget.auto && widget.children.length > 1) {
+      ticker = tickerStart();
     }
+  }
+
+  void _dispose() {
+    pageController?.dispose();
+    pageController = null;
+    indicatorController?.dispose();
+    indicatorController = null;
+    ticker?.cancel();
+    ticker = null;
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (widget.auto) {
+    if (widget.auto && widget.children.length > 1) {
       if (state == AppLifecycleState.inactive ||
           state == AppLifecycleState.paused) {
         ticker?.cancel();
@@ -91,9 +114,8 @@ class _UiBannerState extends State<UiBanner>
 
   @override
   Widget build(BuildContext context) {
-    return widget.children.isEmpty
-        ? const SizedBox.shrink()
-        : Stack(
+    return widget.children.length > 1
+        ? Stack(
             children: [
               regionWrap(
                 child: PageView.builder(
@@ -105,7 +127,7 @@ class _UiBannerState extends State<UiBanner>
                   onPageChanged: onPageChanged,
                 ),
               ),
-              if (widget.indicator)
+              if (indicatorController != null)
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -127,13 +149,16 @@ class _UiBannerState extends State<UiBanner>
                   ),
                 ),
             ],
-          );
+          )
+        : widget.children.length == 1
+        ? widget.children[0]
+        : const SizedBox.shrink();
   }
 
   void onPageChanged(int index) {
-    if (widget.indicator) {
+    if (indicatorController != null) {
       this.index = index;
-      indicatorController.animateTo(index % widget.children.length);
+      indicatorController?.animateTo(index % widget.children.length);
     }
   }
 
@@ -143,12 +168,15 @@ class _UiBannerState extends State<UiBanner>
       if (widget.children.isEmpty) {
         return;
       }
-      if (widget.indicator) {
+      if (indicatorController != null) {
         index += 1;
         int p = index % widget.children.length;
-        indicatorController.animateTo(p);
+        indicatorController?.animateTo(p);
       }
-      pageController.nextPage(duration: kTabScrollDuration, curve: Curves.ease);
+      pageController?.nextPage(
+        duration: kTabScrollDuration,
+        curve: Curves.ease,
+      );
     });
   }
 
