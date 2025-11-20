@@ -1,11 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-
-import 'lifecycle.dart';
-import 'src/logic_dict.dart';
+import 'package:state/lifecycle.dart';
+import 'package:state/src/logic_dict.dart';
 
 abstract class Logic<T> with Lifecycle {
+  Logic(this.context);
+
   final Map<String, void Function()> _updateDict = {};
 
   @nonVirtual
@@ -14,8 +15,7 @@ abstract class Logic<T> with Lifecycle {
   @nonVirtual
   bool public = false;
 
-
- /* late final T _state;
+  /* late final T _state;
 
   @nonVirtual
   @protected
@@ -26,20 +26,20 @@ abstract class Logic<T> with Lifecycle {
   @nonVirtual
   T get state => _state;*/
 
-  final BuildContext _context;
-
   @nonVirtual
   @override
-  BuildContext get context => _context;
+  final BuildContext context;
 
-  Logic(this._context);
+  /*@nonVirtual
+  @override
+  BuildContext get context => _context;*/
 
   @nonVirtual
   void initDict(void Function() update) {
-    if (_updateDict.containsKey("_")) {
+    if (_updateDict.containsKey('_')) {
       return;
     }
-    _updateDict["_"] = update;
+    _updateDict['_'] = update;
   }
 
   @nonVirtual
@@ -53,7 +53,7 @@ abstract class Logic<T> with Lifecycle {
         if (ids.contains(key)) func.call();
       });
     } else {
-      _updateDict["_"]?.call();
+      _updateDict['_']?.call();
     }
   }
 
@@ -69,15 +69,15 @@ abstract class Logic<T> with Lifecycle {
 }
 
 class _BuildChildWidget extends StatefulWidget {
-  final String id;
-  final Map<String, void Function()> updateDict;
-  final Widget Function(BuildContext context) builder;
-
   const _BuildChildWidget({
     required this.id,
     required this.builder,
     required this.updateDict,
   });
+
+  final String id;
+  final Map<String, void Function()> updateDict;
+  final Widget Function(BuildContext context) builder;
 
   @override
   State<_BuildChildWidget> createState() => _BuildChildWidgetState();
@@ -87,9 +87,9 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
   @override
   void initState() {
     super.initState();
-    for (String e in widget.updateDict.keys) {
-      if (widget.id == "_" || e == widget.id) {
-        throw "${widget.id} : already exists";
+    for (final e in widget.updateDict.keys) {
+      if (widget.id == '_' || e == widget.id) {
+        throw Exception('${widget.id} : already exists');
       }
     }
     widget.updateDict[widget.id] = () => setState(() {});

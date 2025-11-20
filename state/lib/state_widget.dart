@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:state/logic.dart';
+import 'package:state/src/logic_dict.dart';
 
-import 'logic.dart';
-import 'src/logic_dict.dart';
-
-class StateWidget<T extends Logic> extends StatefulWidget {
-  final T Function(BuildContext context) logic;
-  final Widget Function(BuildContext context, T) builder;
+class StateWidget<T extends Logic<dynamic>> extends StatefulWidget {
   // final bool public;
 
   const StateWidget({
-    super.key,
     required this.logic,
     required this.builder,
+    super.key,
     // this.public = false,
   });
+
+  final T Function(BuildContext context) logic;
+  final Widget Function(BuildContext context, T) builder;
 
   @override
   State<StateWidget<T>> createState() => _StateWidgetState<T>();
 }
 
-class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
+class _StateWidgetState<T extends Logic<dynamic>>
+    extends State<StateWidget<T>> {
   late T logic;
 
   @override
@@ -29,8 +30,9 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
     if (logic.public) {
       LogicDict.set<T>(logic);
     }
-    logic.initDict(() => setState(() {}));
-    logic.onInit();
+    logic
+      ..initDict(() => setState(() {}))
+      ..onInit();
   }
 
   @override
@@ -40,7 +42,7 @@ class _StateWidgetState<T extends Logic> extends State<StateWidget<T>> {
   }
 
   @override
-  Widget build(BuildContext context) => widget.builder(context,logic);
+  Widget build(BuildContext context) => widget.builder(context, logic);
 
   @override
   void dispose() {
