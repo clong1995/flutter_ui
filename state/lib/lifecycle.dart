@@ -9,5 +9,5 @@ mixin Lifecycle {
 
   BuildContext get context;
 
-  void update([List<String>? ids]) {}
+  void update([List<ValueKey<dynamic>>? keys]) {}
 }

@@ -1,3 +1,4 @@
+import 'package:example/list/page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       //home: eventBusPage(),
-      home: const Text('xxx'),
+      home: listPage(),
     );
   }
 }

@@ -7,7 +7,7 @@ import 'package:state/src/logic_dict.dart';
 abstract class Logic<T> with Lifecycle {
   Logic(this.context);
 
-  final Map<String, void Function()> _updateDict = {};
+  final Map<ValueKey<dynamic>, void Function()> _updateDict = {};
 
   @nonVirtual
   late final T state;
@@ -36,10 +36,10 @@ abstract class Logic<T> with Lifecycle {
 
   @nonVirtual
   void initDict(void Function() update) {
-    if (_updateDict.containsKey('_')) {
+    if (_updateDict.containsKey(const ValueKey('_'))) {
       return;
     }
-    _updateDict['_'] = update;
+    _updateDict[const ValueKey('_')] = update;
   }
 
   @nonVirtual
@@ -47,21 +47,21 @@ abstract class Logic<T> with Lifecycle {
 
   @nonVirtual
   @override
-  void update([List<String>? ids]) {
-    if (ids != null) {
-      _updateDict.forEach((String key, void Function() func) {
-        if (ids.contains(key)) func.call();
+  void update([List<ValueKey<dynamic>>? keys]) {
+    if (keys != null) {
+      _updateDict.forEach((ValueKey<dynamic> key, void Function() func) {
+        if (keys.contains(key)) func.call();
       });
     } else {
-      _updateDict['_']?.call();
+      _updateDict[const ValueKey('_')]?.call();
     }
   }
 
   @nonVirtual
   Widget builder({
-    required String id,
+    required ValueKey<dynamic> key,
     required Widget Function(BuildContext context) builder,
-  }) => _BuildChildWidget(id: id, builder: builder, updateDict: _updateDict);
+  }) => _BuildChildWidget(key: key, builder: builder, updateDict: _updateDict);
 
   @nonVirtual
   void Function(FrameCallback callback, {String debugLabel}) frameCallback =
@@ -70,13 +70,14 @@ abstract class Logic<T> with Lifecycle {
 
 class _BuildChildWidget extends StatefulWidget {
   const _BuildChildWidget({
-    required this.id,
+    //required this.id,
     required this.builder,
     required this.updateDict,
+    required super.key,
   });
 
-  final String id;
-  final Map<String, void Function()> updateDict;
+  //final String id;
+  final Map<Key, void Function()> updateDict;
   final Widget Function(BuildContext context) builder;
 
   @override
@@ -87,12 +88,13 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
   @override
   void initState() {
     super.initState();
+    print('initState========');
     for (final e in widget.updateDict.keys) {
-      if (widget.id == '_' || e == widget.id) {
-        throw Exception('${widget.id} : already exists');
+      if (widget.key == const ValueKey('_') || e == widget.key) {
+        throw Exception('${widget.key} : already exists');
       }
     }
-    widget.updateDict[widget.id] = () => setState(() {});
+    widget.updateDict[widget.key!] = () => setState(() {});
   }
 
   @override
@@ -100,7 +102,8 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
 
   @override
   void dispose() {
-    widget.updateDict.remove(widget.id);
+    print('dispose========');
+    widget.updateDict.remove(widget.key);
     super.dispose();
   }
 }
