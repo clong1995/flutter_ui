@@ -91,6 +91,7 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
     print('initState========');
     for (final e in widget.updateDict.keys) {
       if (widget.key == const ValueKey('_') || e == widget.key) {
+        //使用hot reload的时候，如果key无效(父Widget改变，位置夸组件移动，会报错是正常的，release模式不会)
         throw Exception('${widget.key} : already exists');
       }
     }
