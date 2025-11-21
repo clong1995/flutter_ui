@@ -1,23 +1,24 @@
 name: ui_cache_image
 description: "A new Flutter project."
-version: 0.2.2
+version: 0.2.3
 homepage: flutter_ui
 
 environment:
-  sdk: ^3.8.0
-  flutter: ">=3.19.6"
+  sdk: ^3.9.2
+  flutter: ">=3.35.6"
 
 dependencies:
+  crypto: ^3.0.7
   flutter:
     sdk: flutter
+  http: ^1.6.0
   path_provider: ^2.1.5
-  crypto: ^3.0.6
-  http: ^1.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  #flutter_lints: ^5.0.0
+  very_good_analysis: ^10.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -31,7 +32,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
   #
   assets:
-     - images/
+    - images/
   # For details regarding assets in packages, see
   # https://flutter.dev/to/asset-from-package
   #

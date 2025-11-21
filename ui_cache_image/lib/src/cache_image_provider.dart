@@ -6,13 +6,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
+import 'package:ui_cache_image/src/common.dart';
 
-import 'common.dart';
-
+@immutable
 class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
-  final String src;
+  const UiCacheImageProvider(this.src);
 
-  UiCacheImageProvider(this.src);
+  final String src;
 
   @override
   Future<UiCacheImageProvider> obtainKey(ImageConfiguration configuration) =>
@@ -27,7 +27,7 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
     return MultiFrameImageStreamCompleter(
       chunkEvents: chunkEvents.stream,
       codec: _loadAsync(key, chunkEvents, decode),
-      scale: 1.0,
+      scale: 1,
       debugLabel: 'AsyncImageProvider($src)',
     );
   }
@@ -41,18 +41,18 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
       final tempDir = await tempDirectory();
       final md5 = md5str(src);
       final imageFile = File('$tempDir/$md5');
-      if (await imageFile.exists()) {
+      if (imageFile.existsSync()) {
         try {
           final bytes = await imageFile.readAsBytes();
           return await ui.instantiateImageCodec(bytes);
-        } catch (e) {
+        } on Exception catch (e) {
           debugPrint('cache image error $e');
           await imageFile.delete();
         }
       }
 
       //请求新的图片
-      debugPrint("request new image");
+      debugPrint('request new image');
 
       final response = await get(Uri.parse(src));
       if (response.statusCode != 200) {
@@ -63,12 +63,13 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
 
       await imageFile.writeAsBytes(response.bodyBytes);
       return await ui.instantiateImageCodec(response.bodyBytes);
-    } catch (e) {
+    } on Exception catch (e) {
+      debugPrint('load image error: $e');
       final data = await rootBundle.load(
-        "packages/ui_cache_image/images/image.png",
+        'packages/ui_cache_image/images/image.png',
       );
       final bytes = data.buffer.asUint8List();
-      return await ui.instantiateImageCodec(bytes);
+      return ui.instantiateImageCodec(bytes);
     } finally {
       await chunkEvents.close();
     }
