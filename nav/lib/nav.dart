@@ -46,7 +46,7 @@ class Nav {
   }) => Navigator.of(context, rootNavigator: root).pop<T>(result);
 
   static T? routeArgs<T>(BuildContext context) {
-    Object? arguments = ModalRoute.of(context)?.settings.arguments;
+    final arguments = ModalRoute.of(context)?.settings.arguments;
     if (arguments != null) {
       return arguments as T;
     }
