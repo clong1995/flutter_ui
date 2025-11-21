@@ -56,9 +56,9 @@ mixin EventBus on Lifecycle {
 
   @mustCallSuper
   @override
-  Future<void> onDispose() async {
+  void onDispose() {
     super.onDispose();
-    await _subscription.cancel();
+    unawaited(_subscription.cancel());
   }
 }
 

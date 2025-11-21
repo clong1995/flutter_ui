@@ -88,7 +88,6 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
   @override
   void initState() {
     super.initState();
-    print('initState========');
     for (final e in widget.updateDict.keys) {
       if (widget.key == const ValueKey('_') || e == widget.key) {
         //使用hot reload的时候，如果key无效(父Widget改变，位置夸组件移动，会报错是正常的，release模式不会)
@@ -103,7 +102,6 @@ class _BuildChildWidgetState extends State<_BuildChildWidget> {
 
   @override
   void dispose() {
-    print('dispose========');
     widget.updateDict.remove(widget.key);
     super.dispose();
   }
