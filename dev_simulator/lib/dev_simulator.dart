@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 //尺寸: 340 * 740
-class DevSimulator extends StatelessWidget {
-  final bool web; //模拟web
-  final String webTitle; //模拟web
+class DevSimulator extends StatelessWidget { //模拟web
   const DevSimulator(
     this.builder, {
     super.key,
     this.web = false,
-    this.webTitle = "example.com",
+    this.webTitle = 'example.com',
   });
+  final bool web; //模拟web
+  final String webTitle;
 
   final Widget Function(BuildContext) builder;
 
@@ -19,7 +19,7 @@ class DevSimulator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MediaQueryData mediaQueryData = MediaQuery.of(context);
+    final mediaQueryData = MediaQuery.of(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -27,13 +27,13 @@ class DevSimulator extends StatelessWidget {
             child: MediaQuery(
               data: mediaQueryData.copyWith(
                 viewPadding: mediaQueryData.padding.copyWith(
-                  top: web == true ? 0 : paddingTop,
+                  top: web ? 0 : paddingTop,
                   bottom: paddingBottom,
                 ),
               ),
               child: Column(
                 children: [
-                  if (web == true)
+                  if (web)
                     Container(
                       color: Colors.white,
                       padding: EdgeInsets.only(top: paddingTop),
@@ -82,7 +82,7 @@ class DevSimulator extends StatelessWidget {
               children: [
                 const Expanded(
                   child: Center(
-                    child: Text("14:15", style: TextStyle(fontSize: 12)),
+                    child: Text('14:15', style: TextStyle(fontSize: 12)),
                   ),
                 ),
                 Container(

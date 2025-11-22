@@ -1,3 +1,11 @@
-import 'dart:js' as js;
+import 'dart:js_interop';
 
-String userAgent = js.context["navigator"]["userAgent"];
+@JS('navigator')
+external Navigator get navigator;
+
+@JS()
+extension type Navigator._(JSObject _) implements JSObject {
+  external String get userAgent;
+}
+
+String userAgent = navigator.userAgent;
