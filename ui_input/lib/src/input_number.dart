@@ -2,22 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class InputNumber<T extends num> extends StatefulWidget {
+  const InputNumber({
+    required this.num,
+    super.key,
+    this.width,
+    this.height,
+    this.onChanged,
+    this.autofocus = false,
+    this.style,
+  });
+
   final double? width;
   final double? height;
   final T num;
   final void Function(T)? onChanged;
   final bool autofocus;
   final TextStyle? style;
-
-  const InputNumber({
-    super.key,
-    this.width,
-    this.height,
-    required this.num,
-    this.onChanged,
-    this.autofocus = false,
-    this.style,
-  });
 
   @override
   State<InputNumber<T>> createState() => _InputNumberState<T>();
@@ -43,13 +43,13 @@ class _InputNumberState<T extends num> extends State<InputNumber<T>> {
     height = widget.height ?? 32;
     width = widget.width ?? 85;
     style = widget.style ?? const TextStyle(fontSize: 14);
-    controller = TextEditingController(text: "${widget.num}");
+    controller = TextEditingController(text: '${widget.num}');
   }
 
   @override
-  void didUpdateWidget(oldWidget) {
+  void didUpdateWidget(InputNumber<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    controller.text = "${widget.num}";
+    controller.text = '${widget.num}';
   }
 
   @override
@@ -72,7 +72,6 @@ class _InputNumberState<T extends num> extends State<InputNumber<T>> {
             controller: controller,
             cursorHeight: height * .7,
             style: style,
-            maxLines: 1,
             readOnly: widget.onChanged == null,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [FilteringTextInputFormatter.allow(reg)],
@@ -98,7 +97,7 @@ class _InputNumberState<T extends num> extends State<InputNumber<T>> {
 
   T? get number {
     num? n;
-    String text = controller.text;
+    final text = controller.text;
     if (text.isEmpty) {
       return null;
     } else {
@@ -124,28 +123,28 @@ class _InputNumberState<T extends num> extends State<InputNumber<T>> {
   }
 
   void onSubtractPressed() {
-    T? n = number;
+    final n = number;
     if (n == null) {
       return;
     }
-    controller.text = "${n - 1}";
+    controller.text = '${n - 1}';
     widget.onChanged!((n - 1) as T);
   }
 
   void onPlusPressed() {
-    T? n = number;
+    final n = number;
     if (n == null) {
       return;
     }
-    controller.text = "${n + 1}";
+    controller.text = '${n + 1}';
     widget.onChanged!((n + 1) as T);
   }
 
   void onInputChanged(String text) {
-    if (text == "-") {
+    if (text == '-') {
       return;
     }
-    T? n = number;
+    final n = number;
     if (n == null) {
       return;
     }

@@ -2,23 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class InputText extends StatefulWidget {
-  final double? width;
-  final double? height;
-  final int maxLines;
-  final String? text;
-  final Widget? prefix;
-  final String? hint;
-  final BorderSide? borderSide;
-  final TextStyle? style;
-  final TextInputType? keyboardType;
-  final List<TextInputFormatter>? inputFormatters;
-  final void Function(String)? onChanged;
-  final bool clear;
-  final bool autofocus;
-  final bool obscureText;
-  final EdgeInsetsGeometry? padding;
-  final bool? selection;
-
   const InputText({
     super.key,
     this.width,
@@ -38,6 +21,23 @@ class InputText extends StatefulWidget {
     this.padding,
     this.selection,
   });
+
+  final double? width;
+  final double? height;
+  final int maxLines;
+  final String? text;
+  final Widget? prefix;
+  final String? hint;
+  final BorderSide? borderSide;
+  final TextStyle? style;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final void Function(String)? onChanged;
+  final bool clear;
+  final bool autofocus;
+  final bool obscureText;
+  final EdgeInsetsGeometry? padding;
+  final bool? selection;
 
   @override
   State<InputText> createState() => _InputTextState();
@@ -112,8 +112,7 @@ class _InputTextState extends State<InputText> {
         ),
         focusedBorder: OutlineInputBorder(borderSide: borderSide),
         contentPadding:
-            widget.padding ??
-            const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+            widget.padding ?? const EdgeInsets.symmetric(horizontal: 10),
         fillColor: Colors.white,
         hoverColor: Colors.transparent,
         filled: true,
