@@ -34,12 +34,12 @@ class _UiCacheImageState extends State<UiCacheImage> {
   }
 
   @override
-  Future<void> didUpdateWidget(covariant UiCacheImage oldWidget) async {
+  void didUpdateWidget(covariant UiCacheImage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.src != widget.src || oldWidget.fit != widget.fit) {
       debugPrint('image changed');
       setState(() => loading = true);
-      await loadImage();
+      unawaited(loadImage());
     }
   }
 
