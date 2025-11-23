@@ -36,10 +36,10 @@ abstract class Logic<T> with Lifecycle {
 
   @nonVirtual
   void initDict(void Function() update) {
-    if (_updateDict.containsKey(const ValueKey('_'))) {
+    /*if (_updateDict.containsKey(const ValueKey<dynamic>('_'))) {
       return;
-    }
-    _updateDict[const ValueKey('_')] = update;
+    }*/
+    _updateDict[const ValueKey<dynamic>('_')] = update;
   }
 
   @nonVirtual
@@ -53,7 +53,7 @@ abstract class Logic<T> with Lifecycle {
         if (keys.contains(key)) func.call();
       });
     } else {
-      _updateDict[const ValueKey('_')]?.call();
+      _updateDict[const ValueKey<dynamic>('_')]?.call();
     }
   }
 
