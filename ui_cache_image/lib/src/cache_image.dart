@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -21,10 +22,10 @@ class _UiCacheImageState extends State<UiCacheImage> {
   bool loading = true;
 
   @override
-  Future<void> initState() async {
+  void initState() {
     super.initState();
     //print("initState");
-    await loadImage();
+     unawaited(loadImage());
   }
 
   Future<void> loadImage() async {
