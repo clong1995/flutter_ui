@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'config.dart';
+import 'package:ui_alert/src/widget/config.dart';
 
 class TitleWidget extends StatelessWidget {
-  final String text;
 
-  const TitleWidget({super.key, required this.text});
+  const TitleWidget({required this.text, super.key});
+  final String text;
 
   @override
   Widget build(BuildContext context) {

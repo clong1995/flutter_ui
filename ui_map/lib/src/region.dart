@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nav/nav.dart';
-
-import 'region_widget.dart';
+import 'package:ui_map/src/region_widget.dart';
 
 Future<List<Region>?> region(
   BuildContext context, {
@@ -15,6 +14,6 @@ Future<List<Region>?> region(
 );
 
 class Region {
-  String code = "";
-  String name = "";
+  String code = '';
+  String name = '';
 }

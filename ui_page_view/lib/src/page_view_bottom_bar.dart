@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
 class PageViewBottomBar extends StatefulWidget {
+  const PageViewBottomBar({
+    required this.height,
+    required this.items,
+    required this.controller,
+    super.key,
+    this.decoration,
+    this.padding,
+  });
+
   final double height;
   final Decoration? decoration;
   final List<PageViewBottomBarItem> items;
   final PageController controller;
   final EdgeInsetsGeometry? padding;
 
-  const PageViewBottomBar({
-    super.key,
-    required this.height,
-    this.decoration,
-    required this.items,
-    this.padding,
-    required this.controller,
-  });
-
   @override
   State<PageViewBottomBar> createState() => _PageViewBottomBarState();
 }
 
 class _PageViewBottomBarState extends State<PageViewBottomBar> {
-  var currIndex = 0;
+  int currIndex = 0;
   final List<PageViewBottomBarItem> items = [];
 
   @override
@@ -42,30 +42,27 @@ class _PageViewBottomBarState extends State<PageViewBottomBar> {
     decoration: widget.decoration,
     padding: widget.padding,
     child: Row(
-      children:
-          widget.items
-              .map(
-                (e) =>
-                    e.isSpacer == true
-                        ? e.item
-                        : Expanded(
-                          child: InkWell(
-                            onTap: () {
-                              if (currIndex == e.index) {
-                                return;
-                              }
-                              currIndex = e.index;
-                              setState(() {});
-                              widget.controller.jumpToPage(e.index);
-                            },
-                            child:
-                                currIndex == e.index
-                                    ? e.selectedItem ?? e.item
-                                    : e.item,
-                          ),
-                        ),
-              )
-              .toList(),
+      children: widget.items
+          .map(
+            (e) => e.isSpacer ?? false
+                ? e.item
+                : Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        if (currIndex == e.index) {
+                          return;
+                        }
+                        currIndex = e.index;
+                        setState(() {});
+                        widget.controller.jumpToPage(e.index);
+                      },
+                      child: currIndex == e.index
+                          ? e.selectedItem ?? e.item
+                          : e.item,
+                    ),
+                  ),
+          )
+          .toList(),
     ),
   );
 
@@ -81,14 +78,14 @@ class _PageViewBottomBarState extends State<PageViewBottomBar> {
 }
 
 class PageViewBottomBarItem {
-  final bool? isSpacer;
-  final Widget item;
-  final Widget? selectedItem;
-  int index = 0;
-
   PageViewBottomBarItem({
     required this.item,
     this.selectedItem,
     this.isSpacer,
   });
+
+  final bool? isSpacer;
+  final Widget item;
+  final Widget? selectedItem;
+  int index = 0;
 }

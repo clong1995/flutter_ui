@@ -1,21 +1,23 @@
 name: ui_markdown
 description: "A new Flutter project."
-version: 0.0.1
-homepage:
+version: 0.0.2
+homepage: flutter_ui
+publish_to: none
 
 environment:
-  sdk: ^3.8.1
-  flutter: ">=1.17.0"
+  sdk: ^3.10.1
+  flutter: ">=3.38.3"
 
 dependencies:
   flutter:
     sdk: flutter
-  gpt_markdown: ^1.1.2
+  gpt_markdown: ^1.1.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  #flutter_lints: ^5.0.0
+  very_good_analysis: ^10.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

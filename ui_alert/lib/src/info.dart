@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'widget/config.dart';
-import 'widget/confirm_button.dart';
-import 'widget/title.dart';
+import 'package:ui_alert/src/widget/config.dart';
+import 'package:ui_alert/src/widget/confirm_button.dart';
+import 'package:ui_alert/src/widget/title.dart';
 
 Future<bool?> alertInfo({
   required BuildContext context,
@@ -15,7 +15,7 @@ Future<bool?> alertInfo({
   useRootNavigator: root,
   builder: (BuildContext context) => AlertDialog(
     clipBehavior: Clip.antiAlias,
-    title: const TitleWidget(text: "特别提示:"),
+    title: const TitleWidget(text: '特别提示:'),
     titleTextStyle: Config.titleStyle,
     titlePadding: Config.titlePadding,
     contentPadding: Config.contentPadding,

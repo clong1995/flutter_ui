@@ -1,5 +1,3 @@
-library;
-
 export 'src/address.dart';
 export 'src/distance.dart';
 export 'src/location.dart';

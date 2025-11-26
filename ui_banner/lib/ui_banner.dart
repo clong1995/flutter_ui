@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 class UiBanner extends StatefulWidget {
   const UiBanner({
-    super.key,
     required this.children,
+    super.key,
     this.auto = true,
     this.indicator = true,
     this.scrollDirection = Axis.horizontal,
@@ -58,9 +58,9 @@ class _UiBannerState extends State<UiBanner>
     _dispose();
   }
 
-  void _init(){
+  void _init() {
     if (widget.children.length > 1) {
-      pageController = PageController(initialPage: 0);
+      pageController = PageController();
     }
 
     if (widget.indicator) {
@@ -99,7 +99,7 @@ class _UiBannerState extends State<UiBanner>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    bool isCurrent = ModalRoute.of(context)?.isCurrent ?? false;
+    final isCurrent = ModalRoute.of(context)?.isCurrent ?? false;
     if (isCurrent && !isCurrentPage) {
       //防止重复启动
       isCurrentPage = true;
@@ -119,7 +119,6 @@ class _UiBannerState extends State<UiBanner>
             children: [
               regionWrap(
                 child: PageView.builder(
-                  itemCount: null,
                   scrollDirection: widget.scrollDirection,
                   controller: pageController,
                   itemBuilder: (BuildContext context, int index) =>
@@ -164,16 +163,16 @@ class _UiBannerState extends State<UiBanner>
 
   Timer tickerStart() {
     ticker?.cancel();
-    return Timer.periodic(const Duration(seconds: 2), (Timer timer) {
+    return Timer.periodic(const Duration(seconds: 2), (Timer timer) async {
       if (widget.children.isEmpty) {
         return;
       }
       if (indicatorController != null) {
         index += 1;
-        int p = index % widget.children.length;
+        final p = index % widget.children.length;
         indicatorController?.animateTo(p);
       }
-      pageController?.nextPage(
+      await pageController?.nextPage(
         duration: kTabScrollDuration,
         curve: Curves.ease,
       );
@@ -181,29 +180,25 @@ class _UiBannerState extends State<UiBanner>
   }
 
   Widget regionWrap({required Widget child}) {
-    bool touch = false;
-    String platform = Device.platform;
+    var touch = false;
+    final platform = Device.platform;
     switch (platform) {
-      case "web-ios":
-      case "web-android":
+      case 'web-ios':
+      case 'web-android':
         touch = true;
-        break;
-      case "web-windows":
-      case "web-macOS":
-      case "web-linux":
-      case "web-fuchsia":
+      case 'web-windows':
+      case 'web-macOS':
+      case 'web-linux':
+      case 'web-fuchsia':
         touch = false;
-        break;
-      case "android":
-      case "iOS":
+      case 'android':
+      case 'iOS':
         touch = true;
-        break;
-      case "windows":
-      case "macOS":
-      case "linux":
-      case "fuchsia":
+      case 'windows':
+      case 'macOS':
+      case 'linux':
+      case 'fuchsia':
         touch = false;
-        break;
     }
     if (touch) {
       return GestureDetector(

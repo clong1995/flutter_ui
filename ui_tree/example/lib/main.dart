@@ -32,17 +32,17 @@ class _MyHomePageState extends State<MyHomePage> {
   final RegExp regExp = RegExp(r'_(\d+)x(\d+)\.$');
 
   List<UiTreeItem<String>> data = [
-    UiTreeItem<String>(id: "A", data: "A 一级标题"),
-    UiTreeItem<String>(id: "B", pid: "A", data: "B 二级标题"),
-    UiTreeItem<String>(id: "C", pid: "A", data: "C 二级标题"),
-    UiTreeItem<String>(id: "D", pid: "A", data: "D 二级标题"),
-    UiTreeItem<String>(id: "E", data: "E 一级标题"),
-    UiTreeItem<String>(id: "F", pid: "E", data: "F 二级标题"),
-    UiTreeItem<String>(id: "G", pid: "E", data: "G 二级标题"),
-    UiTreeItem<String>(id: "H", pid: "G", data: "H 三级标题"),
-    UiTreeItem<String>(id: "I", pid: "G", data: "I 三级标题"),
-    UiTreeItem<String>(id: "J", data: "J 一标题"),
-    UiTreeItem<String>(id: "K", data: "K 一级标题"),
+    const UiTreeItem<String>(id: "A", data: "A 一级标题"),
+    const UiTreeItem<String>(id: "B", pid: "A", data: "B 二级标题"),
+    const UiTreeItem<String>(id: "C", pid: "A", data: "C 二级标题"),
+    const UiTreeItem<String>(id: "D", pid: "A", data: "D 二级标题"),
+    const UiTreeItem<String>(id: "E", data: "E 一级标题"),
+    const UiTreeItem<String>(id: "F", pid: "E", data: "F 二级标题"),
+    const UiTreeItem<String>(id: "G", pid: "E", data: "G 二级标题"),
+    const UiTreeItem<String>(id: "H", pid: "G", data: "H 三级标题"),
+    const UiTreeItem<String>(id: "I", pid: "G", data: "I 三级标题"),
+    const UiTreeItem<String>(id: "J", data: "J 一标题"),
+    const UiTreeItem<String>(id: "K", data: "K 一级标题"),
   ];
 
   @override
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
         data: data,
         itemBuilder: itemBuilder,
         onTap: (UiTreeItem<String> item) {
-          print(item.data);
+          //print(item.data);
         },
       ),
     );

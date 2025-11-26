@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:ui_pick_datetime/src/pick_datetime.dart';
 
 class DataPick extends StatefulWidget {
+  const DataPick({
+    required this.firstDate,
+    required this.lastDate,
+    super.key,
+    this.date,
+    this.onChanged,
+  });
+
   final DateTime firstDate;
   final DateTime lastDate;
   final DateTime? date;
   final void Function(DateTime)? onChanged;
-
-  const DataPick({
-    super.key,
-    this.date,
-    this.onChanged,
-    required this.firstDate,
-    required this.lastDate,
-  });
 
   @override
   State<DataPick> createState() => _DataPickState();

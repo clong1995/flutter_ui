@@ -1,17 +1,17 @@
 name: security
 description: "A new Flutter project."
-version: 0.0.1
-homepage:
+version: 0.0.2
+homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.8.0
-  flutter: ">=3.19.6"
+  sdk: ^3.10.1
+  flutter: ">=3.38.3"
 
 dependencies:
   flutter:
     sdk: flutter
-  crypto: ^3.0.6
+  crypto: ^3.0.7
   encrypt: ^5.0.3
   guid:
     git:
@@ -21,7 +21,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  #flutter_lints: ^5.0.0
+  very_good_analysis: ^10.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

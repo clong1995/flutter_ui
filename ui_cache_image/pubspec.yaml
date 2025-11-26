@@ -1,11 +1,11 @@
 name: ui_cache_image
 description: "A new Flutter project."
-version: 0.2.4
+version: 0.2.5
 homepage: flutter_ui
 
 environment:
-  sdk: ^3.9.2
-  flutter: ">=3.35.6"
+  sdk: ^3.10.1
+  flutter: ">=3.38.3"
 
 dependencies:
   crypto: ^3.0.7

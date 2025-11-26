@@ -2,25 +2,24 @@
 import 'package:flutter/material.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
-import 'push_photo_view_page.dart';
+import 'package:ui_photo_view/src/push_photo_view_page.dart';
 
 class PhotoViewGrid extends StatelessWidget {
+
+  const PhotoViewGrid({
+    required this.images, super.key,
+    this.thumbnail = true,
+    this.crossAxisCount = 3,
+    this.mainAxisSpacing = 5,
+    this.crossAxisSpacing = 5,
+    this.onChanged,
+  });
   final bool thumbnail;
   final List<String> images;
   final int crossAxisCount;
   final double mainAxisSpacing;
   final double crossAxisSpacing;
   final void Function(int)? onChanged;
-
-  const PhotoViewGrid({
-    super.key,
-    this.thumbnail = true,
-    required this.images,
-    this.crossAxisCount = 3,
-    this.mainAxisSpacing = 5,
-    this.crossAxisSpacing = 5,
-    this.onChanged,
-  });
 
   @override
   Widget build(BuildContext context) => GridView.builder(
@@ -35,12 +34,12 @@ class PhotoViewGrid extends StatelessWidget {
       crossAxisSpacing: crossAxisSpacing,
     ),
     itemBuilder: (context, index) {
-      String image = images[index];
+      var image = images[index];
       if(thumbnail){
-        Uri uri = Uri.parse(image).replace(
+        final uri = Uri.parse(image).replace(
           queryParameters: {
             ...Uri.parse(image).queryParameters,
-            "x-oss-process": "style/thumbnail"
+            'x-oss-process': 'style/thumbnail'
           }
         );
         image = uri.toString();

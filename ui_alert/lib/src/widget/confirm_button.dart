@@ -6,7 +6,7 @@ class ConfirmButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-      child: const Text("确定"),
+      child: const Text('确定'),
       onPressed: () => Navigator.pop(context, true),
     );
   }

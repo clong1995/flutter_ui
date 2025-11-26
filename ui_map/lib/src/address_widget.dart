@@ -2,15 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:nav/nav.dart';
-
-import 'address.dart';
-import 'distance.dart';
+import 'package:ui_map/src/address.dart';
+import 'package:ui_map/src/distance.dart';
 
 class AddressWidget extends StatefulWidget {
+  const AddressWidget({required this.datasource, super.key, this.location});
+
   final Future<List<Address>> Function(String keyword) datasource;
   final Future<List<double>?> Function()? location;
-
-  const AddressWidget({super.key, required this.datasource, this.location});
 
   @override
   State<AddressWidget> createState() => _AddressWidgetState();
@@ -30,9 +29,11 @@ class _AddressWidgetState extends State<AddressWidget> {
   void initState() {
     super.initState();
     if (widget.location != null) {
-      widget.location!().then((value) {
-        lonLat = value;
-      });
+      unawaited(
+        widget.location!().then((value) {
+          lonLat = value;
+        }),
+      );
     }
     controller.addListener(onInputChanged);
   }
@@ -47,7 +48,7 @@ class _AddressWidgetState extends State<AddressWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("搜索地址")),
+      appBar: AppBar(title: const Text('搜索地址')),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
@@ -57,7 +58,6 @@ class _AddressWidgetState extends State<AddressWidget> {
               child: TextField(
                 controller: controller,
                 cursorHeight: height - 8 * 2,
-                maxLines: 1,
                 autofocus: true,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.search),
@@ -90,7 +90,7 @@ class _AddressWidgetState extends State<AddressWidget> {
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  hintText: "输入名称或地址",
+                  hintText: '输入名称或地址',
                   hintStyle: const TextStyle(
                     color: Color.fromRGBO(153, 153, 153, 1),
                   ),
@@ -102,7 +102,7 @@ class _AddressWidgetState extends State<AddressWidget> {
               child: ListView.builder(
                 itemCount: list.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Address address = list[index];
+                  final address = list[index];
                   return Card(
                     color: Colors.white,
                     margin: const EdgeInsets.only(bottom: 8),
@@ -114,7 +114,7 @@ class _AddressWidgetState extends State<AddressWidget> {
                           children: [
                             SizedBox(
                               width: 40,
-                              child: Center(child: Text("${index + 1}")),
+                              child: Center(child: Text('${index + 1}')),
                             ),
                             Expanded(
                               child: Column(
@@ -137,7 +137,7 @@ class _AddressWidgetState extends State<AddressWidget> {
                                         ),
                                       if (widget.location != null)
                                         Text(
-                                          "${getDistance(address.lonLat)} km",
+                                          '${getDistance(address.lonLat)} km',
                                           style: const TextStyle(
                                             fontSize: 11,
                                             color: Color(0xFF757575),
@@ -171,11 +171,11 @@ class _AddressWidgetState extends State<AddressWidget> {
   void onInputChanged() {
     if (debounce?.isActive ?? false) debounce?.cancel();
     debounce = Timer(const Duration(milliseconds: 300), () async {
-      String text = controller.text.trim();
+      final text = controller.text.trim();
       if (text.isNotEmpty) {
-        int currentRequestTime = DateTime.now().millisecondsSinceEpoch;
+        final currentRequestTime = DateTime.now().millisecondsSinceEpoch;
         lastRequestTime = currentRequestTime;
-        List<Address> l = await widget.datasource(text);
+        final l = await widget.datasource(text);
         if (lastRequestTime == currentRequestTime) {
           setState(() {
             list = l;
@@ -187,7 +187,7 @@ class _AddressWidgetState extends State<AddressWidget> {
 
   String getDistance(List<double> lonLat) {
     if (this.lonLat == null) {
-      return "";
+      return '';
     }
     return (distance(this.lonLat!, lonLat) / 1000).toStringAsFixed(2);
   }

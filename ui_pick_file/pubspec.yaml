@@ -1,26 +1,27 @@
 name: ui_pick_file
 description: "A new Flutter project."
-version: 0.1.1
+version: 0.1.2
 homepage: flutter_ui
 
 environment:
-  sdk: ^3.8.0
-  flutter: ">=3.19.6"
+  sdk: ^3.10.1
+  flutter: ">=3.38.3"
 
 dependencies:
   flutter:
     sdk: flutter
-  file_picker: ^10.1.9
-  image_picker: ^1.1.2
+  file_picker: ^10.3.7
+  image_picker: ^1.2.1
   image_gallery_saver_plus: ^4.0.1
   path: ^1.9.1
   path_provider: ^2.1.5
-  http: ^1.4.0
+  http: ^1.6.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  #flutter_lints: ^5.0.0
+  very_good_analysis: ^10.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 
 class UiList extends StatefulWidget {
+
+  const UiList({
+    required this.head, required this.body, super.key,
+    this.lineMinimumHeight,
+    this.headColor,
+    this.borderColor,
+    this.width,
+  });
   final List<Widget> head;
   final List<UiListItem> body;
   final double? lineMinimumHeight;
   final Color? headColor;
   final Color? borderColor;
   final List<double>? width;
-
-  const UiList({
-    super.key,
-    required this.head,
-    required this.body,
-    this.lineMinimumHeight,
-    this.headColor,
-    this.borderColor,
-    this.width,
-  });
 
   @override
   State<UiList> createState() => _UiListState();
@@ -82,8 +80,8 @@ class _UiListState extends State<UiList> {
 
   Widget line(List<Widget> children) => Row(
     children: children.asMap().entries.map((MapEntry<int, Widget> entry) {
-      double width = getWidth(entry.key);
-      Widget child = Container(
+      final width = getWidth(entry.key);
+      final Widget child = Container(
         constraints: constraints,
         width: width > 0 ? width : null,
         decoration: entry.key == widget.head.length - 1
@@ -100,8 +98,8 @@ class _UiListState extends State<UiList> {
 }
 
 class UiListItem {
+
+  UiListItem({required this.row, this.key});
   final String? key;
   final List<Widget> row;
-
-  UiListItem({this.key, required this.row});
 }

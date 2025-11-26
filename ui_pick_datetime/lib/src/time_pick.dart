@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ui_pick_datetime/src/pick_datetime.dart';
 
 class TimePick extends StatefulWidget {
+  const TimePick({super.key, this.time, this.onChanged});
+
   final TimeOfDay? time;
   final void Function(TimeOfDay)? onChanged;
-
-  const TimePick({super.key, this.time, this.onChanged});
 
   @override
   State<TimePick> createState() => _TimePickState();

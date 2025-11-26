@@ -6,16 +6,15 @@ import 'package:ui_cache_image/ui_cache_image.dart';
 
 //PhotoView 的实现
 class PhotoView extends StatefulWidget {
-  final List<String> images;
-  final int index;
-  final void Function(int)? onChanged;
 
   const PhotoView({
-    super.key,
-    required this.images,
+    required this.images, super.key,
     this.index = 0,
     this.onChanged,
   });
+  final List<String> images;
+  final int index;
+  final void Function(int)? onChanged;
 
   @override
   State<PhotoView> createState() => _PhotoViewState();
@@ -87,9 +86,9 @@ class _PhotoViewState extends State<PhotoView> {
     final result = await ImageGallerySaverPlus.saveImage(bytes, quality: 100);
 
     if (result['isSuccess'] == true) {
-      snackBar("保存成功");
+      snackBar('保存成功');
     } else {
-      snackBar("保存失败");
+      snackBar('保存失败');
     }
   }
 

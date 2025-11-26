@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
@@ -6,10 +7,11 @@ import 'package:webview_flutter/webview_flutter.dart';
 //import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 class UiWebview extends StatefulWidget {
+
+  const UiWebview({required this.url, super.key, this.register});
+
   final String url;
   final Map<String, Future<dynamic> Function(dynamic json)>? register;
-
-  const UiWebview({super.key, required this.url, this.register});
 
   @override
   State<UiWebview> createState() => _UiWebviewState();
@@ -23,15 +25,19 @@ class _UiWebviewState extends State<UiWebview> {
   @override
   void initState() {
     super.initState();
+    unawaited(initWebview());
+  }
+
+  Future<void> initWebview() async {
     //chrome://inspect/#devices
     //AndroidWebViewController.enableDebugging(true);
 
     controller = WebViewController();
-    controller.setJavaScriptMode(JavaScriptMode.unrestricted);
-    final bridge = "_b${random}_";
-    final callback = "_cb${random}_";
+    await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+    final bridge = '_b${random}_';
+    final callback = '_cb${random}_';
     if (isRegister) {
-      controller.addJavaScriptChannel(
+      await controller.addJavaScriptChannel(
         bridge,
         onMessageReceived: (JavaScriptMessage message) async {
           final data = jsonDecode(message.message);
@@ -40,9 +46,9 @@ class _UiWebviewState extends State<UiWebview> {
           final param = data['param'];
 
           final func = widget.register![action];
-          String res = "";
+          var res = '';
           if (func == null) {
-            res = "$action : not found";
+            res = '$action : not found';
           }
 
           final result = await func!(param);
@@ -50,12 +56,12 @@ class _UiWebviewState extends State<UiWebview> {
           final script = '''
                 window.$callback('$callbackId', $res);
               ''';
-          controller.runJavaScript(script);
+          await controller.runJavaScript(script);
         },
       );
     }
-    final ready = "_r${random}_";
-    controller.addJavaScriptChannel(
+    final ready = '_r${random}_';
+    await controller.addJavaScriptChannel(
         ready,
         onMessageReceived: (JavaScriptMessage message) async {
           setState(() {
@@ -63,15 +69,15 @@ class _UiWebviewState extends State<UiWebview> {
           });
         }
     );
-    controller.setNavigationDelegate(
+    await controller.setNavigationDelegate(
       NavigationDelegate(
         onProgress: (int progress) {
           // Update loading bar.
         },
-        onPageFinished: (String url) {
+        onPageFinished: (String url) async {
           //有函数需要调用时
           if (isRegister) {
-            final callbacks = "_cbs${random}_";
+            final callbacks = '_cbs${random}_';
             final script = '''
               const $callbacks = {};
               window.$callback = (callbackId, result) =>{
@@ -105,30 +111,31 @@ class _UiWebviewState extends State<UiWebview> {
                 }
               })();
             ''';
-            controller.runJavaScript(script);
+            await controller.runJavaScript(script);
           }
         },
       ),
     );
-    if(widget.url.startsWith("http://") || widget.url.startsWith("https://")){
-      controller.loadRequest(Uri.parse(widget.url));
-    }else{
-      controller.loadFlutterAsset(widget.url);
+    if (widget.url.startsWith('http://') || widget.url.startsWith('https://')) {
+      await controller.loadRequest(Uri.parse(widget.url));
+    } else {
+      await controller.loadFlutterAsset(widget.url);
     }
   }
 
   int get random => Random().nextInt(100);
 
-  bool get isRegister =>(widget.register != null && widget.register!.isNotEmpty);
+  bool get isRegister => widget.register != null && widget.register!.isNotEmpty;
 
   @override
-  Widget build(BuildContext context) => Stack(
-    children: [
-      WebViewWidget(controller: controller),
-      if (!pageReady)
-        const Positioned.fill(
-          child: Center(child: CircularProgressIndicator()),
-        ),
-    ],
-  );
+  Widget build(BuildContext context) =>
+      Stack(
+        children: [
+          WebViewWidget(controller: controller),
+          if (!pageReady)
+            const Positioned.fill(
+              child: Center(child: CircularProgressIndicator()),
+            ),
+        ],
+      );
 }

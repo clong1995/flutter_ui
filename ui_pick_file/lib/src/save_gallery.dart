@@ -2,15 +2,16 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:path_provider/path_provider.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
+import 'package:path_provider/path_provider.dart';
 
 Future<String> saveImageToGallery({
-  String? fileName,
-  required Uint8List bytes,
+  required Uint8List bytes, String? fileName,
 }) async {
   if (fileName == null || fileName.isEmpty) {
-    fileName = "${DateTime.now().millisecondsSinceEpoch}";
+    fileName = '${DateTime
+        .now()
+        .millisecondsSinceEpoch}';
   }
   final result = await ImageGallerySaverPlus.saveImage(
     bytes,
@@ -18,21 +19,25 @@ Future<String> saveImageToGallery({
     name: fileName,
   );
   if (result['isSuccess'] == true) {
-    return "";
+    return '';
   }
-  return result.errorMessage ?? "saver gallery error";
+  if (result.errorMessage == null) {
+    return 'saver gallery error';
+  }
+  return result.errorMessage.toString();
 }
 
 Future<String> saveVideoToGallery({
-  String? fileName,
-  required Uint8List bytes,
+  required Uint8List bytes, String? fileName,
 }) async {
-  Directory appDocDir = await getTemporaryDirectory();
+  final appDocDir = await getTemporaryDirectory();
   if (fileName == null || fileName.isEmpty) {
-    fileName = "${DateTime.now().millisecondsSinceEpoch}";
+    fileName = '${DateTime
+        .now()
+        .millisecondsSinceEpoch}';
   }
-  String savePath = appDocDir.path + fileName;
-  File file = File(savePath);
+  final savePath = appDocDir.path + fileName;
+  final file = File(savePath);
   await file.writeAsBytes(bytes);
 
   final result = await ImageGallerySaverPlus.saveFile(
@@ -40,7 +45,10 @@ Future<String> saveVideoToGallery({
     name: fileName,
   );
   if (result['isSuccess'] == true) {
-    return "";
+    return '';
   }
-  return result.errorMessage ?? "saver gallery error";
+  if (result.errorMessage == null) {
+    return 'saver gallery error';
+  }
+  return result.errorMessage.toString();
 }

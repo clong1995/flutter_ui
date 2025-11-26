@@ -7,17 +7,21 @@ Future<void> uiCaptcha({
   required Future<bool> Function(String json) verify,
   double width = 340,
   double height = 340,
-}) async => await alertCustom(
+}) async => alertCustom(
   context: context,
   child: _Captcha(verify: verify, width: width, height: height),
 );
 
 class _Captcha extends StatelessWidget {
+  const _Captcha({
+    required this.verify,
+    required this.width,
+    required this.height,
+  });
+
   final double width;
   final double height;
   final Future<bool> Function(String json) verify;
-
-  const _Captcha({required this.verify, required this.width, required this.height});
 
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -27,10 +31,10 @@ class _Captcha extends StatelessWidget {
       children: [
         Expanded(
           child: UiWebview(
-            url: "packages/ui_captcha/html/captcha.html",
+            url: 'packages/ui_captcha/html/captcha.html',
             register: {
-              "verify": (dynamic data) async {
-                bool res = await verify(data);
+              'verify': (dynamic data) async {
+                final res = await verify(data.toString());
                 if (res && context.mounted) {
                   Navigator.pop(context);
                 }
@@ -42,7 +46,9 @@ class _Captcha extends StatelessWidget {
         const SizedBox(height: 5),
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text("取消验证",),
+          child: const Text(
+            '取消验证',
+          ),
         ),
         const SizedBox(height: 10),
       ],

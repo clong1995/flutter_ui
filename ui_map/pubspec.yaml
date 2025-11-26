@@ -1,19 +1,19 @@
 name: ui_map
 description: "A new Flutter project."
-version: 0.1.5
+version: 0.1.6
 homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.8.0
-  flutter: ">=3.19.6"
+  sdk: ^3.10.1
+  flutter: ">=3.38.3"
 
 dependencies:
   flutter:
     sdk: flutter
   pinyin: ^3.3.0
-  alphabet_list_view: ^1.1.4
-  geolocator: ^14.0.1
+  alphabet_list_view: ^1.2.0
+  geolocator: ^14.0.2
   ui_webview:
     git:
       url: https://github.com/clong1995/flutter_ui.git
@@ -32,7 +32,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  #flutter_lints: ^5.0.0
+  very_good_analysis: ^10.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

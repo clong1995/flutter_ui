@@ -58,7 +58,7 @@ class MyHomePage extends StatelessWidget {
                   ),
                 );
               },
-              child: Text("离开本页面会暂停"))
+              child: const Text("离开本页面会暂停"))
         ],
       ),
     );

@@ -1,17 +1,17 @@
 name: datetime
 description: "A new Flutter project."
-version: 0.0.6
+version: 0.0.7
 homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.9.2
-  flutter: ">=3.35.6"
+  sdk: ^3.10.1
+  flutter: ">=3.38.3"
 
 dependencies:
   flutter:
     sdk: flutter
-  jiffy: ^6.4.3
+  jiffy: ^6.4.4
 
 dev_dependencies:
   flutter_test:

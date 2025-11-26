@@ -11,6 +11,6 @@ class MapView extends StatefulWidget {
 class _MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
-    return const UiWebview(url: "packages/ui_map/html/tianditu.html");
+    return const UiWebview(url: 'packages/ui_map/html/tianditu.html');
   }
 }

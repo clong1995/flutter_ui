@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CheckButton<T> extends StatefulWidget {
+  const CheckButton({
+    required this.title,
+    required this.value,
+    super.key,
+    this.checked = false,
+    this.onTap,
+  });
+
   final String title;
   final T value;
   final bool checked;
   final void Function(T)? onTap;
-
-  const CheckButton({
-    super.key,
-    required this.title,
-    required this.value,
-    this.checked = false,
-    this.onTap,
-  });
 
   @override
   State<CheckButton<T>> createState() => _CheckButtonState<T>();
@@ -35,16 +35,15 @@ class _CheckButtonState<T> extends State<CheckButton<T>> {
 
   @override
   Widget build(BuildContext context) {
-    Color color = Theme.of(context).primaryColor;
-    Widget child = InkWell(
-      onTap:
-      widget.onTap == null
+    final color = Theme.of(context).primaryColor;
+    final Widget child = InkWell(
+      onTap: widget.onTap == null
           ? null
           : () {
-        checked = !checked;
-        widget.onTap!(widget.value);
-        setState(() {});
-      },
+              checked = !checked;
+              widget.onTap!(widget.value);
+              setState(() {});
+            },
       child: Container(
         constraints: const BoxConstraints(minHeight: 24),
         decoration: BoxDecoration(
@@ -59,13 +58,12 @@ class _CheckButtonState<T> extends State<CheckButton<T>> {
             Container(
               width: 24,
               alignment: Alignment.center,
-              child:
-              checked
+              child: checked
                   ? Icon(Icons.check_box, color: color)
                   : const Icon(
-                Icons.check_box_outlined,
-                color: Colors.grey,
-              ),
+                      Icons.check_box_outlined,
+                      color: Colors.grey,
+                    ),
             ),
             Text(widget.title, style: TextStyle(color: checked ? color : null)),
             const SizedBox(width: 5),

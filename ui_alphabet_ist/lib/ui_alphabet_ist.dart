@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:pinyin/pinyin.dart';
 
 class UiAlphabetList<T> extends StatefulWidget {
+
+  const UiAlphabetList({required this.data, required this.builder, super.key});
   final Map<String, T> data; //key会作为排序的依据，仅支持数字、字母、汉字
   final Widget Function(T) builder;
-
-  const UiAlphabetList({super.key, required this.data, required this.builder});
 
   @override
   State<UiAlphabetList<T>> createState() => _UiAlphabetListState<T>();
@@ -17,12 +17,12 @@ class UiAlphabetList<T> extends StatefulWidget {
 class _UiAlphabetListState<T> extends State<UiAlphabetList<T>> {
   @override
   Widget build(BuildContext context) {
-    TextStyle bodyMedium =
+    final bodyMedium =
         Theme.of(context).textTheme.bodyMedium ?? const TextStyle(fontSize: 13);
     if (widget.data.isEmpty) {
       return const SizedBox.shrink();
     }
-    SplayTreeMap<String, List<T>> data = loadData();
+    final data = loadData();
     return AlphabetListView(
       items: data.keys.map(
             (e) => AlphabetListViewItemGroup(
@@ -52,11 +52,11 @@ class _UiAlphabetListState<T> extends State<UiAlphabetList<T>> {
               AlphabetScrollbarItemState state,
               ) {
             //active
-            TextStyle activeTxtStyle = bodyMedium.copyWith(
+            final activeTxtStyle = bodyMedium.copyWith(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).primaryColor,
             );
-            TextStyle inActiveTextStyle = bodyMedium.copyWith(
+            final inActiveTextStyle = bodyMedium.copyWith(
               color: const Color(0xFF9E9E9E),
             );
             return Center(
@@ -75,15 +75,15 @@ class _UiAlphabetListState<T> extends State<UiAlphabetList<T>> {
   }
 
   SplayTreeMap<String, List<T>> loadData() {
-    SplayTreeMap<String, T> sortedMap = SplayTreeMap();
+    final sortedMap = SplayTreeMap<String, T>();
     widget.data.forEach((String key, T value) {
-      String str = PinyinHelper.getShortPinyin(key);
+      final str = PinyinHelper.getShortPinyin(key);
       sortedMap[str] = value;
     });
 
-    SplayTreeMap<String, List<T>> data = SplayTreeMap();
+    final data = SplayTreeMap<String, List<T>>();
     sortedMap.forEach((String key, T value) {
-      String k = key[0];
+      var k = key[0];
       k = k.toUpperCase();
       data.putIfAbsent(k, () => []);
       data[k]!.add(value);

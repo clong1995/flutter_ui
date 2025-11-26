@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
 class AvatarGroup extends StatelessWidget {
+  const AvatarGroup({required this.images, super.key, this.wrapSize = 55});
+
   final List<String> images;
   final double wrapSize;
-
-  const AvatarGroup({super.key, required this.images, this.wrapSize = 55});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,10 @@ class AvatarGroup extends StatelessWidget {
                 width: avatarSize,
                 height: avatarSize,
                 padding: const EdgeInsets.all(1),
-                child: UiCacheImage(e,fit: BoxFit.cover,),
+                child: UiCacheImage(
+                  e,
+                  fit: BoxFit.cover,
+                ),
               ),
             )
             .toList(),

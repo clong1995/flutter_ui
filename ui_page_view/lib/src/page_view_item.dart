@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 // 还可以充当 Keep alive 功能的容器
 class PageViewItem extends StatefulWidget {
-  final Widget child;
-  final bool keepAlive;
-  final bool nestRoute;
-
   const PageViewItem({
-    super.key,
     required this.child,
+    super.key,
     this.keepAlive = false,
     this.nestRoute = false,
   });
+
+  final Widget child;
+  final bool keepAlive;
+  final bool nestRoute;
 
   @override
   State<PageViewItem> createState() => _PageViewItemState();

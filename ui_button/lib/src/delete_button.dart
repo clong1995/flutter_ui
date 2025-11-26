@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 class DeleteButton<T> extends StatelessWidget {
+  const DeleteButton({
+    required this.title,
+    required this.value,
+    super.key,
+    this.onTap,
+  });
+
   final String title;
   final T value;
   final void Function(T)? onTap;
 
-  const DeleteButton({
-    super.key,
-    required this.title,
-    this.onTap,
-    required this.value,
-  });
-
   @override
   Widget build(BuildContext context) {
-    Color color = Theme.of(context).primaryColor;
-    Widget child = Container(
+    final color = Theme.of(context).primaryColor;
+    final Widget child = Container(
       constraints: const BoxConstraints(minHeight: 24),
       decoration: BoxDecoration(
         color: color.withAlpha(25),

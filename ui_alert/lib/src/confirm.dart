@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'widget/cancel_button.dart';
-import 'widget/confirm_button.dart';
-import 'widget/title.dart';
-import 'widget/config.dart';
+import 'package:ui_alert/src/widget/cancel_button.dart';
+import 'package:ui_alert/src/widget/config.dart';
+import 'package:ui_alert/src/widget/confirm_button.dart';
+import 'package:ui_alert/src/widget/title.dart';
 
 Future<bool?> alertConfirm({
   required BuildContext context,
@@ -16,7 +15,7 @@ Future<bool?> alertConfirm({
   useRootNavigator: root,
   builder: (BuildContext context) => AlertDialog(
     clipBehavior: Clip.antiAlias,
-    title: const TitleWidget(text: "确认提示:"),
+    title: const TitleWidget(text: '确认提示:'),
     titleTextStyle: Config.titleStyle,
     titlePadding: Config.titlePadding,
     contentPadding: Config.contentPadding,
@@ -36,7 +35,7 @@ Future<bool?> alertConfirm({
               color: Colors.orange,
             ),
           ),
-          Text(content?? "确定要执行吗?"),
+          Text(content?? '确定要执行吗?'),
         ],
       ),
     ),

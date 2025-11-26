@@ -2,10 +2,9 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../ui_pick_file.dart' show PickerFile;
-import 'picker.dart';
-import 'save_gallery.dart';
+import 'package:ui_pick_file/src/picker.dart';
+import 'package:ui_pick_file/src/save_gallery.dart';
+import 'package:ui_pick_file/ui_pick_file.dart' show PickerFile;
 
 //Image.file(File(_imageFile!.path))
 
@@ -16,7 +15,7 @@ class PickImage {
     double? maxHeight,
     int? imageQuality,
   }) async {
-    XFile? xf = await imagePicker.pickImage(
+    final xf = await imagePicker.pickImage(
       source: ImageSource.camera,
       maxWidth: maxWidth,
       maxHeight: maxHeight,
@@ -31,7 +30,7 @@ class PickImage {
     double? maxHeight,
     int? imageQuality,
   }) async {
-    final XFile? xf = await imagePicker.pickImage(
+    final xf = await imagePicker.pickImage(
       source: ImageSource.gallery,
       maxWidth: maxWidth,
       maxHeight: maxHeight,
@@ -47,7 +46,7 @@ class PickImage {
     int? imageQuality,
     int? limit,
   }) async {
-    List<XFile> list = await imagePicker.pickMultiImage(
+    final list = await imagePicker.pickMultiImage(
       maxWidth: maxWidth,
       maxHeight: maxHeight,
       imageQuality: imageQuality,
@@ -56,9 +55,9 @@ class PickImage {
     if (list.isEmpty) {
       return null;
     }
-    List<PickerFile> l = [];
-    for (XFile xf in list) {
-      PickerFile pf = await pickerFile(xf);
+    final l = <PickerFile>[];
+    for (final xf in list) {
+      final pf = await pickerFile(xf);
       l.add(pf);
     }
     return l;
@@ -66,11 +65,10 @@ class PickImage {
 
   // 保存图片到相册
   static Future<String> save({
-    String? fileName,
-    required Uint8List bytes,
-  }) async => await saveImageToGallery(fileName: fileName, bytes: bytes);
+    required Uint8List bytes, String? fileName,
+  }) async => saveImageToGallery(fileName: fileName, bytes: bytes);
 
-  static Future<void> saveUrl({String? fileName, required String url}) async {
+  static Future<void> saveUrl({required String url, String? fileName}) async {
     final response = await get(Uri.parse(url));
     final bytes = response.bodyBytes;
     await save(bytes: bytes, fileName: fileName);

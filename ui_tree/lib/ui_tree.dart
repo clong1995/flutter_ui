@@ -2,29 +2,29 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class UiTree<T extends Comparable<T>> extends StatefulWidget {
+  const UiTree({
+    required this.data,
+    required this.itemBuilder,
+    super.key,
+    this.indent = 10.0,
+    this.selectedId = '',
+    this.onTap,
+  });
+
   final double indent;
   final String selectedId;
   final List<UiTreeItem<T>> data;
   final Widget Function(
-    BuildContext context,
-    UiTreeItem<T> item,
-    int length,
-    int level,
-    bool expand,
-    bool selected,
-  )
+      BuildContext context,
+      UiTreeItem<T> item,
+      int length,
+      int level,
+      bool expand,
+      bool selected,
+      )
   itemBuilder;
 
   final void Function(UiTreeItem<T> item)? onTap;
-
-  const UiTree({
-    super.key,
-    this.indent = 10.0,
-    this.selectedId = "",
-    required this.data,
-    required this.itemBuilder,
-    this.onTap,
-  });
 
   @override
   State<UiTree<T>> createState() => _UiTreeState<T>();
@@ -33,7 +33,7 @@ class UiTree<T extends Comparable<T>> extends StatefulWidget {
 class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
   List<_Tree<T>> treeList = [];
 
-  String selectedId = "";
+  String selectedId = '';
 
   late Color activeBackgroundColor;
 
@@ -60,7 +60,7 @@ class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
       padding: EdgeInsets.zero,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: treeList.map((e) => buildItem(e)).toList(),
+        children: treeList.map(buildItem).toList(),
       ),
     );
   }
@@ -106,7 +106,7 @@ class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
           Visibility(
             visible: tree.expand,
             child: Column(
-              children: tree.children.map((e) => buildItem(e)).toList(),
+              children: tree.children.map(buildItem).toList(),
             ),
           ),
         ],
@@ -117,14 +117,14 @@ class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
   void buildTree() {
     selectedId = widget.selectedId;
     treeList.clear();
-    final Map<String, _Tree<T>> nodeMap = {};
-    for (var item in widget.data) {
+    final nodeMap = <String, _Tree<T>>{};
+    for (final item in widget.data) {
       nodeMap[item.id] = _Tree<T>()
         ..item = item
         ..children = [];
     }
 
-    for (var item in widget.data) {
+    for (final item in widget.data) {
       final node = nodeMap[item.id]!;
 
       if (item.pid.isEmpty) {
@@ -160,12 +160,13 @@ class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
   int get hashCode => id.hashCode ^ pid.hashCode ^ data.hashCode;
 }*/
 
+@immutable
 class UiTreeItem<T extends Comparable<T>> {
-  String id;
-  String pid;
-  T data;
+  const UiTreeItem({required this.id, required this.data, this.pid = ''});
 
-  UiTreeItem({required this.id, this.pid = "", required this.data});
+  final String id;
+  final String pid;
+  final T data;
 
   @override
   bool operator ==(Object other) {

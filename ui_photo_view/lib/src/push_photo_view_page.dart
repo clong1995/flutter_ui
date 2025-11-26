@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:nav/nav.dart';
 
-import 'photo_view.dart';
+import 'package:ui_photo_view/src/photo_view.dart';
 
 Future<void> pushPhotoViewPage({
   required BuildContext context,

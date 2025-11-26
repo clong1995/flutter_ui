@@ -8,13 +8,13 @@ Position? _position;
 //cache 最快 缓存（last和current都会更新这个位置）
 //last 快 最后一个位置
 //current 慢 实时位置
-Future<List<double>?> location([String type = "cache"]) async {
+Future<List<double>?> location([String type = 'cache']) async {
   final p = await _permission();
   if (!p) return null;
-  if (type == "cache") {
+  if (type == 'cache') {
     _position ??= await Geolocator.getLastKnownPosition();
     _position ??= await Geolocator.getCurrentPosition();
-  } else if (type == "last") {
+  } else if (type == 'last') {
     _position = await Geolocator.getLastKnownPosition();
     _position ??= await Geolocator.getCurrentPosition();
   } else {
@@ -38,11 +38,11 @@ Future<bool> _permission() async {
   final serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
     //Location services are disabled
-    UiToast.show(UiToast.info..text = "location service disabled");
+    UiToast.show(UiToast.info..text = 'location service disabled');
     return false;
   }
 
-  LocationPermission permission = await Geolocator.checkPermission();
+  var permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
@@ -52,7 +52,7 @@ Future<bool> _permission() async {
       // returned true. According to Android guidelines
       // your App should show an explanatory UI now.
       //Location permissions are denied
-      UiToast.show(UiToast.info..text = "location  permissions are denied");
+      UiToast.show(UiToast.info..text = 'location  permissions are denied');
       return false;
     }
   }
@@ -61,7 +61,7 @@ Future<bool> _permission() async {
     // Permissions are denied forever, handle appropriately.
     //Location permissions are permanently denied, we cannot request permissions.
     UiToast.show(
-      UiToast.info..text = "location permissions are denied forever",
+      UiToast.info..text = 'location permissions are denied forever',
     );
     return false;
   }

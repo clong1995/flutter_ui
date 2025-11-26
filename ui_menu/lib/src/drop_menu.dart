@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 
 class UiDropMenu<T> extends StatefulWidget {
-  final T? value;
-  final Map<T, String> items;
-  final ValueChanged<T?>? onChanged;
-  final double? width;
-  final double? height;
-
   const UiDropMenu({
+    required this.items,
     super.key,
     this.value,
-    required this.items,
     this.width,
     this.height,
     this.onChanged,
@@ -18,6 +12,12 @@ class UiDropMenu<T> extends StatefulWidget {
          !(value == null || !items.containsKey(value)),
          'the provided value: $value is not in items',
        )*/;
+
+  final T? value;
+  final Map<T, String> items;
+  final ValueChanged<T?>? onChanged;
+  final double? width;
+  final double? height;
 
   @override
   State<UiDropMenu<T>> createState() => _UiDropMenuState<T>();
@@ -33,7 +33,7 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
   }
 
   @override
-  void didUpdateWidget(oldWidget) {
+  void didUpdateWidget(UiDropMenu<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     value = widget.value;
   }
@@ -69,13 +69,12 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
                   color: Colors.white,
                 ),
                 child: Row(
-                  mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Expanded(
                       child: Center(
                         child: Text(
-                          value == null ? "未选择" : widget.items[value] ?? "无选项",
+                          value == null ? '未选择' : widget.items[value] ?? '无选项',
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(height: 1),
                         ),

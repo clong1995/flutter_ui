@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'widget/cancel_button.dart';
-import 'widget/title.dart';
-import 'widget/config.dart';
+import 'package:ui_alert/src/widget/cancel_button.dart';
+import 'package:ui_alert/src/widget/config.dart';
+import 'package:ui_alert/src/widget/title.dart';
 
 Future<bool?> alertDelete({
   required BuildContext context,
@@ -15,7 +14,7 @@ Future<bool?> alertDelete({
   useRootNavigator: root,
   builder: (BuildContext context) => AlertDialog(
     clipBehavior: Clip.antiAlias,
-    title: const TitleWidget(text: "删除提示:"),
+    title: const TitleWidget(text: '删除提示:'),
     titleTextStyle: Config.titleStyle,
     titlePadding: Config.titlePadding,
     contentPadding: Config.contentPadding,
@@ -35,7 +34,7 @@ Future<bool?> alertDelete({
               color: Colors.red,
             ),
           ),
-          Text(content ?? "确定要删除吗?"),
+          Text(content ?? '确定要删除吗?'),
         ],
       ),
     ),
@@ -46,7 +45,7 @@ Future<bool?> alertDelete({
           backgroundColor: Colors.red.withAlpha(20),
           shadowColor: Colors.red.withAlpha(20),
         ),
-        child: const Text("删除", style: TextStyle(color: Colors.red)),
+        child: const Text('删除', style: TextStyle(color: Colors.red)),
         onPressed: () => Navigator.pop(context, true),
       ),
     ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nav/nav.dart';
-
-import 'address_widget.dart';
+import 'package:ui_map/src/address_widget.dart';
 
 Future<Address?> address(
   BuildContext context, {
@@ -15,11 +14,11 @@ Future<Address?> address(
 );
 
 class Address {
-  String province = "";
-  String city = "";
-  String county = "";
-  String address = "";
+  String province = '';
+  String city = '';
+  String county = '';
+  String address = '';
   List<double> lonLat = [];
-  String name = "";
-  String typeName = "";
+  String name = '';
+  String typeName = '';
 }

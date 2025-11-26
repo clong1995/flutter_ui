@@ -36,7 +36,6 @@ class Snack {
         behavior: SnackBarBehavior.floating,
         margin: EdgeInsets.only(
           left: 15,
-          top: 0,
           right: 15,
           bottom:
               mediaQueryData.size.height -

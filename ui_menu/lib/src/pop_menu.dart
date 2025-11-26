@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 class UiPopMenu<T> extends StatelessWidget {
+  const UiPopMenu({
+    required this.child,
+    required this.items,
+    super.key,
+    this.onTap,
+  });
+
   final Widget child;
   final Map<T, Widget> items;
   final void Function(T?)? onTap;
-
-  const UiPopMenu({
-    super.key,
-    required this.child,
-    this.onTap,
-    required this.items,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class UiPopMenu<T> extends StatelessWidget {
       onTap: onTap == null
           ? null
           : () async {
-              T? result = await _showPopupMenu<T>(
+              final result = await _showPopupMenu<T>(
                 key: key,
                 context: context,
                 items: items,
@@ -37,10 +37,9 @@ Future<T?> _showPopupMenu<T>({
   required BuildContext context,
   required Map<T, Widget> items,
 }) async {
-  final RenderBox renderBox =
-      key.currentContext!.findRenderObject() as RenderBox;
-  final Offset offset = renderBox.localToGlobal(Offset.zero);
-  double height = 35;
+  final renderBox = key.currentContext!.findRenderObject()! as RenderBox;
+  final offset = renderBox.localToGlobal(Offset.zero);
+  const double height = 35;
   final result = await showMenu<T>(
     context: context,
     color: Colors.white,

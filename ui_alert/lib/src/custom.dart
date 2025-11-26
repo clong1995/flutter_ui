@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'widget/config.dart';
-import 'widget/title.dart';
+import 'package:ui_alert/src/widget/config.dart';
+import 'package:ui_alert/src/widget/title.dart';
 
 Future<T?> alertCustom<T>({
   required BuildContext context,
@@ -24,18 +24,17 @@ Future<T?> alertCustom<T>({
 );
 
 class CustomContent extends StatelessWidget {
+
+  const CustomContent({
+    required this.child, super.key,
+    this.title,
+    this.cancel = true,
+    this.action,
+  });
   final String? title;
   final Widget child;
   final bool cancel;
   final List<Widget>? action;
-
-  const CustomContent({
-    super.key,
-    this.title,
-    required this.child,
-    this.cancel = true,
-    this.action,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +54,9 @@ class CustomContent extends StatelessWidget {
                   style: FilledButton.styleFrom(
                     backgroundColor: Colors.grey.shade300,
                   ),
-                  onPressed: () => Navigator.pop(context, null),
+                  onPressed: () => Navigator.pop(context),
                   child: Text(
-                    "取消",
+                    '取消',
                     style: TextStyle(color: Colors.grey.shade600),
                   ),
                 ),
