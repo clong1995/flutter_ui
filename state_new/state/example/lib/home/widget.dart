@@ -17,6 +17,7 @@ class _Build extends Build<HomeLogic> {
           buttonWidget(),
           builderWidget(),
           button1Widget(),
+          sendEventWidget(),
         ],
       ),
     );
@@ -44,6 +45,13 @@ class _Build extends Build<HomeLogic> {
     return logic.builder(
       key: const ValueKey('builder'),
       builder: (context) => Text('${logic.state.money}'),
+    );
+  }
+
+  Widget sendEventWidget() {
+    return FilledButton(
+      onPressed: logic.onEventSend,
+      child: const Text('send event'),
     );
   }
 

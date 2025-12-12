@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -71,11 +73,32 @@ abstract class Logic<S> {
     });
   }
 
-  void onInit() {}
+  late final StreamSubscription<_Event> _subscription;
 
-  void onDidChanged() {}
+  @mustCallSuper
+  void onInit() {
+    _subscription = _EventBus.instance.stream.listen(
+      (_Event event) => onEvent(event.topic, event.message),
+    );
+  }
 
-  void onDispose() {}
+  //void onDidChanged() {}
+
+  @mustCallSuper
+  void onDispose() {
+    unawaited(_subscription.cancel());
+  }
+
+  @nonVirtual
+  void sendEvent(String topic, [dynamic message]) {
+    _EventBus.instance.send(
+      _Event()
+        ..topic = topic
+        ..message = message,
+    );
+  }
+
+  void onEvent(String topic, dynamic message) {}
 
   @nonVirtual
   void setSetState(SetState setState) {
@@ -140,3 +163,27 @@ class _BuilderWidgetState extends State<_BuilderWidget> {
     super.dispose();
   }
 }
+
+class _EventBus {
+  _EventBus._internal();
+
+  static final _EventBus instance = _EventBus._internal();
+
+  final _controller = StreamController<_Event>.broadcast();
+
+  void send(_Event event) => _controller.add(event);
+
+  Stream<_Event> get stream => _controller.stream;
+}
+
+class _Event {
+  String topic = '';
+  dynamic message;
+}
+
+/*mixin EventBus<S> on Logic<S> {
+  void publish(String event,[dynamic data]){
+
+  }
+  void onEvent(){}
+}*/

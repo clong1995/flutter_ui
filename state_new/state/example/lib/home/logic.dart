@@ -7,8 +7,12 @@ class _State {
   int money = 2600;
 }
 
-class HomeLogic extends Logic<_State> {
-  HomeLogic(super.context) {
+class HomeLogic extends Logic<_State>{
+  HomeLogic(super.context);
+
+  @override
+  void onInit() {
+    super.onInit();
     state = _State();
   }
 
@@ -23,4 +27,14 @@ class HomeLogic extends Logic<_State> {
   }
 
 
+  void onEventSend() {
+    sendEvent('hello','word');
+  }
+
+
+  @override
+  void onEvent(String topic, dynamic message){
+    debugPrint(topic);
+    debugPrint('$message');
+  }
 }
