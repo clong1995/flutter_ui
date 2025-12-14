@@ -1,6 +1,3 @@
-/// 弹窗
-library;
-
 export 'src/confirm.dart';
 export 'src/custom.dart';
 export 'src/delete.dart';
