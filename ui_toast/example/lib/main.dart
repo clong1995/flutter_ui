@@ -1,8 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_toast/ui_toast.dart';
 
+final GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
+
 void main() {
+  UiToast.init(navigatorKey: appNavigatorKey);
   runApp(const MyApp());
 }
 
@@ -14,11 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      builder: uiToastBuilder,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      navigatorKey: appNavigatorKey,
       home: const MyHomePage(),
     );
   }
@@ -42,42 +44,43 @@ class MyHomePage extends StatelessWidget {
           children: [
             FilledButton(
               onPressed: () {
-                UiToast.show(UiToast.success);
+                UiToast.show(UiToastMessage.success());
               },
               child: const Text("success"),
             ),
             FilledButton(
               onPressed: () {
-                UiToast.show(UiToast.info);
+                UiToast.show(UiToastMessage.info());
               },
               child: const Text("info"),
             ),
             FilledButton(
               onPressed: () {
-                UiToast.show(UiToast.failure);
+                UiToast.show(UiToastMessage.failure());
               },
               child: const Text("failure"),
             ),
             FilledButton(
               onPressed: () {
-                UiToast.show(UiToast.failure..text = "自定义文本:执行错误");
-              },
-              child: const Text("failure 执行错误"),
-            ),
-            FilledButton(
-              onPressed: () {
-                UiToast.show(UiToast.loading);
+                UiToast.show(UiToastMessage.loading());
                 Future.delayed(const Duration(seconds: 2), UiToast.dismiss);
               },
               child: const Text("loading"),
             ),
             FilledButton(
               onPressed: () {
-                UiToast.show(UiToast.choice
+                UiToast.show(UiToastMessage()
+                  ..text = '自定义文本'
+                  ..icon = const Icon(Icons.back_hand_outlined));
+              },
+              child: const Text("自定义"),
+            ),
+            FilledButton(
+              onPressed: () {
+                UiToast.show(UiToastMessage.failure()
+                  ..text = '是否重试'
                   ..choiceCallback = (bool choice) {
-                    if (kDebugMode) {
-                      print(choice);
-                    }
+                    debugPrint('$choice');
                   });
               },
               child: const Text("选择"),
@@ -85,7 +88,6 @@ class MyHomePage extends StatelessWidget {
           ],
         ),
       ),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
