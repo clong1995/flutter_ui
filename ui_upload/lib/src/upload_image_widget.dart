@@ -4,8 +4,8 @@ import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 import 'package:ui_photo_view/ui_photo_view.dart';
 import 'package:ui_toast/ui_toast.dart';
-import 'package:ui_upload/sign_url.dart';
-import 'package:ui_upload/upload.dart';
+import 'package:ui_upload/src/sign_url.dart';
+import 'package:ui_upload/src/upload.dart';
 
 class UploadImageWidget extends StatefulWidget {
   const UploadImageWidget({
