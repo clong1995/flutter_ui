@@ -176,10 +176,10 @@ packages:
     description:
       path: nav
       ref: HEAD
-      resolved-ref: "19c0b89b8e990959309f85075762602b8c9dd9a1"
+      resolved-ref: "825846dfb7928502a6430fdea17816d6e360eb7f"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.0.2"
+    version: "0.0.3"
   path:
     dependency: transitive
     description:
@@ -326,17 +326,17 @@ packages:
     description:
       path: ui_cache_image
       ref: HEAD
-      resolved-ref: "19c0b89b8e990959309f85075762602b8c9dd9a1"
+      resolved-ref: "825846dfb7928502a6430fdea17816d6e360eb7f"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.2.4"
+    version: "0.2.5"
   ui_photo_view:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.1.2"
   vector_math:
     dependency: transitive
     description:

@@ -4,9 +4,9 @@ import 'package:ui_cache_image/ui_cache_image.dart';
 
 import 'package:ui_photo_view/src/push_photo_view_page.dart';
 
-class PhotoViewGrid extends StatelessWidget {
+class UiPhotoViewGrid extends StatelessWidget {
 
-  const PhotoViewGrid({
+  const UiPhotoViewGrid({
     required this.images, super.key,
     this.thumbnail = true,
     this.crossAxisCount = 3,

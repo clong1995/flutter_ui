@@ -5,9 +5,9 @@ import 'package:photo_view/photo_view_gallery.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
 //PhotoView 的实现
-class PhotoView extends StatefulWidget {
+class UiPhotoView extends StatefulWidget {
 
-  const PhotoView({
+  const UiPhotoView({
     required this.images, super.key,
     this.index = 0,
     this.onChanged,
@@ -17,10 +17,10 @@ class PhotoView extends StatefulWidget {
   final void Function(int)? onChanged;
 
   @override
-  State<PhotoView> createState() => _PhotoViewState();
+  State<UiPhotoView> createState() => _UiPhotoViewState();
 }
 
-class _PhotoViewState extends State<PhotoView> {
+class _UiPhotoViewState extends State<UiPhotoView> {
   late int currIndex;
   late List<String> images;
 

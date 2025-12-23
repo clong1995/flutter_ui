@@ -12,6 +12,6 @@ Future<void> pushPhotoViewPage({
 }) => Nav.push(
   context,
   () => Scaffold(
-    body: PhotoView(images: images, index: index, onChanged: onChanged),
+    body: UiPhotoView(images: images, index: index, onChanged: onChanged),
   ),
 );
