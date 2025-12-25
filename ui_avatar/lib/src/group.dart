@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
-class AvatarGroup extends StatelessWidget {
-  const AvatarGroup({required this.images, super.key, this.wrapSize = 55});
+class UiAvatarGroup extends StatelessWidget {
+  const UiAvatarGroup({required this.images, super.key, this.wrapSize = 55});
 
   final List<String> images;
   final double wrapSize;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
-class AvatarSingle extends StatelessWidget {
-  const AvatarSingle({
+class UiAvatarSingle extends StatelessWidget {
+  const UiAvatarSingle({
     super.key,
     this.imageUrl,
     this.size,

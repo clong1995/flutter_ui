@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:ui_avatar/src/avatar_single.dart';
+import 'package:ui_avatar/src/single.dart';
 
-class AvatarStack extends StatelessWidget {
-  const AvatarStack({
+class UiAvatarStack extends StatelessWidget {
+  const UiAvatarStack({
     required this.images,
     super.key,
     this.max = 5,
@@ -36,7 +36,7 @@ class AvatarStack extends StatelessWidget {
               final index = entry.key;
               return Positioned(
                 left: (index * height) - index * offset,
-                child: AvatarSingle(
+                child: UiAvatarSingle(
                   imageUrl: entry.value,
                   size: height,
                   border: Border.all(color: Colors.white, width: 2),
