@@ -1,34 +1,48 @@
 import 'package:security/encrypt.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-const String _key = '__auth';
+class FnAuth {
+  FnAuth._();
 
-final SharedPreferencesAsync _asyncPrefs = SharedPreferencesAsync();
+  static String _ak = '';
+  static String _sk = '';
+  static List<String> _role = [];
 
-String _ak = '';
-String _sk = '';
-List<String> _role = [];
+  static final SharedPreferencesAsync _asyncPrefs = SharedPreferencesAsync();
 
-class Auth {
+  static const String _key = '__auth';
+
   static String get ak => _ak;
 
   static String get sk => _sk;
 
-  //加载凭证
+
+  //
+  // ignore:avoid_setters_without_getters
+  static set role(List<String> r) => _role = r;
+
+
+  static bool roleAllow(List<String> role) =>
+      role.any((element) => _role.contains(element));
+
+  //载入凭证
   static Future<void> load({
     String? ak,
     String? sk,
     bool persist = true,
   }) async {
+    //从外部参数载入
     if (ak != null && sk != null && ak != '' && sk != '') {
       _ak = ak;
       _sk = sk;
       if (persist) {
-        await _set();
+        final encryptText = await encrypter('$_ak:$_sk');
+        await _asyncPrefs.setString(_key, encryptText);
       }
       return;
     }
 
+    //从storage载入
     final value = await _asyncPrefs.getString(_key);
     if (value == null || value.isEmpty) {
       return;
@@ -51,17 +65,12 @@ class Auth {
   }
 
   //判断状态
-  static bool state() => _ak != '' && _sk != '';
+  static bool get state => _ak != '' && _sk != '';
 
-  static bool allow(List<String> role) =>
-      role.any((element) => _role.contains(element));
-
-  //
-  // ignore:avoid_setters_without_getters
-  static set role(List<String> r) => _role = r;
 }
 
-Future<void> _set() async {
-  final encryptText = await encrypter('$_ak:$_sk');
-  await _asyncPrefs.setString(_key, encryptText);
-}
+
+
+
+
+

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ui_alert/src/widget/config.dart';
 import 'package:ui_alert/src/widget/title.dart';
 
-Future<T?> alertCustom<T>({
+Future<T?> fnAlertCustom<T>({
   required BuildContext context,
   required Widget child,
   bool root = true,
@@ -23,9 +23,9 @@ Future<T?> alertCustom<T>({
   ),
 );
 
-class CustomContent extends StatelessWidget {
+class UiAlertCustomContent extends StatelessWidget {
 
-  const CustomContent({
+  const UiAlertCustomContent({
     required this.child, super.key,
     this.title,
     this.cancel = true,

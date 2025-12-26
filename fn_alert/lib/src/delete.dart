@@ -3,7 +3,7 @@ import 'package:ui_alert/src/widget/cancel_button.dart';
 import 'package:ui_alert/src/widget/config.dart';
 import 'package:ui_alert/src/widget/title.dart';
 
-Future<bool?> alertDelete({
+Future<bool?> fnAlertDelete({
   required BuildContext context,
   String? content,
   bool root = true,

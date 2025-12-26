@@ -4,7 +4,7 @@ import 'package:ui_alert/src/widget/config.dart';
 import 'package:ui_alert/src/widget/confirm_button.dart';
 import 'package:ui_alert/src/widget/title.dart';
 
-Future<bool?> alertConfirm({
+Future<bool?> fnAlertConfirm({
   required BuildContext context,
   String? content,
   bool root = true,

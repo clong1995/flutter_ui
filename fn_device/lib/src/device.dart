@@ -1,12 +1,14 @@
-import 'package:device/src/user_agent.dart';
 import 'package:flutter/foundation.dart';
+import 'package:fn_device/src/user_agent.dart';
 
-class Device {
+class FnDevice {
+  FnDevice._();
+
   static String? _platform;
 
   static String get platform {
     if (_platform != null) {
-      return _platform ?? '';
+      return _platform!;
     }
     if (kIsWeb) {
       if (userAgent.contains('iPad') ||
@@ -40,6 +42,6 @@ class Device {
           _platform = 'fuchsia';
       }
     }
-    return _platform ?? '';
+    return _platform ?? 'no-os';
   }
 }

@@ -1,6 +1,6 @@
-name: device
+name: fn_device
 description: "A new Flutter project."
-version: 0.0.3
+version: 0.1.0
 homepage: flutter_ui
 publish_to: none
 

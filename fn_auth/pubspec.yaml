@@ -1,6 +1,6 @@
-name: auth
+name: fn_auth
 description: "A new Flutter project."
-version: 0.0.4
+version: 0.1.0
 homepage: flutter_ui
 publish_to: none
 
