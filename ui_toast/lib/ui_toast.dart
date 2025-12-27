@@ -67,7 +67,7 @@ class UiToastMessage {
 }*/
 
 class UiToast {
-  //Toast._();
+  UiToast._();
 
   static GlobalKey<NavigatorState>? _navigatorKey;
 
