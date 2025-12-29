@@ -1,22 +1,24 @@
-name: guid
+name: fn_guid
 description: "A new Flutter project."
-version: 0.0.3
+version: 0.1.0
 homepage: flutter_ui
 
 environment:
-  sdk: ^3.8.0
-  flutter: ">=3.19.6"
+  sdk: ^3.10.1
+  flutter: ">=3.38.3"
 
 dependencies:
   flutter:
     sdk: flutter
-  device_info_plus: ^11.4.0
-  crypto: ^3.0.6
+  web: ^1.1.1
+  device_info_plus: ^12.3.0
+  crypto: ^3.0.7
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  #flutter_lints: ^5.0.0
+  very_good_analysis: ^10.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
