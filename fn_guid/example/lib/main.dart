@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guid/fn_guid.dart';
+import 'package:fn_guid/fn_guid.dart';
 
 void main() {
   runApp(const MyApp());

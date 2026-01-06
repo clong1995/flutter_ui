@@ -120,7 +120,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  guid:
+  fn_guid:
     dependency: "direct main"
     description:
       path: ".."

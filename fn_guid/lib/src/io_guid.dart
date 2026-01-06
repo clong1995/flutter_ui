@@ -88,7 +88,7 @@ class FnGuid {
           '${androidInfo.supportedAbis.join(',')}'
           '${androidInfo.isPhysicalDevice}'
           //'${androidInfo.serialNumber}'
-          '';
+          ;
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       final iosInfo = await _deviceInfo.iosInfo;
       input =
