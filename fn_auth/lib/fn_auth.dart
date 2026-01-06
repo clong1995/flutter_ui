@@ -1,4 +1,4 @@
-import 'package:security/encrypt.dart';
+import 'package:fn_security/fn_security.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FnAuth {
@@ -36,7 +36,7 @@ class FnAuth {
       _ak = ak;
       _sk = sk;
       if (persist) {
-        final encryptText = await encrypter('$_ak:$_sk');
+        final encryptText = await FnSecurity.encrypter('$_ak:$_sk');
         await _asyncPrefs.setString(_key, encryptText);
       }
       return;
@@ -48,7 +48,7 @@ class FnAuth {
       return;
     }
 
-    final decryptText = await decrypter(value);
+    final decryptText = await FnSecurity.decrypter(value);
     final arr = decryptText.split(':');
     if (arr.length != 2) {
       return;
@@ -66,11 +66,4 @@ class FnAuth {
 
   //判断状态
   static bool get state => _ak != '' && _sk != '';
-
 }
-
-
-
-
-
-
