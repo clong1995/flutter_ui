@@ -1,6 +1,6 @@
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter/foundation.dart';
-import 'package:guid/guid.dart';
+import 'package:fn_guid/fn_guid.dart';
 
 Future<String> encrypter(String plainText) async {
   final iv = encrypt.IV.fromLength(16);
