@@ -27,13 +27,13 @@ class UiAlert {
       return null;
     }
     return infoDialog(
-      context: context!,
+      context: context,
       content: content,
       root: root,
     );
   }
 
-  Future<bool?> delete({
+  static Future<bool?> delete({
     //required BuildContext context,
     String? content,
     bool root = true,
@@ -45,7 +45,7 @@ class UiAlert {
     return deleteDialog(context: context, content: content, root: root);
   }
 
-  Future<T?> custom<T>({
+  static Future<T?> custom<T>({
     //required BuildContext context,
     required Widget child,
     bool root = true,
@@ -57,7 +57,7 @@ class UiAlert {
     return customDialog(context: context, child: child, root: root);
   }
 
-  Future<bool?> confirm({
+  static Future<bool?> confirm({
     //required BuildContext context,
     String? content,
     bool root = true,
