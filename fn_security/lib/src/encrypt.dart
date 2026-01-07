@@ -1,6 +1,6 @@
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:flutter/foundation.dart';
-import 'package:fn_guid/fn_guid.dart';
+import 'package:fn_device/fn_device.dart';
 
 Future<String> encrypter(String plainText) async {
   final iv = encrypt.IV.fromLength(16);
@@ -31,7 +31,7 @@ Future<String> decrypter(String encryptedText) async {
 }
 
 Future<encrypt.Encrypter> _encrypter() async {
-  var deviceId = await Guid.id;
+  var deviceId = await FnDevice.guid;
   deviceId = deviceId.length > 32
       ? deviceId.substring(0, 32)
       : deviceId.padRight(32);

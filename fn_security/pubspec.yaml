@@ -13,10 +13,10 @@ dependencies:
     sdk: flutter
   crypto: ^3.0.7
   encrypt: ^5.0.3
-  fn_guid:
+  fn_device:
     git:
       url: https://github.com/clong1995/flutter_ui.git
-      path: fn_guid
+      path: fn_device
 
 dev_dependencies:
   flutter_test:
