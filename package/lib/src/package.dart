@@ -15,23 +15,23 @@ class Package {
     if (!_packages.containsKey(packageName)) {
       throw FormatException('$packageName not registered');
     }
-    final packageBuilder = _packages[packageName];
-
-    return packageBuilder == null
-        ? const SizedBox.shrink()
-        : packageBuilder(
-            arg: arg,
-          );
+    final package = _packages[packageName];
+    if (package == null) {
+      throw FormatException('$packageName is null');
+    }
+    return package(
+      arg: arg,
+    );
   }
 
   //注册包，在项目初始化的时候统一注册
   static void register(Iterable<Register Function()> builders) {
-    for (final register in builders) {
-      final package = register();
+    for (final builder in builders) {
+      final package = builder();
       if (_packages.containsKey(package.name)) {
         throw FormatException('${package.name} already registered');
       }
-      _packages[package.name] = package.packageBuilder;
+      _packages[package.name] = package.builder;
     }
   }
 }
