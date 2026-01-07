@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:device/device.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fn_device/fn_device.dart';
 
 class UiBanner extends StatefulWidget {
   const UiBanner({
@@ -181,24 +181,22 @@ class _UiBannerState extends State<UiBanner>
 
   Widget regionWrap({required Widget child}) {
     var touch = false;
-    final platform = Device.platform;
+    final platform = FnDevice.platform;
     switch (platform) {
       case 'web-ios':
       case 'web-android':
-        touch = true;
-      case 'web-windows':
-      case 'web-macOS':
-      case 'web-linux':
-      case 'web-fuchsia':
-        touch = false;
       case 'android':
       case 'iOS':
         touch = true;
+      /*case 'web-windows':
+      case 'web-macOS':
+      case 'web-linux':
+      case 'web-fuchsia':
       case 'windows':
       case 'macOS':
       case 'linux':
       case 'fuchsia':
-        touch = false;
+        touch = false;*/
     }
     if (touch) {
       return GestureDetector(

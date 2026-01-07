@@ -11,10 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  device:
+  fn_device:
     git:
       url: https://github.com/clong1995/flutter_ui.git
-      path: device
+      path: fn_device
 
 dev_dependencies:
   flutter_test:
