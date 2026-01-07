@@ -3,6 +3,7 @@ import 'package:jiffy/jiffy.dart';
 
 class FnDatetime {
   FnDatetime._();
+
   static String toStr(DateTime dateTime, [String? pattern]) {
     var p = pattern ?? '';
     switch (pattern) {
