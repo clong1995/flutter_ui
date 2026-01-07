@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: PhotoViewGrid(
+      body: UiPhotoViewGrid(
         images: [
           "https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/aa.jpg",
           "https://bj-eschool.oss-cn-beijing.aliyuncs.com/test/6.jpg",

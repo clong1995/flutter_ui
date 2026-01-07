@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nav/nav.dart';
+import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 import 'package:ui_photo_view/ui_photo_view.dart';
@@ -202,8 +202,7 @@ class _UploadImageWidgetState extends State<UploadImageWidget> {
   }
 
   Future<void> imageWidget(int index) async {
-    await Nav.push(
-      context,
+    await FnNav.push(
       () => _PhotoViewer(
         index: index,
         images: [...imageList],
@@ -302,7 +301,7 @@ class _PhotoViewerState extends State<_PhotoViewer> {
       } else {
         //没有了
         if (!mounted) return;
-        Nav.pop(context);
+        FnNav.pop();
       }
     }
   }

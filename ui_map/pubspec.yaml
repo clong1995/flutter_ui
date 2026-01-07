@@ -1,6 +1,6 @@
 name: ui_map
 description: "A new Flutter project."
-version: 0.1.6
+version: 0.1.7
 homepage: flutter_ui
 publish_to: none
 
@@ -22,10 +22,10 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_toast
-  nav:
+  fn_nav:
     git:
       url: https://github.com/clong1995/flutter_ui.git
-      path: nav
+      path: fn_nav
   #ui_webview:
   #  path: ../ui_webview
 

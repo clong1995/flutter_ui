@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nav/nav.dart';
+import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_map/src/address_widget.dart';
 
 Future<Address?> address(
@@ -7,8 +7,7 @@ Future<Address?> address(
   required Future<List<Address>> Function(String keyword) datasource,
   bool root = false,
   Future<List<double>?> Function()? location,
-}) => Nav.push<Address>(
-  context,
+}) => FnNav.push<Address>(
   root: root,
   () => AddressWidget(datasource: datasource, location: location),
 );

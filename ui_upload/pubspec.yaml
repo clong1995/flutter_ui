@@ -26,10 +26,10 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_cache_image
-  nav:
+  fn_nav:
     git:
       url: https://github.com/clong1995/flutter_ui.git
-      path: nav
+      path: fn_nav
   ui_photo_view:
     git:
       url: https://github.com/clong1995/flutter_ui.git

@@ -4,7 +4,7 @@ import 'dart:collection';
 import 'package:alphabet_list_view/alphabet_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:nav/nav.dart';
+import 'package:fn_nav/fn_nav.dart';
 import 'package:pinyin/pinyin.dart';
 import 'package:ui_map/src/region.dart' show Region;
 
@@ -66,9 +66,7 @@ class _RegionWidgetState extends State<RegionWidget> {
           leadingWidth: 100,
           leading: canPop
               ? TextButton(
-                  onPressed: () {
-                    Nav.pop(context);
-                  },
+                  onPressed: FnNav.pop,
                   child: Text(
                     '取消',
                     style: bodyMedium.copyWith(color: Colors.red),
@@ -326,7 +324,7 @@ class _RegionWidgetState extends State<RegionWidget> {
         );
       }
       canPop = true;
-      Nav.pop<List<Region>>(context, result: list);
+      FnNav.pop<List<Region>>(result: list);
       return;
     }
   }

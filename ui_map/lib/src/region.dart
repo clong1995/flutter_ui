@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nav/nav.dart';
+import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_map/src/region_widget.dart';
 
 Future<List<Region>?> region(
@@ -7,9 +7,8 @@ Future<List<Region>?> region(
   String? region, //如：山东省/青岛市/黄岛区
   Future<String?> Function()? location, //如：返回 山东省/青岛市/黄岛区
   bool root = false,
-}) => Nav.push<List<Region>>(
+}) => FnNav.push<List<Region>>(
   root: root,
-  context,
   () => RegionWidget(region: region, location: location),
 );
 

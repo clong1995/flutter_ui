@@ -45,14 +45,13 @@ class UiPhotoViewGrid extends StatelessWidget {
         image = uri.toString();
       }
       return GestureDetector(
-        onTap: () => onImageTap(context, index),
+        onTap: () => onImageTap(index),
         child: UiCacheImage(image, fit: BoxFit.contain),
       );
     },
   );
 
-  void onImageTap(BuildContext context, int index) => pushPhotoViewPage(
-    context: context,
+  void onImageTap(int index) => pushPhotoViewPage(
     images: images,
     index: index,
     onChanged: onChanged,

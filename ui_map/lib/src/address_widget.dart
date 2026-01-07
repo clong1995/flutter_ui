@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:nav/nav.dart';
+import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_map/src/address.dart';
 import 'package:ui_map/src/distance.dart';
 
@@ -193,6 +193,6 @@ class _AddressWidgetState extends State<AddressWidget> {
   }
 
   void onAddressTap(Address address) {
-    Nav.pop<Address?>(context, result: address);
+    FnNav.pop<Address?>(result: address);
   }
 }

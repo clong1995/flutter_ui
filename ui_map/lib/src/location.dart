@@ -38,7 +38,7 @@ Future<bool> _permission() async {
   final serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
     //Location services are disabled
-    UiToast.show(UiToast.info..text = 'location service disabled');
+    UiToast.show(UiToastMessage.info()..text = 'location service disabled');
     return false;
   }
 
@@ -52,7 +52,7 @@ Future<bool> _permission() async {
       // returned true. According to Android guidelines
       // your App should show an explanatory UI now.
       //Location permissions are denied
-      UiToast.show(UiToast.info..text = 'location  permissions are denied');
+      UiToast.show(UiToastMessage.info()..text = 'location  permissions are denied');
       return false;
     }
   }
@@ -61,7 +61,7 @@ Future<bool> _permission() async {
     // Permissions are denied forever, handle appropriately.
     //Location permissions are permanently denied, we cannot request permissions.
     UiToast.show(
-      UiToast.info..text = 'location permissions are denied forever',
+      UiToastMessage.info()..text = 'location permissions are denied forever',
     );
     return false;
   }
