@@ -279,7 +279,6 @@ class _PhotoViewerState extends State<_PhotoViewer> {
 
   Future<void> remove() async {
     final flag = await UiAlert.confirm(
-      context: context,
       content: '确定删除这张图片?',
     );
 
