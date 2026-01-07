@@ -2,6 +2,9 @@ import 'package:flutter/widgets.dart';
 import 'package:package/src/register.dart';
 
 class Package {
+
+  Package._();
+  
   static final Map<
     String,
     Widget Function({

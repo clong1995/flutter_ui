@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 
 class Rpx {
+  Rpx._();
+
   static double _width = 0;
 
   static void init([double? width]) {
