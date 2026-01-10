@@ -1,17 +1,17 @@
 void logger(String message, {bool stack = true}) {
   assert(() {
-    var datetime = '';
-    var location = '';
-    var start = '';
-    var end = '';
     if (stack) {
       final stackTrace = StackTrace.current;
-      start = '┏━━━━━━━━━━━━━━━━━━━━━━━━━ Logger ━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n';
-      datetime = '${_datetime()}\n';
-      location = '${_stackTrace(stackTrace)}\n';
-      end = '\n┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛';
+      const start =
+          '\n┏━━━━━━━━━━━━━━━━━━━━━━━━━ Logger ━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n';
+      final datetime = '${_datetime()}\n';
+      final location = '${_stackTrace(stackTrace)}\n';
+      const end =
+          '\n┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n';
+      _printLong('$start$datetime$location$message$end');
+    } else {
+      _printLong(message);
     }
-    _printLong('$start$datetime$location$message$end');
     return true;
   }(), '');
 }
