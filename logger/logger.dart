@@ -4,7 +4,7 @@ void logger(String message, {bool stack = true}) {
     var location = '';
     var start = '';
     var end = '';
-    if(stack){
+    if (stack) {
       final stackTrace = StackTrace.current;
       start = '┏━━━━━━━━━━━━━━━━━━━━━━━━━ Logger ━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n';
       datetime = '${_datetime()}\n';
@@ -44,7 +44,7 @@ String _stackTrace(StackTrace stackTrace) {
   return '';
 }
 
-String _datetime(){
+String _datetime() {
   return DateTime.now().toString();
 }
 
