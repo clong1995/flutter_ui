@@ -1,6 +1,5 @@
+import 'package:logger/logger.dart';
 import 'package:test/test.dart';
-
-import '../logger.dart';
 
 void main() async {
   test('logger', ()  {
