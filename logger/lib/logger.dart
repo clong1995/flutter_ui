@@ -4,11 +4,11 @@ void logger(String message, {bool stack = true}) {
       final stackTrace = StackTrace.current;
       const start =
           '\n┏━━━━━━━━━━━━━━━━━━━━━━━━━ Logger ━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n';
-      final datetime = '${_datetime()}\n';
-      final location = '${_stackTrace(stackTrace)}\n';
+      final datetime = '┃  ${_datetime()}\n';
+      final location = '┃  ${_stackTrace(stackTrace)}\n';
       const end =
           '\n┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n';
-      _printLong('$start$datetime$location$message$end');
+      _printLong('$start$datetime$location┃  $message$end');
     } else {
       _printLong(message);
     }
