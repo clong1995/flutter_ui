@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:state/logic.dart' show Logic;
-import 'package:state/state.dart' show Build;
+import 'package:state/widget.dart' show Build;
 
 class StateWidget<L extends Logic<dynamic>> extends StatefulWidget {
   const StateWidget({required this.build, required this.logic, super.key});

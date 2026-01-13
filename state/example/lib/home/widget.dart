@@ -1,6 +1,6 @@
 import 'package:example/home/logic.dart';
 import 'package:flutter/material.dart';
-import 'package:state/state.dart';
+import 'package:state/widget.dart';
 
 Widget homeWidget() => stateWidget(HomeLogic.new, _Build.new);
 
