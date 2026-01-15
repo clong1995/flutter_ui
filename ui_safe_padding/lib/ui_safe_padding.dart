@@ -29,7 +29,7 @@ class UiSafePadding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final padding = paddingData(context);
+    final padding = uiSafePaddingData(context);
     return Padding(
       padding: EdgeInsets.fromLTRB(
         left ? padding.left + addLeft : 0,
@@ -44,7 +44,7 @@ class UiSafePadding extends StatelessWidget {
 
 EdgeInsets? _paddingData;
 
-EdgeInsets paddingData(BuildContext context) {
+EdgeInsets uiSafePaddingData(BuildContext context) {
   if (_paddingData != null) {
     return _paddingData!;
   }
