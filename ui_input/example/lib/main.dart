@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: InputNumber<int>(
+      body: UiInputNumber<int>(
         num: 1,
         width: 150,
         height: 50,

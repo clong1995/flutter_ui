@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class InputNumber<T extends num> extends StatefulWidget {
-  const InputNumber({
+class UiInputNumber<T extends num> extends StatefulWidget {
+  const UiInputNumber({
     required this.num,
     super.key,
     this.width,
@@ -20,10 +20,10 @@ class InputNumber<T extends num> extends StatefulWidget {
   final TextStyle? style;
 
   @override
-  State<InputNumber<T>> createState() => _InputNumberState<T>();
+  State<UiInputNumber<T>> createState() => _UiInputNumberState<T>();
 }
 
-class _InputNumberState<T extends num> extends State<InputNumber<T>> {
+class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
   late TextEditingController controller;
 
   late RegExp reg;
@@ -47,7 +47,7 @@ class _InputNumberState<T extends num> extends State<InputNumber<T>> {
   }
 
   @override
-  void didUpdateWidget(InputNumber<T> oldWidget) {
+  void didUpdateWidget(UiInputNumber<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     controller.text = '${widget.num}';
   }

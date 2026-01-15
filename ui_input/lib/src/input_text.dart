@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class InputText extends StatefulWidget {
-  const InputText({
+class UiInputText extends StatefulWidget {
+  const UiInputText({
     super.key,
     this.width,
     this.height,
@@ -40,10 +40,10 @@ class InputText extends StatefulWidget {
   final bool? selection;
 
   @override
-  State<InputText> createState() => _InputTextState();
+  State<UiInputText> createState() => _UiInputTextState();
 }
 
-class _InputTextState extends State<InputText> {
+class _UiInputTextState extends State<UiInputText> {
   late BorderSide borderSide;
   late TextStyle style;
   late TextEditingController controller;
@@ -70,7 +70,7 @@ class _InputTextState extends State<InputText> {
   }
 
   @override
-  void didUpdateWidget(InputText oldWidget) {
+  void didUpdateWidget(UiInputText oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.text != null) {
       controller.text = widget.text!;
