@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ui_pick_datetime/src/pick_datetime.dart';
 
-class UiDataPick extends StatefulWidget {
-  const UiDataPick({
+class UiInputDate extends StatefulWidget {
+  const UiInputDate({
     required this.firstDate,
     required this.lastDate,
     super.key,
@@ -16,10 +15,10 @@ class UiDataPick extends StatefulWidget {
   final void Function(DateTime)? onChanged;
 
   @override
-  State<UiDataPick> createState() => _UiDataPickState();
+  State<UiInputDate> createState() => _UiInputDateState();
 }
 
-class _UiDataPickState extends State<UiDataPick> {
+class _UiInputDateState extends State<UiInputDate> {
   late DateTime date;
 
   @override
@@ -29,7 +28,7 @@ class _UiDataPickState extends State<UiDataPick> {
   }
 
   @override
-  void didUpdateWidget(covariant UiDataPick oldWidget) {
+  void didUpdateWidget(covariant UiInputDate oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.date != oldWidget.date) {
       date = widget.date ?? DateTime.now();
@@ -43,7 +42,7 @@ class _UiDataPickState extends State<UiDataPick> {
       onPressed: widget.onChanged == null
           ? null
           : () async {
-              final dateTime = await UiPickDateTime.date(
+              final dateTime = await datePicker(
                 context: context,
                 init: date,
                 firstDate: widget.firstDate,
@@ -56,10 +55,26 @@ class _UiDataPickState extends State<UiDataPick> {
               setState(() {});
               widget.onChanged!(date);
             },
-      child: Text(_fmtDate),
+      child: Text(fmtDate),
     );
   }
 
-  String get _fmtDate =>
+  Future<DateTime?> datePicker({
+    required BuildContext context,
+    required DateTime firstDate,
+    required DateTime lastDate,
+    bool root = true,
+    DateTime? init,
+  }) => showDatePicker(
+    context: context,
+    barrierDismissible: false,
+    useRootNavigator: root,
+    initialEntryMode: DatePickerEntryMode.calendarOnly,
+    initialDate: init,
+    firstDate: firstDate,
+    lastDate: lastDate,
+  );
+
+  String get fmtDate =>
       '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
 }

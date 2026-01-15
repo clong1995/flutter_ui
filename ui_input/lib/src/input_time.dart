@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:ui_pick_datetime/src/pick_datetime.dart';
 
-class UiTimePick extends StatefulWidget {
-  const UiTimePick({super.key, this.time, this.onChanged});
+class UiInputTime extends StatefulWidget {
+  const UiInputTime({super.key, this.time, this.onChanged});
 
   final TimeOfDay? time;
   final void Function(TimeOfDay)? onChanged;
 
   @override
-  State<UiTimePick> createState() => _UiTimePickState();
+  State<UiInputTime> createState() => _UiInputTimeState();
 }
 
-class _UiTimePickState extends State<UiTimePick> {
+class _UiInputTimeState extends State<UiInputTime> {
   late TimeOfDay time;
 
   @override
@@ -21,7 +20,7 @@ class _UiTimePickState extends State<UiTimePick> {
   }
 
   @override
-  void didUpdateWidget(covariant UiTimePick oldWidget) {
+  void didUpdateWidget(covariant UiInputTime oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.time != oldWidget.time) {
       time = widget.time ?? TimeOfDay.now();
@@ -35,7 +34,7 @@ class _UiTimePickState extends State<UiTimePick> {
       onPressed: widget.onChanged == null
           ? null
           : () async {
-              final timeOfDay = await UiPickDateTime.time(
+              final timeOfDay = await timePicker(
                 context: context,
                 init: time,
               );
@@ -46,10 +45,22 @@ class _UiTimePickState extends State<UiTimePick> {
               setState(() {});
               widget.onChanged!(time);
             },
-      child: Text(_fmtTime),
+      child: Text(fmtTime),
     );
   }
 
-  String get _fmtTime =>
+  Future<TimeOfDay?> timePicker({
+    required BuildContext context,
+    TimeOfDay? init,
+    bool root = true,
+  }) => showTimePicker(
+    context: context,
+    barrierDismissible: false,
+    useRootNavigator: root,
+    initialEntryMode: TimePickerEntryMode.inputOnly,
+    initialTime: init ?? TimeOfDay.now(),
+  );
+
+  String get fmtTime =>
       '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
 }
