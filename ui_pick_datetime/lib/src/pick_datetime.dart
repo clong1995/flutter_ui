@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PickDateTime {
+class UiPickDateTime {
   static Future<DateTime?> date({
     required BuildContext context,
     required DateTime firstDate,

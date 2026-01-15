@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ui_pick_datetime/src/pick_datetime.dart';
 
-class DataPick extends StatefulWidget {
-  const DataPick({
+class UiDataPick extends StatefulWidget {
+  const UiDataPick({
     required this.firstDate,
     required this.lastDate,
     super.key,
@@ -16,10 +16,10 @@ class DataPick extends StatefulWidget {
   final void Function(DateTime)? onChanged;
 
   @override
-  State<DataPick> createState() => _DataPickState();
+  State<UiDataPick> createState() => _UiDataPickState();
 }
 
-class _DataPickState extends State<DataPick> {
+class _UiDataPickState extends State<UiDataPick> {
   late DateTime date;
 
   @override
@@ -29,7 +29,7 @@ class _DataPickState extends State<DataPick> {
   }
 
   @override
-  void didUpdateWidget(covariant DataPick oldWidget) {
+  void didUpdateWidget(covariant UiDataPick oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.date != oldWidget.date) {
       date = widget.date ?? DateTime.now();
@@ -43,7 +43,7 @@ class _DataPickState extends State<DataPick> {
       onPressed: widget.onChanged == null
           ? null
           : () async {
-              final dateTime = await PickDateTime.date(
+              final dateTime = await UiPickDateTime.date(
                 context: context,
                 init: date,
                 firstDate: widget.firstDate,

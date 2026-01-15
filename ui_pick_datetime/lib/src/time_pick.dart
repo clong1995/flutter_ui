@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:ui_pick_datetime/src/pick_datetime.dart';
 
-class TimePick extends StatefulWidget {
-  const TimePick({super.key, this.time, this.onChanged});
+class UiTimePick extends StatefulWidget {
+  const UiTimePick({super.key, this.time, this.onChanged});
 
   final TimeOfDay? time;
   final void Function(TimeOfDay)? onChanged;
 
   @override
-  State<TimePick> createState() => _TimePickState();
+  State<UiTimePick> createState() => _UiTimePickState();
 }
 
-class _TimePickState extends State<TimePick> {
+class _UiTimePickState extends State<UiTimePick> {
   late TimeOfDay time;
 
   @override
@@ -21,7 +21,7 @@ class _TimePickState extends State<TimePick> {
   }
 
   @override
-  void didUpdateWidget(covariant TimePick oldWidget) {
+  void didUpdateWidget(covariant UiTimePick oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.time != oldWidget.time) {
       time = widget.time ?? TimeOfDay.now();
@@ -35,7 +35,7 @@ class _TimePickState extends State<TimePick> {
       onPressed: widget.onChanged == null
           ? null
           : () async {
-              final timeOfDay = await PickDateTime.time(
+              final timeOfDay = await UiPickDateTime.time(
                 context: context,
                 init: time,
               );
