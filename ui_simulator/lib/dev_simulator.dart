@@ -1,38 +1,82 @@
 import 'package:flutter/material.dart';
 
+class UiSimulator {
+  UiSimulator._();
+
+  static Widget ios(BuildContext context, Widget? child) {
+    return child == null
+        ? const SizedBox.shrink()
+        : _UiSimulator(context, child);
+  }
+
+  static Widget android(BuildContext context, Widget? child) {
+    return child == null
+        ? const SizedBox.shrink()
+        : _UiSimulator(
+            context,
+            child,
+            device: _Device.android,
+          );
+  }
+
+  static Widget web(BuildContext context, Widget? child) {
+    return child == null
+        ? const SizedBox.shrink()
+        : _UiSimulator(
+            context,
+            child,
+            device: _Device.web,
+          );
+  }
+}
+
+enum _Device { ios, android, web }
+
 //尺寸: 340 * 740
-class UiSimulator extends StatelessWidget {
-  const UiSimulator(
-    this.builder, {
-    super.key,
-    this.webTitle,
+class _UiSimulator extends StatelessWidget {
+  const _UiSimulator(
+    this.context,
+    this.child, {
+    //super.key,
+    this.device = _Device.ios,
   });
 
-  final String? webTitle;
+  final _Device device;
 
-  final Widget Function(BuildContext) builder;
+  // final Widget Function(BuildContext) builder;
+  final BuildContext context;
+  final Widget child;
 
   double get paddingTop => 35;
+
   double get paddingBottom => 25;
+
   double get indicatorHeight => 5;
 
   @override
   Widget build(BuildContext context) {
     final mediaQueryData = MediaQuery.of(context);
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: MediaQuery(
-              data: mediaQueryData.copyWith(
-                viewPadding: mediaQueryData.padding.copyWith(
-                  top: webTitle == null ? paddingTop : 0,
-                  bottom: paddingBottom,
-                ),
-              ),
+    final padding = EdgeInsets.fromLTRB(
+      0,
+      device == _Device.web ? 0 : paddingTop,
+      0,
+      paddingBottom,
+    );
+    return MediaQuery(
+      data: mediaQueryData.copyWith(
+        viewPadding: padding,
+        padding: padding,
+        textScaler: TextScaler.noScaling,
+        size: const Size(340, 740),
+      ),
+      child: DefaultTextStyle(
+        style: const TextStyle(color: Colors.black),
+        child: Stack(
+          children: [
+            Positioned.fill(
               child: Column(
                 children: [
-                  if (webTitle != null)
+                  if (device == _Device.web)
                     Container(
                       color: Colors.white,
                       padding: EdgeInsets.only(top: paddingTop),
@@ -54,8 +98,15 @@ class UiSimulator extends StatelessWidget {
                               color: Colors.green,
                               size: 14,
                             ),
-                            Expanded(
-                              child: Center(child: Text(webTitle ?? '')),
+                            const Expanded(
+                              child: Center(
+                                child: Text(
+                                  'Web Simulator',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
                             ),
                             Icon(
                               Icons.refresh,
@@ -66,98 +117,110 @@ class UiSimulator extends StatelessWidget {
                         ),
                       ),
                     ),
-                  Expanded(child: Builder(builder: builder)),
+                  //Expanded(child: Builder(builder: builder)),
+                  Expanded(child: child),
                 ],
               ),
             ),
-          ),
-          //top
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            height: paddingTop,
-            child: Row(
-              children: [
-                const Expanded(
-                  child: Center(
-                    child: Text('14:15', style: TextStyle(fontSize: 12)),
-                  ),
-                ),
-                Container(
-                  width: mediaQueryData.size.width / 2,
-                  // height: paddingTop * 95,
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(22),
-                      bottomRight: Radius.circular(22),
+            //top
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: paddingTop,
+              child: Row(
+                children: [
+                  const Expanded(
+                    child: Center(
+                      child: Text(
+                        '14:15',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
                     ),
                   ),
-                  margin: EdgeInsets.only(bottom: paddingTop * .1),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Spacer(),
-                      Container(
-                        width: 50,
-                        height: 6,
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade800,
-                          borderRadius: BorderRadius.circular(4),
+                  if (device == _Device.ios)
+                    Container(
+                      width: mediaQueryData.size.width / 2,
+                      // height: paddingTop * 95,
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(22),
+                          bottomRight: Radius.circular(22),
                         ),
                       ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Icon(
-                            Icons.circle,
-                            color: Colors.grey.shade900,
-                            size: 14,
+                      margin: EdgeInsets.only(bottom: paddingTop * .1),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Spacer(),
+                          Container(
+                            width: 50,
+                            height: 6,
+                            margin: const EdgeInsets.symmetric(horizontal: 5),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade800,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
                           ),
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Icon(
+                                Icons.circle,
+                                color: Colors.grey.shade900,
+                                size: 14,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  else
+                    SizedBox(
+                      width: mediaQueryData.size.width / 2,
+                    ),
+                  const Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Icon(Icons.signal_cellular_alt, size: 17),
+                        SizedBox(width: 6),
+                        Icon(Icons.wifi, size: 17),
+                        SizedBox(width: 6),
+                        RotatedBox(
+                          quarterTurns: 1,
+                          child: Icon(Icons.battery_5_bar, size: 18),
                         ),
-                      ),
-                    ],
+                        SizedBox(width: 10),
+                      ],
+                    ),
                   ),
-                ),
-                const Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Icon(Icons.signal_cellular_alt, size: 17),
-                      SizedBox(width: 5),
-                      Icon(Icons.wifi, size: 17),
-                      SizedBox(width: 5),
-                      RotatedBox(
-                        quarterTurns: 1,
-                        child: Icon(Icons.battery_5_bar, size: 18),
-                      ),
-                      SizedBox(width: 10),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          //bottom
-          Positioned(
-            height: paddingBottom,
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Container(
-                height: indicatorHeight,
-                width: mediaQueryData.size.width / 2,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(indicatorHeight / 2),
-                ),
+                ],
               ),
             ),
-          ),
-        ],
+            //bottom
+            if (device == _Device.ios)
+              Positioned(
+                height: paddingBottom,
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: Container(
+                    height: indicatorHeight,
+                    width: mediaQueryData.size.width / 2,
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(indicatorHeight / 2),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

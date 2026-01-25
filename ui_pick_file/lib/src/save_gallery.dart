@@ -6,12 +6,11 @@ import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<String> saveImageToGallery({
-  required Uint8List bytes, String? fileName,
+  required Uint8List bytes,
+  String? fileName,
 }) async {
   if (fileName == null || fileName.isEmpty) {
-    fileName = '${DateTime
-        .now()
-        .millisecondsSinceEpoch}';
+    fileName = '${DateTime.now().millisecondsSinceEpoch}';
   }
   final result = await ImageGallerySaverPlus.saveImage(
     bytes,
@@ -28,13 +27,12 @@ Future<String> saveImageToGallery({
 }
 
 Future<String> saveVideoToGallery({
-  required Uint8List bytes, String? fileName,
+  required Uint8List bytes,
+  String? fileName,
 }) async {
   final appDocDir = await getTemporaryDirectory();
   if (fileName == null || fileName.isEmpty) {
-    fileName = '${DateTime
-        .now()
-        .millisecondsSinceEpoch}';
+    fileName = '${DateTime.now().millisecondsSinceEpoch}';
   }
   final savePath = appDocDir.path + fileName;
   final file = File(savePath);

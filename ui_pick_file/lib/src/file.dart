@@ -5,7 +5,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:ui_pick_file/src/picker.dart';
 import 'package:ui_pick_file/ui_pick_file.dart' show PickerFile;
 
-class PickFile {
+class UiPickFile {
+  UiPickFile._();
+
   //单选任意单文件
   static Future<PickerFile?> single({List<String>? allowedExtensions}) async {
     final result = await FilePicker.platform.pickFiles(
@@ -46,7 +48,8 @@ class PickFile {
 
   //保存任意文件
   static Future<String?> save({
-    required Uint8List bytes, String? dialogTitle,
+    required Uint8List bytes,
+    String? dialogTitle,
     String? fileName,
   }) async {
     final outputFile = await FilePicker.platform.saveFile(

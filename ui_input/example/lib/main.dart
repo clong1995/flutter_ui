@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui_input/ui_input.dart';
+import 'package:ui_simulator/dev_simulator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,8 +30,9 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
+      builder: UiSimulator.ios,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -55,9 +57,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
+
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -74,14 +76,14 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: UiInputNumber<int>(
-        num: 1,
-        width: 150,
-        height: 50,
-        onChanged: (value) {
-          debugPrint('$value');
+      /*body: UiInputMedia(
+        uploadUrl: (List<String> fileName) async {
+          return <NetUrl>[];
         },
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        list: const <String>[],
+      ),*/
+      body: Text("你好 hello"),
     );
+    //
   }
 }

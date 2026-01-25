@@ -8,7 +8,9 @@ import 'package:ui_pick_file/ui_pick_file.dart' show PickerFile;
 
 //Image.file(File(_imageFile!.path))
 
-class PickImage {
+class UiPickImage {
+  UiPickImage._();
+
   //拍照文件
   static Future<PickerFile?> camera({
     double? maxWidth,
@@ -65,7 +67,8 @@ class PickImage {
 
   // 保存图片到相册
   static Future<String> save({
-    required Uint8List bytes, String? fileName,
+    required Uint8List bytes,
+    String? fileName,
   }) async => saveImageToGallery(fileName: fileName, bytes: bytes);
 
   static Future<void> saveUrl({required String url, String? fileName}) async {
