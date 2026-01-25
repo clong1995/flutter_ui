@@ -16,6 +16,7 @@ class UiInputMedia extends StatefulWidget {
     this.imageQuality,
     this.maxHeight,
     this.maxWidth,
+    this.decoration,
 
     //仅仅视频有效
     //xxx
@@ -40,20 +41,31 @@ class UiInputMedia extends StatefulWidget {
   final int limit;
   final List<String>? ext;
   final IconData icon;
+  final Decoration? decoration;
 
   @override
   State<UiInputMedia> createState() => _UiInputMediaState();
 }
 
 class _UiInputMediaState extends State<UiInputMedia> {
+  late Color primaryColor;
+  late BoxDecoration decoration;
+
   @override
   void initState() {
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) =>
-      widget.limit <= 1 ? single() : multiple();
+  Widget build(BuildContext context) {
+    primaryColor = Theme.of(context).primaryColor;
+    decoration = BoxDecoration(
+      border: Border.all(color: primaryColor),
+      borderRadius: BorderRadius.circular(8),
+      color: primaryColor.withAlpha(10),
+    );
+    return widget.limit <= 1 ? single() : multiple();
+  }
 
   Widget multiple() => GridView.builder(
     shrinkWrap: true,
@@ -70,22 +82,21 @@ class _UiInputMediaState extends State<UiInputMedia> {
       return index == widget.list.length
           ? GestureDetector(
               //onTap: onMultiTap,
-              child: Card(
-                clipBehavior: Clip.antiAlias,
-                color: Colors.grey.shade50,
-                margin: EdgeInsets.zero,
+              child: DecoratedBox(
+                decoration: widget.decoration ?? decoration,
                 child: FittedBox(
-                  child: Icon(
-                    widget.icon,
-                    color: Colors.grey,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Icon(
+                      widget.icon,
+                      color: primaryColor,
+                    ),
                   ),
                 ),
               ),
             )
-          : Card(
-              clipBehavior: Clip.antiAlias,
-              color: Colors.grey.shade50,
-              margin: EdgeInsets.zero,
+          : DecoratedBox(
+              decoration: widget.decoration ?? decoration,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
@@ -108,33 +119,27 @@ class _UiInputMediaState extends State<UiInputMedia> {
   Widget single() => AspectRatio(
     aspectRatio: 1,
     child: DecoratedBox(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-      child: Stack(
-        children: [
-          if (widget.list.isNotEmpty)
-            GestureDetector(
-              onTap: () async {
-                //await imageWidget(0);
-              },
-              //child: UiCacheImage(imageList[0], fit: BoxFit.contain),
-            ),
+      decoration: widget.decoration ?? decoration,
+      child: widget.list.isNotEmpty
+          ? Stack(
+              children: [
+                //removeWidget(index),
+                //UiCacheImage(imageList[0], fit: BoxFit.contain)
+                Container(
+                  color: Colors.red,
+                ),
+              ],
+            )
           //if (widget.list.isNotEmpty) removeWidget(0),
-          if (widget.list.isEmpty)
-            Center(
-              child: GestureDetector(
-                //onTap: onSingleTap,
-                child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: Icon(
-                    Icons.add_photo_alternate_outlined,
-                    //size: widget.iconSize,
-                    color: Colors.grey,
-                  ),
+          : FittedBox(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Icon(
+                  widget.icon,
+                  color: primaryColor,
                 ),
               ),
             ),
-        ],
-      ),
     ),
   );
 }

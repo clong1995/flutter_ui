@@ -59,7 +59,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -76,13 +75,20 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      /*body: UiInputMedia(
-        uploadUrl: (List<String> fileName) async {
-          return <NetUrl>[];
-        },
-        list: const <String>[],
-      ),*/
-      body: Text("你好 hello"),
+      body: Column(
+        children: [
+          SizedBox(
+            width: 100,
+            child: UiInputMedia(
+              limit: 1,
+              uploadUrl: (List<String> fileName) async {
+                return <NetUrl>[];
+              },
+              list: const <String>[],
+            ),
+          ),
+        ],
+      ),
     );
     //
   }
