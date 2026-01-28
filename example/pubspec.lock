@@ -115,6 +115,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  rpx:
+    dependency: transitive
+    description:
+      path: rpx
+      ref: HEAD
+      resolved-ref: "38c582b829aadbad1f36b1afe23a49a9b49f9d50"
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
+    version: "0.3.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -201,4 +210,4 @@ packages:
     version: "15.0.2"
 sdks:
   dart: ">=3.10.7 <4.0.0"
-  flutter: ">=3.18.0-18.0.pre.54"
+  flutter: ">=3.38.3"

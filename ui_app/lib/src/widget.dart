@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:ui_app/src/builder.dart';
 
 class UiApp extends StatelessWidget {
-  const UiApp({super.key, this.title, required this.home});
+  const UiApp({required this.home, super.key, this.title});
 
   final String? title;
   final Widget home;

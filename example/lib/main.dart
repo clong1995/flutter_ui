@@ -15,6 +15,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('xxx');
+    return const Text('你好 世界！');
   }
 }
