@@ -36,8 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   ui_input:
     path: ../../ui_input
-  ui_simulator:
-    path: ../../ui_simulator
+  #ui_simulator:
+  #  path: ../../ui_simulator
 
 dev_dependencies:
   flutter_test:

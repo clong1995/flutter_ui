@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui_input/ui_input.dart';
-import 'package:ui_simulator/dev_simulator.dart';
+//import 'package:ui_simulator/dev_simulator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
-      builder: UiSimulator.ios,
+      //builder: UiSimulator.ios,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }

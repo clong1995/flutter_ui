@@ -199,13 +199,6 @@ packages:
       relative: true
     source: path
     version: "0.1.2"
-  ui_simulator:
-    dependency: "direct main"
-    description:
-      path: "../../ui_simulator"
-      relative: true
-    source: path
-    version: "0.1.1"
   vector_math:
     dependency: transitive
     description:
