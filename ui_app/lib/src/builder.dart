@@ -1,34 +1,24 @@
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rpx/ext.dart';
 
 Widget builder(BuildContext context, Widget? child) {
+  final keyboard = GestureDetector(
+    behavior: HitTestBehavior.translucent,
 
-  final keyboard = Listener(
-    onPointerUp: (event) {
-      if (MediaQuery.of(context).viewInsets.bottom <= 0) {
-        return;
+    onTap: () {
+      final currentFocus = FocusScope.of(context);
+      if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+        FocusManager.instance.primaryFocus?.unfocus();
       }
-      final box = context.findRenderObject() as RenderBox?;
-      if (box != null) {
-        final localPosition = box.globalToLocal(event.position);
-        final result = BoxHitTestResult();
-        box.hitTest(result, position: localPosition);
-        for (final hit in result.path) {
-          if (hit.target is RenderEditable) {
-            return;
-          }
-        }
-      }
-      FocusManager.instance.primaryFocus?.unfocus();
     },
-    child: child ?? const Placeholder(),
+
+    child: child,
   );
 
   //文字
   final defaultTextStyle = DefaultTextStyle(
     style: TextStyle(
-      // color: Color(0xFF333333), // 默认文字颜色
+      color: const Color(0xFF333333), // 默认文字颜色
       fontSize: 14.r, // 默认字体大小
     ),
     child: keyboard,

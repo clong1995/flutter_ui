@@ -21,7 +21,7 @@ class UiApp extends StatelessWidget {
             reverseTransitionDuration: Duration.zero,
           ),
       debugShowCheckedModeBanner: false,
-      color: const Color(0xFF2196F3),
+      color: const Color(0xFF5681F6),
       //textStyle: const TextStyle(color: Color(0xFF333333), fontSize: 16),
       /*builder: (BuildContext context, Widget? child) {
         return ColoredBox(
