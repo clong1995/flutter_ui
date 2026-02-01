@@ -66,6 +66,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: transitive
+    description:
+      name: font_awesome_flutter
+      sha256: b9011df3a1fa02993630b8fb83526368cf2206a711259830325bab2f1d2a4eb0
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.12.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -134,7 +142,7 @@ packages:
     description:
       path: rpx
       ref: HEAD
-      resolved-ref: bec9048d556b30d09df9d6833824ef28291d5af4
+      resolved-ref: "03ace1a9d4378e440063a77c713b3ff7b0258d16"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.3.0"
@@ -210,7 +218,7 @@ packages:
     description:
       path: ui_theme
       ref: HEAD
-      resolved-ref: bec9048d556b30d09df9d6833824ef28291d5af4
+      resolved-ref: "03ace1a9d4378e440063a77c713b3ff7b0258d16"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"

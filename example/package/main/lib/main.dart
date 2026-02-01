@@ -1,5 +1,5 @@
 import 'package:dependency/dependency.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 Future<void> mainApp() async {
   await runUiApp(
@@ -14,7 +14,11 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UiPage(
-      body: Text('body'),
+      title: Text('title 标题'),
+      body: ColoredBox(
+        color: Color(0xFFF44336),
+        child: Text('body 内容'),
+      ),
     );
   }
 }

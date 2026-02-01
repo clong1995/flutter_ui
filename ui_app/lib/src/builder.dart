@@ -23,10 +23,19 @@ Widget builder(BuildContext context, Widget? child) {
     child: keyboard,
   );
 
+  //图标
+  final iconTheme = IconTheme(
+    data: IconThemeData(
+      color: const Color(0xFF333333),
+      size: 22.r,
+    ),
+    child: defaultTextStyle,
+  );
+
   //滚动条
   final scrollConfiguration = ScrollConfiguration(
     behavior: const ScrollBehavior().copyWith(scrollbars: false),
-    child: defaultTextStyle,
+    child: iconTheme,
   );
 
   //媒体查询
@@ -37,7 +46,7 @@ Widget builder(BuildContext context, Widget? child) {
     right: 0,
     bottom: mediaQueryData.viewPadding.bottom * .3,
   );
-  final mediaQuery= MediaQuery(
+  final mediaQuery = MediaQuery(
     data: mediaQueryData.copyWith(
       //去掉字体缩放
       textScaler: TextScaler.noScaling,
@@ -47,7 +56,6 @@ Widget builder(BuildContext context, Widget? child) {
     ),
     child: scrollConfiguration,
   );
-
 
   return mediaQuery;
 }
