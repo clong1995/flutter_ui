@@ -15,8 +15,12 @@ Future<void> runUiApp({
       statusBarBrightness: Brightness.light,
       statusBarIconBrightness: Brightness.light,
       statusBarColor: Color(0x00000000),
+      systemNavigationBarColor: Color(0x00000000),
     ),
   );
+
+  // 强制应用占满全屏（包括状态栏和导航栏区域）
+  //await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
   //关闭键盘
   await SystemChannels.textInput.invokeMethod('TextInput.hide');
