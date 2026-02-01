@@ -2,16 +2,15 @@ import 'package:flutter/widgets.dart';
 import 'package:rpx/ext.dart';
 
 Widget builder(BuildContext context, Widget? child) {
+  //空白收起键盘
   final keyboard = GestureDetector(
     behavior: HitTestBehavior.translucent,
-
     onTap: () {
       final currentFocus = FocusScope.of(context);
       if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
         FocusManager.instance.primaryFocus?.unfocus();
       }
     },
-
     child: child,
   );
 

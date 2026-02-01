@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:ui_app/src/builder.dart';
+import 'package:ui_theme/ui_theme.dart';
 
 class UiApp extends StatelessWidget {
   const UiApp({required this.home, super.key, this.title});
@@ -21,14 +22,7 @@ class UiApp extends StatelessWidget {
             reverseTransitionDuration: Duration.zero,
           ),
       debugShowCheckedModeBanner: false,
-      color: const Color(0xFF5681F6),
-      //textStyle: const TextStyle(color: Color(0xFF333333), fontSize: 16),
-      /*builder: (BuildContext context, Widget? child) {
-        return ColoredBox(
-          color: const Color(0xFFFFFFFF),
-          child: child,
-        );
-      },*/
+      color: UiTheme.primaryColor,
       builder: builder,
     );
   }
