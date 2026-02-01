@@ -31,8 +31,10 @@ Widget builder(BuildContext context, Widget? child) {
 
   //媒体查询
   final mediaQueryData = MediaQuery.of(context);
-  final safePadding = EdgeInsets.zero.copyWith(
-    top: mediaQueryData.padding.top * .75,
+  final safePadding = mediaQueryData.padding.copyWith(
+    //top: mediaQueryData.padding.top * .75,
+    left: 0,
+    right: 0,
     bottom: mediaQueryData.viewPadding.bottom * .3,
   );
   final mediaQuery= MediaQuery(

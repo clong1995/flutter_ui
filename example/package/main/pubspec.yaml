@@ -1,8 +1,7 @@
-name: dependency
+name: main
 description: "A new Flutter project."
 version: 0.0.1
-homepage: flutter_ui
-publish_to: none
+homepage:
 
 environment:
   sdk: ^3.10.7
@@ -11,16 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  ui_app:
-    # git:
-    #   url: https://github.com/clong1995/flutter_ui.git
-    #   path: ui_app
-    path: /Users/markeckles/Desktop/flutter_ui/ui_app
-  ui_page:
-    #git:
-    #  url: https://github.com/clong1995/flutter_ui.git
-    #  path: ui_page
-    path: /Users/markeckles/Desktop/flutter_ui/ui_page
+  dependency:
+    path: ../../dependency
 
 dev_dependencies:
   flutter_test:
