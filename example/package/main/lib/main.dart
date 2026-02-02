@@ -15,6 +15,7 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return UiPage(
       title: Text('title 标题'),
+      color: Color(0xFF4CAF50),
       body: Center(
         child: GestureDetector(
           onTap: () async {
@@ -34,6 +35,8 @@ class SecondPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const UiPage(
       title: Text('Second'),
+
+      color: Color(0xFFAF4C4C),
       body: Text('data'),
     );
   }

@@ -21,6 +21,10 @@ class App extends StatelessWidget {
             builder(context),
         //transitionDuration: Duration.zero,
         //reverseTransitionDuration: Duration.zero,
+
+        transitionDuration: const Duration(milliseconds: 1300),
+        reverseTransitionDuration: const Duration(milliseconds: 1300),
+
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             FadeTransition(
               opacity: animation,
