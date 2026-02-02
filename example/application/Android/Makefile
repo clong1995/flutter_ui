@@ -13,7 +13,7 @@ adb_tcpip: # 华为手机必须选择“仅充电模式下允许ADB调试”
 	~/Library/Android/sdk/platform-tools/adb tcpip 5555
 
 adb_connect:
-	~/Library/Android/sdk/platform-tools/adb connect 192.168.10.106:5555
+	~/Library/Android/sdk/platform-tools/adb connect 192.168.10.101:5555
 
 adb_disconnect:
 	~/Library/Android/sdk/platform-tools/adb disconnect
@@ -34,3 +34,17 @@ build_apk_arm64:
 #检查签名
 check_sign:
 	/Applications/Android\ Studio.app/Contents/jbr/Contents/Home/bin/jarsigner -verify -verbose -certs build/app/outputs/flutter-apk/app-release.apk
+
+
+#icon
+
+icons_generate:
+	dart run flutter_launcher_icons:generate --override
+
+icons_run:
+	dart run flutter_launcher_icons
+
+#splash
+
+splash_run:
+	dart run flutter_native_splash:create

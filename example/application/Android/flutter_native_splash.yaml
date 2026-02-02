@@ -1,0 +1,5 @@
+flutter_native_splash:
+  image: icon/splash.png
+  color: "#F7F8FA"
+  android: true
+  android_gravity: center

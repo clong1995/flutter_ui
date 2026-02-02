@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpx/ext.dart';
+import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiPage extends StatelessWidget {
@@ -9,6 +10,7 @@ class UiPage extends StatelessWidget {
     this.appbarBetweenSpace,
     this.title,
     this.bodyPadding,
+    this.color = const Color(0xFFF7F8FA),
     super.key,
   });
 
@@ -16,12 +18,13 @@ class UiPage extends StatelessWidget {
   final double? bodyPadding;
   final Widget? title;
   final Widget body;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     final padding = MediaQuery.of(context).padding;
     return ColoredBox(
-      color: UiTheme.scaffoldBackgroundColor,
+      color: color,
       child: title == null
           ? SizedBox(
               width: double.infinity,
@@ -46,7 +49,8 @@ class UiPage extends StatelessWidget {
                             Container(
                               width: appbarBetweenSpace ?? 40.r,
                               height: 40.r,
-                              child: const FaIcon(FontAwesomeIcons.angleLeft),
+                              //child: const FaIcon(FontAwesomeIcons.angleLeft),
+                              child: UiIconButton(),
                             ),
                             Expanded(child: title!),
                             Container(

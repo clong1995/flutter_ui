@@ -1,11 +1,12 @@
 name: ui_theme
 description: "A new Flutter project."
 version: 0.0.1
-homepage:
+homepage: flutter_ui
+publish_to: none
 
 environment:
   sdk: ^3.10.7
-  flutter: ">=1.17.0"
+  flutter: ">=3.38.7"
 
 dependencies:
   flutter:
