@@ -19,17 +19,21 @@ class App extends StatelessWidget {
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) =>
             builder(context),
+
         //transitionDuration: Duration.zero,
         //reverseTransitionDuration: Duration.zero,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1, 0); // 从右边进入
+          const end = Offset.zero;
+          const curve = Curves.easeOut; // 减速曲线，感觉更顺滑
 
-        transitionDuration: const Duration(milliseconds: 1300),
-        reverseTransitionDuration: const Duration(milliseconds: 1300),
+          final tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
-        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-            FadeTransition(
-              opacity: animation,
-              child: child,
-            ),
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
       ),
       debugShowCheckedModeBanner: false,
       color: UiTheme.primaryColor,
