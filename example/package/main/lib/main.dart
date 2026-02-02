@@ -2,7 +2,7 @@ import 'package:dependency/dependency.dart';
 import 'package:flutter/widgets.dart';
 
 Future<void> mainApp() async {
-  await runUiApp(
+  await uiApp(
     title: 'Flutter UI',
     home: MyHomePage(),
   );

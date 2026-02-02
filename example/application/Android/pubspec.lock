@@ -154,9 +154,11 @@ packages:
   fn_nav:
     dependency: transitive
     description:
-      path: "/Users/markeckles/Desktop/flutter_ui/fn_nav"
-      relative: false
-    source: path
+      path: fn_nav
+      ref: HEAD
+      resolved-ref: "816092ca8c103a68020a307e39bc5dfcbdd79d1f"
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
     version: "0.1.0"
   font_awesome_flutter:
     dependency: transitive
@@ -274,7 +276,7 @@ packages:
     description:
       path: rpx
       ref: HEAD
-      resolved-ref: b214a585828833e1be9bd33b846e9875e12ec9b1
+      resolved-ref: "816092ca8c103a68020a307e39bc5dfcbdd79d1f"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.3.0"
@@ -358,7 +360,7 @@ packages:
     description:
       path: ui_disable
       ref: HEAD
-      resolved-ref: b214a585828833e1be9bd33b846e9875e12ec9b1
+      resolved-ref: "816092ca8c103a68020a307e39bc5dfcbdd79d1f"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
@@ -374,7 +376,7 @@ packages:
     description:
       path: ui_theme
       ref: HEAD
-      resolved-ref: b214a585828833e1be9bd33b846e9875e12ec9b1
+      resolved-ref: "816092ca8c103a68020a307e39bc5dfcbdd79d1f"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
@@ -398,10 +400,10 @@ packages:
     dependency: "direct dev"
     description:
       name: very_good_analysis
-      sha256: "96245839dbcc45dfab1af5fa551603b5c7a282028a64746c19c547d21a7f1e3a"
+      sha256: "27927d1140ce1b140f998b6340f730a626faa5b95110b3e34a238ff254d731d0"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0"
+    version: "10.1.0"
   vm_service:
     dependency: transitive
     description:
