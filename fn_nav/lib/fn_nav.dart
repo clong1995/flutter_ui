@@ -1,14 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class FnNav {
   FnNav._();
 
   static GlobalKey<NavigatorState>? _navigatorKey;
 
-  static void init({
-    required GlobalKey<NavigatorState> navigatorKey,
-  }) {
-    _navigatorKey = navigatorKey;
+  static set navigatorKey(GlobalKey<NavigatorState> value) {
+    _navigatorKey = value;
   }
 
   static Future<T?> push<T extends Object?>(
@@ -21,8 +19,13 @@ class FnNav {
       return null;
     }
     return Navigator.of(context, rootNavigator: root).push<T>(
-      MaterialPageRoute<T>(
-        builder: (BuildContext context) => page(),
+      PageRouteBuilder<T>(
+        pageBuilder:
+            (
+              BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+            ) => page(),
         settings: RouteSettings(arguments: args),
       ),
     );
@@ -39,8 +42,13 @@ class FnNav {
     }
 
     return Navigator.of(context, rootNavigator: root).pushAndRemoveUntil<T>(
-      MaterialPageRoute<T>(
-        builder: (BuildContext context) => page(),
+      PageRouteBuilder<T>(
+        pageBuilder:
+            (
+              BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+            ) => page(),
         settings: RouteSettings(arguments: args),
       ),
       (Route<dynamic> route) => false,
@@ -58,8 +66,13 @@ class FnNav {
     }
     return Navigator.pushReplacement<T, TO>(
       context,
-      MaterialPageRoute<T>(
-        builder: (BuildContext context) => page(),
+      PageRouteBuilder<T>(
+        pageBuilder:
+            (
+              BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+            ) => page(),
         settings: RouteSettings(arguments: args),
       ),
     );

@@ -21,6 +21,11 @@ dependencies:
     #  url: https://github.com/clong1995/flutter_ui.git
     #  path: ui_page
     path: /Users/markeckles/Desktop/flutter_ui/ui_page
+  fn_nav:
+    #git:
+    #  url: https://github.com/clong1995/flutter_ui.git
+    #  path: ui_page
+    path: /Users/markeckles/Desktop/flutter_ui/fn_nav
 
 dev_dependencies:
   flutter_test:
