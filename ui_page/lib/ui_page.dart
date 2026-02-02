@@ -46,11 +46,14 @@ class UiPage extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            Container(
+                            SizedBox(
                               width: appbarBetweenSpace ?? 40.r,
                               height: 40.r,
-                              //child: const FaIcon(FontAwesomeIcons.angleLeft),
-                              child: UiIconButton(),
+                              child: Center(
+                                child: UiIconButton(
+                                  icon: FontAwesomeIcons.angleLeft,
+                                ),
+                              ),
                             ),
                             Expanded(child: title!),
                             Container(

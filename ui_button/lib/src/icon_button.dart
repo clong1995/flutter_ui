@@ -1,25 +1,55 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rpx/ext.dart';
 
 class UiIconButton extends StatelessWidget {
-  const UiIconButton({this.size, super.key, this.width, this.icon});
+  const UiIconButton({
+    required this.icon,
+    this.size,
+    super.key,
+    this.width,
+    this.decoration,
+    this.height,
+    this.color,
+    this.onTap,
+  });
 
   final double? size;
   final double? width;
-  final IconData? icon;
+  final double? height;
+  final IconData icon;
+  final BoxDecoration? decoration;
+  final Color? color;
+  final GestureTapCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: SizedBox(
-        width: width,
-        height: width,
+    /*var decoration = this.decoration;
+    if(onTap == null && decoration != null){
+      decoration = decoration.copyWith(
+        color:
+      );
+    }*/
+    final child = Container(
+      //decoration: onTap == null ? null : decoration,
+      decoration: decoration,
+      width: width ?? 30.r,
+      height: height ?? 30.r,
+      child: Center(
         child: FaIcon(
           icon,
           size: size,
+          //color: onTap == null ? const Color(0xFF9E9E9E) : color,
+          color: color,
         ),
       ),
     );
+    return onTap == null
+        ? child
+        : GestureDetector(
+            onTap: onTap,
+            behavior: HitTestBehavior.opaque,
+            child: child,
+          );
   }
 }

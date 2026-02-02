@@ -267,7 +267,7 @@ packages:
     description:
       path: rpx
       ref: HEAD
-      resolved-ref: "6978bb4621aa2956f6f9984bea7d87db7ad8da03"
+      resolved-ref: "3e9e9a6bdd70181f8760608bba75783f22eca42a"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.3.0"
@@ -339,6 +339,13 @@ packages:
       relative: false
     source: path
     version: "0.0.1"
+  ui_button:
+    dependency: transitive
+    description:
+      path: "../../../ui_button"
+      relative: true
+    source: path
+    version: "0.0.2"
   ui_page:
     dependency: transitive
     description:
@@ -351,7 +358,7 @@ packages:
     description:
       path: ui_theme
       ref: HEAD
-      resolved-ref: "6978bb4621aa2956f6f9984bea7d87db7ad8da03"
+      resolved-ref: "3e9e9a6bdd70181f8760608bba75783f22eca42a"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
@@ -405,4 +412,4 @@ packages:
     version: "3.1.3"
 sdks:
   dart: ">=3.10.7 <4.0.0"
-  flutter: ">=3.38.3"
+  flutter: ">=3.38.7"
