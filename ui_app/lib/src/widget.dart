@@ -15,14 +15,18 @@ class App extends StatelessWidget {
       title: title,
       home: home,
       navigatorKey: navigatorKey,
-      pageRouteBuilder: <T>(settings, builder) =>
-          PageRouteBuilder<T>(
-            settings: settings,
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                builder(context),
-            transitionDuration: Duration.zero,
-            reverseTransitionDuration: Duration.zero,
-          ),
+      pageRouteBuilder: <T>(settings, builder) => PageRouteBuilder<T>(
+        settings: settings,
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            builder(context),
+        //transitionDuration: Duration.zero,
+        //reverseTransitionDuration: Duration.zero,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+            FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+      ),
       debugShowCheckedModeBanner: false,
       color: UiTheme.primaryColor,
       builder: builder,
