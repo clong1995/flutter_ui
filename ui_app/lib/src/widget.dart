@@ -2,18 +2,20 @@ import 'package:flutter/widgets.dart';
 import 'package:ui_app/src/builder.dart';
 import 'package:ui_theme/ui_theme.dart';
 
-class UiApp extends StatelessWidget {
-  const UiApp({required this.home, super.key, this.title});
+class App extends StatelessWidget {
+  const App({required this.home, this.navigatorKey, super.key, this.title});
 
   final String? title;
   final Widget home;
+  final GlobalKey<NavigatorState>? navigatorKey;
 
   @override
   Widget build(BuildContext context) {
     return WidgetsApp(
       title: title,
       home: home,
-      pageRouteBuilder: <T>(RouteSettings settings, WidgetBuilder builder) =>
+      navigatorKey: navigatorKey,
+      pageRouteBuilder: <T>(settings, builder) =>
           PageRouteBuilder<T>(
             settings: settings,
             pageBuilder: (context, animation, secondaryAnimation) =>

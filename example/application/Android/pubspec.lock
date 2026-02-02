@@ -151,6 +151,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  fn_nav:
+    dependency: transitive
+    description:
+      path: "/Users/markeckles/Desktop/flutter_ui/fn_nav"
+      relative: false
+    source: path
+    version: "0.1.0"
   font_awesome_flutter:
     dependency: transitive
     description:
@@ -267,7 +274,7 @@ packages:
     description:
       path: rpx
       ref: HEAD
-      resolved-ref: "4f6a935659cc69cdc40e5432f98764bfd999640d"
+      resolved-ref: b214a585828833e1be9bd33b846e9875e12ec9b1
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.3.0"
@@ -351,7 +358,7 @@ packages:
     description:
       path: ui_disable
       ref: HEAD
-      resolved-ref: "4f6a935659cc69cdc40e5432f98764bfd999640d"
+      resolved-ref: b214a585828833e1be9bd33b846e9875e12ec9b1
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
@@ -367,7 +374,7 @@ packages:
     description:
       path: ui_theme
       ref: HEAD
-      resolved-ref: "4f6a935659cc69cdc40e5432f98764bfd999640d"
+      resolved-ref: b214a585828833e1be9bd33b846e9875e12ec9b1
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"

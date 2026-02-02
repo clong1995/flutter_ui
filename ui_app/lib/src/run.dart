@@ -1,8 +1,9 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_app/src/widget.dart';
 
-Future<void> runUiApp({
+Future<void> uiApp({
   required Widget home,
   String? title,
 }) async {
@@ -30,8 +31,14 @@ Future<void> runUiApp({
     DeviceOrientation.portraitUp,
   ]);
 
+  final navigatorKey = GlobalKey<NavigatorState>();
+
+  //导航
+  FnNav.navigatorKey = navigatorKey;
+
   runApp(
-    UiApp(
+    App(
+      navigatorKey: navigatorKey,
       title: title,
       home: home,
     ),
