@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpx/ext.dart';
+import 'package:ui_disable/ui_disable.dart';
 
 class UiIconButton extends StatelessWidget {
   const UiIconButton({
@@ -24,14 +25,7 @@ class UiIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /*var decoration = this.decoration;
-    if(onTap == null && decoration != null){
-      decoration = decoration.copyWith(
-        color:
-      );
-    }*/
     final child = Container(
-      //decoration: onTap == null ? null : decoration,
       decoration: decoration,
       width: width ?? 30.r,
       height: height ?? 30.r,
@@ -39,13 +33,12 @@ class UiIconButton extends StatelessWidget {
         child: FaIcon(
           icon,
           size: size,
-          //color: onTap == null ? const Color(0xFF9E9E9E) : color,
           color: color,
         ),
       ),
     );
     return onTap == null
-        ? child
+        ? UiDisable(child: child)
         : GestureDetector(
             onTap: onTap,
             behavior: HitTestBehavior.opaque,

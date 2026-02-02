@@ -16,6 +16,10 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: rpx
+  ui_disable:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_disable
 
 dev_dependencies:
   flutter_test:

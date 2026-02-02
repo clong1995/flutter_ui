@@ -267,7 +267,7 @@ packages:
     description:
       path: rpx
       ref: HEAD
-      resolved-ref: "3e9e9a6bdd70181f8760608bba75783f22eca42a"
+      resolved-ref: "4f6a935659cc69cdc40e5432f98764bfd999640d"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.3.0"
@@ -346,6 +346,15 @@ packages:
       relative: true
     source: path
     version: "0.0.2"
+  ui_disable:
+    dependency: transitive
+    description:
+      path: ui_disable
+      ref: HEAD
+      resolved-ref: "4f6a935659cc69cdc40e5432f98764bfd999640d"
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
+    version: "0.0.1"
   ui_page:
     dependency: transitive
     description:
@@ -358,7 +367,7 @@ packages:
     description:
       path: ui_theme
       ref: HEAD
-      resolved-ref: "3e9e9a6bdd70181f8760608bba75783f22eca42a"
+      resolved-ref: "4f6a935659cc69cdc40e5432f98764bfd999640d"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"

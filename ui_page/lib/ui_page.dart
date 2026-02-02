@@ -10,6 +10,8 @@ class UiPage extends StatelessWidget {
     this.appbarBetweenSpace,
     this.title,
     this.bodyPadding,
+    this.leading,
+    this.action,
     this.color = const Color(0xFFF7F8FA),
     super.key,
   });
@@ -19,6 +21,8 @@ class UiPage extends StatelessWidget {
   final Widget? title;
   final Widget body;
   final Color color;
+  final Widget? leading;
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
@@ -49,15 +53,19 @@ class UiPage extends StatelessWidget {
                             SizedBox(
                               width: appbarBetweenSpace ?? 40.r,
                               height: 40.r,
-                              child: Center(
-                                child: UiIconButton(
-                                  icon: FontAwesomeIcons.angleLeft,
-                                ),
-                              ),
+                              child:
+                                  leading ??
+                                  (Navigator.canPop(context)
+                                      ? UiIconButton(
+                                          icon: FontAwesomeIcons.angleLeft,
+                                          onTap: () => Navigator.pop(context),
+                                        )
+                                      : const SizedBox.shrink()),
                             ),
                             Expanded(child: title!),
-                            Container(
+                            SizedBox(
                               width: appbarBetweenSpace ?? 40.r,
+                              child: action ?? const SizedBox.shrink(),
                             ),
                           ],
                         ),
