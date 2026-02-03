@@ -19,8 +19,8 @@ class FnNav {
       return null;
     }
     return Navigator.of(context, rootNavigator: root).push<T>(
-      AppRoute(
-        page: page(),
+      AppRoute<T>(
+          builder: (context) => page(),
         settings: RouteSettings(arguments: args),
       ),
       /*PageRouteBuilder<T>(
@@ -107,13 +107,14 @@ class FnNav {
 }
 
 class AppRoute<T> extends PageRouteBuilder<T> {
-  AppRoute({required this.page, super.settings})
+  AppRoute({required this.builder, super.settings})
     : super(
-        pageBuilder: (context, animation, secondaryAnimation) => page,
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            builder(context),
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             child,
       );
-  final Widget page;
+  final WidgetBuilder builder;
 }

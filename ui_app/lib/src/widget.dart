@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_app/src/builder.dart';
 import 'package:ui_theme/ui_theme.dart';
 
@@ -15,15 +16,9 @@ class App extends StatelessWidget {
       title: title,
       home: home,
       navigatorKey: navigatorKey,
-      pageRouteBuilder: <T>(settings, builder) => PageRouteBuilder<T>(
+      pageRouteBuilder: <T>(settings, builder) => AppRoute<T>(
         settings: settings,
-
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            builder(context),
-        transitionDuration: Duration.zero,
-        reverseTransitionDuration: Duration.zero,
-        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-            child,
+        page: builder(context),
       ),
       debugShowCheckedModeBanner: false,
       color: UiTheme.primaryColor,
