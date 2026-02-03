@@ -19,19 +19,10 @@ class FnNav {
       return null;
     }
     return Navigator.of(context, rootNavigator: root).push<T>(
-      AppRoute<T>(
-          builder: (context) => page(),
-        settings: RouteSettings(arguments: args),
+      FnNavRouteBuilder<T>(
+        RouteSettings(arguments: args),
+        (context) => page(),
       ),
-      /*PageRouteBuilder<T>(
-        pageBuilder:
-            (
-              context,
-              animation,
-              secondaryAnimation,
-            ) => page(),
-        settings: RouteSettings(arguments: args),
-      ),*/
     );
   }
 
@@ -46,14 +37,9 @@ class FnNav {
     }
 
     return Navigator.of(context, rootNavigator: root).pushAndRemoveUntil<T>(
-      PageRouteBuilder<T>(
-        pageBuilder:
-            (
-              BuildContext context,
-              Animation<double> animation,
-              Animation<double> secondaryAnimation,
-            ) => page(),
-        settings: RouteSettings(arguments: args),
+      FnNavRouteBuilder<T>(
+        RouteSettings(arguments: args),
+        (context) => page(),
       ),
       (Route<dynamic> route) => false,
     );
@@ -70,14 +56,9 @@ class FnNav {
     }
     return Navigator.pushReplacement<T, TO>(
       context,
-      PageRouteBuilder<T>(
-        pageBuilder:
-            (
-              BuildContext context,
-              Animation<double> animation,
-              Animation<double> secondaryAnimation,
-            ) => page(),
-        settings: RouteSettings(arguments: args),
+      FnNavRouteBuilder<T>(
+        RouteSettings(arguments: args),
+            (context) => page(),
       ),
     );
   }
@@ -106,9 +87,10 @@ class FnNav {
   }
 }
 
-class AppRoute<T> extends PageRouteBuilder<T> {
-  AppRoute({required this.builder, super.settings})
+class FnNavRouteBuilder<T> extends PageRouteBuilder<T> {
+  FnNavRouteBuilder(RouteSettings settings, this.builder)
     : super(
+        settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) =>
             builder(context),
         transitionDuration: Duration.zero,
