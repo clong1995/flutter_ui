@@ -16,10 +16,7 @@ class App extends StatelessWidget {
       title: title,
       home: home,
       navigatorKey: navigatorKey,
-      pageRouteBuilder: <T>(settings, builder) => AppRoute<T>(
-        settings: settings,
-        builder: builder,
-      ),
+      pageRouteBuilder: FnNavRouteBuilder.new,
       debugShowCheckedModeBanner: false,
       color: UiTheme.primaryColor,
       builder: builder,
