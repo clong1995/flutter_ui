@@ -19,15 +19,19 @@ class FnNav {
       return null;
     }
     return Navigator.of(context, rootNavigator: root).push<T>(
-      PageRouteBuilder<T>(
-        pageBuilder:
-            (
-              BuildContext context,
-              Animation<double> animation,
-              Animation<double> secondaryAnimation,
-            ) => page(),
+      _AppRoute(
+        page: page(),
         settings: RouteSettings(arguments: args),
       ),
+      /*PageRouteBuilder<T>(
+        pageBuilder:
+            (
+              context,
+              animation,
+              secondaryAnimation,
+            ) => page(),
+        settings: RouteSettings(arguments: args),
+      ),*/
     );
   }
 
@@ -100,4 +104,16 @@ class FnNav {
     }
     return null;
   }
+}
+
+class _AppRoute<T> extends PageRouteBuilder<T> {
+  _AppRoute({required this.page, super.settings})
+    : super(
+        pageBuilder: (context, animation, secondaryAnimation) => page,
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+            child,
+      );
+  final Widget page;
 }

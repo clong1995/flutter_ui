@@ -15,7 +15,7 @@ class App extends StatelessWidget {
       title: title,
       home: home,
       navigatorKey: navigatorKey,
-      pageRouteBuilder: <T>(settings, builder) => PageRouteBuilder<T>(
+      /*pageRouteBuilder: <T>(settings, builder) => PageRouteBuilder<T>(
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) =>
             builder(context),
@@ -34,7 +34,7 @@ class App extends StatelessWidget {
             child: child,
           );
         },
-      ),
+      ),*/
       debugShowCheckedModeBanner: false,
       color: UiTheme.primaryColor,
       builder: builder,
