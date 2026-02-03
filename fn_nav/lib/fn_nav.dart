@@ -19,7 +19,7 @@ class FnNav {
       return null;
     }
     return Navigator.of(context, rootNavigator: root).push<T>(
-      _AppRoute(
+      AppRoute(
         page: page(),
         settings: RouteSettings(arguments: args),
       ),
@@ -106,8 +106,8 @@ class FnNav {
   }
 }
 
-class _AppRoute<T> extends PageRouteBuilder<T> {
-  _AppRoute({required this.page, super.settings})
+class AppRoute<T> extends PageRouteBuilder<T> {
+  AppRoute({required this.page, super.settings})
     : super(
         pageBuilder: (context, animation, secondaryAnimation) => page,
         transitionDuration: Duration.zero,
