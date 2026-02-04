@@ -1,7 +1,6 @@
 import 'package:dependency/dependency.dart';
 
 class _State {
-  int seconds = 1;
 }
 
 class HomeLogic extends Logic<_State> {

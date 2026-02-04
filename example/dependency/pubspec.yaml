@@ -11,6 +11,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  state:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: state
+    # path: /Users/markeckles/Desktop/flutter_ui/fn_nav
+  package:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: package
+  rpx:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: rpx
   ui_app:
     git:
       url: https://github.com/clong1995/flutter_ui.git
@@ -26,10 +39,6 @@ dependencies:
       url: https://github.com/clong1995/flutter_ui.git
       path: fn_nav
     # path: /Users/markeckles/Desktop/flutter_ui/fn_nav
-  package:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: package
 
 dev_dependencies:
   flutter_test:
