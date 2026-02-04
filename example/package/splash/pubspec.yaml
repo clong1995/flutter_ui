@@ -1,8 +1,8 @@
-name: fn_security
+name: splash
 description: "A new Flutter project."
-version: 0.1.0
-homepage: flutter_ui
+version: 0.0.1
 publish_to: none
+homepage: flutter_ui
 
 environment:
   sdk: ^3.10.7
@@ -11,17 +11,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  crypto: ^3.0.7
-  encrypt: ^5.0.3
-  fn_device:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: fn_device
+  dependency:
+    path: ../../dependency
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  #flutter_lints: ^5.0.0
+  #flutter_lints: ^6.0.0
   very_good_analysis: ^10.1.0
 
 # For information on the generic Dart part of this file, see the

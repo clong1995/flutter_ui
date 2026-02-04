@@ -5,6 +5,8 @@ class FnNav {
 
   static GlobalKey<NavigatorState>? _navigatorKey;
 
+  //
+  // ignore:avoid_setters_without_getters
   static set navigatorKey(GlobalKey<NavigatorState> value) {
     _navigatorKey = value;
   }

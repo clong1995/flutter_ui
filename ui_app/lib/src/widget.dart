@@ -20,6 +20,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       color: UiTheme.primaryColor,
       builder: builder,
+      locale: const Locale('zh', 'CN'),
     );
   }
 }
