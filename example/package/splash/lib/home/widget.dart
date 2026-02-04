@@ -17,7 +17,7 @@ class _Build extends Build<HomeLogic> {
   Widget ad() => Column(
     children: [
       const Spacer(),
-      Image.asset(width: 300.r, 'images/ad.png', package: 'splash'),
+      Image.asset(width: 300.r, 'images/splash.png', package: 'splash'),
       const Spacer(),
       Text(
         '© 2005-2025 flutter.ui \nall rights reserved flutter ui',

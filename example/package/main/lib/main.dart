@@ -1,11 +1,14 @@
+import 'package:main/register.dart';
 import 'package:package/package.dart';
-import 'package:splash/home/widget.dart';
 import 'package:ui_app/ui_app.dart';
 
 Future<void> mainApp() async {
-  Package.register();
+  //
+  Register.pkgReg = registers;
+
+  //
   await uiApp(
     title: 'Flutter UI',
-    home: homeWidget(),
+    home: Register.get('splash')(),
   );
 }

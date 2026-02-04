@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:fn_nav/fn_nav.dart';
 
 typedef PkgReg = Map<String, Widget Function()>;
 
