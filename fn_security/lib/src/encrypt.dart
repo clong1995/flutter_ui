@@ -1,6 +1,7 @@
 import 'package:encrypt/encrypt.dart' as encrypt;
-import 'package:flutter/foundation.dart';
+//import 'package:flutter/foundation.dart';
 import 'package:fn_device/fn_device.dart';
+import 'package:logger/logger.dart';
 
 Future<String> encrypter(String plainText) async {
   final iv = encrypt.IV.fromLength(16);
@@ -22,9 +23,7 @@ Future<String> decrypter(String encryptedText) async {
   try{
     decrypted = encrypter.decrypt64(eText, iv: iv);
   }on Exception catch(e){
-    if (kDebugMode) {
-      print(e);
-    }
+    logger(e.toString());
     return '';
   }
   return decrypted;

@@ -1,3 +1,6 @@
+flutter_run:
+	flutter run
+
 flutter_run_release:
 	flutter run --release
 

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:jiffy/jiffy.dart';
 
 class FnDatetime {
@@ -11,19 +10,14 @@ class FnDatetime {
         p = 'yyyy-MM-dd';
       case 'time':
         p = 'HH:mm:ss';
-      case 'date time':
+      case 'timeOnly':
+        p = 'HH:mm';
+      case 'datetime':
+      case '':
         p = 'yyyy-MM-dd HH:mm:ss';
-    }
-    if (p == '') {
-      p = 'yyyy-MM-dd HH:mm:ss';
     }
     return Jiffy.parseFromDateTime(dateTime).format(pattern: p);
   }
-
-  static String toTimeStr(TimeOfDay time) =>
-      '${time.hour.toString().padLeft(2, '0')}'
-      ':'
-      '${time.minute.toString().padLeft(2, '0')}';
 
   static DateTime add(
     DateTime dateTime, {
