@@ -4,7 +4,7 @@ import 'package:ui_alert/ui_alert.dart';
 final GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
-  UiAlert.init(navigatorKey: appNavigatorKey);
+  UiAlert.navigatorKey= appNavigatorKey;
   runApp(const MyApp());
 }
 
@@ -31,16 +31,16 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("toast"),
+        title: const Text('toast'),
       ),
       body: Column(
         children: [
           //info
           FilledButton(
-            onPressed: () {
-              UiAlert.info(content: 'info');
+            onPressed: () async {
+              await UiAlert.info(content: 'info');
             },
-            child: const Text("info"),
+            child: const Text('info'),
           ),
         ],
       ),

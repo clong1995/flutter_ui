@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ui_alert/src/widget/cancel_button.dart';
 import 'package:ui_alert/src/widget/config.dart';
 import 'package:ui_alert/src/widget/confirm_button.dart';
@@ -13,7 +13,7 @@ Future<bool?> confirmDialog({
   barrierColor: Config.barrierColor,
   barrierDismissible: false,
   useRootNavigator: root,
-  builder: (BuildContext context) => AlertDialog(
+  builder: (context) => AlertDialog(
     clipBehavior: Clip.antiAlias,
     title: const TitleWidget(text: '确认提示:'),
     titleTextStyle: Config.titleStyle,

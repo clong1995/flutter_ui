@@ -1,23 +1,24 @@
-import 'package:flutter/material.dart';
+
+import 'package:flutter/widgets.dart';
 
 class UiAdapt extends StatelessWidget {
+  const UiAdapt({
+    required this.builder,
+    required this.width,
+    required this.height,
+    super.key,
+  });
+
   final Widget Function(double scale) builder;
   final double width;
   final double height;
 
-  const UiAdapt({
-    super.key,
-    required this.builder,
-    required this.width,
-    required this.height,
-  });
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        double height = constraints.maxHeight;
-        double s = constraints.maxWidth / width;
+      builder: (context, constraints) {
+        final height = constraints.maxHeight;
+        var s = constraints.maxWidth / width;
         if (this.height * s > height) {
           s = height / this.height;
         }

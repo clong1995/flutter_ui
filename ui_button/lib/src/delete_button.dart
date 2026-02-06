@@ -1,41 +1,44 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rpx/ext.dart';
+import 'package:ui_disable/ui_disable.dart';
+import 'package:ui_theme/ui_theme.dart';
 
-class DeleteButton<T> extends StatelessWidget {
+class DeleteButton extends StatelessWidget {
   const DeleteButton({
     required this.title,
-    required this.value,
     super.key,
     this.onTap,
   });
 
   final String title;
-  final T value;
-  final void Function(T)? onTap;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).primaryColor;
+    final color = UiTheme.primaryColor;
     final Widget child = Container(
-      constraints: const BoxConstraints(minHeight: 24),
+      constraints: BoxConstraints(minHeight: 24.r),
       decoration: BoxDecoration(
         color: color.withAlpha(25),
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(5.r),
         border: Border.all(color: color),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(width: 5),
+          SizedBox(width: 5.r),
           Text(title, style: TextStyle(color: color)),
-          const SizedBox(width: 5),
-          IconButton(
-            onPressed: onTap == null ? null : () => onTap!(value),
-            icon: const Icon(Icons.close),
-          ),
+          SizedBox(width: 5.r),
+          FaIcon(FontAwesomeIcons.xmark,color: color,),
+          SizedBox(width: 5.r),
         ],
       ),
     );
-    return onTap == null ? Opacity(opacity: .5, child: child) : child;
+    return onTap == null ? UiDisable(child: child) : GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: onTap,
+      child: child,
+    );
   }
 }

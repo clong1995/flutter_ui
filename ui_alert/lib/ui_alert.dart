@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:ui_alert/src/confirm.dart';
 import 'package:ui_alert/src/custom.dart';
 import 'package:ui_alert/src/delete.dart';
@@ -11,14 +11,14 @@ class UiAlert {
 
   static GlobalKey<NavigatorState>? _navigatorKey;
 
-  static void init({
-    required GlobalKey<NavigatorState> navigatorKey,
-  }) {
-    _navigatorKey = navigatorKey;
+  //
+  // ignore:avoid_setters_without_getters
+  static set navigatorKey(GlobalKey<NavigatorState> value) {
+    _navigatorKey = value;
   }
 
+
   static Future<bool?> info({
-    //required BuildContext context,
     required String content,
     bool root = true,
   }) async {
@@ -34,7 +34,6 @@ class UiAlert {
   }
 
   static Future<bool?> delete({
-    //required BuildContext context,
     String? content,
     bool root = true,
   }) async {
@@ -46,7 +45,6 @@ class UiAlert {
   }
 
   static Future<T?> custom<T>({
-    //required BuildContext context,
     required Widget child,
     bool root = true,
   }) async {
@@ -58,7 +56,6 @@ class UiAlert {
   }
 
   static Future<bool?> confirm({
-    //required BuildContext context,
     String? content,
     bool root = true,
   }) async {

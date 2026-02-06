@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 
+import 'package:flutter/widgets.dart';
 import 'package:ui_alert/src/widget/config.dart';
 import 'package:ui_alert/src/widget/title.dart';
 
