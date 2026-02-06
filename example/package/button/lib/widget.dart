@@ -11,12 +11,7 @@ class _Build extends Build<ButtonLogic> {
   Widget build() {
     return UiPage(
       title: const Text('button'),
-      body: ListView(
-        children: [
-          //page
-          //button
-        ],
-      ),
+      body: Text("button"),
     );
   }
 }

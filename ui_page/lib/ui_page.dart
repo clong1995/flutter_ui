@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_button/ui_button.dart';
@@ -62,7 +62,19 @@ class UiPage extends StatelessWidget {
                                         )
                                       : const SizedBox.shrink()),
                             ),
-                            Expanded(child: title!),
+                            // Expanded(child: title!),
+                            Expanded(
+                              child: title is Text
+                                  ? Center(
+                                      child: DefaultTextStyle.merge(
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        child: title!,
+                                      ),
+                                    )
+                                  : title!,
+                            ),
                             SizedBox(
                               width: appbarBetweenSpace ?? 40.r,
                               child: action ?? const SizedBox.shrink(),

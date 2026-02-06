@@ -10,8 +10,9 @@ class _Build extends Build<PageLogic> {
   @override
   Widget build() {
     return const UiPage(
+      title: Text('title'),
       body: Center(
-        child: Text('page'),
+        child: Text('body'),
       ),
     );
   }

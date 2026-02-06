@@ -7,8 +7,8 @@ class _State {
   int seconds = 0;
 }
 
-class HomeLogic extends Logic<_State> {
-  HomeLogic(super.context);
+class SplashLogic extends Logic<_State> {
+  SplashLogic(super.context);
 
   @override
   void onInit() {

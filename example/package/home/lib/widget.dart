@@ -11,11 +11,28 @@ class _Build extends Build<HomeLogic> {
   Widget build() {
     return UiPage(
       title: const Text('flutter ui'),
-      body: ListView(
-        children: [
-          //page
-          //button
-        ],
+      body: ListView.separated(
+        padding: EdgeInsets.zero.copyWith(top: 10.r),
+        itemBuilder: tile,
+        separatorBuilder: (context, index) => SizedBox(
+          height: 10.r,
+        ),
+        itemCount: logic.state.packages.length,
+      ),
+    );
+  }
+
+  Widget tile(BuildContext context, int index) {
+    return GestureDetector(
+      onTap: () => logic.onTileTap(index),
+      child: Container(
+        padding: EdgeInsets.all(10.r),
+        decoration: BoxDecoration(
+          color: const Color(0xFFFFFFFF),
+          borderRadius: BorderRadius.circular(5.r),
+          border: Border.all(color: const Color(0xFF9E9E9E)),
+        ),
+        child: Text(logic.state.packages[index]),
       ),
     );
   }

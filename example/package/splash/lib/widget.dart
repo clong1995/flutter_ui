@@ -1,10 +1,10 @@
 import 'package:dependency/dependency.dart';
 import 'package:flutter/widgets.dart';
-import 'package:splash/home/logic.dart';
+import 'package:splash/logic.dart';
 
-Widget homeWidget() => stateWidget(HomeLogic.new, _Build.new);
+Widget splashWidget() => stateWidget(SplashLogic.new, _Build.new);
 
-class _Build extends Build<HomeLogic> {
+class _Build extends Build<SplashLogic> {
   _Build(super.logic);
 
   @override
