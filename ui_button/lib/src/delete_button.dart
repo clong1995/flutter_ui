@@ -12,7 +12,7 @@ class DeleteButton extends StatelessWidget {
   });
 
   final String title;
-  final void Function()? onTap;
+  final GestureTapCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
