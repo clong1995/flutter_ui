@@ -13,13 +13,54 @@ class _Build extends Build<ButtonLogic> {
       title: const Text('button'),
       body: ListView(
         children: [
-          UiIconButton(
-            icon: FontAwesomeIcons.fontAwesome,
-            decoration: BoxDecoration(
-              color: Color(0xFFF44336)
-            ),
-            onTap: () {},
+          Row(
+            spacing: 10.r,
+            children: [
+              Text('UiIconButton:'),
+              UiIconButton(
+                icon: FontAwesomeIcons.fontAwesome,
+                onTap: () {},
+              ),
+              UiIconButton(
+                background: false,
+                icon: FontAwesomeIcons.fontAwesome,
+                onTap: () {},
+              ),
+            ],
           ),
+          SizedBox(height: 10.r,),
+          Row(
+            spacing: 10.r,
+            children: [
+              const Text('UiTextButton:'),
+              UiTextButton(
+                text: '文本按钮',
+                onTap: () {},
+              ),
+              UiTextButton(
+                text: '文本按钮',
+                background: false,
+                onTap: () {},
+              ),
+            ],
+          ),
+          SizedBox(height: 10.r,),
+          Row(
+            spacing: 10.r,
+            children: [
+              const Text('UiButton:'),
+              UiButton(
+                onTap: () {}, 
+                child: Text('按钮'),
+              ),
+              UiButton(
+                onTap: () {},
+                background: false,
+                child: const Text('按钮'),
+              )
+            ],
+          ),
+          SizedBox(height: 10.r,),
         ],
       ),
     );

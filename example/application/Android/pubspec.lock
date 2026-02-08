@@ -159,13 +159,11 @@ packages:
     source: sdk
     version: "0.0.0"
   fn_nav:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: fn_nav
-      ref: HEAD
-      resolved-ref: "2aee094a94efbfd2026b5d0201e4b6a086a770ee"
-      url: "https://github.com/clong1995/flutter_ui.git"
-    source: git
+      path: "../../../fn_nav"
+      relative: true
+    source: path
     version: "0.2.3"
   font_awesome_flutter:
     dependency: transitive
@@ -262,13 +260,11 @@ packages:
     source: hosted
     version: "1.17.0"
   package:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: package
-      ref: HEAD
-      resolved-ref: "2aee094a94efbfd2026b5d0201e4b6a086a770ee"
-      url: "https://github.com/clong1995/flutter_ui.git"
-    source: git
+      path: "../../../package"
+      relative: true
+    source: path
     version: "0.0.4"
   page:
     dependency: transitive
@@ -302,13 +298,11 @@ packages:
     source: hosted
     version: "6.0.3"
   rpx:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: rpx
-      ref: HEAD
-      resolved-ref: "2aee094a94efbfd2026b5d0201e4b6a086a770ee"
-      url: "https://github.com/clong1995/flutter_ui.git"
-    source: git
+      path: "../../../rpx"
+      relative: true
+    source: path
     version: "0.3.0"
   sky_engine:
     dependency: transitive
@@ -339,13 +333,11 @@ packages:
     source: hosted
     version: "1.12.1"
   state:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: state
-      ref: HEAD
-      resolved-ref: "2aee094a94efbfd2026b5d0201e4b6a086a770ee"
-      url: "https://github.com/clong1995/flutter_ui.git"
-    source: git
+      path: "../../../state"
+      relative: true
+    source: path
     version: "1.1.0"
   stream_channel:
     dependency: transitive
@@ -388,49 +380,39 @@ packages:
     source: hosted
     version: "1.4.0"
   ui_app:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: ui_app
-      ref: HEAD
-      resolved-ref: "2aee094a94efbfd2026b5d0201e4b6a086a770ee"
-      url: "https://github.com/clong1995/flutter_ui.git"
-    source: git
+      path: "../../../ui_app"
+      relative: true
+    source: path
     version: "0.0.6"
   ui_button:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: ui_button
-      ref: "2aee094a94efbfd2026b5d0201e4b6a086a770ee"
-      resolved-ref: "2aee094a94efbfd2026b5d0201e4b6a086a770ee"
-      url: "https://github.com/clong1995/flutter_ui.git"
-    source: git
-    version: "0.0.2"
+      path: "../../../ui_button"
+      relative: true
+    source: path
+    version: "0.0.3"
   ui_disable:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: ui_disable
-      ref: HEAD
-      resolved-ref: "2aee094a94efbfd2026b5d0201e4b6a086a770ee"
-      url: "https://github.com/clong1995/flutter_ui.git"
-    source: git
+      path: "../../../ui_disable"
+      relative: true
+    source: path
     version: "0.0.1"
   ui_page:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: ui_page
-      ref: HEAD
-      resolved-ref: "2aee094a94efbfd2026b5d0201e4b6a086a770ee"
-      url: "https://github.com/clong1995/flutter_ui.git"
-    source: git
+      path: "../../../ui_page"
+      relative: true
+    source: path
     version: "0.0.3"
   ui_theme:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: ui_theme
-      ref: HEAD
-      resolved-ref: "2aee094a94efbfd2026b5d0201e4b6a086a770ee"
-      url: "https://github.com/clong1995/flutter_ui.git"
-    source: git
+      path: "../../../ui_theme"
+      relative: true
+    source: path
     version: "0.0.1"
   universal_io:
     dependency: transitive

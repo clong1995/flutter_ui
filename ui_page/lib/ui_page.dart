@@ -7,94 +7,104 @@ import 'package:ui_theme/ui_theme.dart';
 class UiPage extends StatelessWidget {
   const UiPage({
     required this.body,
-    this.appbarBetweenSpace,
+    // this.appbarBetweenSpace,
     this.title,
     this.bodyPadding,
-    this.leading,
-    this.action,
-    this.color = const Color(0xFFF7F8FA),
+    this.appbarLeading,
+    this.appbarAction,
+    this.backgroundColor = const Color(0xFFF7F8FA),
+    this.appbarTextColor = const Color(0xFFFFFFFF),
     super.key,
   });
 
-  final double? appbarBetweenSpace;
+  // final double? appbarBetweenSpace;
   final EdgeInsetsGeometry? bodyPadding;
   final Widget? title;
   final Widget body;
-  final Color color;
-  final Widget? leading;
-  final Widget? action;
+  final Color backgroundColor;
+  final Widget? appbarLeading;
+  final Widget? appbarAction;
+  final Color? appbarTextColor;
 
   @override
   Widget build(BuildContext context) {
-    final padding = MediaQuery.of(context).padding;
     return ColoredBox(
-      color: color,
+      color: backgroundColor,
       child: title == null
-          ? SizedBox(
-              width: double.infinity,
-              child: body,
-            )
+          ? _body(context)
           : Column(
               children: [
-                if (title != null)
-                  Container(
-                    width: double.infinity,
-                    color: UiTheme.primaryColor,
-                    height: 40.r + padding.top,
-                    padding: EdgeInsets.fromLTRB(10.r, padding.top, 10.r, 0),
-                    child: DefaultTextStyle.merge(
-                      style: const TextStyle(color: Color(0xFFFFFFFF)),
-                      child: IconTheme.merge(
-                        data: const IconThemeData(
-                          color: Color(0xFFFFFFFF),
-                        ),
-                        child: Row(
-                          children: [
-                            SizedBox(
-                              width: appbarBetweenSpace ?? 40.r,
-                              height: 40.r,
-                              child:
-                                  leading ??
-                                  (Navigator.canPop(context)
-                                      ? UiIconButton(
-                                          icon: FontAwesomeIcons.angleLeft,
-                                          onTap: () => Navigator.pop(context),
-                                        )
-                                      : const SizedBox.shrink()),
-                            ),
-                            // Expanded(child: title!),
-                            Expanded(
-                              child: title is Text
-                                  ? Center(
-                                      child: DefaultTextStyle.merge(
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        child: title!,
-                                      ),
-                                    )
-                                  : title!,
-                            ),
-                            SizedBox(
-                              width: appbarBetweenSpace ?? 40.r,
-                              child: action ?? const SizedBox.shrink(),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                _appBar(context: context, title: title!),
                 Expanded(
-                  child: Container(
-                    width: double.infinity,
-                    padding: bodyPadding??EdgeInsets.fromLTRB(
-                      10.r,10.r,10.r,0
-                    ),
-                    child: body,
-                  ),
+                  child: _body(context),
                 ),
               ],
             ),
+    );
+  }
+
+  Widget _body(BuildContext context) {
+    return MediaQuery.removePadding(
+      removeLeft: true,
+      removeTop: true,
+      removeRight: true,
+      removeBottom: true,
+      context: context,
+      child: Container(
+        width: double.infinity,
+        padding: bodyPadding ?? EdgeInsets.fromLTRB(10.r, 10.r, 10.r, 0),
+        child: body,
+      ),
+    );
+  }
+
+  Widget _appBar({required BuildContext context, required Widget title}) {
+    final padding = MediaQuery.of(context).padding;
+    return Container(
+      color: UiTheme.primaryColor,
+      width: double.infinity,
+      height: 40.r + padding.top,
+      padding: EdgeInsets.fromLTRB(10.r, padding.top, 10.r, 0),
+      child: DefaultTextStyle.merge(
+        style: TextStyle(color: appbarTextColor),
+        child: IconTheme.merge(
+          data: IconThemeData(
+            color: appbarTextColor,
+          ),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    appbarLeading ??
+                        (Navigator.canPop(context)
+                            ? UiIconButton(
+                                color: appbarTextColor,
+                                background: false,
+                                icon: FontAwesomeIcons.chevronLeft,
+                                onTap: () => Navigator.pop(context),
+                              )
+                            : const SizedBox.shrink()),
+                    appbarAction ?? const SizedBox.shrink(),
+                  ],
+                ),
+              ),
+              if (title is Text)
+                Center(
+                  child: DefaultTextStyle.merge(
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    child: title,
+                  ),
+                )
+              else
+                title,
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

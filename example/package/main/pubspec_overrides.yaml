@@ -1,0 +1,17 @@
+dependency_overrides:
+  ui_app:
+    path: ../../../ui_app
+  ui_theme:
+    path: ../../../ui_theme
+  package:
+    path: ../../../package
+  rpx:
+    path: ../../../rpx
+  fn_nav:
+    path: ../../../fn_nav
+  ui_button:
+    path: ../../../ui_button
+  ui_disable:
+    path: ../../../ui_disable
+  state:
+    path: ../../../state

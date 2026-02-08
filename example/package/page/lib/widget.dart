@@ -9,8 +9,24 @@ class _Build extends Build<PageLogic> {
 
   @override
   Widget build() {
-    return const UiPage(
-      title: Text('title'),
+    return UiPage(
+       title: const Text('title'),
+      appbarAction: Row(
+        children: [
+          UiIconButton(
+            color: Color(0xFFFFFFFF),
+            background: false,
+            icon: FontAwesomeIcons.arrowsRotate,
+            onTap: () {},
+          ),
+          UiIconButton(
+            color: Color(0xFFFFFFFF),
+            background: false,
+            icon: FontAwesomeIcons.bars,
+            onTap: () {},
+          ),
+        ],
+      ),
       body: Center(
         child: Text('body'),
       ),

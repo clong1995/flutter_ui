@@ -27,7 +27,7 @@ Widget builder(BuildContext context, Widget? child) {
   final iconTheme = IconTheme(
     data: IconThemeData(
       color: const Color(0xFF333333),
-      size: 22.r,
+      size: 14.r,
     ),
     child: defaultTextStyle,
   );
