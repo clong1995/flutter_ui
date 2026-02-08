@@ -11,7 +11,14 @@ class _Build extends Build<ButtonLogic> {
   Widget build() {
     return UiPage(
       title: const Text('button'),
-      body: Text("button"),
+      body: ListView(
+        children: [
+          UiIconButton(
+            icon: FontAwesomeIcons.fontAwesome,
+            onTap: () {},
+          ),
+        ],
+      ),
     );
   }
 }

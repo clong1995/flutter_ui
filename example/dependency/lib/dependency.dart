@@ -1,7 +1,9 @@
 export 'package:fn_nav/fn_nav.dart';
+export 'package:font_awesome_flutter/font_awesome_flutter.dart';
 export 'package:package/package.dart';
 export 'package:rpx/ext.dart';
 export 'package:state/state.dart';
 export 'package:ui_app/ui_app.dart';
+export 'package:ui_button/ui_button.dart';
 export 'package:ui_page/ui_page.dart';
 export 'package:ui_theme/ui_theme.dart';

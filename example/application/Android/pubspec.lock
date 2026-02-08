@@ -163,7 +163,7 @@ packages:
     description:
       path: fn_nav
       ref: HEAD
-      resolved-ref: f08cdac83a374d24e26ccf8fbc7b2487f23d157b
+      resolved-ref: "8f3bc3132b39e9d9616ae47b0872ea66b454f43b"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.2.3"
@@ -266,7 +266,7 @@ packages:
     description:
       path: package
       ref: HEAD
-      resolved-ref: f08cdac83a374d24e26ccf8fbc7b2487f23d157b
+      resolved-ref: "8f3bc3132b39e9d9616ae47b0872ea66b454f43b"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.4"
@@ -306,7 +306,7 @@ packages:
     description:
       path: rpx
       ref: HEAD
-      resolved-ref: f08cdac83a374d24e26ccf8fbc7b2487f23d157b
+      resolved-ref: "8f3bc3132b39e9d9616ae47b0872ea66b454f43b"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.3.0"
@@ -343,7 +343,7 @@ packages:
     description:
       path: state
       ref: HEAD
-      resolved-ref: f08cdac83a374d24e26ccf8fbc7b2487f23d157b
+      resolved-ref: "8f3bc3132b39e9d9616ae47b0872ea66b454f43b"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "1.1.0"
@@ -392,7 +392,7 @@ packages:
     description:
       path: ui_app
       ref: HEAD
-      resolved-ref: f08cdac83a374d24e26ccf8fbc7b2487f23d157b
+      resolved-ref: "8f3bc3132b39e9d9616ae47b0872ea66b454f43b"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.6"
@@ -400,8 +400,8 @@ packages:
     dependency: transitive
     description:
       path: ui_button
-      ref: f08cdac83a374d24e26ccf8fbc7b2487f23d157b
-      resolved-ref: f08cdac83a374d24e26ccf8fbc7b2487f23d157b
+      ref: "8f3bc3132b39e9d9616ae47b0872ea66b454f43b"
+      resolved-ref: "8f3bc3132b39e9d9616ae47b0872ea66b454f43b"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.2"
@@ -410,7 +410,7 @@ packages:
     description:
       path: ui_disable
       ref: HEAD
-      resolved-ref: f08cdac83a374d24e26ccf8fbc7b2487f23d157b
+      resolved-ref: "8f3bc3132b39e9d9616ae47b0872ea66b454f43b"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
@@ -419,16 +419,16 @@ packages:
     description:
       path: ui_page
       ref: HEAD
-      resolved-ref: f08cdac83a374d24e26ccf8fbc7b2487f23d157b
+      resolved-ref: "8f3bc3132b39e9d9616ae47b0872ea66b454f43b"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.0.1"
+    version: "0.0.3"
   ui_theme:
     dependency: transitive
     description:
       path: ui_theme
       ref: HEAD
-      resolved-ref: f08cdac83a374d24e26ccf8fbc7b2487f23d157b
+      resolved-ref: "8f3bc3132b39e9d9616ae47b0872ea66b454f43b"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"

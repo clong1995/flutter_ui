@@ -44,6 +44,7 @@ dependencies:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_theme
     # path: /Users/markeckles/Desktop/flutter_ui/fn_nav
+  font_awesome_flutter: ^10.12.0
 
 dev_dependencies:
   flutter_test:

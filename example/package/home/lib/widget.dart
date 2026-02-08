@@ -12,7 +12,7 @@ class _Build extends Build<HomeLogic> {
     return UiPage(
       title: const Text('flutter ui'),
       body: ListView.separated(
-        padding: EdgeInsets.zero.copyWith(top: 10.r),
+        padding: EdgeInsets.zero,
         itemBuilder: tile,
         separatorBuilder: (context, index) => SizedBox(
           height: 10.r,

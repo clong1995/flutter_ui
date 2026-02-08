@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_disable/ui_disable.dart';
+import 'package:ui_theme/ui_theme.dart';
 
 class UiIconButton extends StatelessWidget {
   const UiIconButton({
@@ -30,10 +31,15 @@ class UiIconButton extends StatelessWidget {
       width: width ?? 30.r,
       height: height ?? 30.r,
       child: Center(
-        child: FaIcon(
-          icon,
-          size: size,
-          color: color,
+        child: IconTheme.merge(
+          data: IconThemeData(
+            color: UiTheme.primaryColor,
+          ),
+          child: FaIcon(
+            icon,
+            size: size,
+            color: color,
+          ),
         ),
       ),
     );
