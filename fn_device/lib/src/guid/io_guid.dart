@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:crypto/crypto.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 
 class Guid {
   static String _id = '';
@@ -28,7 +29,7 @@ class Guid {
 
   static Future<String> get info async {
     var input = '';
-    if (defaultTargetPlatform == TargetPlatform.windows) {
+    if (Platform.isWindows) {
       final deviceInfo = await _deviceInfo.windowsInfo;
       input =
           '${deviceInfo.computerName}'
@@ -47,7 +48,7 @@ class Guid {
           '${deviceInfo.productId}'
           '${deviceInfo.productName}'
           '${deviceInfo.registeredOwner}';
-    } else if (defaultTargetPlatform == TargetPlatform.linux) {
+    } else if (Platform.isLinux) {
       final deviceInfo = await _deviceInfo.linuxInfo;
       input =
           '${deviceInfo.name}'
@@ -57,7 +58,7 @@ class Guid {
           '${deviceInfo.variant}'
           '${deviceInfo.variantId}'
           '${deviceInfo.machineId ?? ''}';
-    } else if (defaultTargetPlatform == TargetPlatform.macOS) {
+    } else if (Platform.isMacOS) {
       final macOsInfo = await _deviceInfo.macOsInfo;
       input =
           '${macOsInfo.computerName}'
@@ -69,7 +70,7 @@ class Guid {
           '${macOsInfo.cpuFrequency}'
           '${macOsInfo.systemGUID ?? ''}'
           '${macOsInfo.majorVersion}';
-    } else if (defaultTargetPlatform == TargetPlatform.android) {
+    } else if (Platform.isAndroid) {
       final androidInfo = await _deviceInfo.androidInfo;
       input =
           '${androidInfo.board}'
@@ -89,7 +90,7 @@ class Guid {
           '${androidInfo.isPhysicalDevice}'
           //'${androidInfo.serialNumber}'
           ;
-    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+    } else if (Platform.isIOS) {
       final iosInfo = await _deviceInfo.iosInfo;
       input =
           '${iosInfo.name}'
@@ -103,6 +104,6 @@ class Guid {
       throw Exception('no guid');
     }
     //input +;
-    return input += defaultTargetPlatform.name;
+    return input += Platform.localeName;
   }
 }

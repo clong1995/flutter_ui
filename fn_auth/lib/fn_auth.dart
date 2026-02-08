@@ -21,7 +21,6 @@ class FnAuth {
   // ignore:avoid_setters_without_getters
   static set role(List<String> r) => _role = r;
 
-
   static bool roleAllow(List<String> role) =>
       role.any((element) => _role.contains(element));
 
