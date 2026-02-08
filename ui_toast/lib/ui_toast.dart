@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:ui_button/ui_button.dart';
 
 /*import 'package:ui_toast/src/toast_widget.dart';
 
@@ -71,10 +72,10 @@ class UiToast {
 
   static GlobalKey<NavigatorState>? _navigatorKey;
 
-  static void init({
-    required GlobalKey<NavigatorState> navigatorKey,
-  }) {
-    _navigatorKey = navigatorKey;
+  //
+  // ignore:avoid_setters_without_getters
+  static set navigatorKey(GlobalKey<NavigatorState> value) {
+    _navigatorKey = value;
   }
 
   static OverlayEntry? _entry;
@@ -114,14 +115,17 @@ class UiToastMessage {
   UiToastMessage();
 
   factory UiToastMessage.success() => UiToastMessage()
-    ..icon = const Icon(Icons.check_circle_outline, color: Colors.green)
+    ..icon = const Icon(
+      Icons.check_circle_outline,
+      color: const Color(0xFF4CAF50),
+    )
     ..text = '成功'
-    ..color = Colors.green;
+    ..color = const Color(0xFF4CAF50);
 
   factory UiToastMessage.info() => UiToastMessage()
-    ..icon = const Icon(Icons.info_outline, color: Colors.orange)
+    ..icon = const Icon(Icons.info_outline, color: Color(0xFFFF9800))
     ..text = '提示'
-    ..color = Colors.orange;
+    ..color = const Color(0xFFFF9800);
 
   factory UiToastMessage.failure() => UiToastMessage()
     ..icon = const Icon(Icons.cancel_outlined, color: Colors.red)
@@ -129,13 +133,13 @@ class UiToastMessage {
     ..color = Colors.red;
 
   factory UiToastMessage.loading() => UiToastMessage()
-    ..icon = const SizedBox(
+    ..icon = SizedBox(
       width: 20,
       height: 20,
-      child: CircularProgressIndicator(color: Colors.blue),
+      child: CircularProgressIndicator(color: const Color(0xFF2196F3)),
     )
     ..text = '加载中'
-    ..color = Colors.blue
+    ..color = const Color(0xFF2196F3)
     ..autoClose = false;
 
   Widget icon = const Icon(Icons.circle_outlined);
@@ -172,7 +176,11 @@ class _ToastWidgetState extends State<_ToastWidget> {
               minHeight: 60,
             ),
             decoration: BoxDecoration(
-              color: Color.lerp(widget.message.color, Colors.white, .95),
+              color: Color.lerp(
+                widget.message.color,
+                const Color(0xFFFFFFFF),
+                .95,
+              ),
               border: Border.all(
                 color: widget.message.color,
                 width: 1.5,
@@ -204,19 +212,19 @@ class _ToastWidgetState extends State<_ToastWidget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextButton(
-                        onPressed: () {
+                      UiTextButton(
+                        onTap: () {
                           widget.message.choiceCallback!(false);
                           UiToast.dismiss();
                         },
-                        child: const Text('取消'),
+                        text: '取消',
                       ),
-                      TextButton(
-                        onPressed: () {
+                      UiTextButton(
+                        onTap: () {
                           widget.message.choiceCallback!(true);
                           UiToast.dismiss();
                         },
-                        child: const Text('确定'),
+                        text: '确定',
                       ),
                     ],
                   ),

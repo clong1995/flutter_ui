@@ -4,18 +4,20 @@ version: 1.0.0
 homepage: flutter_ui
 
 environment:
-  sdk: ^3.10.1
-  flutter: ">=3.38.3"
+  sdk: ^3.10.7
+  flutter: ">=3.38.7"
 
 dependencies:
   flutter:
     sdk: flutter
+  ui_button:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_button
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   #flutter_lints: ^5.0.0
-  very_good_analysis: ^10.0.0
+  very_good_analysis: ^10.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
