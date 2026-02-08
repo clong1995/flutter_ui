@@ -17,7 +17,7 @@ class UiPage extends StatelessWidget {
   });
 
   final double? appbarBetweenSpace;
-  final double? bodyPadding;
+  final EdgeInsetsGeometry? bodyPadding;
   final Widget? title;
   final Widget body;
   final Color color;
@@ -87,8 +87,8 @@ class UiPage extends StatelessWidget {
                 Expanded(
                   child: Container(
                     width: double.infinity,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: bodyPadding ?? 10.r,
+                    padding: bodyPadding??EdgeInsets.fromLTRB(
+                      10.r,10.r,10.r,0
                     ),
                     child: body,
                   ),
