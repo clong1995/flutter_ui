@@ -4,6 +4,7 @@ class _State {
   List<String> packages = [
     'page',
     'button',
+    'toast',
   ];
 }
 

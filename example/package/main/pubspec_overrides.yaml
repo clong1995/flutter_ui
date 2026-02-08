@@ -15,3 +15,5 @@ dependency_overrides:
     path: ../../../ui_disable
   state:
     path: ../../../state
+  ui_page:
+    path: ../../../ui_page

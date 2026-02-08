@@ -30,6 +30,8 @@ dependencies:
     path: ../../package/page
   button:
     path: ../../package/button
+  toast:
+    path: ../../package/toast
 
 dev_dependencies:
   flutter_test:
