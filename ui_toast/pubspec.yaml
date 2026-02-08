@@ -2,6 +2,7 @@ name: ui_toast
 description: "A new Flutter project."
 version: 1.0.0
 homepage: flutter_ui
+publish_to: none
 
 environment:
   sdk: ^3.10.7
@@ -10,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  font_awesome_flutter: ^10.12.0
   ui_button:
     git:
       url: https://github.com/clong1995/flutter_ui.git
