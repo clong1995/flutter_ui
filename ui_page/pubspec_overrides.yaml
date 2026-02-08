@@ -1,4 +1,4 @@
-name: ui_button
+name: ui_page
 description: "A new Flutter project."
 version: 0.0.3
 homepage: flutter_ui
@@ -13,23 +13,17 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^10.12.0
   rpx:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: rpx
-  ui_disable:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: ui_disable
+    path: ../rpx
+  ui_button:
+    path: ../ui_button
   ui_theme:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: ui_theme
+    path: ../ui_theme
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  #flutter_lints: ^5.0.0
-  very_good_analysis: ^10.1.0
+  #flutter_lints: ^6.0.0
+  very_good_analysis: ^10.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

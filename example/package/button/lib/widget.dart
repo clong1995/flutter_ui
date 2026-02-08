@@ -12,7 +12,6 @@ class _Build extends Build<ButtonLogic> {
     return UiPage(
       title: const Text('button'),
       body: ListView(
-        padding: ,
         children: [
           UiIconButton(
             icon: FontAwesomeIcons.fontAwesome,

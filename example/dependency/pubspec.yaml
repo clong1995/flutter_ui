@@ -12,9 +12,6 @@ dependencies:
   flutter:
     sdk: flutter
   state:
-    #git:
-    #  url: https://github.com/clong1995/flutter_ui.git
-    #  path: state
     path: ../../state
   package:
     path: ../../package

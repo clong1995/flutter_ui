@@ -13,17 +13,11 @@ dependencies:
     sdk: flutter
   font_awesome_flutter: ^10.12.0
   rpx:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: rpx
+    path: ../rpx
   ui_disable:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: ui_disable
+    path: ../ui_disable
   ui_theme:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: ui_theme
+    path: ../ui_theme
 
 dev_dependencies:
   flutter_test:
