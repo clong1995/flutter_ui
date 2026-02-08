@@ -12,38 +12,24 @@ dependencies:
   flutter:
     sdk: flutter
   state:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: state
-    # path: /Users/markeckles/Desktop/flutter_ui/fn_nav
+    #git:
+    #  url: https://github.com/clong1995/flutter_ui.git
+    #  path: state
+    path: ../../state
   package:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: package
+    path: ../../package
   rpx:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: rpx
+    path: ../../rpx
   ui_app:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: ui_app
-    # path: /Users/markeckles/Desktop/flutter_ui/ui_app
+    path: ../../ui_app
   ui_page:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: ui_page
-    # path: /Users/markeckles/Desktop/flutter_ui/ui_page
+    path: ../../ui_page
   fn_nav:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: fn_nav
-    # path: /Users/markeckles/Desktop/flutter_ui/fn_nav
+    path: ../../fn_nav
   ui_theme:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: ui_theme
-    # path: /Users/markeckles/Desktop/flutter_ui/fn_nav
+    path: ../../ui_theme
+  ui_button:
+    path: ../../ui_button
   font_awesome_flutter: ^10.12.0
 
 dev_dependencies:

@@ -12,9 +12,13 @@ class _Build extends Build<ButtonLogic> {
     return UiPage(
       title: const Text('button'),
       body: ListView(
+        padding: ,
         children: [
           UiIconButton(
             icon: FontAwesomeIcons.fontAwesome,
+            decoration: BoxDecoration(
+              color: Color(0xFFF44336)
+            ),
             onTap: () {},
           ),
         ],
