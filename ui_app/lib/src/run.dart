@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_app/src/widget.dart';
+import 'package:ui_toast/ui_toast.dart';
 
 Future<void> uiApp({
   required Widget home,
@@ -35,6 +36,9 @@ Future<void> uiApp({
 
   //导航
   FnNav.navigatorKey = navigatorKey;
+
+  //toast
+  UiToast.navigatorKey = navigatorKey;
 
   runApp(
     App(

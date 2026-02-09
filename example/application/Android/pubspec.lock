@@ -167,6 +167,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.10.0"
+  logger:
+    dependency: transitive
+    description:
+      path: logger
+      ref: HEAD
+      resolved-ref: e8ca7a074d3fa5d7c11a91251b5d5b900871e2f4
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
+    version: "0.0.4"
   main:
     dependency: "direct main"
     description:

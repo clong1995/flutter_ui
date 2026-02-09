@@ -23,6 +23,10 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: fn_nav
+  ui_toast:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_toast
 
 dev_dependencies:
   flutter_test:

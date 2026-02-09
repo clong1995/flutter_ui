@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rpx/ext.dart';
 import 'package:ui_button/ui_button.dart';
 
 class UiToast {
@@ -113,9 +114,9 @@ class _ToastWidgetState extends State<_ToastWidget> {
         child: IntrinsicWidth(
           child: Container(
             padding: const EdgeInsets.all(10),
-            constraints: const BoxConstraints(
-              minWidth: 140,
-              minHeight: 60,
+            constraints: BoxConstraints(
+              minWidth: 140.r,
+              minHeight: 60.r,
             ),
             decoration: BoxDecoration(
               color: Color.lerp(
@@ -125,9 +126,9 @@ class _ToastWidgetState extends State<_ToastWidget> {
               ),
               border: Border.all(
                 color: widget.message.color,
-                width: 1.5,
+                width: 1.5.r,
               ),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(10.r),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -137,31 +138,34 @@ class _ToastWidgetState extends State<_ToastWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     widget.message.icon,
-                    const SizedBox(width: 5),
+                    SizedBox(width: 5.r),
                     Text(
                       widget.message.text,
                       style: TextStyle(
                         color: widget.message.color,
-                        fontSize: 15,
+                        fontSize: 15.r,
                         decoration: TextDecoration.none,
                       ),
                     ),
                   ],
                 ),
                 if (widget.message.choiceCallback != null)
-                  const SizedBox(height: 10),
+                   SizedBox(height: 10.r),
                 if (widget.message.choiceCallback != null)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       UiTextButton(
+                        background: false,
                         onTap: () {
                           widget.message.choiceCallback!(false);
                           UiToast.dismiss();
                         },
                         text: '取消',
                       ),
+                      SizedBox(width: 10.r,),
                       UiTextButton(
+                        background: false,
                         onTap: () {
                           widget.message.choiceCallback!(true);
                           UiToast.dismiss();
