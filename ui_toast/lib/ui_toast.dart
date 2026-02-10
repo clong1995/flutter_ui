@@ -113,10 +113,9 @@ class _ToastWidgetState extends State<_ToastWidget> {
         alignment: Alignment.center,
         child: IntrinsicWidth(
           child: Container(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10.r),
             constraints: BoxConstraints(
               minWidth: 140.r,
-              minHeight: 60.r,
             ),
             decoration: BoxDecoration(
               color: Color.lerp(
@@ -150,7 +149,7 @@ class _ToastWidgetState extends State<_ToastWidget> {
                   ],
                 ),
                 if (widget.message.choiceCallback != null)
-                   SizedBox(height: 10.r),
+                  SizedBox(height: 10.r),
                 if (widget.message.choiceCallback != null)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
