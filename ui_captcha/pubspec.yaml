@@ -1,6 +1,6 @@
 name: ui_captcha
 description: "A new Flutter project."
-version: 0.0.2
+version: 0.0.3
 homepage: flutter_ui
 publish_to: none
 
@@ -32,7 +32,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   #flutter_lints: ^5.0.0
-  very_good_analysis: ^10.0.0
+  very_good_analysis: ^10.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
