@@ -5,8 +5,8 @@ homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.10.1
-  flutter: ">=3.38.3"
+  sdk: ^3.10.7
+  flutter: ">=3.38.7"
 
 dependencies:
   flutter:
@@ -19,6 +19,14 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_alert
+  rpx:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: rpx
+  ui_button:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_button
 
 dev_dependencies:
   flutter_test:

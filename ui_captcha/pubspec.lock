@@ -59,6 +59,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: transitive
+    description:
+      name: font_awesome_flutter
+      sha256: b9011df3a1fa02993630b8fb83526368cf2206a711259830325bab2f1d2a4eb0
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.12.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -123,6 +131,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  rpx:
+    dependency: "direct main"
+    description:
+      path: rpx
+      ref: HEAD
+      resolved-ref: "55c3bf0241f66e545f9b23964c551f5f2c19e9eb"
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
+    version: "0.3.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -132,10 +149,10 @@ packages:
     dependency: transitive
     description:
       name: source_span
-      sha256: "254ee5351d6cb365c859e20ee823c3bb479bf4a293c22d17a9f1bf144ce86f7c"
+      sha256: "56a02f1f4cd1a2d96303c0144c93bd6d909eea6bee6bf5a0e0b685edbd4c47ab"
       url: "https://pub.dev"
     source: hosted
-    version: "1.10.1"
+    version: "1.10.2"
   stack_trace:
     dependency: transitive
     description:
@@ -181,19 +198,46 @@ packages:
     description:
       path: ui_alert
       ref: HEAD
-      resolved-ref: "19c0b89b8e990959309f85075762602b8c9dd9a1"
+      resolved-ref: "55c3bf0241f66e545f9b23964c551f5f2c19e9eb"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.1.1"
+    version: "0.2.0"
+  ui_button:
+    dependency: "direct main"
+    description:
+      path: ui_button
+      ref: HEAD
+      resolved-ref: "55c3bf0241f66e545f9b23964c551f5f2c19e9eb"
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
+    version: "0.0.3"
+  ui_disable:
+    dependency: transitive
+    description:
+      path: ui_disable
+      ref: HEAD
+      resolved-ref: "55c3bf0241f66e545f9b23964c551f5f2c19e9eb"
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
+    version: "0.0.1"
+  ui_theme:
+    dependency: transitive
+    description:
+      path: ui_theme
+      ref: HEAD
+      resolved-ref: "55c3bf0241f66e545f9b23964c551f5f2c19e9eb"
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
+    version: "0.0.1"
   ui_webview:
     dependency: "direct main"
     description:
       path: ui_webview
       ref: HEAD
-      resolved-ref: "19c0b89b8e990959309f85075762602b8c9dd9a1"
+      resolved-ref: "55c3bf0241f66e545f9b23964c551f5f2c19e9eb"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.1.0"
+    version: "0.1.2"
   vector_math:
     dependency: transitive
     description:
@@ -206,10 +250,10 @@ packages:
     dependency: "direct dev"
     description:
       name: very_good_analysis
-      sha256: "96245839dbcc45dfab1af5fa551603b5c7a282028a64746c19c547d21a7f1e3a"
+      sha256: "27927d1140ce1b140f998b6340f730a626faa5b95110b3e34a238ff254d731d0"
       url: "https://pub.dev"
     source: hosted
-    version: "10.0.0"
+    version: "10.1.0"
   vm_service:
     dependency: transitive
     description:
@@ -222,18 +266,18 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter
-      sha256: c3e4fe614b1c814950ad07186007eff2f2e5dd2935eba7b9a9a1af8e5885f1ba
+      sha256: a3da219916aba44947d3a5478b1927876a09781174b5a2b67fa5be0555154bf9
       url: "https://pub.dev"
     source: hosted
-    version: "4.13.0"
+    version: "4.13.1"
   webview_flutter_android:
     dependency: transitive
     description:
       name: webview_flutter_android
-      sha256: "3fcca88ee2ae568807ebd42deed235bb8dd8e62b3e4d5caff67daa6bce062cca"
+      sha256: eeeb3fcd5f0ff9f8446c9f4bbc18a99b809e40297528a3395597d03aafb9f510
       url: "https://pub.dev"
     source: hosted
-    version: "4.10.9"
+    version: "4.10.11"
   webview_flutter_platform_interface:
     dependency: transitive
     description:
@@ -246,10 +290,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
-      sha256: a57b76a081bed3bf3a71a486bdf83642b00f1a7342043d50367cea68f338b1af
+      sha256: "0412b657a2828fb301e73509909e6ec02b77cd2b441ae9f77125d482b3ddf0e7"
       url: "https://pub.dev"
     source: hosted
-    version: "3.23.4"
+    version: "3.23.6"
 sdks:
-  dart: ">=3.10.1 <4.0.0"
-  flutter: ">=3.38.3"
+  dart: ">=3.10.7 <4.0.0"
+  flutter: ">=3.38.7"

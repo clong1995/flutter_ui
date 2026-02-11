@@ -1,32 +1,27 @@
-import 'package:flutter/material.dart';
-import 'package:ui_alert/ui_alert.dart' show alertCustom;
+import 'package:flutter/widgets.dart';
+import 'package:rpx/ext.dart';
+import 'package:ui_alert/ui_alert.dart';
+import 'package:ui_button/ui_button.dart';
 import 'package:ui_webview/ui_webview.dart';
 
 Future<void> uiCaptcha({
   required BuildContext context,
   required Future<bool> Function(String json) verify,
-  double width = 340,
-  double height = 340,
-}) async => alertCustom(
-  context: context,
-  child: _Captcha(verify: verify, width: width, height: height),
+}) async => UiAlert.custom(
+  child: _Captcha(verify: verify),
 );
 
 class _Captcha extends StatelessWidget {
   const _Captcha({
     required this.verify,
-    required this.width,
-    required this.height,
   });
 
-  final double width;
-  final double height;
   final Future<bool> Function(String json) verify;
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    width: width,
-    height: height,
+    width: 340.r,
+    height: 340.r,
     child: Column(
       children: [
         Expanded(
@@ -43,14 +38,12 @@ class _Captcha extends StatelessWidget {
             },
           ),
         ),
-        const SizedBox(height: 5),
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text(
-            '取消验证',
-          ),
+        SizedBox(height: 5.r),
+        UiTextButton(
+          onTap: () => Navigator.pop(context),
+          text: '取消验证',
         ),
-        const SizedBox(height: 10),
+        SizedBox(height: 10.r),
       ],
     ),
   );
