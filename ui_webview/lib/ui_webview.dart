@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 //import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 class UiWebview extends StatefulWidget {
-
   const UiWebview({required this.url, super.key, this.register});
 
   final String url;
@@ -34,6 +34,8 @@ class _UiWebviewState extends State<UiWebview> {
 
     controller = WebViewController();
     await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+
+    //
     final bridge = '_b${random}_';
     final callback = '_cb${random}_';
     if (isRegister) {
@@ -53,32 +55,51 @@ class _UiWebviewState extends State<UiWebview> {
 
           final result = await func!(param);
           res = jsonEncode(result);
-          final script = '''
+          final script =
+              '''
                 window.$callback('$callbackId', $res);
               ''';
           await controller.runJavaScript(script);
         },
       );
     }
+
+    //ready
     final ready = '_r${random}_';
     await controller.addJavaScriptChannel(
-        ready,
-        onMessageReceived: (JavaScriptMessage message) async {
-          setState(() {
-            pageReady = true;
-          });
-        }
+      ready,
+      onMessageReceived: (JavaScriptMessage message) async {
+        setState(() {
+          pageReady = true;
+        });
+      },
     );
+
     await controller.setNavigationDelegate(
       NavigationDelegate(
-        onProgress: (int progress) {
+        /*onProgress: (int progress) {
           // Update loading bar.
-        },
+        },*/
         onPageFinished: (String url) async {
+          var script =
+              '''
+              function sendReady() {
+                $ready.postMessage("");
+              }
+              
+              (function() {
+                if (document.readyState === "complete") {
+                  sendReady();
+                } else {
+                  window.addEventListener("load", sendReady);
+                }
+              })();
+          ''';
           //有函数需要调用时
           if (isRegister) {
             final callbacks = '_cbs${random}_';
-            final script = '''
+            script =
+                '''
               const $callbacks = {};
               window.$callback = (callbackId, result) =>{
                   if ($callbacks[callbackId]) {
@@ -99,20 +120,9 @@ class _UiWebviewState extends State<UiWebview> {
                       $bridge.postMessage(JSON.stringify(payload));
                   });
               };
-              
-              (function() {
-                function sendReady() {
-                  $ready.postMessage("");
-                }
-                if (document.readyState === "complete") {
-                  sendReady();
-                } else {
-                  window.addEventListener("load", sendReady);
-                }
-              })();
-            ''';
-            await controller.runJavaScript(script);
+            $script''';
           }
+          await controller.runJavaScript(script);
         },
       ),
     );
@@ -128,14 +138,13 @@ class _UiWebviewState extends State<UiWebview> {
   bool get isRegister => widget.register != null && widget.register!.isNotEmpty;
 
   @override
-  Widget build(BuildContext context) =>
-      Stack(
-        children: [
-          WebViewWidget(controller: controller),
-          if (!pageReady)
-            const Positioned.fill(
-              child: Center(child: CircularProgressIndicator()),
-            ),
-        ],
-      );
+  Widget build(BuildContext context) => Stack(
+    children: [
+      WebViewWidget(controller: controller),
+      if (!pageReady)
+        const Positioned.fill(
+          child: Center(child: Text('加载中...')),
+        ),
+    ],
+  );
 }
