@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dependency/dependency.dart';
 
 class _State {}
@@ -27,15 +29,16 @@ class ToastLogic extends Logic<_State> {
     UiToast.show(
       UiToastMessage.failure()
         ..text = '是否重试'
-        ..choiceCallback = (bool choice) {
-          logger('$choice');
+        ..autoPopSeconds = 0
+        ..callback = (value) {
+          logger('$value');
         },
     );
   }
 
   void onLoadingTap() {
-    UiToast.show(UiToastMessage.loading());
-    Future.delayed(const Duration(seconds: 2), UiToast.dismiss);
+    final pop = UiToast.show(UiToastMessage.loading());
+    Future.delayed(const Duration(seconds: 10), pop);
   }
 
   void onCustomTap() {

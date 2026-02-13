@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 
 import 'package:ui_alert/src/widget/config.dart';
@@ -28,16 +29,9 @@ class TitleWidget extends StatelessWidget {
           ),
           Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
           const Spacer(),
-          /*IconButton(
-            onPressed: () => Navigator.pop(context, false),
-            icon: const Icon(
-              Icons.close_rounded,
-              color: Colors.black,
-              size: 14,
-            ),
-          ),*/
         ],
       ),
     );
   }
 }
+*/

@@ -17,3 +17,9 @@ dependency_overrides:
     path: ../../../state
   ui_page:
     path: ../../../ui_page
+  ui_toast:
+    path: ../../../ui_toast
+  ui_alert:
+    path: ../../../ui_alert
+  logger:
+    path: ../../../logger

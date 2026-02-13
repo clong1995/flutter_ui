@@ -9,3 +9,4 @@ export 'package:ui_page/ui_page.dart';
 export 'package:ui_theme/ui_theme.dart';
 export 'package:ui_toast/ui_toast.dart';
 export 'package:logger/logger.dart';
+export 'package:ui_alert/ui_alert.dart';

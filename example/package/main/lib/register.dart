@@ -4,6 +4,7 @@ import 'package:package/package.dart';
 import 'package:page/widget.dart';
 import 'package:splash/widget.dart';
 import 'package:toast/widget.dart';
+import 'package:alert/widget.dart';
 
 final PkgReg registers = {
   'splash': splashWidget,
@@ -11,4 +12,5 @@ final PkgReg registers = {
   'page': pageWidget,
   'button': buttonWidget,
   'toast': toastWidget,
+  'alert': alertWidget,
 };

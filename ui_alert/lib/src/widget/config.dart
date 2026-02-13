@@ -1,3 +1,4 @@
+/*
 
 import 'package:flutter/painting.dart';
 
@@ -13,3 +14,4 @@ class Config {
     border: Border(bottom: BorderSide(color: Color(0xFFE0E0E0))),
   );
 }
+*/

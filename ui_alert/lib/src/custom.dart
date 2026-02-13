@@ -1,11 +1,32 @@
-
+/*
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ui_alert/src/widget/config.dart';
 import 'package:ui_alert/src/widget/title.dart';
 
 Future<T?> customDialog<T>({
-  required BuildContext context,
   required Widget child,
+  String? title,
+  bool root = true,
+}) => showDialog<T>(
+  context: context,
+  barrierColor: Config.barrierColor,
+  barrierDismissible: false,
+  useRootNavigator: root,
+  builder: (context) => PopScope(
+    canPop: false,
+    child: AlertDialog(
+      insetPadding: EdgeInsets.zero,
+      clipBehavior: Clip.antiAlias,
+      contentPadding: EdgeInsets.zero,
+      content: child,
+    ),
+  ),
+);
+
+Future<T?> customDialog<T>({
+  required Widget child,
+  String? title,
   bool root = true,
 }) => showDialog<T>(
   context: context,
@@ -24,13 +45,14 @@ Future<T?> customDialog<T>({
 );
 
 class UiAlertCustomContent extends StatelessWidget {
-
   const UiAlertCustomContent({
-    required this.child, super.key,
+    required this.child,
+    super.key,
     this.title,
     this.cancel = true,
     this.action,
   });
+
   final String? title;
   final Widget child;
   final bool cancel;
@@ -73,3 +95,4 @@ class UiAlertCustomContent extends StatelessWidget {
     );
   }
 }
+*/

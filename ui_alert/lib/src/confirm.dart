@@ -1,3 +1,5 @@
+/*
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:ui_alert/src/widget/cancel_button.dart';
 import 'package:ui_alert/src/widget/config.dart';
@@ -42,3 +44,4 @@ Future<bool?> confirmDialog({
     actions: const <Widget>[CancelButton(), ConfirmButton()],
   ),
 );
+*/

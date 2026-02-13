@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fn_nav/fn_nav.dart';
+import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_app/src/widget.dart';
 import 'package:ui_toast/ui_toast.dart';
 
@@ -39,6 +40,9 @@ Future<void> uiApp({
 
   //toast
   UiToast.navigatorKey = navigatorKey;
+
+  //alert
+  UiAlert.navigatorKey = navigatorKey;
 
   runApp(
     App(

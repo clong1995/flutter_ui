@@ -5,6 +5,7 @@ class _State {
     'page',
     'button',
     'toast',
+    'alert',
   ];
 }
 
