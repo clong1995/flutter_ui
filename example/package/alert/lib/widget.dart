@@ -24,6 +24,16 @@ class _Build extends Build<AlertLogic> {
             ],
           ),
           SizedBox(height: 10.r,),
+          Row(
+            spacing: 10.r,
+            children: [
+              const Text('custom:'),
+              UiButton(
+                onTap: logic.onCustomTap,
+                child: const Text('custom'),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -36,5 +46,14 @@ class Dialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Text('dialog');
+  }
+}
+
+class Custom extends StatelessWidget {
+  const Custom({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Text('custom');
   }
 }

@@ -43,7 +43,7 @@ class FnNav {
         RouteSettings(arguments: args),
         (context) => page(),
       ),
-      (Route<dynamic> route) => false,
+      (route) => false,
     );
   }
 
@@ -60,7 +60,7 @@ class FnNav {
       context,
       FnNavRouteBuilder<T>(
         RouteSettings(arguments: args),
-            (context) => page(),
+        (context) => page(),
       ),
     );
   }

@@ -16,39 +16,7 @@ class UiToast {
     _navigatorKey = value;
   }
 
-  //static OverlayEntry? _entry;
-  //static Timer? _timer;
-
-  /*static void show(UiToastMessage message) {
-    final overlay = _navigatorKey?.currentState?.overlay;
-    if (overlay == null) {
-      return;
-    }
-
-    dismiss();
-
-    _entry = OverlayEntry(
-      builder: (_) => _ToastWidget(message: message),
-    );
-
-    overlay.insert(_entry!);
-
-    if (message.choiceCallback != null) {
-      return;
-    }
-
-    _timer = Timer(const Duration(seconds: 1), dismiss);
-  }*/
-
-  /*static void dismiss() {
-    _timer?.cancel();
-    _timer = null;
-
-    _entry?.remove();
-    _entry = null;
-  }*/
-
-  static void Function()? show(UiToastMessage message) {
+  static void Function()? show(UiToastMessage message, {bool root = false}) {
     final navContext = _navigatorKey?.currentContext;
     if (navContext == null) {
       return null;
@@ -89,7 +57,7 @@ class UiToast {
           child,
     );
 
-    unawaited(Navigator.of(navContext).push<void>(route));
+    unawaited(Navigator.of(navContext, rootNavigator: root).push<void>(route));
 
     return pop;
   }
@@ -205,8 +173,8 @@ class _ToastWidgetState extends State<_ToastWidget> {
                   ),
                 ],
               ),
-              if (widget.message.callback != null) SizedBox(height: 10.r),
-              if (widget.message.callback != null)
+              if (widget.message.callback != null) ...[
+                SizedBox(height: 10.r),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -230,13 +198,15 @@ class _ToastWidgetState extends State<_ToastWidget> {
                     ),
                   ],
                 ),
-              if (showCloseButton) SizedBox(height: 10.r),
-              if (showCloseButton)
+              ],
+              if (showCloseButton) ...[
+                SizedBox(height: 10.r),
                 UiTextButton(
                   text: '关闭',
                   color: widget.message.color,
                   onTap: Navigator.of(context).pop,
                 ),
+              ],
             ],
           ),
         ),
