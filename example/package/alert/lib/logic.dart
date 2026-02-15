@@ -1,6 +1,5 @@
-import 'package:alert/widget.dart' show Dialog,Custom;
+import 'package:alert/widget.dart' show Custom,Dialog;
 import 'package:dependency/dependency.dart';
-import 'package:flutter/cupertino.dart';
 
 class _State {}
 
