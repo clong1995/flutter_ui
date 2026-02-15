@@ -23,7 +23,9 @@ class _Build extends Build<AlertLogic> {
               ),
             ],
           ),
-          SizedBox(height: 10.r,),
+          SizedBox(
+            height: 10.r,
+          ),
           Row(
             spacing: 10.r,
             children: [
@@ -54,6 +56,10 @@ class Custom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('custom');
+    return const UiAlertWidget(
+      title: 'custom',
+      content: Text('custom'),
+      action: [],
+    );
   }
 }

@@ -1,4 +1,4 @@
-import 'package:alert/widget.dart' show Dialog;
+import 'package:alert/widget.dart' show Dialog,Custom;
 import 'package:dependency/dependency.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -18,11 +18,6 @@ class AlertLogic extends Logic<_State> {
   }
 
   Future<void> onCustomTap() async {
-    await UiAlert.custom(
-      builder: () {
-        return Text('data');
-      },
-      title: 'custom',
-    );
+    await UiAlert.dialog(Custom.new);
   }
 }
