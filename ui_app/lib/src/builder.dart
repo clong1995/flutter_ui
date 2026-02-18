@@ -14,6 +14,8 @@ Widget builder(BuildContext context, Widget? child) {
     child: child,
   );
 
+  //final keyboard = child!;
+
   //文字
   final defaultTextStyle = DefaultTextStyle(
     style: TextStyle(

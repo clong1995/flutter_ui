@@ -1,41 +1,18 @@
-name: main
+name: input
 description: "A new Flutter project."
 version: 0.0.1
 homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.10.7
-  flutter: ">=3.38.7"
+  sdk: ^3.11.0
+  flutter: ">=3.41.1"
 
 dependencies:
   flutter:
     sdk: flutter
-  # 外部依赖（精简）
-  package:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: package
-  ui_app:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: ui_app
-  # 项目包
-  splash:
-    path: ../../package/splash
-  # 项目包
-  home:
-    path: ../../package/home
-  page:
-    path: ../../package/page
-  button:
-    path: ../../package/button
-  toast:
-    path: ../../package/toast
-  alert:
-    path: ../../package/alert
-  input:
-    path: ../../package/input
+  dependency:
+    path: ../../dependency
 
 dev_dependencies:
   #flutter_lints: ^6.0.0

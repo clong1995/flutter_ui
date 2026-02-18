@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -151,3 +152,4 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
     widget.onChanged!(n);
   }
 }
+*/

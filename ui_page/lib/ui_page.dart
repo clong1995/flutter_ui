@@ -22,8 +22,8 @@ class UiPage extends StatelessWidget {
   final Widget? title;
   final Widget body;
   final Color backgroundColor;
-  final Widget? appbarLeading;
-  final Widget? appbarAction;
+  final List<Widget>? appbarLeading;
+  final List<Widget>? appbarAction;
   final Color? appbarTextColor;
 
   @override
@@ -43,20 +43,18 @@ class UiPage extends StatelessWidget {
     );
   }
 
-  Widget _body(BuildContext context) {
-    return MediaQuery.removePadding(
-      removeLeft: true,
-      removeTop: true,
-      removeRight: true,
-      removeBottom: true,
-      context: context,
-      child: Container(
-        width: double.infinity,
-        padding: bodyPadding ?? EdgeInsets.fromLTRB(10.r, 10.r, 10.r, 0),
-        child: body,
-      ),
-    );
-  }
+  Widget _body(BuildContext context) => MediaQuery.removePadding(
+    removeLeft: true,
+    removeTop: true,
+    removeRight: true,
+    removeBottom: true,
+    context: context,
+    child: Container(
+      width: double.infinity,
+      padding: bodyPadding ?? EdgeInsets.fromLTRB(10.r, 10.r, 10.r, 0),
+      child: body,
+    ),
+  );
 
   Widget _appBar({required BuildContext context, required Widget title}) {
     final padding = MediaQuery.of(context).padding;
@@ -75,18 +73,18 @@ class UiPage extends StatelessWidget {
             children: [
               Positioned.fill(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  spacing: 5.r,
                   children: [
-                    appbarLeading ??
-                        (Navigator.canPop(context)
-                            ? UiIconButton(
-                                color: appbarTextColor,
-                                background: false,
-                                icon: FontAwesomeIcons.chevronLeft,
-                                onTap: () => Navigator.pop(context),
-                              )
-                            : const SizedBox.shrink()),
-                    appbarAction ?? const SizedBox.shrink(),
+                    if (Navigator.canPop(context))
+                      UiIconButton(
+                        color: appbarTextColor,
+                        background: false,
+                        icon: FontAwesomeIcons.chevronLeft,
+                        onTap: () => Navigator.pop(context),
+                      ),
+                    ...?appbarLeading,
+                    const Spacer(),
+                    ...?appbarAction,
                   ],
                 ),
               ),

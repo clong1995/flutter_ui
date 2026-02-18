@@ -6,6 +6,7 @@ class _State {
     'button',
     'toast',
     'alert',
+    'input',
   ];
 }
 

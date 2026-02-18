@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 
 class UiInputTime extends StatefulWidget {
@@ -64,3 +65,4 @@ class _UiInputTimeState extends State<UiInputTime> {
   String get fmtTime =>
       '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}';
 }
+*/

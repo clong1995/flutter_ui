@@ -11,22 +11,20 @@ class _Build extends Build<PageLogic> {
   Widget build() {
     return UiPage(
        title: const Text('title'),
-      appbarAction: Row(
-        children: [
-          UiIconButton(
-            color: Color(0xFFFFFFFF),
-            background: false,
-            icon: FontAwesomeIcons.arrowsRotate,
-            onTap: () {},
-          ),
-          UiIconButton(
-            color: Color(0xFFFFFFFF),
-            background: false,
-            icon: FontAwesomeIcons.bars,
-            onTap: () {},
-          ),
-        ],
-      ),
+      appbarAction: [
+        UiIconButton(
+          color: Color(0xFFFFFFFF),
+          background: false,
+          icon: FontAwesomeIcons.arrowsRotate,
+          onTap: () {},
+        ),
+        UiIconButton(
+          color: Color(0xFFFFFFFF),
+          background: false,
+          icon: FontAwesomeIcons.bars,
+          onTap: () {},
+        ),
+      ],
       body: Center(
         child: Text('body'),
       ),

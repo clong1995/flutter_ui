@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_app/src/builder.dart';
 import 'package:ui_theme/ui_theme.dart';
@@ -15,6 +16,14 @@ class App extends StatelessWidget {
     return WidgetsApp(
       title: title,
       home: home,
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('zh'), // 中文
+        Locale('en'), // 英语
+      ],
       navigatorKey: navigatorKey,
       pageRouteBuilder: FnNavRouteBuilder.new,
       debugShowCheckedModeBanner: false,

@@ -32,6 +32,9 @@ dependencies:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_alert
 
+  flutter_localizations:
+    sdk: flutter
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

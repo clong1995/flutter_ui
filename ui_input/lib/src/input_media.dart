@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 
 class UiInputMedia extends StatefulWidget {
@@ -104,10 +105,12 @@ class _UiInputMediaState extends State<UiInputMedia> {
                     onTap: () async {
                       //await imageWidget(index);
                     },
-                    /*child: UiCacheImage(
+                    */
+/*child: UiCacheImage(
                       imageList[index],
                       fit: BoxFit.contain,
-                    ),*/
+                    ),*//*
+
                   ),
                   //removeWidget(index),
                 ],
@@ -148,3 +151,4 @@ class NetUrl {
   String upload = '';
   String download = '';
 }
+*/
