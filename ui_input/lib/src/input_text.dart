@@ -66,9 +66,13 @@ class _UiInputTextState extends State<UiInputText> {
     controller = TextEditingController(
       text: widget.text,
     );
-    /*if(widget.autofocus){
-      controller.
-    }*/
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    focusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -160,7 +164,7 @@ class _UiInputTextState extends State<UiInputText> {
       widget.maxLines *
           (textStyle.fontSize ?? 14.r) *
           (textStyle.height ?? 1.25) +
-      2;
+      (decoration.border?.top.width ?? 1) * 2;
 
   BoxDecoration get decoration {
     if (widget.decoration == null) {
