@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:rpx/ext.dart';
 
 Widget builder(BuildContext context, Widget? child) {
+  const color = Color(0xFF333333);
   //空白收起键盘
   final keyboard = GestureDetector(
     behavior: HitTestBehavior.translucent,
@@ -19,7 +20,7 @@ Widget builder(BuildContext context, Widget? child) {
   //文字
   final defaultTextStyle = DefaultTextStyle(
     style: TextStyle(
-      color: const Color(0xFF333333), // 默认文字颜色
+      color: color, // 默认文字颜色
       fontSize: 14.r, // 默认字体大小
     ),
     child: keyboard,
@@ -28,7 +29,7 @@ Widget builder(BuildContext context, Widget? child) {
   //图标
   final iconTheme = IconTheme(
     data: IconThemeData(
-      color: const Color(0xFF333333),
+      color: color,
       size: 14.r,
     ),
     child: defaultTextStyle,

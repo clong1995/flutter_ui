@@ -9,33 +9,29 @@ class UiInputText extends StatefulWidget {
   const UiInputText({
     super.key,
     this.width,
-    //this.height,
     this.maxLines = 1,
     this.text,
     this.leading,
     this.action,
     this.hint,
-    this.borderSide,
     this.style,
     this.keyboardType,
     this.inputFormatters,
-    this.onChanged,
-    this.clear = false,
+    this.decoration,
+    this.padding,
     this.autofocus = false,
     this.obscureText = false,
-    this.padding,
-    this.selection,
+    this.onChanged,
+
+    this.clear = false,
   });
 
   final double? width;
-
-  //final double? height;
   final int maxLines;
   final String? text;
   final List<Widget>? leading;
   final List<Widget>? action;
   final String? hint;
-  final BorderSide? borderSide;
   final TextStyle? style;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
@@ -43,8 +39,8 @@ class UiInputText extends StatefulWidget {
   final bool clear;
   final bool autofocus;
   final bool obscureText;
-  final EdgeInsetsGeometry? padding;
-  final bool? selection;
+  final BoxDecoration? decoration;
+  final EdgeInsets? padding;
 
   @override
   State<UiInputText> createState() => _UiInputTextState();
@@ -54,9 +50,13 @@ class _UiInputTextState extends State<UiInputText> {
   late TextEditingController controller;
   final FocusNode focusNode = FocusNode();
 
-  final defaultTextStyle = TextStyle(
-    color: const Color(0xFF333333),
-    fontSize: 14.r,
+  late TextStyle defaultTextStyle;
+  late EdgeInsets padding;
+
+  final defaultDecoration = BoxDecoration(
+    color: const Color(0xFFFFFFFF),
+    border: Border.all(color: const Color(0xFF9E9E9E)),
+    borderRadius: BorderRadius.circular(5.r),
   );
 
   @override
@@ -65,45 +65,87 @@ class _UiInputTextState extends State<UiInputText> {
     controller = TextEditingController(
       text: widget.text,
     );
+    /*if(widget.autofocus){
+      controller.
+    }*/
+    defaultTextStyle = DefaultTextStyle.of(context).style;
+    padding = widget.padding ?? EdgeInsets.all(5.r);
   }
 
   @override
   Widget build(BuildContext context) {
-    final finalStyle = defaultTextStyle.merge(widget.style);
     return Container(
-      padding: EdgeInsets.all(5.r),
+      padding: padding,
       width: widget.width ?? 128.r,
-      //height: widget.height ?? 128.r,
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFFFFF),
-        border: Border.all(color: const Color(0xFF9E9E9E)),
-        borderRadius: BorderRadius.circular(5.r),
-      ),
+      height: height,
+      decoration: decoration,
       child: Row(
         spacing: 5.r,
         children: [
           ...?widget.leading,
           Expanded(
-            child: EditableText(
-              controller: controller,
-              focusNode: focusNode,
-              obscureText: widget.obscureText,
-              style: finalStyle,
-              maxLines: widget.maxLines,
-              cursorColor: UiTheme.primaryColor,
-              backgroundCursorColor: const Color(0xFFEEEEEE),
-              selectionColor: UiTheme.primaryColor.withAlpha(50),
-              showSelectionHandles: true,
-              selectionControls: materialTextSelectionControls,
-              contextMenuBuilder: (context, editableTextState) =>
-                  AdaptiveTextSelectionToolbar.editableText(
-                    editableTextState: editableTextState,
-                  ),
-            ),
+            child: widget.hint != null ? hint : editableText,
           ),
           ...?widget.action,
         ],
       ),
     );
   }
+
+  Widget get hint => Stack(
+    children: [
+      ValueListenableBuilder<TextEditingValue>(
+        valueListenable: controller,
+        builder: (_, value, _) {
+          return value.text.isEmpty
+              ? Text(
+                  widget.hint!,
+                  style: textStyle.copyWith(
+                    color: const Color(0xFF9E9E9E),
+                    fontWeight: FontWeight.normal,
+                  ),
+                )
+              : const SizedBox.shrink();
+        },
+      ),
+      editableText,
+    ],
+  );
+
+  Widget get editableText => EditableText(
+    autofocus: widget.autofocus,
+    keyboardType: widget.keyboardType,
+    inputFormatters: widget.inputFormatters,
+    controller: controller,
+    focusNode: focusNode,
+    readOnly: widget.onChanged == null,
+    obscureText: widget.obscureText,
+    style: textStyle,
+    maxLines: widget.maxLines,
+    cursorColor: UiTheme.primaryColor,
+    backgroundCursorColor: const Color(0xFFEEEEEE),
+    selectionColor: UiTheme.primaryColor.withAlpha(50),
+    showSelectionHandles: true,
+    selectionControls: materialTextSelectionControls,
+    contextMenuBuilder: (context, editableTextState) =>
+        AdaptiveTextSelectionToolbar.editableText(
+          editableTextState: editableTextState,
+        ),
+  );
+
+  double get height =>
+      padding.bottom + widget.maxLines * (textStyle.fontSize ?? 0);
+
+  BoxDecoration get decoration {
+    if (widget.decoration == null) {
+      return defaultDecoration;
+    }
+    return widget.decoration!.copyWith(
+      color: defaultDecoration.color,
+      border: defaultDecoration.border,
+      borderRadius: defaultDecoration.borderRadius,
+    );
+  }
+
+  TextStyle get textStyle => defaultTextStyle.merge(widget.style);
 }
