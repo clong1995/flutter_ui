@@ -1,6 +1,6 @@
 name: ui_input
 description: "A new Flutter project."
-version: 0.1.2
+version: 0.1.3
 homepage: flutter_ui
 publish_to: none
 
@@ -19,6 +19,11 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_theme
+  ui_button:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_button
+  font_awesome_flutter: ^10.12.0
 
 dev_dependencies:
   #flutter_lints: ^6.0.0

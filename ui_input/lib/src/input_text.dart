@@ -2,7 +2,9 @@ import 'package:flutter/material.dart'
     show AdaptiveTextSelectionToolbar, materialTextSelectionControls;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpx/ext.dart';
+import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiInputText extends StatefulWidget {
@@ -22,7 +24,6 @@ class UiInputText extends StatefulWidget {
     this.autofocus = false,
     this.obscureText = false,
     this.onChanged,
-
     this.clear = false,
   });
 
@@ -68,12 +69,13 @@ class _UiInputTextState extends State<UiInputText> {
     /*if(widget.autofocus){
       controller.
     }*/
-    defaultTextStyle = DefaultTextStyle.of(context).style;
-    padding = widget.padding ?? EdgeInsets.all(5.r);
   }
 
   @override
   Widget build(BuildContext context) {
+    defaultTextStyle = DefaultTextStyle.of(context).style;
+    padding =
+        widget.padding ?? EdgeInsets.symmetric(horizontal: 5.r, vertical: 3.r);
     return Container(
       padding: padding,
       width: widget.width ?? 128.r,
@@ -86,6 +88,7 @@ class _UiInputTextState extends State<UiInputText> {
           Expanded(
             child: widget.hint != null ? hint : editableText,
           ),
+          if (widget.clear) close,
           ...?widget.action,
         ],
       ),
@@ -101,7 +104,9 @@ class _UiInputTextState extends State<UiInputText> {
               ? Text(
                   widget.hint!,
                   style: textStyle.copyWith(
-                    color: const Color(0xFF9E9E9E),
+                    color:
+                        textStyle.color?.withAlpha(100) ??
+                        const Color(0xFF9E9E9E),
                     fontWeight: FontWeight.normal,
                   ),
                 )
@@ -110,6 +115,21 @@ class _UiInputTextState extends State<UiInputText> {
       ),
       editableText,
     ],
+  );
+
+  Widget get close => ValueListenableBuilder<TextEditingValue>(
+    valueListenable: controller,
+    builder: (_, value, _) {
+      return value.text.isEmpty
+          ? const SizedBox.shrink()
+          : UiIconButton(
+              icon: FontAwesomeIcons.circleXmark,
+              onTap: () {
+                controller.clear();
+                widget.onChanged?.call('');
+              },
+            );
+    },
   );
 
   Widget get editableText => EditableText(
@@ -124,17 +144,23 @@ class _UiInputTextState extends State<UiInputText> {
     maxLines: widget.maxLines,
     cursorColor: UiTheme.primaryColor,
     backgroundCursorColor: const Color(0xFFEEEEEE),
-    selectionColor: UiTheme.primaryColor.withAlpha(50),
+    selectionColor: UiTheme.primaryColor.withAlpha(100),
     showSelectionHandles: true,
     selectionControls: materialTextSelectionControls,
     contextMenuBuilder: (context, editableTextState) =>
         AdaptiveTextSelectionToolbar.editableText(
           editableTextState: editableTextState,
         ),
+    onChanged: widget.onChanged,
   );
 
   double get height =>
-      padding.bottom + widget.maxLines * (textStyle.fontSize ?? 0);
+      padding.top +
+      padding.bottom +
+      widget.maxLines *
+          (textStyle.fontSize ?? 14.r) *
+          (textStyle.height ?? 1.25) +
+      2;
 
   BoxDecoration get decoration {
     if (widget.decoration == null) {

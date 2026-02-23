@@ -15,14 +15,20 @@ class _Build extends Build<InputLogic> {
         children: [
           Row(
             spacing: 10.r,
-            children: const [
-              Text('input:'),
+            children: [
+              const Text('input:'),
               UiInputText(
-                // text: 'text',
+                clear: true,
+                hint: 'hello',
+                onChanged: (value) {
+                  print('value:' + value);
+                },
               ),
             ],
           ),
-          SizedBox(height: 10.r,),
+          SizedBox(
+            height: 10.r,
+          ),
         ],
       ),
     );
