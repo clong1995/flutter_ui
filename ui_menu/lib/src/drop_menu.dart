@@ -87,7 +87,7 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
                     FaIcon(
                       FontAwesomeIcons.caretDown,
                       color: const Color(0xDD000000),
-                      size: 20.r,
+                      size: 16.r,
                     ),
                   ],
                 ),
