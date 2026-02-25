@@ -38,7 +38,7 @@ class UiButton extends StatelessWidget {
       height: height ?? 28.r,
       alignment: Alignment.center,
       child: DefaultTextStyle.merge(
-        style: TextStyle(color: background ? Color(0xFFFFFFFF) : color),
+        style: TextStyle(color: background ? const Color(0xFFFFFFFF) : color),
         child: IconTheme.merge(
           data: const IconThemeData(
             color: Color(0xFFFFFFFF),

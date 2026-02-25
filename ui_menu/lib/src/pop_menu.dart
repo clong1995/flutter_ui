@@ -1,4 +1,7 @@
-import 'package:flutter/material.dart';
+
+import 'package:flutter/material.dart' show PopupMenuItem, showMenu;
+import 'package:flutter/widgets.dart';
+import 'package:rpx/ext.dart';
 
 class UiPopMenu<T> extends StatelessWidget {
   const UiPopMenu({
@@ -15,7 +18,7 @@ class UiPopMenu<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final key = GlobalKey();
-    return InkWell(
+    return GestureDetector(
       key: key,
       onTap: onTap == null
           ? null
@@ -39,14 +42,14 @@ Future<T?> _showPopupMenu<T>({
 }) async {
   final renderBox = key.currentContext!.findRenderObject()! as RenderBox;
   final offset = renderBox.localToGlobal(Offset.zero);
-  const double height = 35;
+  double height = 35.r;
   final result = await showMenu<T>(
     context: context,
-    color: Colors.white,
+    color: const Color(0xFFFFFFFF),
     menuPadding: EdgeInsets.zero,
     position: RelativeRect.fromLTRB(
       offset.dx,
-      offset.dy + renderBox.size.height + 5,
+      offset.dy + renderBox.size.height + 5.r,
       offset.dx + renderBox.size.width,
       offset.dy + height * items.length,
     ),

@@ -5,18 +5,28 @@ homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.10.1
-  flutter: ">=3.38.3"
+  sdk: ^3.10.7
+  flutter: ">=3.38.7"
 
 dependencies:
   flutter:
     sdk: flutter
+  font_awesome_flutter: ^10.12.0
+  rpx:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: rpx
+  ui_disable:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_disable
+  ui_theme:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_theme
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  #flutter_lints: ^5.0.0
-  very_good_analysis: ^10.0.0
+  very_good_analysis: ^10.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

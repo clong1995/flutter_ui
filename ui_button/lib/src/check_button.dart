@@ -14,6 +14,9 @@ class UiCheckButton extends StatefulWidget {
 
   final String title;
   final bool checked;
+  
+  //
+  // ignore:avoid_positional_boolean_parameters
   final void Function(bool)? onChanged;
 
   @override

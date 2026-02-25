@@ -1,4 +1,8 @@
-import 'package:flutter/material.dart';
+
+import 'package:flutter/material.dart' show MenuAnchor, MenuItemButton, MenuStyle;
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rpx/ext.dart';
 
 class UiDropMenu<T> extends StatefulWidget {
   const UiDropMenu({
@@ -42,10 +46,10 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
   Widget build(BuildContext context) {
     return MenuAnchor(
       style: const MenuStyle(
-        backgroundColor: WidgetStatePropertyAll(Colors.white),
+        backgroundColor: WidgetStatePropertyAll(Color(0xFFFFFFFF)),
       ),
       builder:
-          (BuildContext context, MenuController controller, Widget? child) {
+          (context, controller, child) {
             return GestureDetector(
               onTap: () {
                 if (controller.isOpen) {
@@ -55,18 +59,18 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
                 }
               },
               child: Container(
-                height: widget.height ?? 30,
-                padding: const EdgeInsets.only(
-                  left: 10,
-                  top: 5,
-                  right: 5,
-                  bottom: 5,
+                height: widget.height ?? 28.r,
+                padding: EdgeInsets.only(
+                  left: 10.r,
+                  top: 5.r,
+                  right: 5.r,
+                  bottom: 5.r,
                 ),
                 width: widget.width,
                 decoration: BoxDecoration(
                   border: Border.all(color: const Color(0x42000000)),
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5.r),
+                  color: const Color(0xFFFFFFFF),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -76,14 +80,14 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
                         child: Text(
                           value == null ? '未选择' : widget.items[value] ?? '无选项',
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(height: 1),
+                          style: TextStyle(height: 1.r),
                         ),
                       ),
                     ),
-                    const Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.black87,
-                      size: 20,
+                    FaIcon(
+                      FontAwesomeIcons.sortDown,
+                      color: const Color(0xDD000000),
+                      size: 20.r,
                     ),
                   ],
                 ),
@@ -94,7 +98,7 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
           .map(
             (e) => SizedBox(
               width: widget.width,
-              height: widget.height ?? 30,
+              height: widget.height ?? 28.r,
               child: MenuItemButton(
                 style: MenuItemButton.styleFrom(padding: EdgeInsets.zero),
                 onPressed: () {

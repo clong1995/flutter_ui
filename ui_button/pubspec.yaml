@@ -26,9 +26,6 @@ dependencies:
       path: ui_theme
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  #flutter_lints: ^5.0.0
   very_good_analysis: ^10.1.0
 
 # For information on the generic Dart part of this file, see the
