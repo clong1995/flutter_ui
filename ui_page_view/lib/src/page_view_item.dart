@@ -3,8 +3,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:fn_nav/fn_nav.dart';
 
-class PageViewItem extends StatefulWidget {
-  const PageViewItem({
+class UiPageViewItem extends StatefulWidget {
+  const UiPageViewItem({
     required this.child,
     super.key,
     this.keepAlive = false,
@@ -16,10 +16,10 @@ class PageViewItem extends StatefulWidget {
   final bool nestRoute;
 
   @override
-  State<PageViewItem> createState() => _PageViewItemState();
+  State<UiPageViewItem> createState() => _UiPageViewItemState();
 }
 
-class _PageViewItemState extends State<PageViewItem>
+class _UiPageViewItemState extends State<UiPageViewItem>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => widget.keepAlive;
