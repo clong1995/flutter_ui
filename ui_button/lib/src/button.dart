@@ -40,8 +40,8 @@ class UiButton extends StatelessWidget {
       child: DefaultTextStyle.merge(
         style: TextStyle(color: background ? const Color(0xFFFFFFFF) : color),
         child: IconTheme.merge(
-          data: const IconThemeData(
-            color: Color(0xFFFFFFFF),
+          data: IconThemeData(
+            color: background ? const Color(0xFFFFFFFF) : color,
           ),
           child: this.child,
         ),
