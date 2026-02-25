@@ -45,23 +45,27 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
     child: Row(
       children: widget.items
           .map(
-            (e) => e.isSpacer
-                ? e.item
-                : Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        if (currIndex == e.index) {
-                          return;
-                        }
-                        currIndex = e.index;
-                        setState(() {});
-                        widget.controller.jumpToPage(e.index);
-                      },
-                      child: currIndex == e.index
-                          ? e.selectedItem ?? e.item
-                          : e.item,
-                    ),
-                  ),
+            (e) {
+              final item = e.itemBuilder(false);
+              final selectedItem = e.itemBuilder(true);
+              return e.isSpacer
+                  ? item
+                  : Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    if (currIndex == e.index) {
+                      return;
+                    }
+                    currIndex = e.index;
+                    setState(() {});
+                    widget.controller.jumpToPage(e.index);
+                  },
+                  child: currIndex == e.index
+                      ? selectedItem
+                      : item,
+                ),
+              );
+            },
           )
           .toList(),
     ),
@@ -70,7 +74,7 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
   void indexItem() {
     var index = -1;
     for (var i = 0; i < widget.items.length; i++) {
-      if (widget.items[i].isSpacer != true) {
+      if (!widget.items[i].isSpacer) {
         index++;
         widget.items[i].index = index;
       }
@@ -80,13 +84,16 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
 
 class UiPageViewBottomBarItem {
   UiPageViewBottomBarItem({
-    required this.item,
-    this.selectedItem,
+    required this.itemBuilder,
     this.isSpacer = false,
   });
 
   final bool isSpacer;
-  final Widget item;
-  final Widget? selectedItem;
+
+  //
+  // ignore:avoid_positional_boolean_parameters
+  final Widget Function(bool) itemBuilder;
+
+  @protected
   int index = 0;
 }
