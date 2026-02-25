@@ -63,9 +63,9 @@ class _UiTableState extends State<UiTable> {
     headerHeight = widget.headerHeight.roundToDouble();
     cellHeight = widget.cellHeight.roundToDouble();
 
-    for (var i = 0; i < widget.cellsWidth.length; i++) {
+    /*for (var i = 0; i < widget.cellsWidth.length; i++) {
       widget.cellsWidth[i] = widget.cellsWidth[i].roundToDouble();
-    }
+    }*/
 
     leftFix = widget.cellsWidth.first;
     rightFix = widget.cellsWidth.last + track;
