@@ -1,9 +1,23 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Scrollbar;
+import 'package:flutter/widgets.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 
 class UiTable extends StatefulWidget {
+  const UiTable({
+    required this.cellsWidth,
+    required this.head,
+    required this.data,
+    super.key,
+    this.borderColor,
+    this.headColor,
+    this.headerHeight = 40,
+    this.evenColor,
+    this.oddColor,
+    this.cellHeight = 40,
+  });
+
   final List<double> cellsWidth;
   final UiTableItem head;
   final List<UiTableItem> data;
@@ -13,19 +27,6 @@ class UiTable extends StatefulWidget {
   final Color? borderColor;
   final Color? evenColor;
   final Color? oddColor;
-
-  const UiTable({
-    super.key,
-    required this.cellsWidth,
-    required this.head,
-    required this.data,
-    this.borderColor,
-    this.headColor,
-    this.headerHeight = 40,
-    this.evenColor,
-    this.oddColor,
-    this.cellHeight = 40,
-  });
 
   @override
   State<UiTable> createState() => _UiTableState();
@@ -62,14 +63,16 @@ class _UiTableState extends State<UiTable> {
     headerHeight = widget.headerHeight.roundToDouble();
     cellHeight = widget.cellHeight.roundToDouble();
 
-    for (int i = 0; i < widget.cellsWidth.length; i++) {
+    for (var i = 0; i < widget.cellsWidth.length; i++) {
       widget.cellsWidth[i] = widget.cellsWidth[i].roundToDouble();
     }
 
     leftFix = widget.cellsWidth.first;
     rightFix = widget.cellsWidth.last + track;
 
-    borderSide = BorderSide(color: widget.borderColor ?? Colors.grey);
+    borderSide = BorderSide(
+      color: widget.borderColor ?? const Color(0xFF9E9E9E),
+    );
 
     scrollVerticalLeftFix = _verticalControllers.addAndGet();
     scrollVerticalRightFix = _verticalControllers.addAndGet();
@@ -140,10 +143,10 @@ class _UiTableState extends State<UiTable> {
               child: ListView.builder(
                 controller: scrollVerticalCenter,
                 itemCount: widget.data.length - 2,
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (context, index) {
                   final item = widget.data[index];
                   return Container(
-                    key: ValueKey("body-center-${item.key}"),
+                    key: ValueKey('body-center-${item.key}'),
                     height: cellHeight,
                     decoration: BoxDecoration(
                       color: indexColor(index),
@@ -155,7 +158,7 @@ class _UiTableState extends State<UiTable> {
                           .asMap()
                           .entries
                           .map(
-                            (MapEntry<int, Widget> e) => Container(
+                            (e) => Container(
                               alignment: Alignment.center,
                               height: double.infinity,
                               width: widget.cellsWidth[e.key + 1],
@@ -184,7 +187,7 @@ class _UiTableState extends State<UiTable> {
               scrollDirection: Axis.horizontal,
               controller: scrollHorizontalBar,
               itemCount: widget.cellsWidth.length - 2,
-              itemBuilder: (BuildContext context, int index) =>
+              itemBuilder: (context, index) =>
                   SizedBox(width: widget.cellsWidth[index + 1]),
             ),
           ),
@@ -204,10 +207,10 @@ class _UiTableState extends State<UiTable> {
               child: ListView.builder(
                 controller: scrollVerticalRightFix,
                 itemCount: widget.data.length,
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (context, index) {
                   final item = widget.data[index];
                   return Container(
-                    key: ValueKey("body-right-${item.key}"),
+                    key: ValueKey('body-right-${item.key}'),
                     alignment: Alignment.center,
                     height: cellHeight,
                     decoration: BoxDecoration(
@@ -230,8 +233,7 @@ class _UiTableState extends State<UiTable> {
               child: ListView.builder(
                 controller: scrollVerticalBar,
                 itemCount: widget.data.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    SizedBox(height: cellHeight),
+                itemBuilder: (context, index) => SizedBox(height: cellHeight),
               ),
             ),
           ),
@@ -249,10 +251,10 @@ class _UiTableState extends State<UiTable> {
             child: ListView.builder(
               controller: scrollVerticalLeftFix,
               itemCount: widget.data.length,
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (context, index) {
                 final item = widget.data[index];
                 return Container(
-                  key: ValueKey("body-left-${item.key}"),
+                  key: ValueKey('body-left-${item.key}'),
                   height: cellHeight,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -275,8 +277,8 @@ class _UiTableState extends State<UiTable> {
 
   //head ===
   Widget _buildHeaderRight() {
-    if (widget.cellsWidth.last == 0){
-      return SizedBox.shrink();
+    if (widget.cellsWidth.last == 0) {
+      return const SizedBox.shrink();
     }
     return Container(
       width: rightFix,
@@ -298,7 +300,7 @@ class _UiTableState extends State<UiTable> {
         controller: scrollHorizontalLeftFix,
         scrollDirection: Axis.horizontal,
         itemCount: widget.head.row.length - 2,
-        itemBuilder: (BuildContext context, int index) => Container(
+        itemBuilder: (context, index) => Container(
           width: widget.cellsWidth[index + 1],
           alignment: Alignment.center,
           decoration: BoxDecoration(
@@ -342,25 +344,21 @@ class _UiTableState extends State<UiTable> {
     switch (event.logicalKey.keyLabel) {
       case 'Arrow Right':
         _horizontalControllers.jumpTo(_horizontalControllers.offset + 10);
-        break;
       case 'Arrow Left':
         _horizontalControllers.jumpTo(
           max(0, _horizontalControllers.offset - 10),
         );
-        break;
       case 'Arrow Up':
         _verticalControllers.jumpTo(max(0, _verticalControllers.offset + 10));
-        break;
       case 'Arrow Down':
         _verticalControllers.jumpTo(max(0, _verticalControllers.offset - 10));
-        break;
     }
   }
 }
 
 class UiTableItem {
+  UiTableItem({required this.row, this.key});
+
   final String? key;
   final List<Widget> row;
-
-  UiTableItem({this.key, required this.row});
 }
