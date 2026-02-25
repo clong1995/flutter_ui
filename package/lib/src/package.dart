@@ -1,8 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:fn_nav/fn_nav.dart';
 import 'package:package/package.dart';
 
 class Package {
-  static Future<T?> pushPackage<T extends Object?>(
+
+  static Widget get(String packageName){
+    return Register.get(packageName)();
+  }
+
+  static Future<T?> push<T extends Object?>(
       String packageName, {
         bool root = false,
         Object? args,
@@ -11,7 +17,7 @@ class Package {
     return FnNav.push<T>(page, root: root, args: args);
   }
 
-  static Future<T?> pushAndRemovePackage<T extends Object?>(
+  static Future<T?> pushAndRemove<T extends Object?>(
       String packageName, {
         bool root = false,
         Object? args,
