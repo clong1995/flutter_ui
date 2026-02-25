@@ -14,7 +14,7 @@ void setWidth([double? width]) {
     return;
   }
 
-  switch (defaultTargetPlatform) {
+  /*switch (defaultTargetPlatform) {
     case TargetPlatform.macOS:
     case TargetPlatform.linux:
     case TargetPlatform.windows:
@@ -31,7 +31,8 @@ void setWidth([double? width]) {
     case TargetPlatform.fuchsia:
       // 移动端平台，不执行任何操作
       break;
-  }
+  }*/
+
   final flutterView = PlatformDispatcher.instance.views.first;
   final pw = flutterView.physicalSize.width;
   final ph = flutterView.physicalSize.height;
