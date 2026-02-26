@@ -1,0 +1,4 @@
+flutter_native_splash:
+  image: icon/splash.png
+  color: "#F7F8FA"
+  web_image_mode: center

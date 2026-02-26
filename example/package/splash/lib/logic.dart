@@ -20,7 +20,7 @@ class SplashLogic extends Logic<_State> {
   }
 
   Future<void> _loadData() async {
-    _startTimer(()=>Package.pushAndRemovePackage('home'));
+    _startTimer(()=>Package.pushAndRemove('home'));
   }
 
   void _startTimer(void Function() callback) {

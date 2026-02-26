@@ -20,6 +20,6 @@ class HomeLogic extends Logic<_State> {
   }
 
   Future<void> onTileTap(int index) async {
-    await Package.pushPackage(state.packages[index]);
+    await Package.push(state.packages[index]);
   }
 }
