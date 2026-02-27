@@ -67,7 +67,7 @@ class _UiInputTextState extends State<UiInputText> {
       text: widget.text,
     );
   }
-
+  
   @override
   void dispose() {
     controller.dispose();

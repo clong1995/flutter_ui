@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 
 class UiPageViewBottomBar extends StatefulWidget {
@@ -9,6 +8,7 @@ class UiPageViewBottomBar extends StatefulWidget {
     super.key,
     this.decoration,
     this.padding,
+    this.mainAxisAlignment,
   });
 
   final double height;
@@ -16,6 +16,7 @@ class UiPageViewBottomBar extends StatefulWidget {
   final List<UiPageViewBottomBarItem> items;
   final PageController controller;
   final EdgeInsetsGeometry? padding;
+  final MainAxisAlignment? mainAxisAlignment;
 
   @override
   State<UiPageViewBottomBar> createState() => _UiPageViewBottomBarState();
@@ -43,31 +44,33 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
     decoration: widget.decoration,
     padding: widget.padding,
     child: Row(
-      children: widget.items
-          .map(
-            (e) {
-              final item = e.itemBuilder(false);
-              final selectedItem = e.itemBuilder(true);
-              return e.isSpacer
-                  ? item
-                  : Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    if (currIndex == e.index) {
-                      return;
-                    }
-                    currIndex = e.index;
-                    setState(() {});
-                    widget.controller.jumpToPage(e.index);
-                  },
-                  child: currIndex == e.index
-                      ? selectedItem
-                      : item,
-                ),
-              );
+      mainAxisAlignment: widget.mainAxisAlignment ?? MainAxisAlignment.start,
+      children: widget.items.map(
+        (e) {
+          final item = e.itemBuilder(false);
+          final selectedItem = e.itemBuilder(true);
+
+          final detectorItem = GestureDetector(
+            onTap: () {
+              if (currIndex == e.index) {
+                return;
+              }
+              currIndex = e.index;
+              setState(() {});
+              widget.controller.jumpToPage(e.index);
             },
-          )
-          .toList(),
+            child: currIndex == e.index ? selectedItem : item,
+          );
+
+          return e.isSpacer
+              ? item
+              : widget.mainAxisAlignment == null
+              ? Expanded(
+                  child: detectorItem,
+                )
+              : detectorItem;
+        },
+      ).toList(),
     ),
   );
 
