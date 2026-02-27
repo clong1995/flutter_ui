@@ -25,4 +25,13 @@ class Package {
     final page = Register.get(packageName);
     return FnNav.pushAndRemove<T>(page, root: root, args: args);
   }
+
+  static Future<T?> pushAndReplace<T extends Object?, TO extends Object?>(
+      String packageName, {
+        bool root = false,
+        Object? args,
+      }) {
+    final page = Register.get(packageName);
+    return FnNav.pushAndReplace<T,TO>(page, root: root, args: args);
+  }
 }
