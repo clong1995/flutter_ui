@@ -1,14 +1,16 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class UiList extends StatefulWidget {
-
   const UiList({
-    required this.head, required this.body, super.key,
+    required this.head,
+    required this.body,
+    super.key,
     this.lineMinimumHeight,
     this.headColor,
     this.borderColor,
     this.width,
   });
+
   final List<Widget> head;
   final List<UiListItem> body;
   final double? lineMinimumHeight;
@@ -29,7 +31,7 @@ class _UiListState extends State<UiList> {
   void initState() {
     super.initState();
     width = widget.width ?? [];
-    borderColor = widget.borderColor ?? Colors.grey.shade300;
+    borderColor = widget.borderColor ?? const Color(0xFFE0E0E0);
     constraints = BoxConstraints(minHeight: widget.lineMinimumHeight ?? 30);
   }
 
@@ -57,7 +59,7 @@ class _UiListState extends State<UiList> {
         Expanded(
           child: ListView.builder(
             itemCount: widget.body.length,
-            itemBuilder: (BuildContext context, int index) {
+            itemBuilder: (context, index) {
               final item = widget.body[index];
               return Container(
                 key: ValueKey(item.key),
@@ -79,7 +81,7 @@ class _UiListState extends State<UiList> {
   double getWidth(int index) => index < width.length ? width[index] : 0;
 
   Widget line(List<Widget> children) => Row(
-    children: children.asMap().entries.map((MapEntry<int, Widget> entry) {
+    children: children.asMap().entries.map((entry) {
       final width = getWidth(entry.key);
       final Widget child = Container(
         constraints: constraints,
@@ -98,8 +100,8 @@ class _UiListState extends State<UiList> {
 }
 
 class UiListItem {
-
   UiListItem({required this.row, this.key});
+
   final String? key;
   final List<Widget> row;
 }
