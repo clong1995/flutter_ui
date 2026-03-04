@@ -54,6 +54,8 @@ class _UiInputTextState extends State<UiInputText> {
   late TextStyle defaultTextStyle;
   late EdgeInsets padding;
 
+  bool obscure = true;
+
   final defaultDecoration = BoxDecoration(
     color: const Color(0xFFFFFFFF),
     border: Border.all(color: const Color(0xFF9E9E9E)),
@@ -67,7 +69,7 @@ class _UiInputTextState extends State<UiInputText> {
       text: widget.text,
     );
   }
-  
+
   @override
   void dispose() {
     controller.dispose();
@@ -83,23 +85,31 @@ class _UiInputTextState extends State<UiInputText> {
     return Container(
       padding: padding,
       width: widget.width ?? 128.r,
-      height: height,
-      decoration: decoration,
+      height: height(),
+      decoration: decoration(),
       child: Row(
         spacing: 5.r,
         children: [
           ...?widget.leading,
           Expanded(
-            child: widget.hint != null ? hint : editableText,
+            child: widget.hint != null ? hint() : editableText(),
           ),
-          if (widget.clear) close,
+          if (widget.clear) close(),
           ...?widget.action,
+          if (widget.obscureText)
+            UiIconButton(
+              icon: obscure ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
+              onTap: () {
+                obscure = !obscure;
+                setState(() {});
+              },
+            ),
         ],
       ),
     );
   }
 
-  Widget get hint => Stack(
+  Widget hint() => Stack(
     children: [
       ValueListenableBuilder<TextEditingValue>(
         valueListenable: controller,
@@ -107,9 +117,9 @@ class _UiInputTextState extends State<UiInputText> {
           return value.text.isEmpty
               ? Text(
                   widget.hint!,
-                  style: textStyle.copyWith(
+                  style: textStyle().copyWith(
                     color:
-                        textStyle.color?.withAlpha(100) ??
+                        textStyle().color?.withAlpha(100) ??
                         const Color(0xFF9E9E9E),
                     fontWeight: FontWeight.normal,
                   ),
@@ -117,16 +127,17 @@ class _UiInputTextState extends State<UiInputText> {
               : const SizedBox.shrink();
         },
       ),
-      editableText,
+      editableText(),
     ],
   );
 
-  Widget get close => ValueListenableBuilder<TextEditingValue>(
+  Widget close() => ValueListenableBuilder<TextEditingValue>(
     valueListenable: controller,
     builder: (_, value, _) {
       return value.text.isEmpty
           ? const SizedBox.shrink()
           : UiIconButton(
+              background: false,
               icon: FontAwesomeIcons.circleXmark,
               onTap: () {
                 controller.clear();
@@ -136,15 +147,15 @@ class _UiInputTextState extends State<UiInputText> {
     },
   );
 
-  Widget get editableText => EditableText(
+  Widget editableText() => EditableText(
     autofocus: widget.autofocus,
     keyboardType: widget.keyboardType,
     inputFormatters: widget.inputFormatters,
     controller: controller,
     focusNode: focusNode,
     readOnly: widget.onChanged == null,
-    obscureText: widget.obscureText,
-    style: textStyle,
+    obscureText: widget.obscureText && obscure,
+    style: textStyle(),
     maxLines: widget.maxLines,
     cursorColor: UiTheme.primaryColor,
     backgroundCursorColor: const Color(0xFFEEEEEE),
@@ -158,15 +169,15 @@ class _UiInputTextState extends State<UiInputText> {
     onChanged: widget.onChanged,
   );
 
-  double get height =>
+  double height() =>
       padding.top +
       padding.bottom +
       widget.maxLines *
-          (textStyle.fontSize ?? 14.r) *
-          (textStyle.height ?? 1.25) +
-      (decoration.border?.top.width ?? 1) * 2;
+          (textStyle().fontSize ?? 14.r) *
+          (textStyle().height ?? 1.25) +
+      (decoration().border?.top.width ?? 1) * 2;
 
-  BoxDecoration get decoration {
+  BoxDecoration decoration() {
     if (widget.decoration == null) {
       return defaultDecoration;
     }
@@ -177,5 +188,5 @@ class _UiInputTextState extends State<UiInputText> {
     );
   }
 
-  TextStyle get textStyle => defaultTextStyle.merge(widget.style);
+  TextStyle textStyle() => defaultTextStyle.merge(widget.style);
 }
