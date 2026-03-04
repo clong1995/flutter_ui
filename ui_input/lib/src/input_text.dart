@@ -101,6 +101,7 @@ class _UiInputTextState extends State<UiInputText> {
               background: false,
               icon: obscure ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
               color: obscure ? const Color(0xFF9E9E9E) : null,
+              size: 12.r,
               onTap: () {
                 obscure = !obscure;
                 setState(() {});
