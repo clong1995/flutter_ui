@@ -5,8 +5,8 @@ homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.10.7
-  flutter: ">=3.38.7"
+  sdk: ^3.11.0
+  flutter: ">=3.41.1"
 
 dependencies:
   flutter:
@@ -20,10 +20,10 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_app
+
   # 项目包
   splash:
     path: ../../package/splash
-  # 项目包
   home:
     path: ../../package/home
   page:
@@ -36,10 +36,12 @@ dependencies:
     path: ../../package/alert
   input:
     path: ../../package/input
+  captcha:
+    path: ../../package/captcha
 
 dev_dependencies:
   #flutter_lints: ^6.0.0
-  very_good_analysis: ^10.1.0
+  very_good_analysis: ^10.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -1,8 +1,7 @@
-name: home
+name: captcha
 description: "A new Flutter project."
 version: 0.0.1
-publish_to: none
-homepage: flutter_ui
+homepage:
 
 environment:
   sdk: ^3.11.0

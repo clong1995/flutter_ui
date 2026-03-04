@@ -11,3 +11,4 @@ export 'package:ui_input/ui_input.dart';
 export 'package:ui_page/ui_page.dart';
 export 'package:ui_theme/ui_theme.dart';
 export 'package:ui_toast/ui_toast.dart';
+export 'package:ui_captcha/ui_captcha.dart';

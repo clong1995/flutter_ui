@@ -1,5 +1,6 @@
 import 'package:alert/widget.dart';
 import 'package:button/widget.dart';
+import 'package:captcha/widget.dart';
 import 'package:home/widget.dart';
 import 'package:input/widget.dart';
 import 'package:package/package.dart';
@@ -15,4 +16,5 @@ final PkgReg registers = {
   'toast': toastWidget,
   'alert': alertWidget,
   'input': inputWidget,
+  'captcha': captchaWidget,
 };

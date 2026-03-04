@@ -7,6 +7,7 @@ class _State {
     'toast',
     'alert',
     'input',
+    'captcha',
   ];
 }
 

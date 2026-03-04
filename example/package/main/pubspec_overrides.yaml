@@ -23,3 +23,7 @@ dependency_overrides:
     path: ../../../ui_alert
   logger:
     path: ../../../logger
+  ui_webview:
+    path: ../../../ui_webview
+  ui_captcha:
+    path: ../../../ui_captcha
