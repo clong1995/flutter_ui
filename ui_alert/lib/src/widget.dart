@@ -7,11 +7,13 @@ class UiAlertWidget extends StatelessWidget {
   const UiAlertWidget({
     required this.content,
     this.title,
+    this.cancelText = '取 消',
     super.key,
     this.action,
   });
 
   final String? title;
+  final String cancelText;
   final Widget content;
   final List<Widget>? action;
 
@@ -61,7 +63,7 @@ class UiAlertWidget extends StatelessWidget {
                           UiButton(
                             background: false,
                             onTap: Navigator.of(context).pop,
-                            child: const Text('取 消'),
+                            child: Text(cancelText),
                           ),
                           ...action!,
                         ],
