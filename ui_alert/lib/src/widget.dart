@@ -32,7 +32,7 @@ class UiAlertWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.r),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
               if (title != null)

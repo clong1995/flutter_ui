@@ -58,6 +58,7 @@ class _UiListState extends State<UiList> {
         ),
         Expanded(
           child: ListView.builder(
+            padding: EdgeInsets.zero,
             itemCount: widget.body.length,
             itemBuilder: (context, index) {
               final item = widget.body[index];
