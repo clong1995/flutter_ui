@@ -98,7 +98,9 @@ class _UiInputTextState extends State<UiInputText> {
           ...?widget.action,
           if (widget.obscureText)
             UiIconButton(
+              background: false,
               icon: obscure ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
+              color: obscure ? const Color(0xFF9E9E9E) : null,
               onTap: () {
                 obscure = !obscure;
                 setState(() {});
