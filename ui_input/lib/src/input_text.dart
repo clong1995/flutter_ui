@@ -51,7 +51,6 @@ class _UiInputTextState extends State<UiInputText> {
   late TextEditingController controller;
   final FocusNode focusNode = FocusNode();
 
-  late TextStyle defaultTextStyle;
   late EdgeInsets padding;
 
   bool obscure = true;
@@ -79,9 +78,8 @@ class _UiInputTextState extends State<UiInputText> {
 
   @override
   Widget build(BuildContext context) {
-    defaultTextStyle = DefaultTextStyle.of(context).style;
     padding =
-        widget.padding ?? EdgeInsets.symmetric(horizontal: 5.r, vertical: 3.r);
+        widget.padding ?? EdgeInsets.symmetric(horizontal: 8.r, vertical: 5.r);
     return Container(
       padding: padding,
       width: widget.width ?? 128.r,
@@ -191,5 +189,11 @@ class _UiInputTextState extends State<UiInputText> {
     );
   }
 
-  TextStyle textStyle() => defaultTextStyle.merge(widget.style);
+  TextStyle textStyle() => DefaultTextStyle.of(context).style
+      .merge(
+        TextStyle(
+          fontSize: 14.r,
+        ),
+      )
+      .merge(widget.style);
 }
