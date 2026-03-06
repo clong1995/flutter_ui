@@ -1,24 +1,31 @@
-/*
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rpx/ext.dart';
+import 'package:ui_button/ui_button.dart';
+import 'package:ui_input/ui_input.dart';
 
 class UiInputNumber<T extends num> extends StatefulWidget {
   const UiInputNumber({
-    required this.num,
+    this.num,
     super.key,
     this.width,
-    this.height,
     this.onChanged,
     this.autofocus = false,
     this.style,
+    this.padding,
+    this.decoration,
+    this.controller,
   });
 
   final double? width;
-  final double? height;
-  final T num;
+  final T? num;
   final void Function(T)? onChanged;
   final bool autofocus;
   final TextStyle? style;
+  final EdgeInsets? padding;
+  final BoxDecoration? decoration;
+  final TextEditingController? controller;
 
   @override
   State<UiInputNumber<T>> createState() => _UiInputNumberState<T>();
@@ -27,76 +34,59 @@ class UiInputNumber<T extends num> extends StatefulWidget {
 class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
   late TextEditingController controller;
 
-  late RegExp reg;
-  late double height;
-  late double width;
-  late TextStyle style;
-
   @override
   void initState() {
     super.initState();
-    if (widget.num is int) {
+    controller = widget.controller ?? TextEditingController();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    late RegExp reg;
+    if (T == int) {
       reg = RegExp(r'[0-9\-]');
-    } else if (widget.num is double) {
+    } else if (T == double) {
       reg = RegExp(r'[0-9.\-]');
     }
+    final number = widget.num ?? 0 as T;
 
-    height = widget.height ?? 32;
-    width = widget.width ?? 85;
-    style = widget.style ?? const TextStyle(fontSize: 14);
-    controller = TextEditingController(text: '${widget.num}');
-  }
-
-  @override
-  void didUpdateWidget(UiInputNumber<T> oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    controller.text = '${widget.num}';
-  }
-
-  @override
-  Widget build(BuildContext context) => Container(
-    width: width,
-    height: height,
-    decoration: BoxDecoration(
-      border: Border.all(color: Colors.grey),
-      borderRadius: BorderRadius.circular(5),
-    ),
-    child: Row(
-      children: [
-        IconButton(
-          onPressed: widget.onChanged == null ? null : onSubtractPressed,
-          icon: const Icon(Icons.remove),
-        ),
-        Expanded(
-          child: TextField(
-            textAlign: TextAlign.center,
-            controller: controller,
-            cursorHeight: height * .7,
-            style: style,
-            readOnly: widget.onChanged == null,
-            keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            inputFormatters: [FilteringTextInputFormatter.allow(reg)],
-            onChanged: widget.onChanged == null ? null : onInputChanged,
-            autofocus: widget.autofocus,
-            decoration: const InputDecoration(
-              prefixIconConstraints: BoxConstraints(),
-              contentPadding: EdgeInsets.zero,
-              fillColor: Colors.white,
-              hoverColor: Colors.transparent,
-              filled: true,
-              border: OutlineInputBorder(borderSide: BorderSide.none),
-            ),
-          ),
-        ),
-        IconButton(
-          onPressed: widget.onChanged == null ? null : onPlusPressed,
-          icon: const Icon(Icons.add),
+    return UiInputText(
+      text: '$number',
+      textAlign: TextAlign.center,
+      spacing: 0,
+      width: widget.width ?? 90.r,
+      padding: widget.padding ?? EdgeInsets.symmetric(vertical: 5.r),
+      style: widget.style,
+      autofocus: widget.autofocus,
+      decoration: widget.decoration,
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
+      inputFormatters: [FilteringTextInputFormatter.allow(reg)],
+      controller: controller,
+      onChanged: widget.onChanged == null ? null : onInputChanged,
+      leading: [
+        UiIconButton(
+          background: false,
+          onTap: widget.onChanged == null ? null : onSubtractPressed,
+          icon: FontAwesomeIcons.minus,
         ),
       ],
-    ),
-  );
+      action: [
+        UiIconButton(
+          background: false,
+          onTap: widget.onChanged == null ? null : onPlusPressed,
+          icon: FontAwesomeIcons.plus,
+        ),
+      ],
+    );
+  }
 
-  T? get number {
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  T? numberParse() {
     num? n;
     final text = controller.text;
     if (text.isEmpty) {
@@ -108,11 +98,11 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
       }
     }
 
-    if (widget.num is int) {
+    if (T == int) {
       if (n is double) {
         n = n.toInt();
       }
-    } else if (widget.num is double) {
+    } else if (T == double) {
       if (n is int) {
         n = n.toDouble();
       }
@@ -124,7 +114,7 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
   }
 
   void onSubtractPressed() {
-    final n = number;
+    final n = numberParse();
     if (n == null) {
       return;
     }
@@ -133,7 +123,7 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
   }
 
   void onPlusPressed() {
-    final n = number;
+    final n = numberParse();
     if (n == null) {
       return;
     }
@@ -145,11 +135,10 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
     if (text == '-') {
       return;
     }
-    final n = number;
+    final n = numberParse();
     if (n == null) {
       return;
     }
     widget.onChanged!(n);
   }
 }
-*/

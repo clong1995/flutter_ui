@@ -24,10 +24,14 @@ class UiInputText extends StatefulWidget {
     this.autofocus = false,
     this.obscureText = false,
     this.onChanged,
+    this.controller,
     this.clear = false,
+    this.spacing,
+    this.textAlign,
   });
 
   final double? width;
+  final double? spacing;
   final int maxLines;
   final String? text;
   final List<Widget>? leading;
@@ -42,6 +46,8 @@ class UiInputText extends StatefulWidget {
   final bool obscureText;
   final BoxDecoration? decoration;
   final EdgeInsets? padding;
+  final TextEditingController? controller;
+  final TextAlign? textAlign;
 
   @override
   State<UiInputText> createState() => _UiInputTextState();
@@ -64,9 +70,7 @@ class _UiInputTextState extends State<UiInputText> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController(
-      text: widget.text,
-    );
+    controller = widget.controller ?? TextEditingController();
   }
 
   @override
@@ -78,6 +82,7 @@ class _UiInputTextState extends State<UiInputText> {
 
   @override
   Widget build(BuildContext context) {
+    controller.text = widget.text ?? '';
     padding =
         widget.padding ?? EdgeInsets.symmetric(horizontal: 8.r, vertical: 5.r);
     return Container(
@@ -86,7 +91,7 @@ class _UiInputTextState extends State<UiInputText> {
       height: height(),
       decoration: decoration(),
       child: Row(
-        spacing: 5.r,
+        spacing: widget.spacing ?? 5.r,
         children: [
           ...?widget.leading,
           Expanded(
@@ -149,6 +154,7 @@ class _UiInputTextState extends State<UiInputText> {
   );
 
   Widget editableText() => EditableText(
+    textAlign: widget.textAlign ?? TextAlign.start,
     autofocus: widget.autofocus,
     keyboardType: widget.keyboardType,
     inputFormatters: widget.inputFormatters,

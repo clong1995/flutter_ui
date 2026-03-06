@@ -21,7 +21,22 @@ class _Build extends Build<InputLogic> {
                 clear: true,
                 hint: 'hello',
                 onChanged: (value) {
-                  print('value:' + value);
+                  print('value:$value');
+                },
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 10.r,
+          ),
+          Row(
+            spacing: 10.r,
+            children: [
+              const Text('number:'),
+              UiInputNumber<int>(
+                num: 16,
+                onChanged: (value) {
+                  print('value:$value');
                 },
               ),
             ],
