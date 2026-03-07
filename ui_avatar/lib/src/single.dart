@@ -36,7 +36,7 @@ class UiAvatarSingle extends StatelessWidget {
             padding: EdgeInsets.all(padding),
             child: (imageUrl == null || imageUrl == '')
                 ? FaIcon(
-                    FontAwesomeIcons.person,
+                    FontAwesomeIcons.circleUser,
                     color: const Color(0xFF9E9E9E),
                     size: size / 1.3,
                   )
