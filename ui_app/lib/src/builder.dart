@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 Widget builder(BuildContext context, Widget? child) {
-  const color = Color(0xFF333333);
+  const color = UiTheme.gary900;
   //空白收起键盘
   final keyboard = GestureDetector(
     behavior: HitTestBehavior.translucent,

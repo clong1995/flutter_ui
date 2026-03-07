@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_app/src/widget.dart';
+import 'package:ui_theme/ui_theme.dart';
 import 'package:ui_toast/ui_toast.dart';
 
 Future<void> uiApp({
@@ -17,8 +18,8 @@ Future<void> uiApp({
     const SystemUiOverlayStyle(
       statusBarBrightness: Brightness.light,
       statusBarIconBrightness: Brightness.light,
-      statusBarColor: Color(0x00000000),
-      systemNavigationBarColor: Color(0x00000000),
+      statusBarColor: UiTheme.transparent,
+      systemNavigationBarColor: UiTheme.transparent,
     ),
   );
 
