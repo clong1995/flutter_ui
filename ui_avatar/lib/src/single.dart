@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
 class UiAvatarSingle extends StatelessWidget {
@@ -34,7 +35,11 @@ class UiAvatarSingle extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(padding),
             child: (imageUrl == null || imageUrl == '')
-                ? Icon(Icons.person, color: Colors.grey, size: size / 1.3)
+                ? FaIcon(
+                    FontAwesomeIcons.person,
+                    color: const Color(0xFF9E9E9E),
+                    size: size / 1.3,
+                  )
                 : ClipRRect(
                     borderRadius: BorderRadius.circular(size / 10),
                     child: imageUrl!.startsWith('http')

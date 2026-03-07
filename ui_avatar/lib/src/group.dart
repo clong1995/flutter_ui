@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:rpx/ext.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
 class UiAvatarGroup extends StatelessWidget {
@@ -10,8 +11,8 @@ class UiAvatarGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final decoration = BoxDecoration(
-      color: Colors.grey.shade200,
-      borderRadius: BorderRadius.circular(4),
+      color: const Color(0xFFEEEEEE),
+      borderRadius: BorderRadius.circular(5.r),
     );
 
     if (images.isEmpty) {

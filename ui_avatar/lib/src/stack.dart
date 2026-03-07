@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:rpx/ext.dart';
 import 'package:ui_avatar/src/single.dart';
 
 class UiAvatarStack extends StatelessWidget {
@@ -6,15 +7,16 @@ class UiAvatarStack extends StatelessWidget {
     required this.images,
     super.key,
     this.max = 5,
-    this.height = 26,
+    this.height,
   });
 
   final int max;
-  final double height;
+  final double? height;
   final List<String> images;
 
   @override
   Widget build(BuildContext context) {
+    final h = height ?? 26.r;
     var length = images.length;
     if (length <= 0) {
       return const SizedBox.shrink();
@@ -22,12 +24,12 @@ class UiAvatarStack extends StatelessWidget {
     if (length > max) {
       length = max;
     }
-    final offset = height / 3;
-    final width = length * height - (length - 1) * offset;
+    final offset = h / 3;
+    final width = length * h - (length - 1) * offset;
     final list = images.sublist(0, length);
     return SizedBox(
       width: width,
-      height: height,
+      height: h,
       child: Stack(
         children: list
             .asMap()
@@ -35,11 +37,14 @@ class UiAvatarStack extends StatelessWidget {
             .map((entry) {
               final index = entry.key;
               return Positioned(
-                left: (index * height) - index * offset,
+                left: (index * h) - index * offset,
                 child: UiAvatarSingle(
                   imageUrl: entry.value,
-                  size: height,
-                  border: Border.all(color: Colors.white, width: 2),
+                  size: h,
+                  border: Border.all(
+                    color: const Color(0xFFFFFFFF),
+                    width: 2.r,
+                  ),
                 ),
               );
             })
