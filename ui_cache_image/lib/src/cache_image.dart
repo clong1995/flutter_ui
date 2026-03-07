@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart';
 
 import 'package:ui_cache_image/src/common.dart';
@@ -18,7 +19,7 @@ class UiCacheImage extends StatefulWidget {
 }
 
 class _UiCacheImageState extends State<UiCacheImage> {
-  Widget? image;
+  late Widget image;
   bool loading = true;
 
   @override
@@ -67,13 +68,13 @@ class _UiCacheImageState extends State<UiCacheImage> {
 
     debugPrint('request new image error: ${response.statusCode}');
 
-    return const Icon(Icons.image_outlined);
+    return const FaIcon(FontAwesomeIcons.linkSlash);
   }
 
   @override
   Widget build(BuildContext context) {
     //print(loading);
-    if (loading) return const Center(child: CircularProgressIndicator());
-    return image ?? const Icon(Icons.broken_image);
+    if (loading) return const Center(child: FaIcon(FontAwesomeIcons.spinner));
+    return image;
   }
 }
