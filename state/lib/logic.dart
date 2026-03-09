@@ -19,9 +19,10 @@ abstract class Logic<S> {
       _listeners[const ValueKey<dynamic>('_')]?.call(() {});
       return;
     }
-    _listeners.forEach((ValueKey<dynamic> key, StateSetter func) {
-      if (keys.contains(key)) func.call(() {});
-    });
+
+    for (final key in keys) {
+      _listeners[key]?.call(() {});
+    }
   }
 
   late final StreamSubscription<_Event> _subscription;
