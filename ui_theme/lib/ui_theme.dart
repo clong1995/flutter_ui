@@ -29,4 +29,8 @@ class UiTheme {
 
   //white
   static const Color white = Color(0xFFFFFFFF);
+  //white
+  static const Color black = Color(0xFF000000);
+  //green
+  static const Color green = Color(0xFF4CAF50);
 }
