@@ -9,6 +9,7 @@ import 'package:ui_toast/ui_toast.dart';
 Future<void> uiApp({
   required Widget home,
   String? title,
+  Widget Function(BuildContext, Widget?)? builder,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
   //增加图片缓存
@@ -50,6 +51,7 @@ Future<void> uiApp({
       navigatorKey: navigatorKey,
       title: title,
       home: home,
+      builder: builder,
     ),
   );
 }
