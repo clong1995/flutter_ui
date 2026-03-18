@@ -1,8 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show TabAlignment, TabBar, TabController, kTabScrollDuration;
+import 'package:flutter/widgets.dart';
 import 'package:fn_device/fn_device.dart';
+import 'package:rpx/ext.dart';
+import 'package:ui_theme/ui_theme.dart';
 
 class UiBanner extends StatefulWidget {
   const UiBanner({
@@ -121,7 +123,7 @@ class _UiBannerState extends State<UiBanner>
                 child: PageView.builder(
                   scrollDirection: widget.scrollDirection,
                   controller: pageController,
-                  itemBuilder: (BuildContext context, int index) =>
+                  itemBuilder: (context, index) =>
                       widget.children[index % widget.children.length],
                   onPageChanged: onPageChanged,
                 ),
@@ -137,11 +139,11 @@ class _UiBannerState extends State<UiBanner>
                         tabAlignment: TabAlignment.center,
                         labelPadding: EdgeInsets.zero,
                         dividerHeight: 0,
-                        indicatorColor: Theme.of(context).primaryColor,
+                        indicatorColor: UiTheme.primaryColor,
                         controller: indicatorController,
                         tabs: List<Widget>.generate(
                           widget.children.length,
-                          (int index) => const SizedBox(width: 24),
+                          (index) => SizedBox(width: 24.r),
                         ),
                       ),
                     ),
@@ -163,7 +165,7 @@ class _UiBannerState extends State<UiBanner>
 
   Timer tickerStart() {
     ticker?.cancel();
-    return Timer.periodic(const Duration(seconds: 2), (Timer timer) async {
+    return Timer.periodic(const Duration(seconds: 2), (timer) async {
       if (widget.children.isEmpty) {
         return;
       }
@@ -200,12 +202,12 @@ class _UiBannerState extends State<UiBanner>
     }
     if (touch) {
       return GestureDetector(
-        onTapDown: (TapDownDetails detail) {
+        onTapDown: (detail) {
           if (widget.auto) {
             ticker?.cancel();
           }
         },
-        onTapUp: (TapUpDetails detail) {
+        onTapUp: (detail) {
           if (widget.auto) {
             ticker = tickerStart();
           }
@@ -214,12 +216,12 @@ class _UiBannerState extends State<UiBanner>
       );
     }
     return MouseRegion(
-      onEnter: (PointerEnterEvent event) {
+      onEnter: (event) {
         if (widget.auto) {
           ticker?.cancel();
         }
       },
-      onExit: (PointerExitEvent event) {
+      onExit: (event) {
         if (widget.auto) {
           ticker = tickerStart();
         }
