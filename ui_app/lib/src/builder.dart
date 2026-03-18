@@ -9,10 +9,10 @@ Widget appBuilder(
   const color = UiTheme.gary900;
 
   late Widget builderWidget;
-  if (builder != null) {
-    builderWidget = builder(context, child);
-  }else {
+  if (builder == null) {
     builderWidget = child!;
+  }else {
+    builderWidget = builder(context, child);
   }
 
   //空白收起键盘

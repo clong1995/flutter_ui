@@ -38,7 +38,7 @@ class UiSimulator extends StatelessWidget {
       0,
       device == UiSimulatorDevice.web ? 0 : paddingTop,
       0,
-      paddingBottom,
+      device == UiSimulatorDevice.web ? 0 :paddingBottom,
     );
     return MediaQuery(
       data: mediaQueryData.copyWith(
