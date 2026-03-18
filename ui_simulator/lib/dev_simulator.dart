@@ -6,7 +6,7 @@ import 'package:ui_theme/ui_theme.dart';
 enum UiSimulatorDevice {
   ios,
   android, //还没有
-  web
+  web,
 }
 
 //尺寸: 340 * 740
@@ -38,7 +38,7 @@ class UiSimulator extends StatelessWidget {
       0,
       device == UiSimulatorDevice.web ? 0 : paddingTop,
       0,
-      device == UiSimulatorDevice.web ? 0 :paddingBottom,
+      device == UiSimulatorDevice.web ? 0 : paddingBottom,
     );
     return MediaQuery(
       data: mediaQueryData.copyWith(
@@ -60,7 +60,13 @@ class UiSimulator extends StatelessWidget {
                     height: 40.r + paddingTop,
                     alignment: Alignment.center,
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 15.r,vertical: 5.r),
+                      margin: EdgeInsets.symmetric(
+                        horizontal: 15.r,
+                        vertical: 5.r,
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10.r,
+                      ),
                       //height: paddingTop * .85,
                       //width: mediaQueryData.size.width * .95,
                       decoration: BoxDecoration(
@@ -81,7 +87,7 @@ class UiSimulator extends StatelessWidget {
                                 'Web Simulator',
                                 style: TextStyle(
                                   fontSize: 12.r,
-                                  fontWeight: FontWeight.bold
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
