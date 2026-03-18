@@ -7,6 +7,14 @@ Widget appBuilder(
   Widget Function(BuildContext, Widget?)? builder,
 ) {
   const color = UiTheme.gary900;
+
+  late Widget builderWidget;
+  if (builder != null) {
+    builderWidget = builder(context, child);
+  }else {
+    builderWidget = child!;
+  }
+
   //空白收起键盘
   final keyboard = GestureDetector(
     behavior: HitTestBehavior.translucent,
@@ -16,7 +24,7 @@ Widget appBuilder(
         FocusManager.instance.primaryFocus?.unfocus();
       }
     },
-    child: child,
+    child: builderWidget,
   );
 
   //final keyboard = child!;
@@ -63,11 +71,6 @@ Widget appBuilder(
     ),
     child: scrollConfiguration,
   );
-
-  //外部的builder
-  if(builder != null){
-    return builder(context,mediaQuery);
-  }
 
   return mediaQuery;
 }
