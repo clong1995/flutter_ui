@@ -5,11 +5,18 @@ import 'package:ui_app/src/builder.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class App extends StatelessWidget {
-  const App({required this.home, this.navigatorKey, super.key, this.title});
+  const App({
+    required this.home,
+    this.navigatorKey,
+    super.key,
+    this.title,
+    this.builder,
+  });
 
   final String? title;
   final Widget home;
   final GlobalKey<NavigatorState>? navigatorKey;
+  final Widget Function(BuildContext, Widget?)? builder;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +35,9 @@ class App extends StatelessWidget {
       pageRouteBuilder: FnNavRouteBuilder.new,
       debugShowCheckedModeBanner: false,
       color: UiTheme.primaryColor,
-      builder: builder,
+      builder: (context, child){
+       return appBuilder(context,child,builder);
+      },
       locale: const Locale('zh', 'CN'),
     );
   }
