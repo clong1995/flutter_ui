@@ -80,7 +80,7 @@ class UiSimulator extends StatelessWidget {
                               child: Text(
                                 'Web Simulator',
                                 style: TextStyle(
-                                  fontSize: 14.r,
+                                  fontSize: 12.r,
                                 ),
                               ),
                             ),
