@@ -81,6 +81,7 @@ class UiSimulator extends StatelessWidget {
                                 'Web Simulator',
                                 style: TextStyle(
                                   fontSize: 12.r,
+                                  fontWeight: FontWeight.bold
                                 ),
                               ),
                             ),
