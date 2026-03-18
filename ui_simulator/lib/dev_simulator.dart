@@ -57,12 +57,12 @@ class UiSimulator extends StatelessWidget {
                   Container(
                     color: UiTheme.white,
                     padding: EdgeInsets.only(top: paddingTop),
-                    height: paddingTop * 2,
+                    height: 40.r + paddingTop,
                     alignment: Alignment.center,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      height: paddingTop * .85,
-                      width: mediaQueryData.size.width * .95,
+                      margin: EdgeInsets.symmetric(horizontal: 15.r,vertical: 5.r),
+                      //height: paddingTop * .85,
+                      //width: mediaQueryData.size.width * .95,
                       decoration: BoxDecoration(
                         color: const Color.fromRGBO(227, 227, 227, 1),
                         //border: Border.all(color: UiTheme.grey.shade300),
