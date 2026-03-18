@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_button/ui_button.dart';
@@ -78,7 +79,7 @@ class UiPage extends StatelessWidget {
                       UiIconButton(
                         color: appbarTextColor,
                         background: false,
-                        icon: FontAwesomeIcons.chevronLeft,
+                        icon: Icons.arrow_back_ios_new_rounded,
                         onTap: () => Navigator.pop(context),
                       ),
                     ...?appbarLeading,
