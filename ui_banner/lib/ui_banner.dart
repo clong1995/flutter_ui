@@ -165,7 +165,7 @@ class _UiBannerState extends State<UiBanner>
 
   Timer tickerStart() {
     ticker?.cancel();
-    return Timer.periodic(const Duration(seconds: 2), (timer) async {
+    return Timer.periodic(const Duration(seconds: 5), (timer) async {
       if (widget.children.isEmpty) {
         return;
       }
