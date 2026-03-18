@@ -1,5 +1,5 @@
+import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_disable/ui_disable.dart';
 import 'package:ui_theme/ui_theme.dart';
@@ -30,7 +30,7 @@ class DeleteButton extends StatelessWidget {
           SizedBox(width: 5.r),
           Text(title, style: TextStyle(color: color)),
           SizedBox(width: 5.r),
-          FaIcon(FontAwesomeIcons.xmark,color: color,),
+          Icon(Icons.close_rounded,color: color,),
           SizedBox(width: 5.r),
         ],
       ),

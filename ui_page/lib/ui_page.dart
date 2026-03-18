@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';

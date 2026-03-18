@@ -1,5 +1,5 @@
+import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_disable/ui_disable.dart';
 import 'package:ui_theme/ui_theme.dart';
@@ -41,10 +41,10 @@ class _UiCheckButtonState extends State<UiCheckButton> {
         children: [
           SizedBox(width: 5.r),
           if (widget.checked)
-            FaIcon(FontAwesomeIcons.squareCheck, color: color)
+            Icon(Icons.check_box_rounded, color: color)
           else
-            const FaIcon(
-              FontAwesomeIcons.square,
+            const Icon(
+              Icons.check_box_outline_blank_rounded,
               color: Color(0xFF9E9E9E),
             ),
           SizedBox(width: 5.r),
