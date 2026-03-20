@@ -5,8 +5,8 @@ publish_to: none
 homepage: flutter_ui
 
 environment:
-  sdk: ^3.11.0
-  flutter: ">=3.41.1"
+  sdk: ^3.11.1
+  flutter: ">=3.41.4"
 
 dependencies:
   flutter:

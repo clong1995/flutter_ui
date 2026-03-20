@@ -27,3 +27,5 @@ dependency_overrides:
     path: ../../../ui_webview
   ui_captcha:
     path: ../../../ui_captcha
+  ui_input:
+    path: ../../../ui_input

@@ -8,6 +8,7 @@ class _State {
     'alert',
     'input',
     'captcha',
+    'rpx_',
   ];
 }
 

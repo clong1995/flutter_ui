@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.11.0
+  sdk: ^3.11.1
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -58,7 +58,7 @@ flutter:
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
-  uses-material-design: false
+  uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -90,3 +90,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+  fonts:
+    - family: AlibabaPuHuiTi
+      fonts:
+        - asset: fonts/AlibabaPuHuiTi-3-55-Regular.otf
+          weight: 400
+        - asset: fonts/AlibabaPuHuiTi-3-65-Medium.otf
+          weight: 500
+        - asset: fonts/AlibabaPuHuiTi-3-85-Bold.otf
+          weight: 700

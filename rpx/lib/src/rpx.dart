@@ -1,6 +1,6 @@
 import 'dart:math';
+import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
 
 double? _width;
 
@@ -37,6 +37,7 @@ void setWidth([double? width]) {
   final pw = flutterView.physicalSize.width;
   final ph = flutterView.physicalSize.height;
   _width = min(pw, ph) / flutterView.devicePixelRatio;
+
 }
 
 double rpx(double size) {

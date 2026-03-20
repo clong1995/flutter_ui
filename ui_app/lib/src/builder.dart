@@ -11,7 +11,7 @@ Widget appBuilder(
   late Widget builderWidget;
   if (builder == null) {
     builderWidget = child!;
-  }else {
+  } else {
     builderWidget = builder(context, child);
   }
 
@@ -34,6 +34,7 @@ Widget appBuilder(
     style: TextStyle(
       color: color,
       fontSize: UiTheme.fontSize,
+      fontFamily: 'AlibabaPuHuiTi',
     ),
     child: keyboard,
   );

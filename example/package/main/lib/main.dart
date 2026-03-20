@@ -10,5 +10,20 @@ Future<void> mainApp() async {
   await uiApp(
     title: 'Flutter UI',
     home: Register.get('splash')(),
+    //home: const HomePage()
   );
 }
+
+
+/*class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final width = PlatformDispatcher.instance.views.first.physicalSize.width;
+    return Center(
+      child: Text('$width'),
+    );
+  }
+}*/
+

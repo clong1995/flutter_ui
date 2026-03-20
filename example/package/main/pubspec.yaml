@@ -5,8 +5,8 @@ homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.11.0
-  flutter: ">=3.41.1"
+  sdk: ^3.11.1
+  flutter: ">=3.41.4"
 
 dependencies:
   flutter:
@@ -38,6 +38,8 @@ dependencies:
     path: ../../package/input
   captcha:
     path: ../../package/captcha
+  rpx_:
+    path: ../../package/rpx_
 
 dev_dependencies:
   #flutter_lints: ^6.0.0
