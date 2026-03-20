@@ -31,10 +31,8 @@
 
     <!-- 防止布局被修改 -->
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-
     <style>
-        flt-paragraph,
-        flt-span {
+        * {
             line-height: normal !important;
             -webkit-text-size-adjust: none !important;
             -moz-text-size-adjust: none !important;
@@ -42,7 +40,6 @@
             text-size-adjust: none !important;
         }
     </style>
-
     <title>app</title>
     <link rel="manifest" href="manifest.json">
     <style id="splash-screen-style">
@@ -123,7 +120,7 @@
     <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
 </picture>
 <script src="flutter_bootstrap.js" async=""></script>
-
-
+<!-- 调试 -->
+<script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
 </body>
 </html>

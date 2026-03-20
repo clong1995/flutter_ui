@@ -9,12 +9,12 @@ class RpxWidget extends StatelessWidget {
     return UiPage(
       body: Center(
         child: Container(
-          width: 100.r,
+          width: 200.r,
           height: 100.r,
           color: UiTheme.gary,
           alignment: Alignment.center,
           child: Text(
-            'hello!',
+            '你好 world!\nhello 世界！',
             style: TextStyle(
               fontSize: 24.r,
             ),

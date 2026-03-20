@@ -10,13 +10,13 @@ Future<void> mainApp() async {
   //
   await uiApp(
     title: 'Flutter UI',
-    //home: Register.get('splash')(),
-    home: const HomePage()
+    home: Register.get('splash')(),
+    // home: const HomePage()
   );
 }
 
 
-class HomePage extends StatelessWidget {
+/*class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
@@ -27,5 +27,5 @@ class HomePage extends StatelessWidget {
       child: Text('hello word'),
     );
   }
-}
+}*/
 
