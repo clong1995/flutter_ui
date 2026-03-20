@@ -36,6 +36,10 @@ Widget appBuilder(
       fontSize: UiTheme.fontSize,
       fontFamily: 'AlibabaPuHuiTi',
     ),
+    textHeightBehavior: const TextHeightBehavior(
+      applyHeightToFirstAscent: false,
+      applyHeightToLastDescent: false,
+    ),
     child: keyboard,
   );
 
