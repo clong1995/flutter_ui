@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_input/ui_input.dart';
@@ -67,14 +67,14 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
         UiIconButton(
           background: false,
           onTap: widget.onChanged == null ? null : onSubtractPressed,
-          icon: FontAwesomeIcons.minus,
+          icon: Icons.remove,
         ),
       ],
       action: [
         UiIconButton(
           background: false,
           onTap: widget.onChanged == null ? null : onPlusPressed,
-          icon: FontAwesomeIcons.plus,
+          icon: Icons.add,
         ),
       ],
     );

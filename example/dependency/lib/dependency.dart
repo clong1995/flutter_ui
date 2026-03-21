@@ -1,5 +1,4 @@
 export 'package:fn_nav/fn_nav.dart';
-export 'package:font_awesome_flutter/font_awesome_flutter.dart';
 export 'package:logger/logger.dart';
 export 'package:package/package.dart';
 export 'package:rpx/ext.dart';

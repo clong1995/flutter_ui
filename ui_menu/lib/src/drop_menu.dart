@@ -1,7 +1,6 @@
 
-import 'package:flutter/material.dart' show MenuAnchor, MenuItemButton, MenuStyle;
+import 'package:flutter/material.dart' show Icons, MenuAnchor, MenuItemButton, MenuStyle;
 import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpx/ext.dart';
 
 class UiDropMenu<T> extends StatefulWidget {
@@ -84,8 +83,8 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
                         ),
                       ),
                     ),
-                    FaIcon(
-                      FontAwesomeIcons.caretDown,
+                    Icon(
+                      Icons.arrow_drop_down,
                       color: const Color(0xDD000000),
                       size: 16.r,
                     ),

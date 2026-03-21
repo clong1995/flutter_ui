@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart'
-    show AdaptiveTextSelectionToolbar, materialTextSelectionControls;
+    show AdaptiveTextSelectionToolbar, Icons, materialTextSelectionControls;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
@@ -102,7 +101,7 @@ class _UiInputTextState extends State<UiInputText> {
           if (widget.obscureText)
             UiIconButton(
               background: false,
-              icon: obscure ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
+              icon: obscure ? Icons.visibility_off_outlined : Icons.visibility,
               color: obscure ? const Color(0xFF9E9E9E) : null,
               size: 12.r,
               onTap: () {
@@ -144,7 +143,7 @@ class _UiInputTextState extends State<UiInputText> {
           ? const SizedBox.shrink()
           : UiIconButton(
               background: false,
-              icon: FontAwesomeIcons.circleXmark,
+              icon: Icons.highlight_remove_outlined,
               onTap: () {
                 controller.clear();
                 widget.onChanged?.call('');
