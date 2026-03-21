@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart' show TabAlignment, TabBar, TabController, kTabScrollDuration;
+import 'package:flutter/material.dart'
+    show TabAlignment, TabBar, TabController, kTabScrollDuration;
 import 'package:flutter/widgets.dart';
-import 'package:fn_device/fn_device.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_theme/ui_theme.dart';
 
@@ -119,7 +119,7 @@ class _UiBannerState extends State<UiBanner>
     return widget.children.length > 1
         ? Stack(
             children: [
-              regionWrap(
+              regionListener(
                 child: PageView.builder(
                   scrollDirection: widget.scrollDirection,
                   controller: pageController,
@@ -181,7 +181,35 @@ class _UiBannerState extends State<UiBanner>
     });
   }
 
-  Widget regionWrap({required Widget child}) {
+  Widget regionListener({required Widget child}) {
+    return MouseRegion(
+      onEnter: (event) {
+        if (widget.auto) {
+          ticker?.cancel();
+        }
+      },
+      onExit: (event) {
+        if (widget.auto) {
+          ticker = tickerStart();
+        }
+      },
+      child: GestureDetector(
+        onTapDown: (detail) {
+          if (widget.auto) {
+            ticker?.cancel();
+          }
+        },
+        onTapUp: (detail) {
+          if (widget.auto) {
+            ticker = tickerStart();
+          }
+        },
+        child: child,
+      ),
+    );
+  }
+
+  /*Widget regionWrap({required Widget child}) {
     var touch = false;
     final platform = FnDevice.platform;
     switch (platform) {
@@ -190,7 +218,7 @@ class _UiBannerState extends State<UiBanner>
       case 'android':
       case 'iOS':
         touch = true;
-      /*case 'web-windows':
+      */ /*case 'web-windows':
       case 'web-macOS':
       case 'web-linux':
       case 'web-fuchsia':
@@ -198,7 +226,7 @@ class _UiBannerState extends State<UiBanner>
       case 'macOS':
       case 'linux':
       case 'fuchsia':
-        touch = false;*/
+        touch = false;*/ /*
     }
     if (touch) {
       return GestureDetector(
@@ -228,5 +256,5 @@ class _UiBannerState extends State<UiBanner>
       },
       child: child,
     );
-  }
+  }*/
 }
