@@ -75,11 +75,13 @@ class FnNav {
     return Navigator.of(context, rootNavigator: root).pop<T>(result);
   }
 
-  static T? routeArgs<T>() {
+  static T? routeArgs<T>(BuildContext context) {
+    /*
+    //这个context拿不到参数
     final context = _navigatorKey?.currentContext;
     if (context == null) {
       return null;
-    }
+    }*/
     final arguments = ModalRoute
         .of(context)
         ?.settings
