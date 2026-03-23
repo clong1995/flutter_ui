@@ -41,7 +41,7 @@ class _UiWebviewState extends State<UiWebview> {
     if (isRegister) {
       await controller.addJavaScriptChannel(
         bridge,
-        onMessageReceived: (JavaScriptMessage message) async {
+        onMessageReceived: (message) async {
           final data = jsonDecode(message.message);
           final callbackId = data['callbackId'];
           final action = data['action'];
@@ -68,7 +68,7 @@ class _UiWebviewState extends State<UiWebview> {
     final ready = '_r${random}_';
     await controller.addJavaScriptChannel(
       ready,
-      onMessageReceived: (JavaScriptMessage message) async {
+      onMessageReceived: (message) async {
         setState(() {
           pageReady = true;
         });
