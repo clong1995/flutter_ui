@@ -90,3 +90,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/AlibabaPuHuiTi-3-55-Regular.otf
+          weight: 400
+        - asset: fonts/AlibabaPuHuiTi-3-65-Medium.otf
+          weight: 500
+        - asset: fonts/AlibabaPuHuiTi-3-85-Bold.otf
+          weight: 700

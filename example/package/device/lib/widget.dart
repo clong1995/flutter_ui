@@ -13,8 +13,22 @@ class _Build extends Build<DeviceLogic> {
       title: const Text('device'),
       body: Column(
         children: [
-          UiButton(child: Text('info')),
-          UiButton(child: Text('id')),
+          UiButton(
+            onTap: logic.onInfoTap,
+            child: const Text('info'),
+          ),
+          logic.builder(
+            key: const ValueKey('info'),
+            builder: (context) => Text('info:${logic.state.info}'),
+          ),
+          UiButton(
+            onTap: logic.onIdTap,
+            child: const Text('id'),
+          ),
+          logic.builder(
+            key: const ValueKey('id'),
+            builder: (context) => Text('id:${logic.state.id}'),
+          ),
         ],
       ),
     );
