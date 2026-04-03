@@ -1,4 +1,5 @@
 import 'package:dependency/dependency.dart';
+import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 import 'package:page/logic.dart';
 
@@ -13,19 +14,19 @@ class _Build extends Build<PageLogic> {
        title: const Text('title'),
       appbarAction: [
         UiIconButton(
-          color: Color(0xFFFFFFFF),
+          color: const Color(0xFFFFFFFF),
           background: false,
-          icon: FontAwesomeIcons.arrowsRotate,
+          icon: Icons.arrow_back_ios_rounded,
           onTap: () {},
         ),
         UiIconButton(
-          color: Color(0xFFFFFFFF),
+          color: const Color(0xFFFFFFFF),
           background: false,
-          icon: FontAwesomeIcons.bars,
+          icon: Icons.more_horiz_rounded,
           onTap: () {},
         ),
       ],
-      body: Center(
+      body: const Center(
         child: Text('body'),
       ),
     );

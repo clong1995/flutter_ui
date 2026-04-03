@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:dependency/dependency.dart';
+import 'package:flutter/material.dart' show Icons;
+import 'package:flutter/widgets.dart';
 
 class _State {}
 
@@ -45,7 +47,7 @@ class ToastLogic extends Logic<_State> {
     UiToast.show(
       UiToastMessage()
         ..text = '自定义文本'
-        ..icon = const FaIcon(FontAwesomeIcons.fontAwesome),
+        ..icon = const Icon(Icons.flutter_dash),
     );
   }
 }

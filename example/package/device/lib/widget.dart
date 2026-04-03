@@ -12,7 +12,10 @@ class _Build extends Build<DeviceLogic> {
     return UiPage(
       title: const Text('device'),
       body: Column(
-        children: [],
+        children: [
+          UiButton(child: Text('info')),
+          UiButton(child: Text('id')),
+        ],
       ),
     );
   }

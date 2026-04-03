@@ -9,6 +9,7 @@ class _State {
     'input',
     'captcha',
     'rpx_',
+    'device',
   ];
 }
 
