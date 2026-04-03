@@ -10,8 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  device_info_plus: ^12.3.0
+  device_info_plus: ^12.4.0
   crypto: ^3.0.7
+  web: ^1.1.1
 
 dev_dependencies:
   very_good_analysis: ^10.2.0

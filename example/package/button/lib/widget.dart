@@ -1,5 +1,6 @@
 import 'package:button/logic.dart';
 import 'package:dependency/dependency.dart';
+import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 
 Widget buttonWidget() => stateWidget(ButtonLogic.new, _Build.new);
@@ -16,14 +17,14 @@ class _Build extends Build<ButtonLogic> {
           Row(
             spacing: 10.r,
             children: [
-              Text('UiIconButton:'),
+              const Text('UiIconButton:'),
               UiIconButton(
-                icon: FontAwesomeIcons.fontAwesome,
+                icon: Icons.flutter_dash,
                 onTap: () {},
               ),
               UiIconButton(
                 background: false,
-                icon: FontAwesomeIcons.fontAwesome,
+                icon: Icons.flutter_dash,
                 onTap: () {},
               ),
             ],
@@ -51,7 +52,7 @@ class _Build extends Build<ButtonLogic> {
               const Text('UiButton:'),
               UiButton(
                 onTap: () {}, 
-                child: Text('按钮'),
+                child: const Text('按钮'),
               ),
               UiButton(
                 onTap: () {},

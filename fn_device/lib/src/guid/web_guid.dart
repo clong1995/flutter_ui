@@ -1,20 +1,20 @@
-/*
 import 'dart:async';
 import 'dart:convert';
 import 'dart:js_interop';
+import 'dart:js_interop_unsafe';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
-import 'package:web/web.dart'
-
+import 'package:web/web.dart' as web;
 
 @JS('fingerprint')
-external String _fingerprint();
+external JSString _fingerprint();
+/*@JS('fingerprint')
+external JSFunction get _fingerprint;*/
 
 class Guid {
-
   static String _id = '';
   static final DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
 
@@ -36,60 +36,41 @@ class Guid {
     return _id = buffer.toString();
   }
 
-
   static Future<String> get info async {
-    var input = '';
-    if (kIsWeb) {
-      await _injectJs();
-      final webBrowserInfo = await _deviceInfo.webBrowserInfo;
-      input =
-          '${webBrowserInfo.appCodeName ?? ''}'
-          '${webBrowserInfo.appName ?? ''}'
-          '${webBrowserInfo.deviceMemory ?? 0}'
-          '${webBrowserInfo.platform ?? ''}'
-          '${webBrowserInfo.product ?? ''}'
-          '${webBrowserInfo.userAgent ?? ''}'
-          '${webBrowserInfo.vendor ?? ''}'
-          '${webBrowserInfo.hardwareConcurrency ?? 0}';
-      input += _fingerprint();
-    }
+    _injectDart();
+    _injectJs();
+
+    final webBrowserInfo = await _deviceInfo.webBrowserInfo;
+    var input =
+        '${webBrowserInfo.appCodeName ?? ''}'
+        '${webBrowserInfo.appName ?? ''}'
+        '${webBrowserInfo.deviceMemory ?? 0}'
+        '${webBrowserInfo.platform ?? ''}'
+        '${webBrowserInfo.product ?? ''}'
+        '${webBrowserInfo.userAgent ?? ''}'
+        '${webBrowserInfo.vendor ?? ''}'
+        '${webBrowserInfo.hardwareConcurrency ?? 0}';
+    final result = _fingerprint();
+    input += result.toDart;
+
     if (input.isEmpty) {
       throw Exception('no guid');
     }
     return input += defaultTargetPlatform.name;
   }
 
-  static Future<void> _injectJs() {
-    final completer = Completer<void>();
-    final timer = Timer(
-      const Duration(seconds: 3),
-      () => completer.completeError('Failed to load script'),
-    );
-    late ScriptElement script;
-    final jsFnComplete = 'c${_randomStr()}';
-    final jsFnMd5 = 'm${_randomStr()}';
-    context[jsFnMd5] = (String str) {
-      final bytes = utf8.encode(str);
-      final digest = md5.convert(bytes);
-      return digest.toString();
-    };
+  static final String _dartFnMd5Name = _randomStr();
 
-    context[jsFnComplete] = () {
-      timer.cancel();
-      completer.complete();
-      script.remove();
-    };
-
-    script = ScriptElement()
-      ..type = 'text/javascript'
-      ..text =
-          '''
-      window.$jsFnComplete();
+  static void _injectJs() {
+    final scriptElement =
+        web.document.createElement('script') as web.HTMLScriptElement
+          ..text =
+              '''
       function fingerprint() {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         ctx.textBaseline = 'top';
-        ctx.font = '14px 'Arial'';
+        ctx.font = '14px Arial';
         ctx.textBaseline = 'alphabetic';
         ctx.fillStyle = '#f60';
         ctx.fillRect(125, 1, 62, 20);
@@ -109,11 +90,21 @@ class Guid {
         ctx.closePath();
         ctx.fill();
         const dataURL = canvas.toDataURL();
-        return window.$jsFnMd5(dataURL);
+        return window.$_dartFnMd5Name(dataURL);
       }
       ''';
-    document.body?.append(script);
-    return completer.future;
+    web.document.head!.append(scriptElement);
+  }
+
+  static void _injectDart() {
+    final dartFn = _dartFnMd5.toJS;
+    globalContext.setProperty(_dartFnMd5Name.toJS, dartFn);
+  }
+
+  static String _dartFnMd5(String str) {
+    final bytes = utf8.encode(str);
+    final digest = md5.convert(bytes);
+    return digest.toString();
   }
 
   static String _randomStr() {
@@ -125,4 +116,3 @@ class Guid {
     ).join();
   }
 }
-*/

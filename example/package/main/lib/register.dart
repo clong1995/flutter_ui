@@ -1,6 +1,7 @@
 import 'package:alert/widget.dart';
 import 'package:button/widget.dart';
 import 'package:captcha/widget.dart';
+import 'package:device/widget.dart';
 import 'package:home/widget.dart';
 import 'package:input/widget.dart';
 import 'package:package/package.dart';
@@ -19,4 +20,5 @@ final PkgReg registers = {
   'input': inputWidget,
   'captcha': captchaWidget,
   'rpx_': RpxWidget.new,
+  'device': deviceWidget,
 };
