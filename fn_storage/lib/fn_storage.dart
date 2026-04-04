@@ -31,6 +31,9 @@ class FnStorage {
   static Future<List<String>?> getStringList(String key) =>
       _asyncPrefs.getStringList(key);
 
+  /// 清空所有数据
+  static Future<void> clear() => _asyncPrefs.clear();
+
   static Future<void> remove(String key) => _asyncPrefs.remove(key);
 
   static Future<bool> containsKey(String key) => _asyncPrefs.containsKey(key);
