@@ -1,6 +1,6 @@
 server:
   host: 192.168.10.104
-  port: 8031
+  port: 8080
   headers:
     - name: Cache-Control
       value: no-cache, no-store, must-revalidate

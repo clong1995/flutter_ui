@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:js_interop';
-import 'dart:js_interop_unsafe';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
@@ -9,21 +8,20 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:web/web.dart' as web;
 
-@JS('fingerprint')
-external JSString _fingerprint();
-
 class Guid {
   static String _id = '';
+  static Future<String>? _idFuture;
   static final DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
 
-  static Future<String> get id async {
+  /// 获取设备唯一标识 ID (MD5 散列并格式化)
+  static Future<String> get id => _idFuture ??= _generateId();
+
+  static Future<String> _generateId() async {
     if (_id.isNotEmpty) {
       return _id;
     }
-
-    final bytes = utf8.encode(await info);
-    final digest = md5.convert(bytes);
-    final md5Hash = digest.toString();
+    final infoString = await info;
+    final md5Hash = _md5(infoString);
     final buffer = StringBuffer();
     for (var i = 0; i < md5Hash.length; i++) {
       buffer.write(md5Hash[i]);
@@ -35,11 +33,15 @@ class Guid {
   }
 
   static Future<String> get info async {
-    _injectDart();
-    _injectJs();
+    if (!kIsWeb) {
+      return defaultTargetPlatform.name;
+    }
 
     final webBrowserInfo = await _deviceInfo.webBrowserInfo;
-    var input =
+    final canvasFingerprint = _getCanvasFingerprint();
+
+    final buffer = StringBuffer()
+      ..write(
         '${webBrowserInfo.appCodeName ?? ''}'
         '${webBrowserInfo.appName ?? ''}'
         '${webBrowserInfo.deviceMemory ?? 0}'
@@ -47,71 +49,55 @@ class Guid {
         '${webBrowserInfo.product ?? ''}'
         '${webBrowserInfo.userAgent ?? ''}'
         '${webBrowserInfo.vendor ?? ''}'
-        '${webBrowserInfo.hardwareConcurrency ?? 0}';
-    final result = _fingerprint();
-    input += result.toDart;
+        '${webBrowserInfo.hardwareConcurrency ?? 0}'
+        '${_md5(canvasFingerprint)}'
+        '${web.window.navigator.language}'
+        '${defaultTargetPlatform.name}',
+      );
 
-    if (input.isEmpty) {
-      throw Exception('no guid');
+    return buffer.toString();
+  }
+
+  // 直接在 Dart 侧进行 Canvas 指纹计算
+  static String _getCanvasFingerprint() {
+    try {
+      final canvas =
+          web.document.createElement('canvas') as web.HTMLCanvasElement
+            ..width = 240
+            ..height = 60;
+      final ctx = canvas.getContext('2d') as web.CanvasRenderingContext2D?;
+      if (ctx == null) return '';
+
+      ctx
+        ..textBaseline = 'top'
+        ..font = '14px Arial'
+        ..textBaseline = 'alphabetic'
+        ..fillStyle = '#f60'.toJS
+        ..fillRect(125, 1, 62, 20)
+        ..fillStyle = '#069'.toJS
+        ..fillText('Hello, world!', 2, 15)
+        ..fillStyle = 'rgba(102, 204, 0, 0.7)'.toJS
+        ..fillText('Hello, world!', 4, 17)
+        ..globalCompositeOperation = 'multiply'
+        ..fillStyle = 'rgb(255,0,255)'.toJS
+        ..beginPath()
+        ..arc(50, 50, 50, 0, pi * 2, true)
+        ..closePath()
+        ..fill()
+        ..fillStyle = 'rgb(0,255,255)'.toJS
+        ..beginPath()
+        ..arc(100, 50, 50, 0, pi * 2, true)
+        ..closePath()
+        ..fill();
+      return canvas.toDataURL();
+    } on Exception catch (_) {
+      return '';
     }
-    return input += defaultTargetPlatform.name;
   }
 
-  static final String _dartFnMd5Name = _randomStr();
-
-  // TODO 这里可以改成dart版本的（dart可以操作js和调用js方法）
-  static void _injectJs() {
-    final scriptElement =
-        web.document.createElement('script') as web.HTMLScriptElement
-          ..text =
-              '''
-      function fingerprint() {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        ctx.textBaseline = 'top';
-        ctx.font = '14px Arial';
-        ctx.textBaseline = 'alphabetic';
-        ctx.fillStyle = '#f60';
-        ctx.fillRect(125, 1, 62, 20);
-        ctx.fillStyle = '#069';
-        ctx.fillText('Hello, world!', 2, 15);
-        ctx.fillStyle = 'rgba(102, 204, 0, 0.7)';
-        ctx.fillText('Hello, world!', 4, 17);
-        ctx.globalCompositeOperation = 'multiply';
-        ctx.fillStyle = 'rgb(255,0,255)';
-        ctx.beginPath();
-        ctx.arc(50, 50, 50, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
-        ctx.fillStyle = 'rgb(0,255,255)';
-        ctx.beginPath();
-        ctx.arc(100, 50, 50, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fill();
-        const dataURL = canvas.toDataURL();
-        return $_dartFnMd5Name(dataURL);
-      }
-      ''';
-    web.document.head!.append(scriptElement);
-  }
-
-  static void _injectDart() {
-    final dartFn = _dartFnMd5.toJS;
-    globalContext.setProperty(_dartFnMd5Name.toJS, dartFn);
-  }
-
-  static String _dartFnMd5(String str) {
+  static String _md5(String str) {
+    if (str.isEmpty) return '';
     final bytes = utf8.encode(str);
-    final digest = md5.convert(bytes);
-    return digest.toString();
-  }
-
-  static String _randomStr() {
-    const characters =
-        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    return List.generate(
-      8,
-      (index) => characters[Random().nextInt(characters.length)],
-    ).join();
+    return md5.convert(bytes).toString();
   }
 }
