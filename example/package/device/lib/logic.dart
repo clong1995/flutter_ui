@@ -1,5 +1,5 @@
 import 'package:dependency/dependency.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 class _State {
   String info = '';
