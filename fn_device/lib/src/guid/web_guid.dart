@@ -109,7 +109,7 @@ class Guid {
 
   static String _randomStr() {
     const characters =
-        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     return List.generate(
       8,
       (index) => characters[Random().nextInt(characters.length)],

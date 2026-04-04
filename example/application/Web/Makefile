@@ -5,7 +5,7 @@ flutter_run_release:
 	flutter run --release
 
 flutter_run_port:
-	flutter run --web-hostname 192.168.10.104 --web-port 8080 -d chrome --wasm
+	flutter run --web-hostname 192.168.10.104 --web-port 8030 -d chrome
 
 flutter_upgrade:
 	flutter pub upgrade

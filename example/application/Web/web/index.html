@@ -112,6 +112,11 @@
     </script>
     <!-- 调试 -->
     <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            new VConsole();
+        });
+    </script>
 </head>
 <body>
 <picture id="splash">
@@ -130,7 +135,6 @@
   * https://docs.flutter.dev/platform-integration/web/initialization
 -->
 <script src="flutter_bootstrap.js" async=""></script>
-<script>const vConsole = new VConsole();</script>
 
 </body>
 </html>
