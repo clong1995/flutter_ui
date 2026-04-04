@@ -1,11 +1,6 @@
 {{flutter_js}}
 {{flutter_build_config}}
 
-_flutter.loader.load({
-    config: {
-        // renderer: 'canvaskit','skwasm'
-    },
-});
+_flutter.loader.load();
 
-//调试
-//var vConsole = new VConsole();
+const vConsole = new VConsole();

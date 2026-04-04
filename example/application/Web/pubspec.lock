@@ -184,7 +184,7 @@ packages:
     description:
       path: fn_device
       ref: HEAD
-      resolved-ref: b7fd4bec22d5a423a31a6b0c1b4842c2c5172a5f
+      resolved-ref: ddd17b47b24132041c2a30e0fde767b08ae1f820
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
