@@ -11,8 +11,6 @@ import 'package:web/web.dart' as web;
 
 @JS('fingerprint')
 external JSString _fingerprint();
-/*@JS('fingerprint')
-external JSFunction get _fingerprint;*/
 
 class Guid {
   static String _id = '';
@@ -61,6 +59,7 @@ class Guid {
 
   static final String _dartFnMd5Name = _randomStr();
 
+  // TODO 这里可以改成dart版本的（dart可以操作js和调用js方法）
   static void _injectJs() {
     final scriptElement =
         web.document.createElement('script') as web.HTMLScriptElement
@@ -90,7 +89,7 @@ class Guid {
         ctx.closePath();
         ctx.fill();
         const dataURL = canvas.toDataURL();
-        return window.$_dartFnMd5Name(dataURL);
+        return $_dartFnMd5Name(dataURL);
       }
       ''';
     web.document.head!.append(scriptElement);
