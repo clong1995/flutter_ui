@@ -180,13 +180,11 @@ packages:
     source: sdk
     version: "0.0.0"
   fn_device:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      path: fn_device
-      ref: HEAD
-      resolved-ref: ddd17b47b24132041c2a30e0fde767b08ae1f820
-      url: "https://github.com/clong1995/flutter_ui.git"
-    source: git
+      path: "../../../fn_device"
+      relative: true
+    source: path
     version: "0.0.1"
   fn_nav:
     dependency: "direct overridden"
