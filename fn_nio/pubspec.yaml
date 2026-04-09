@@ -1,0 +1,30 @@
+name: fn_nio
+description: A starting point for Dart libraries or applications.
+version: 0.0.1
+homepage: flutter_ui
+publish_to: none
+
+environment:
+  sdk: ^3.11.1
+
+dependencies:
+  http: ^1.6.0
+  fn_auth:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: fn_auth
+  fn_security:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: fn_security
+  ui_toast:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_toast
+  logger:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: logger
+
+dev_dependencies:
+  very_good_analysis: ^10.2.0
