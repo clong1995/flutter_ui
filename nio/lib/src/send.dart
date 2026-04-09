@@ -2,13 +2,20 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:fn_auth/fn_auth.dart';
-import 'package:fn_nio/src/host.dart';
+import 'package:nio/src/host.dart';
 import 'package:fn_security/fn_security.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
 import 'package:ui_toast/ui_toast.dart';
 
 Client _client = Client();
+String _host = '';
+
+void setHost(String uri) {
+  if (_host.isEmpty) {
+    _host = uri;
+  }
+}
 
 Future<Map<String, dynamic>> send(String uri, String jsonString) async {
   //loading
@@ -18,7 +25,7 @@ Future<Map<String, dynamic>> send(String uri, String jsonString) async {
   });
 
   //请求地址
-  final url = Uri.parse(getHost() + uri);
+  final url = Uri.parse(_host + uri);
 
   //返回结果
   final res = <String, dynamic>{'state': ''};

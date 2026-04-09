@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:fn_auth/fn_auth.dart';
-import 'package:fn_nio/src/base.dart';
-import 'package:fn_nio/src/empty.dart';
-import 'package:fn_nio/src/send.dart';
+import 'package:nio/src/base.dart';
+import 'package:nio/src/empty.dart';
+import 'package:nio/src/send.dart';
 import 'package:logger/logger.dart';
 import 'package:ui_toast/ui_toast.dart';
 

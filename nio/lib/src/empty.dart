@@ -1,4 +1,4 @@
-import 'package:fn_nio/src/base.dart';
+import 'package:nio/src/base.dart';
 
 class EmptyReq extends BaseReq {}
 
