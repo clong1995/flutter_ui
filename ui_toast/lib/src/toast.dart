@@ -36,7 +36,7 @@ class UiToast {
       reverseTransitionDuration: Duration.zero,
       pageBuilder: (context, animation, secondaryAnimation) {
         Timer? timer;
-        if (message.autoPopSeconds > 0) {
+        if (message.autoPopSeconds > 0 && message.callback == null) {
           timer = Timer(
             Duration(seconds: message.autoPopSeconds),
             pop,
@@ -47,7 +47,7 @@ class UiToast {
           onPopInvokedWithResult: (didPop, result) {
             if (didPop) return;
             timer?.cancel();
-            if (message.autoPopSeconds > 0) pop();
+            if (message.autoPopSeconds > 0 && message.callback == null) pop();
           },
           child: ToastWidget(message: message),
         );
