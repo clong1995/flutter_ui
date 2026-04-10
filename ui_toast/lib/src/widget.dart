@@ -20,9 +20,11 @@ class ToastWidgetState extends State<ToastWidget> {
     super.initState();
     if (widget.message.autoPopSeconds <= -1) {
       Future.delayed(const Duration(seconds: 5), () {
-        setState(() {
-          showCloseButton = true;
-        });
+        if(mounted){
+          setState(() {
+            showCloseButton = true;
+          });
+        }
       });
     }
   }
