@@ -142,7 +142,7 @@ class _UiTableState extends State<UiTable> {
                   .reduce((a, b) => a + b),
               child: ListView.builder(
                 controller: scrollVerticalCenter,
-                itemCount: widget.data.length - 2,
+                itemCount: widget.data.length,
                 itemBuilder: (context, index) {
                   final item = widget.data[index];
                   return Container(
