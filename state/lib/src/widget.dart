@@ -24,6 +24,9 @@ class _StateWidgetState<L extends Logic<dynamic>>
     logic
       ..setSetState(setState)
       ..onInit();
+    WidgetsBinding.instance.addPostFrameCallback((duration) {
+      logic.onFrameCallback(duration);
+    });
   }
 
   @override

@@ -34,6 +34,8 @@ abstract class Logic<S> {
     );
   }
 
+  void onFrameCallback(Duration duration);
+
   //void onDidChanged() {}
 
   @mustCallSuper
@@ -50,7 +52,7 @@ abstract class Logic<S> {
     );
   }
 
-  void onEvent(String topic, dynamic message) {}
+  void onEvent(String topic, dynamic message);
 
   @nonVirtual
   void setSetState(StateSetter setState) {
