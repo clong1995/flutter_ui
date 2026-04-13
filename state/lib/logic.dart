@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
+import 'package:flutter/widgets.dart';
 
 abstract class Logic<S> {
   Logic(this.context);
@@ -30,11 +29,11 @@ abstract class Logic<S> {
   @mustCallSuper
   void onInit() {
     _subscription = _EventBus.instance.stream.listen(
-      (_Event event) => onEvent(event.topic, event.message),
+      (event) => onEvent(event.topic, event.message),
     );
   }
 
-  void onFrameCallback(Duration duration){}
+  void onFrameCallback(Duration duration) {}
 
   //void onDidChanged() {}
 
@@ -52,7 +51,7 @@ abstract class Logic<S> {
     );
   }
 
-  void onEvent(String topic, dynamic message){}
+  void onEvent(String topic, dynamic message) {}
 
   @nonVirtual
   void setSetState(StateSetter setState) {
