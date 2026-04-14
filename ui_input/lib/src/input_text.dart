@@ -74,7 +74,9 @@ class _UiInputTextState extends State<UiInputText> {
 
   @override
   void dispose() {
-    controller.dispose();
+    if(widget.controller == null){
+      controller.dispose();
+    }
     focusNode.dispose();
     super.dispose();
   }

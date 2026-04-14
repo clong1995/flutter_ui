@@ -82,7 +82,9 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
 
   @override
   void dispose() {
-    controller.dispose();
+    if(widget.controller == null){
+      controller.dispose();
+    }
     super.dispose();
   }
 
