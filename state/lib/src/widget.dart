@@ -36,4 +36,10 @@ class _StateWidgetState<L extends Logic<dynamic>>
     logic.onDispose();
     super.dispose();
   }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    logic.onDidChange();
+  }
 }

@@ -35,7 +35,7 @@ abstract class Logic<S> {
 
   void onFrameCallback(Duration duration) {}
 
-  //void onDidChanged() {}
+  void onDidChange() {}
 
   @mustCallSuper
   void onDispose() {
