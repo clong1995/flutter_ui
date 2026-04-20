@@ -57,7 +57,7 @@ Future<Map<String, dynamic>> send(String uri, String jsonString) async {
     toastPop?.call();
   }
   final code = resp.statusCode;
-  final sig = resp.headers['content-sign'] ?? '';
+
   final body = resp.body;
 
   //状态码
@@ -71,7 +71,11 @@ Future<Map<String, dynamic>> send(String uri, String jsonString) async {
     return res;
   }
 
+  //print(resp.headers);
+
   //提取签名
+  // final sigm = resp.headers['content-sign'] ?? '';
+  final sig = resp.headers['content-sign'] ?? '';
   if (sig.isEmpty) {
     //没有签名
     res['state'] = 'nosign'; //没有签名

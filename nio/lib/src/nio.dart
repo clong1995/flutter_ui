@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:fn_auth/fn_auth.dart';
+import 'package:logger/logger.dart';
 import 'package:nio/src/base.dart';
 import 'package:nio/src/empty.dart';
 import 'package:nio/src/send.dart';
-import 'package:logger/logger.dart';
 import 'package:ui_toast/ui_toast.dart';
 
 Future<T> nio<S extends BaseReq, T extends BaseRes>(
