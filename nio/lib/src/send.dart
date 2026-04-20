@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:fn_auth/fn_auth.dart';
-import 'package:nio/src/host.dart';
 import 'package:fn_security/fn_security.dart';
 import 'package:http/http.dart';
 import 'package:logger/logger.dart';
