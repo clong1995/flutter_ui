@@ -8,6 +8,7 @@ class UiTheme {
 
   //fontSize
   static double fontSize = 13.r;
+  static String? fontFamily;
 
   //gary
   static const Color gary = Color(0xFF9E9E9E);

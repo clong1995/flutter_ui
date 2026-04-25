@@ -34,7 +34,7 @@ Widget appBuilder(
     style: TextStyle(
       color: color,
       fontSize: UiTheme.fontSize,
-      fontFamily: 'Roboto',
+      fontFamily: UiTheme.fontFamily,
     ),
     child: keyboard,
   );
