@@ -27,9 +27,9 @@ class UiAlertWidget extends StatelessWidget {
             minWidth: 300.r,
           ),
           decoration: BoxDecoration(
-            color: const Color(0xFFFFFFFF),
+            color: UiTheme.white,
             border: Border.all(
-              color: const Color(0xFF9E9E9E),
+              color: UiTheme.gary,
             ),
             borderRadius: BorderRadius.circular(10.r),
           ),
@@ -45,7 +45,7 @@ class UiAlertWidget extends StatelessWidget {
                   child: Text(
                     title!,
                     style: const TextStyle(
-                      color: Color(0xFFFFFFFF),
+                      color: UiTheme.white,
                     ),
                   ),
                 ),

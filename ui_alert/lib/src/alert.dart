@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:ui_theme/ui_theme.dart';
 
 class UiAlert {
   UiAlert._();
@@ -25,7 +26,7 @@ class UiAlert {
     return Navigator.of(navContext, rootNavigator: root).push<T>(
       PageRouteBuilder<T>(
         opaque: false,
-        barrierColor: const Color(0x00000000),
+        barrierColor: UiTheme.black.withAlpha(50),
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
         settings: RouteSettings(arguments: args),
