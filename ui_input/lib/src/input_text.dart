@@ -167,7 +167,6 @@ class _UiInputTextState extends State<UiInputText> {
     maxLines: widget.maxLines,
     cursorColor: UiTheme.primaryColor,
     backgroundCursorColor: UiTheme.gary200,
-    selectionColor: UiTheme.primaryColor.withAlpha(100),
     showSelectionHandles: true,
     selectionControls: materialTextSelectionControls,
     contextMenuBuilder: (context, editableTextState) =>

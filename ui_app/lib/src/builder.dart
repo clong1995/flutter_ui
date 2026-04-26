@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 Widget appBuilder(
@@ -40,9 +40,12 @@ Widget appBuilder(
   );
 
   //光标
-  final defaultSelectionStyle = DefaultSelectionStyle(
-    cursorColor: UiTheme.primaryColor,
-    selectionColor: UiTheme.primaryColor,
+  final textSelectionTheme = TextSelectionTheme(
+    data: TextSelectionThemeData(
+      cursorColor: UiTheme.primaryColor,
+      selectionColor: UiTheme.primaryColor.withAlpha(100),
+      selectionHandleColor: UiTheme.primaryColor,
+    ),
     child: defaultTextStyle,
   );
 
@@ -52,7 +55,7 @@ Widget appBuilder(
       color: color,
       size: UiTheme.fontSize,
     ),
-    child: defaultSelectionStyle,
+    child: textSelectionTheme,
   );
 
   //滚动条
