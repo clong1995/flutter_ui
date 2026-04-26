@@ -74,7 +74,7 @@ class _UiInputTextState extends State<UiInputText> {
 
   @override
   void dispose() {
-    if(widget.controller == null){
+    if (widget.controller == null) {
       controller.dispose();
     }
     focusNode.dispose();
@@ -125,9 +125,7 @@ class _UiInputTextState extends State<UiInputText> {
               ? Text(
                   widget.hint!,
                   style: textStyle().copyWith(
-                    color:
-                        textStyle().color?.withAlpha(100) ??
-                        UiTheme.gary,
+                    color: textStyle().color?.withAlpha(100) ?? UiTheme.gary,
                     fontWeight: FontWeight.normal,
                   ),
                 )
@@ -189,9 +187,10 @@ class _UiInputTextState extends State<UiInputText> {
       return defaultDecoration;
     }
     return widget.decoration!.copyWith(
-      color: defaultDecoration.color,
-      border: defaultDecoration.border,
-      borderRadius: defaultDecoration.borderRadius,
+      color: widget.decoration!.color ?? defaultDecoration.color,
+      border: widget.decoration!.border ?? defaultDecoration.border,
+      borderRadius:
+          widget.decoration!.borderRadius ?? defaultDecoration.borderRadius,
     );
   }
 
