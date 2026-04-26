@@ -60,11 +60,13 @@ packages:
     source: hosted
     version: "2.1.8"
   rpx:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: "../rpx"
-      relative: true
-    source: path
+      path: rpx
+      ref: HEAD
+      resolved-ref: d8ad55acb8cbf9b610a65195806030891848362b
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
     version: "0.3.0"
   sky_engine:
     dependency: transitive
@@ -74,37 +76,47 @@ packages:
   ui_alert:
     dependency: "direct main"
     description:
-      path: "../ui_alert"
-      relative: true
-    source: path
+      path: ui_alert
+      ref: HEAD
+      resolved-ref: d8ad55acb8cbf9b610a65195806030891848362b
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
     version: "0.2.2"
   ui_button:
     dependency: "direct main"
     description:
-      path: "../ui_button"
-      relative: true
-    source: path
+      path: ui_button
+      ref: HEAD
+      resolved-ref: d8ad55acb8cbf9b610a65195806030891848362b
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
     version: "0.1.0"
   ui_disable:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../ui_disable"
-      relative: true
-    source: path
+      path: ui_disable
+      ref: HEAD
+      resolved-ref: d8ad55acb8cbf9b610a65195806030891848362b
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
     version: "0.0.1"
   ui_theme:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../ui_theme"
-      relative: true
-    source: path
+      path: ui_theme
+      ref: HEAD
+      resolved-ref: d8ad55acb8cbf9b610a65195806030891848362b
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
     version: "0.0.1"
   ui_webview:
     dependency: "direct main"
     description:
-      path: "../ui_webview"
-      relative: true
-    source: path
+      path: ui_webview
+      ref: HEAD
+      resolved-ref: d8ad55acb8cbf9b610a65195806030891848362b
+      url: "https://github.com/clong1995/flutter_ui.git"
+    source: git
     version: "0.1.2"
   vector_math:
     dependency: transitive
@@ -166,10 +178,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter_wkwebview
-      sha256: e15d8828e014291324a4d0cf6e272090167f4fa5673ffcf8fe446f4a4cd35861
+      sha256: a68868ac4828a5f012bf81e8bd25d879f3cec5bd5301575466caafbf9a320a65
       url: "https://pub.dev"
     source: hosted
-    version: "3.24.3"
+    version: "3.24.5"
 sdks:
-  dart: ">=3.11.0 <4.0.0"
-  flutter: ">=3.41.1"
+  dart: ">=3.11.1 <4.0.0"
+  flutter: ">=3.41.4"

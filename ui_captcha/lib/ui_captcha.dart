@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:rpx/ext.dart';
 import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_webview/ui_webview.dart';
@@ -50,7 +49,7 @@ class _Captcha extends StatelessWidget {
   }
 
   double px(BuildContext context, double size) {
-    print(MediaQuery.of(context).devicePixelRatio);
+    //print(MediaQuery.of(context).devicePixelRatio);
     return size;
   }
 }

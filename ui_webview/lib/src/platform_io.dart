@@ -79,25 +79,21 @@ class _UiWebviewState extends State<UiWebview> {
         /*onProgress: (int progress) {
           // Update loading bar.
         },*/
-        onPageFinished: (String url) async {
+        onPageFinished: (url) async {
           var script =
           '''
-              function sendReady() {
-                $ready.postMessage("");
-              }
-              
               (function() {
                 if (document.readyState === "complete") {
-                  sendReady();
+                  $ready.postMessage("");
                 } else {
-                  window.addEventListener("load", sendReady);
+                  window.addEventListener("load", ()=>$ready.postMessage(""););
                 }
               })();
           ''';
           //有函数需要调用时
           if (isRegister) {
             final callbacks = '_cbs${random}_';
-            script =
+            script +=
             '''
               const $callbacks = {};
               window.$callback = (callbackId, result) =>{
@@ -119,7 +115,7 @@ class _UiWebviewState extends State<UiWebview> {
                       $bridge.postMessage(JSON.stringify(payload));
                   });
               };
-            $script''';
+            ''';
           }
           await controller.runJavaScript(script);
         },
