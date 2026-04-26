@@ -61,8 +61,8 @@ class _UiInputTextState extends State<UiInputText> {
   bool obscure = true;
 
   final defaultDecoration = BoxDecoration(
-    color: const Color(0xFFFFFFFF),
-    border: Border.all(color: const Color(0xFF9E9E9E)),
+    color: UiTheme.white,
+    border: Border.all(color: UiTheme.gary),
     borderRadius: BorderRadius.circular(5.r),
   );
 
@@ -104,7 +104,7 @@ class _UiInputTextState extends State<UiInputText> {
             UiIconButton(
               background: false,
               icon: obscure ? Icons.visibility_off_outlined : Icons.visibility,
-              color: obscure ? const Color(0xFF9E9E9E) : null,
+              color: obscure ? UiTheme.gary : null,
               size: 12.r,
               onTap: () {
                 obscure = !obscure;
@@ -127,7 +127,7 @@ class _UiInputTextState extends State<UiInputText> {
                   style: textStyle().copyWith(
                     color:
                         textStyle().color?.withAlpha(100) ??
-                        const Color(0xFF9E9E9E),
+                        UiTheme.gary,
                     fontWeight: FontWeight.normal,
                   ),
                 )
@@ -166,7 +166,7 @@ class _UiInputTextState extends State<UiInputText> {
     style: textStyle(),
     maxLines: widget.maxLines,
     cursorColor: UiTheme.primaryColor,
-    backgroundCursorColor: const Color(0xFFEEEEEE),
+    backgroundCursorColor: UiTheme.gary200,
     selectionColor: UiTheme.primaryColor.withAlpha(100),
     showSelectionHandles: true,
     selectionControls: materialTextSelectionControls,

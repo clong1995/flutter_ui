@@ -39,13 +39,20 @@ Widget appBuilder(
     child: keyboard,
   );
 
+  //光标
+  final defaultSelectionStyle = DefaultSelectionStyle(
+    cursorColor: UiTheme.primaryColor,
+    selectionColor: UiTheme.primaryColor,
+    child: defaultTextStyle,
+  );
+
   //图标
   final iconTheme = IconTheme(
     data: IconThemeData(
       color: color,
       size: UiTheme.fontSize,
     ),
-    child: defaultTextStyle,
+    child: defaultSelectionStyle,
   );
 
   //滚动条
