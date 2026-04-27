@@ -4,17 +4,19 @@ import 'package:ui_button/ui_button.dart';
 import 'package:ui_webview/ui_webview.dart';
 
 Future<void> uiCaptcha({
-  required BuildContext context,
+  required String html,
   required Future<bool> Function(String json) verify,
 }) async => UiAlert.dialog(
-  () => _Captcha(verify: verify),
+  () => _Captcha(html:html,verify: verify),
 );
 
 class _Captcha extends StatelessWidget {
   const _Captcha({
+    required this.html,
     required this.verify,
   });
 
+  final String html;
   final Future<bool> Function(String json) verify;
 
   @override
@@ -27,7 +29,8 @@ class _Captcha extends StatelessWidget {
             width: px(context, 325),
             height: px(context, 290),
             child: UiWebview(
-              url: 'packages/ui_captcha/html/captcha.html',
+              // url: 'packages/ui_captcha/html/captcha.html',
+              html:html,
               register: {
                 'verify': (dynamic data) async {
                   final res = await verify(data.toString());
@@ -36,6 +39,7 @@ class _Captcha extends StatelessWidget {
                   }
                   return res;
                 },
+
               },
             ),
           ),

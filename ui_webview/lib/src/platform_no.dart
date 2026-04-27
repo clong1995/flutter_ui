@@ -1,9 +1,10 @@
 import 'package:flutter/widgets.dart';
 
 class UiWebview extends StatefulWidget {
-  const UiWebview({required this.url, this.register, super.key});
+  const UiWebview({this.register, this.url = '', this.html = '', super.key});
 
   final String url;
+  final String html;
   final Map<String, Future<dynamic> Function(dynamic json)>? register;
 
   @override

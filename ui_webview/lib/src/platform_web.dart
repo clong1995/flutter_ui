@@ -4,9 +4,12 @@ import 'package:flutter/widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class UiWebview extends StatefulWidget {
-  const UiWebview({required this.url, this.register, super.key});
+  const UiWebview({this.url = '', this.html = '', this.register, super.key});
 
   final String url;
+
+  //这个不会用到
+  final String html;
 
   //这个不会用到
   final Map<String, Future<dynamic> Function(dynamic json)>? register;

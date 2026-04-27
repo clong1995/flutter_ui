@@ -64,7 +64,7 @@ packages:
     description:
       path: rpx
       ref: HEAD
-      resolved-ref: "95c4f50e8b3a98d1afef4fc5c71ecfe19741e79a"
+      resolved-ref: "9a211903d6a449fcd3ea9b2f9b4de76184ad6e55"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.3.0"
@@ -78,7 +78,7 @@ packages:
     description:
       path: ui_alert
       ref: HEAD
-      resolved-ref: "95c4f50e8b3a98d1afef4fc5c71ecfe19741e79a"
+      resolved-ref: "9a211903d6a449fcd3ea9b2f9b4de76184ad6e55"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.2.2"
@@ -87,7 +87,7 @@ packages:
     description:
       path: ui_button
       ref: HEAD
-      resolved-ref: "95c4f50e8b3a98d1afef4fc5c71ecfe19741e79a"
+      resolved-ref: "9a211903d6a449fcd3ea9b2f9b4de76184ad6e55"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.1.0"
@@ -96,7 +96,7 @@ packages:
     description:
       path: ui_disable
       ref: HEAD
-      resolved-ref: "95c4f50e8b3a98d1afef4fc5c71ecfe19741e79a"
+      resolved-ref: "9a211903d6a449fcd3ea9b2f9b4de76184ad6e55"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
@@ -105,18 +105,16 @@ packages:
     description:
       path: ui_theme
       ref: HEAD
-      resolved-ref: "95c4f50e8b3a98d1afef4fc5c71ecfe19741e79a"
+      resolved-ref: "9a211903d6a449fcd3ea9b2f9b4de76184ad6e55"
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.0.1"
   ui_webview:
     dependency: "direct main"
     description:
-      path: ui_webview
-      ref: HEAD
-      resolved-ref: "95c4f50e8b3a98d1afef4fc5c71ecfe19741e79a"
-      url: "https://github.com/clong1995/flutter_ui.git"
-    source: git
+      path: "/Users/markeckles/Desktop/flutter_ui/ui_webview"
+      relative: false
+    source: path
     version: "0.1.2"
   vector_math:
     dependency: transitive

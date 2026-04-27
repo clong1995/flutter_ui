@@ -7,9 +7,10 @@ import 'package:webview_flutter/webview_flutter.dart';
 //import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 class UiWebview extends StatefulWidget {
-  const UiWebview({required this.url, super.key, this.register});
+  const UiWebview({super.key, this.url = '', this.html = '', this.register});
 
-  final String url;
+  final String url; //"packages/ui_captcha/html/captcha.html","https://pub.dev"
+  final String html;
   final Map<String, Future<dynamic> Function(dynamic json)>? register;
 
   @override
@@ -55,7 +56,7 @@ class _UiWebviewState extends State<UiWebview> {
           final result = await func!(param);
           res = jsonEncode(result);
           final script =
-          '''
+              '''
                 window.$callback('$callbackId', $res);
               ''';
           await controller.runJavaScript(script);
@@ -81,12 +82,12 @@ class _UiWebviewState extends State<UiWebview> {
         },*/
         onPageFinished: (url) async {
           var script =
-          '''
+              '''
               (function() {
                 if (document.readyState === "complete") {
                   $ready.postMessage("");
                 } else {
-                  window.addEventListener("load", ()=>$ready.postMessage(""););
+                  window.addEventListener("load", ()=>$ready.postMessage(""));
                 }
               })();
           ''';
@@ -94,9 +95,9 @@ class _UiWebviewState extends State<UiWebview> {
           if (isRegister) {
             final callbacks = '_cbs${random}_';
             script +=
-            '''
+                '''
               const $callbacks = {};
-              window.$callback = (callbackId, result) =>{
+              window.$callback = (callbackId, result)=>{
                   if ($callbacks[callbackId]) {
                       $callbacks[callbackId](result);
                       delete $callbacks[callbackId];
@@ -121,8 +122,9 @@ class _UiWebviewState extends State<UiWebview> {
         },
       ),
     );
-
-    if (widget.url.startsWith('http://') || widget.url.startsWith('https://')) {
+    if (widget.html.isNotEmpty) {
+      await controller.loadHtmlString(widget.html);
+    } else if (widget.url.startsWith('http://') || widget.url.startsWith('https://')) {
       await controller.loadRequest(Uri.parse(widget.url));
     } else {
       await controller.loadFlutterAsset(widget.url);
