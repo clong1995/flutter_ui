@@ -11,7 +11,7 @@ class RpxWidget extends StatelessWidget {
         child: Container(
           width: 200.r,
           height: 100.r,
-          color: UiTheme.gary,
+          color: UiTheme.grey,
           alignment: Alignment.center,
           child: Text(
             '你好 world!\nhello 世界！',

@@ -95,7 +95,7 @@ class UiSimulator extends StatelessWidget {
                           Icon(
                             Icons.refresh,
                             size: 14.r,
-                            color: UiTheme.gary700,
+                            color: UiTheme.grey700,
                           ),
                         ],
                       ),
@@ -145,7 +145,7 @@ class UiSimulator extends StatelessWidget {
                           height: 6.r,
                           margin: EdgeInsets.symmetric(horizontal: 5.r),
                           decoration: BoxDecoration(
-                            color: UiTheme.gary800,
+                            color: UiTheme.grey800,
                             borderRadius: BorderRadius.circular(4.r),
                           ),
                         ),
@@ -154,7 +154,7 @@ class UiSimulator extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: Icon(
                               Icons.circle,
-                              color: UiTheme.gary900,
+                              color: UiTheme.grey900,
                               size: 14.r,
                             ),
                           ),

@@ -6,7 +6,7 @@ Widget appBuilder(
   Widget? child,
   Widget Function(BuildContext, Widget?)? builder,
 ) {
-  const color = UiTheme.gary900;
+  const color = UiTheme.grey900;
 
   late Widget builderWidget;
   if (builder == null) {

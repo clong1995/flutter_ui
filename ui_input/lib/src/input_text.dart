@@ -62,7 +62,7 @@ class _UiInputTextState extends State<UiInputText> {
 
   final defaultDecoration = BoxDecoration(
     color: UiTheme.white,
-    border: Border.all(color: UiTheme.gary),
+    border: Border.all(color: UiTheme.grey),
     borderRadius: BorderRadius.circular(5.r),
   );
 
@@ -104,7 +104,7 @@ class _UiInputTextState extends State<UiInputText> {
             UiIconButton(
               background: false,
               icon: obscure ? Icons.visibility_off_outlined : Icons.visibility,
-              color: obscure ? UiTheme.gary : null,
+              color: obscure ? UiTheme.grey : null,
               size: 12.r,
               onTap: () {
                 obscure = !obscure;
@@ -125,7 +125,7 @@ class _UiInputTextState extends State<UiInputText> {
               ? Text(
                   widget.hint!,
                   style: textStyle().copyWith(
-                    color: textStyle().color?.withAlpha(100) ?? UiTheme.gary,
+                    color: textStyle().color?.withAlpha(100) ?? UiTheme.grey,
                     fontWeight: FontWeight.normal,
                   ),
                 )
@@ -164,7 +164,7 @@ class _UiInputTextState extends State<UiInputText> {
     style: textStyle(),
     maxLines: widget.maxLines,
     cursorColor: UiTheme.primaryColor,
-    backgroundCursorColor: UiTheme.gary200,
+    backgroundCursorColor: UiTheme.grey200,
     showSelectionHandles: true,
     selectionControls: materialTextSelectionControls,
     contextMenuBuilder: (context, editableTextState) =>

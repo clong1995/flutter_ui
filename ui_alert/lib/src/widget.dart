@@ -29,7 +29,7 @@ class UiAlertWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: UiTheme.white,
             border: Border.all(
-              color: UiTheme.gary,
+              color: UiTheme.grey,
             ),
             borderRadius: BorderRadius.circular(10.r),
           ),
