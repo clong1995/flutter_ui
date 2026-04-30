@@ -8,10 +8,11 @@ class UiPage extends StatelessWidget {
   const UiPage({
     required this.body,
     // this.appbarBetweenSpace,
-    this.title,
     this.bodyPadding,
+    this.appbarTitle,
     this.appbarLeading,
     this.appbarAction,
+    this.bottomBar,
     this.backgroundColor = const Color(0xFFF7F8FA),
     this.appbarTextColor = const Color(0xFFFFFFFF),
     super.key,
@@ -19,7 +20,8 @@ class UiPage extends StatelessWidget {
 
   // final double? appbarBetweenSpace;
   final EdgeInsetsGeometry? bodyPadding;
-  final Widget? title;
+  final Widget? appbarTitle;
+  final Widget? bottomBar;
   final Widget body;
   final Color backgroundColor;
   final List<Widget>? appbarLeading;
@@ -30,14 +32,15 @@ class UiPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColoredBox(
       color: backgroundColor,
-      child: title == null
+      child: appbarTitle == null
           ? _body(context)
           : Column(
               children: [
-                _appBar(context: context, title: title!),
+                _appBar(context: context, title: appbarTitle!),
                 Expanded(
                   child: _body(context),
                 ),
+                ?bottomBar,
               ],
             ),
     );
