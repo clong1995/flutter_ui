@@ -32,17 +32,16 @@ class UiPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColoredBox(
       color: backgroundColor,
-      child: appbarTitle == null
-          ? _body(context)
-          : Column(
-              children: [
-                _appBar(context: context, title: appbarTitle!),
-                Expanded(
-                  child: _body(context),
-                ),
-                ?bottomBar,
-              ],
-            ),
+      child: Column(
+        children: [
+          if (appbarTitle != null)
+            _appBar(context: context, title: appbarTitle!),
+          Expanded(
+            child: _body(context),
+          ),
+          ?bottomBar,
+        ],
+      ),
     );
   }
 

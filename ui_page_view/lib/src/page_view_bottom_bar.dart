@@ -51,6 +51,7 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
           final selectedItem = e.itemBuilder(true);
 
           final detectorItem = GestureDetector(
+            behavior: HitTestBehavior.opaque,
             onTap: () {
               if (currIndex == e.index) {
                 return;
