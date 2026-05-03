@@ -1,27 +1,28 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:rpx/ext.dart';
 
 class UiTree<T extends Comparable<T>> extends StatefulWidget {
   const UiTree({
     required this.data,
     required this.itemBuilder,
     super.key,
-    this.indent = 10.0,
+    this.indent,
     this.selectedId = '',
     this.onTap,
   });
 
-  final double indent;
+  final double? indent;
   final String selectedId;
   final List<UiTreeItem<T>> data;
   final Widget Function(
-      BuildContext context,
-      UiTreeItem<T> item,
-      int length,
-      int level,
-      bool expand,
-      bool selected,
-      )
+    BuildContext context,
+    UiTreeItem<T> item,
+    int length,
+    int level,
+    bool expand,
+    bool selected,
+  )
   itemBuilder;
 
   final void Function(UiTreeItem<T> item)? onTap;
@@ -47,10 +48,8 @@ class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
   void didUpdateWidget(UiTree<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (!listEquals(widget.data, oldWidget.data) ||
-        widget.indent != oldWidget.indent ||
         widget.selectedId != oldWidget.selectedId) {
       buildTree();
-      setState(() {});
     }
   }
 
@@ -69,7 +68,7 @@ class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
     tree.selected = selectedId == tree.item.id;
     return Padding(
       key: ValueKey(tree.item.id),
-      padding: EdgeInsets.only(left: widget.indent * tree.level),
+      padding: EdgeInsets.only(left: widget.indent ?? 10.r * tree.level),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
