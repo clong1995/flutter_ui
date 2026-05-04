@@ -63,7 +63,7 @@ class FnDevice {
     return Guid.info;
   }
 
-  static void lockEnable() => wakeLockEnable();
+  static Future<void> lockEnable() async => wakeLockEnable();
 
-  static void lockDisable() => wakeLockDisable();
+  static Future<void> lockDisable() async => wakeLockDisable();
 }
