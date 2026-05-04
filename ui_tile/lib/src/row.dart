@@ -2,15 +2,17 @@ import 'package:flutter/widgets.dart';
 
 class UiTileRow extends StatelessWidget {
   const UiTileRow({
-    this.titleWidth,
-    required this.child,
     required this.title,
+    this.child,
+    this.action,
+    this.titleWidth,
     super.key,
   });
 
   final String title;
   final double? titleWidth;
-  final Widget child;
+  final Widget? child;
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +22,13 @@ class UiTileRow extends StatelessWidget {
           width: titleWidth,
           child: Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
-        Expanded(child: child),
+        if (child == null) const Spacer() else Expanded(child: child!),
+        ?action,
       ],
     );
   }

@@ -10,12 +10,14 @@ class UiAlertWidget extends StatelessWidget {
     this.cancelText = '取 消',
     super.key,
     this.action,
+    this.padding,
   });
 
   final String? title;
   final String cancelText;
   final Widget content;
   final List<Widget>? action;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +52,16 @@ class UiAlertWidget extends StatelessWidget {
                   ),
                 ),
               Padding(
-                padding: EdgeInsets.all(10.r),
+                padding: padding ?? EdgeInsets.all(10.r),
                 child: Column(
                   children: [
                     content,
-                    if (action != null)...[
-                      SizedBox(height: 10.r,),
+                    if (action != null) ...[
+                      SizedBox(
+                        height: 10.r,
+                      ),
                       Row(
-                        mainAxisAlignment : MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         spacing: 10.r,
                         children: [
                           UiButton(
@@ -67,7 +71,7 @@ class UiAlertWidget extends StatelessWidget {
                           ),
                           ...action!,
                         ],
-                      )
+                      ),
                     ],
                   ],
                 ),
