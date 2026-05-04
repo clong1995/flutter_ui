@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fn_device/fn_device.dart';
 import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_app/src/widget.dart';
@@ -47,7 +48,7 @@ Future<void> uiApp({
   UiAlert.navigatorKey = navigatorKey;
 
   //屏幕常亮
-
+  await FnDevice.lockEnable();
 
   runApp(
     App(
