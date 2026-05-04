@@ -36,6 +36,9 @@ Future<void> uiApp({
     DeviceOrientation.portraitUp,
   ]);
 
+  //屏幕常亮
+  await FnDevice.lockEnable();
+
   final navigatorKey = GlobalKey<NavigatorState>();
 
   //导航
@@ -47,8 +50,6 @@ Future<void> uiApp({
   //alert
   UiAlert.navigatorKey = navigatorKey;
 
-  //屏幕常亮
-  await FnDevice.lockEnable();
 
   runApp(
     App(
