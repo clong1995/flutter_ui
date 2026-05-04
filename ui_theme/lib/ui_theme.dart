@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:rpx/ext.dart';
 
 class UiTheme {
-  static Color primaryColor = const Color(0xFF5681F6);
+  static Color primaryColor = const Color(0xFF2D7AFF);
 
   //fontSize
   static double fontSize = 13.r;
