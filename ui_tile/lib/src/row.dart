@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:ui_theme/ui_theme.dart';
 
-class UITileRow extends StatelessWidget {
-  const UITileRow({
+class UiTileRow extends StatelessWidget {
+  const UiTileRow({
     this.titleWidth,
     required this.child,
     required this.title,
@@ -19,9 +18,12 @@ class UITileRow extends StatelessWidget {
       children: [
         SizedBox(
           width: titleWidth,
-          child: Text(title,style: TextStyle(
-            
-          ),),
+          child: Text(
+            title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
         Expanded(child: child),
       ],

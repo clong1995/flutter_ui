@@ -14,10 +14,10 @@ class UiAlert {
   }
 
   static Future<T?> dialog<T extends Object?>(
-      Widget Function() builder, {
-        bool root = false,
-        Object? args,
-      }) async {
+    Widget Function() builder, {
+    bool root = false,
+    Object? args,
+  }) async {
     final navContext = _navigatorKey?.currentContext;
     if (navContext == null) {
       return null;
@@ -26,13 +26,14 @@ class UiAlert {
     return Navigator.of(navContext, rootNavigator: root).push<T>(
       PageRouteBuilder<T>(
         opaque: false,
+        fullscreenDialog: true,
         barrierColor: UiTheme.black.withAlpha(50),
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
         settings: RouteSettings(arguments: args),
         pageBuilder: (context, animation, secondaryAnimation) => builder(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-        child,
+            child,
       ),
     );
   }
