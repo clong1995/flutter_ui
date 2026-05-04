@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   ui_theme:
     git:
       url: https://github.com/clong1995/flutter_ui.git
@@ -27,6 +28,10 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_alert
+  fn_device:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: fn_device
 
   flutter_localizations:
     sdk: flutter

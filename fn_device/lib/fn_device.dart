@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:fn_device/src/guid/guid.dart';
 import 'package:fn_device/src/user_agent/user_agent.dart';
+import 'package:fn_device/src/wake_lock.dart';
 
 class FnDevice {
   FnDevice._();
@@ -61,4 +62,8 @@ class FnDevice {
     }
     return Guid.info;
   }
+
+  static void lockEnable() => wakeLockEnable();
+
+  static void lockDisable() => wakeLockDisable();
 }

@@ -46,6 +46,9 @@ Future<void> uiApp({
   //alert
   UiAlert.navigatorKey = navigatorKey;
 
+  //屏幕常亮
+
+
   runApp(
     App(
       navigatorKey: navigatorKey,
