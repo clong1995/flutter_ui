@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_theme/ui_theme.dart';
 
-class UiTree<T extends Comparable<T>> extends StatefulWidget {
+class UiTree<T extends Object?> extends StatefulWidget {
   const UiTree({
     required this.data,
     this.itemBuilder,
@@ -31,7 +31,7 @@ class UiTree<T extends Comparable<T>> extends StatefulWidget {
   State<UiTree<T>> createState() => _UiTreeState<T>();
 }
 
-class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
+class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
   List<UiTreeItemBranch<T>> treeList = [];
 
   String selectedId = '';
@@ -215,7 +215,7 @@ class _UiTreeState<T extends Comparable<T>> extends State<UiTree<T>> {
 }*/
 
 @immutable
-class UiTreeItem<T extends Comparable<T>> {
+class UiTreeItem<T extends Object?> {
   const UiTreeItem({
     required this.id,
     required this.data,
@@ -226,7 +226,7 @@ class UiTreeItem<T extends Comparable<T>> {
   final String id;
   final String pid;
   final String title;
-  final T data;
+  final T? data;
 
   @override
   bool operator ==(Object other) {
@@ -234,19 +234,20 @@ class UiTreeItem<T extends Comparable<T>> {
     if (other is! UiTreeItem<T>) return false;
     return id == other.id &&
         pid == other.pid &&
-        (data.compareTo(other.data) == 0);
+        title == other.title &&
+        data == other.data;
   }
 
   @override
-  int get hashCode => Object.hash(id, pid, data);
+  int get hashCode => Object.hash(id, pid, title,data);
 }
 
-class UiTreeItemBranch<T extends Comparable<T>> {
+class UiTreeItemBranch<T extends Object?> {
   late UiTreeItemOne<T> item;
   List<UiTreeItemBranch<T>> children = [];
 }
 
-class UiTreeItemOne<T extends Comparable<T>> {
+class UiTreeItemOne<T extends Object?> {
   int level = 0;
   bool expand = false;
   bool selected = false;
