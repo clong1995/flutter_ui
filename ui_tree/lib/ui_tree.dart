@@ -25,7 +25,7 @@ class UiTree<T extends Object?> extends StatefulWidget {
   )?
   itemBuilder;
 
-  final void Function(String selectedId,List<String> expandedId)? onTap;
+  final void Function(String selectedId, List<String> expandedId)? onTap;
 
   @override
   State<UiTree<T>> createState() => _UiTreeState<T>();
@@ -33,9 +33,8 @@ class UiTree<T extends Object?> extends StatefulWidget {
 
 class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
   List<UiTreeItemBranch<T>> treeList = [];
-
-  String selectedId = '';
   List<String> expandedId = [];
+  String selectedId = '';//代替遍历树状结构算法
 
   late Color activeBackgroundColor;
 
@@ -66,7 +65,8 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
   }
 
   Widget buildItem(UiTreeItemBranch<T> treeBranch) {
-    treeBranch.item.selected = selectedId == treeBranch.item.item.id;
+    //代替遍历树状结构算法
+    treeBranch.item.selected = treeBranch.item.item.id == selectedId;
 
     return Padding(
       key: ValueKey(treeBranch.item.item.id),
@@ -78,10 +78,9 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
         children: [
           GestureDetector(
             onTap: () {
-              if (selectedId != treeBranch.item.item.id) {
-                widget.onTap?.call(selectedId,expandedId);
-              }
+              //代替遍历树状结构算法
               selectedId = treeBranch.item.item.id;
+
               if (treeBranch.item.expand) {
                 //展开
                 if (treeBranch.item.selected) {
@@ -98,6 +97,7 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
                 expandedId.add(treeBranch.item.item.id);
               }
               setState(() {});
+              widget.onTap?.call(treeBranch.item.item.id, expandedId);
             },
             child: widget.itemBuilder == null
                 ? itemBuilder(context, treeBranch.item)
@@ -161,10 +161,9 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
   }
 
   void buildTree() {
-    selectedId = widget.selectedId;
     expandedId = widget.expandedId ?? <String>[];
-    if (selectedId.isNotEmpty) {
-      expandedId.add(selectedId);
+    if (widget.selectedId.isNotEmpty) {
+      expandedId.add(widget.selectedId);
     }
     expandedId = expandedId.toSet().toList();
 
@@ -172,15 +171,22 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
     final nodeMap = <String, UiTreeItemBranch<T>>{};
     for (final item in widget.data) {
       nodeMap[item.id] = UiTreeItemBranch<T>()
-        ..item = UiTreeItemOne<T>()
-        ..item = UiTreeItemOne<T>()
+        ..item = (UiTreeItemOne<T>()
+          ..selected = widget.selectedId == item.id
+          ..expand = expandedId.contains(item.id)
+          ..item = UiTreeItem<T>(
+            id: item.id,
+            pid: item.pid,
+            title: item.title,
+            data: item.data,
+          ))
         ..children = [];
     }
 
     for (final item in widget.data) {
       final node = nodeMap[item.id]!;
 
-      if (item.pid.isEmpty) {
+      if (item.pid.isEmpty || item.id == item.pid) {
         node.item.level = 0;
         treeList.add(node);
       } else {
@@ -188,6 +194,9 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
         if (parentNode != null) {
           node.item.level = parentNode.item.level + 1;
           parentNode.children.add(node);
+          if (!parentNode.item.expand){
+            parentNode.item.expand = node.item.expand; //当子项目展开的时候，父项目也要展开
+          }
           parentNode.item.len = parentNode.children.length;
         } else {
           node.item.level = 0;
@@ -216,12 +225,7 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
 
 @immutable
 class UiTreeItem<T extends Object?> {
-  const UiTreeItem({
-    required this.id,
-    required this.data,
-    required this.title,
-    this.pid = '',
-  });
+  const UiTreeItem({this.id = '', this.pid = '', this.title = '', this.data});
 
   final String id;
   final String pid;
@@ -239,7 +243,7 @@ class UiTreeItem<T extends Object?> {
   }
 
   @override
-  int get hashCode => Object.hash(id, pid, title,data);
+  int get hashCode => Object.hash(id, pid, title, data);
 }
 
 class UiTreeItemBranch<T extends Object?> {
