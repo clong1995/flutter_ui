@@ -100,7 +100,7 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
               widget.onTap?.call(treeBranch.item.item.id, expandedId);
             },
             child: widget.itemBuilder == null
-                ? itemBuilder(context, treeBranch.item)
+                ? uiItemBuilder<T>(context, treeBranch.item)
                 : widget.itemBuilder!(context, treeBranch.item),
           ),
           if (treeBranch.children.isNotEmpty)
@@ -109,56 +109,6 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
               child: Column(
                 children: treeBranch.children.map(buildItem).toList(),
               ),
-            ),
-        ],
-      ),
-    );
-  }
-
-  Widget itemBuilder(
-    BuildContext context,
-    UiTreeItemOne<T> item,
-  ) {
-    final selectedFontColor = item.selected ? UiTheme.white : UiTheme.black;
-    final selectedFontWeight = item.selected ? FontWeight.bold : null;
-    final selectedBackgroundColor = item.selected
-        ? UiTheme.primaryColor
-        : UiTheme.white;
-    return Container(
-      key: ValueKey(item.item.id),
-      height: 34.r,
-      decoration: BoxDecoration(
-        color: selectedBackgroundColor,
-        borderRadius: BorderRadius.circular(5.r),
-      ),
-      margin: EdgeInsets.only(bottom: 4.r),
-      padding: EdgeInsets.symmetric(horizontal: 5.r),
-      child: Row(
-        children: [
-          if (item.len == 0)
-            SizedBox(
-              width: 5.r,
-            )
-          else
-            Icon(
-              item.expand ? Icons.arrow_drop_down : Icons.arrow_right,
-              color: selectedFontColor,
-            ),
-          Expanded(
-            child: Text(
-              item.item.title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: selectedFontColor,
-                fontWeight: selectedFontWeight,
-              ),
-            ),
-          ),
-          if (item.selected)
-            Icon(
-              Icons.chevron_right_rounded,
-              color: selectedFontColor,
             ),
         ],
       ),
@@ -262,4 +212,51 @@ class UiTreeItemOne<T extends Object?> {
   bool selected = false;
   int len = 0;
   late UiTreeItem<T> item;
+}
+
+Widget uiItemBuilder<T>(BuildContext context, UiTreeItemOne<T> item) {
+  final selectedFontColor = item.selected ? UiTheme.white : UiTheme.black;
+  final selectedFontWeight = item.selected ? FontWeight.bold : null;
+  final selectedBackgroundColor = item.selected
+      ? UiTheme.primaryColor
+      : UiTheme.white;
+  return Container(
+    key: ValueKey(item.item.id),
+    height: 34.r,
+    decoration: BoxDecoration(
+      color: selectedBackgroundColor,
+      borderRadius: BorderRadius.circular(5.r),
+    ),
+    margin: EdgeInsets.only(bottom: 4.r),
+    padding: EdgeInsets.symmetric(horizontal: 5.r),
+    child: Row(
+      children: [
+        if (item.len == 0)
+          SizedBox(
+            width: 5.r,
+          )
+        else
+          Icon(
+            item.expand ? Icons.arrow_drop_down : Icons.arrow_right,
+            color: selectedFontColor,
+          ),
+        Expanded(
+          child: Text(
+            item.item.title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: selectedFontColor,
+              fontWeight: selectedFontWeight,
+            ),
+          ),
+        ),
+        if (item.selected)
+          Icon(
+            Icons.chevron_right_rounded,
+            color: selectedFontColor,
+          ),
+      ],
+    ),
+  );
 }
