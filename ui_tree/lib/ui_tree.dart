@@ -25,7 +25,7 @@ class UiTree<T extends Object?> extends StatefulWidget {
   )?
   itemBuilder;
 
-  final void Function(String selectedId, List<String> expandedId)? onTap;
+  final void Function(String id, List<String> expandedId)? onTap;
 
   @override
   State<UiTree<T>> createState() => _UiTreeState<T>();
