@@ -34,7 +34,7 @@ class UiTree<T extends Object?> extends StatefulWidget {
 class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
   List<UiTreeItemBranch<T>> treeList = [];
   List<String> expandedId = [];
-  String selectedId = '';//代替遍历树状结构算法
+  String selectedId = ''; //代替遍历树状结构算法
 
   late Color activeBackgroundColor;
 
@@ -155,6 +155,11 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
               ),
             ),
           ),
+          if (item.selected)
+            Icon(
+              Icons.chevron_right_rounded,
+              color: selectedFontColor,
+            ),
         ],
       ),
     );
@@ -194,7 +199,7 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
         if (parentNode != null) {
           node.item.level = parentNode.item.level + 1;
           parentNode.children.add(node);
-          if (!parentNode.item.expand){
+          if (!parentNode.item.expand) {
             parentNode.item.expand = node.item.expand; //当子项目展开的时候，父项目也要展开
           }
           parentNode.item.len = parentNode.children.length;
