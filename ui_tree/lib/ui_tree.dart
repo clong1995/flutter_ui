@@ -49,7 +49,6 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
   @override
   void didUpdateWidget(UiTree<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    print(listEquals(widget.data, oldWidget.data));
     if (!listEquals(widget.data, oldWidget.data) ||
         widget.selectedId != oldWidget.selectedId) {
       buildTree();
