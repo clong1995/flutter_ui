@@ -34,4 +34,6 @@ class UiTheme {
   static const Color black = Color(0xFF000000);
   //green
   static const Color green = Color(0xFF4CAF50);
+  //red
+  static const Color red = Color(0xFFF44336);
 }

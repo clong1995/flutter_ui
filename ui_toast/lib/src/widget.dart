@@ -39,7 +39,7 @@ class ToastWidgetState extends State<ToastWidget> {
           padding: EdgeInsets.all(10.r),
           constraints: BoxConstraints(
             minWidth: 140.r,
-            maxWidth: 370.r,
+            maxWidth: 350.r,
           ),
           decoration: BoxDecoration(
             color: Color.lerp(
@@ -49,7 +49,7 @@ class ToastWidgetState extends State<ToastWidget> {
             ),
             border: Border.all(
               color: widget.message.color,
-              width: 1.5.r,
+              width: 1.r,
             ),
             borderRadius: BorderRadius.circular(10.r),
           ),
@@ -66,7 +66,6 @@ class ToastWidgetState extends State<ToastWidget> {
                     widget.message.text,
                     style: TextStyle(
                       color: widget.message.color,
-                      fontSize: 15.r,
                       decoration: TextDecoration.none,
                     ),
                   ),
