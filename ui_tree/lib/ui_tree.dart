@@ -22,6 +22,8 @@ class UiTree<T extends Object?> extends StatefulWidget {
   final Widget Function(
     BuildContext context,
     UiTreeItemOne<T> item,
+    int index,
+    int len,
   )?
   itemBuilder;
 
@@ -47,6 +49,7 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
   @override
   void didUpdateWidget(UiTree<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
+    print(listEquals(widget.data, oldWidget.data));
     if (!listEquals(widget.data, oldWidget.data) ||
         widget.selectedId != oldWidget.selectedId) {
       buildTree();
@@ -59,12 +62,14 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
       padding: EdgeInsets.zero,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: treeList.map(buildItem).toList(),
+        children: treeList.asMap().entries.map((entry) {
+          return buildItem(entry.value, entry.key, treeList.length);
+        }).toList(),
       ),
     );
   }
 
-  Widget buildItem(UiTreeItemBranch<T> treeBranch) {
+  Widget buildItem(UiTreeItemBranch<T> treeBranch, int index, int len) {
     //代替遍历树状结构算法
     treeBranch.item.selected = treeBranch.item.item.id == selectedId;
 
@@ -100,14 +105,26 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
               widget.onTap?.call(treeBranch.item.item.id, expandedId);
             },
             child: widget.itemBuilder == null
-                ? uiItemBuilder<T>(context, treeBranch.item)
-                : widget.itemBuilder!(context, treeBranch.item),
+                ? uiItemBuilder<T>(
+                    context,
+                    treeBranch.item,
+                    index,
+                    len,
+                  )
+                : widget.itemBuilder!(
+                    context,
+                    treeBranch.item,
+                    index,
+                    len,
+                  ),
           ),
           if (treeBranch.children.isNotEmpty)
             Visibility(
               visible: treeBranch.item.expand,
               child: Column(
-                children: treeBranch.children.map(buildItem).toList(),
+                children: treeBranch.children.asMap().entries.map((entry) {
+                  return buildItem(entry.value, entry.key, treeList.length);
+                }).toList(),
               ),
             ),
         ],
@@ -214,7 +231,12 @@ class UiTreeItemOne<T extends Object?> {
   late UiTreeItem<T> item;
 }
 
-Widget uiItemBuilder<T>(BuildContext context, UiTreeItemOne<T> item) {
+Widget uiItemBuilder<T>(
+  BuildContext context,
+  UiTreeItemOne<T> item,
+  int index,
+  int len,
+) {
   final selectedFontColor = item.selected ? UiTheme.white : UiTheme.black;
   final selectedFontWeight = item.selected ? FontWeight.bold : null;
   final selectedBackgroundColor = item.selected

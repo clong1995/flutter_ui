@@ -26,12 +26,9 @@ class UiIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = this.color ?? UiTheme.primaryColor;
-    double? iconSize;
+    var iconSize = size ?? 18.r;
     if (!background) {
-      iconSize = 16.r;
-    }
-    if (size != null) {
-      iconSize = size;
+      iconSize += 2.r;
     }
     final child = Container(
       decoration: background
