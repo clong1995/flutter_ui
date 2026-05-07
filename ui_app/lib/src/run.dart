@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fn_device/fn_device.dart';
@@ -37,7 +38,9 @@ Future<void> uiApp({
   ]);
 
   //屏幕常亮
-  await FnDevice.lockEnable();
+  if(!kIsWeb){
+    await FnDevice.lockEnable();
+  }
 
   final navigatorKey = GlobalKey<NavigatorState>();
 
