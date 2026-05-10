@@ -11,6 +11,7 @@ import 'package:ui_toast/ui_toast.dart';
 Future<T> nio<S extends BaseReq, T extends BaseRes>(
   String uri, {
   bool reTey = true,
+  int timeout = 10,
   S? req,
   T? res,
 }) async {
@@ -33,7 +34,7 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(
   //转string
   final jsonString = jsonEncode(req);
   //发送数据
-  final result = await send(uri, jsonString);
+  final result = await send(uri, jsonString, timeout: timeout);
   res.state = result['state'] as String;
 
   switch (res.state) {
