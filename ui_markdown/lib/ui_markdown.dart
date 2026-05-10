@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gpt_markdown/gpt_markdown.dart';
 
 class UiMarkdown extends StatelessWidget {
