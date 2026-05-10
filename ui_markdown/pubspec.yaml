@@ -14,8 +14,6 @@ dependencies:
   gpt_markdown: ^1.1.7
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   #flutter_lints: ^5.0.0
   very_good_analysis: ^10.2.0
 
