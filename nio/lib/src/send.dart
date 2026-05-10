@@ -19,7 +19,7 @@ void setHost(String uri) {
 Future<Map<String, dynamic>> send(
   String uri,
   String jsonString, {
-  int timeout = 10,
+  int? timeout,
 }) async {
   //loading
   void Function()? toastPop;
@@ -44,7 +44,7 @@ Future<Map<String, dynamic>> send(
   try {
     resp = await _client
         .post(url, headers: headers, body: jsonString)
-        .timeout(Duration(seconds: timeout));
+        .timeout(Duration(seconds: timeout ?? 15));
   } on TimeoutException catch (e) {
     _log(url, jsonString, '$e');
     res['state'] = 'timeout'; //接口超时
