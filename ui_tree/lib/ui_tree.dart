@@ -75,7 +75,7 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
     return Padding(
       key: ValueKey(treeBranch.item.item.id),
       padding: EdgeInsets.only(
-        left: widget.indent ?? 10.r * treeBranch.item.level,
+        left: widget.indent ?? 15.r * treeBranch.item.level,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
