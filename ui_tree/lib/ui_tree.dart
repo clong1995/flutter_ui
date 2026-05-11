@@ -122,7 +122,7 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
               visible: treeBranch.item.expand,
               child: Column(
                 children: treeBranch.children.asMap().entries.map((entry) {
-                  return buildItem(entry.value, entry.key, treeList.length);
+                  return buildItem(entry.value, entry.key, treeBranch.children.length);
                 }).toList(),
               ),
             ),
