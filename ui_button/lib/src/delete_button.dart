@@ -4,8 +4,8 @@ import 'package:rpx/ext.dart';
 import 'package:ui_disable/ui_disable.dart';
 import 'package:ui_theme/ui_theme.dart';
 
-class DeleteButton extends StatelessWidget {
-  const DeleteButton({
+class UiDeleteButton extends StatelessWidget {
+  const UiDeleteButton({
     required this.title,
     super.key,
     this.onTap,

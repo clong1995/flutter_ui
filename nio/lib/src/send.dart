@@ -44,7 +44,7 @@ Future<Map<String, dynamic>> send(
   try {
     resp = await _client
         .post(url, headers: headers, body: jsonString)
-        .timeout(Duration(seconds: timeout ?? 15));
+        .timeout(Duration(seconds: timeout ?? 30));
   } on TimeoutException catch (e) {
     _log(url, jsonString, '$e');
     res['state'] = 'timeout'; //接口超时
