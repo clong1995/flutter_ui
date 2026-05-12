@@ -143,6 +143,8 @@ class _UiInputTextState extends State<UiInputText> {
           ? const SizedBox.shrink()
           : UiIconButton(
               background: false,
+              color: UiTheme.red,
+              size: 16.r,
               icon: Icons.highlight_remove_outlined,
               onTap: () {
                 controller.clear();

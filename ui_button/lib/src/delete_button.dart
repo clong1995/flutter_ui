@@ -30,7 +30,7 @@ class UiDeleteButton extends StatelessWidget {
           SizedBox(width: 5.r),
           Text(title, style: TextStyle(color: color)),
           SizedBox(width: 5.r),
-          Icon(Icons.close_rounded,color: color,),
+          const Icon(Icons.highlight_remove_rounded,color: UiTheme.red,),
           SizedBox(width: 5.r),
         ],
       ),
