@@ -6,6 +6,7 @@ import 'package:ui_theme/ui_theme.dart';
 class UiTextButton extends StatelessWidget {
   const UiTextButton({
     required this.text,
+    this.icon,
     this.fontSize,
     super.key,
     this.height,
@@ -18,6 +19,7 @@ class UiTextButton extends StatelessWidget {
   final double? fontSize;
   final double? height;
   final String text;
+  final IconData? icon;
   final bool background;
   final EdgeInsets? padding;
 
@@ -30,19 +32,19 @@ class UiTextButton extends StatelessWidget {
 
     //height
     double? height;
-    if(background){
+    if (background) {
       height = 28.r;
     }
-    if(this.height!= null){
+    if (this.height != null) {
       height = this.height;
     }
 
     //padding
     EdgeInsets? padding;
-    if(background){
+    if (background) {
       padding = EdgeInsets.symmetric(horizontal: 10.r);
     }
-    if(this.padding!= null){
+    if (this.padding != null) {
       padding = this.padding;
     }
 
@@ -55,10 +57,22 @@ class UiTextButton extends StatelessWidget {
             )
           : null,
       height: height,
-      alignment: Alignment.center,
-      child: Text(
-        text,
-        style: TextStyle(color: color, fontSize: fontSize),
+      child: Row(
+        spacing: 1.r,
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (icon != null)
+            Icon(
+              icon,
+              color: color,
+              size: fontSize,
+            ),
+          Text(
+            text,
+            style: TextStyle(color: color, fontSize: fontSize),
+          ),
+        ],
       ),
     );
     return onTap == null
