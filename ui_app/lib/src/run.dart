@@ -26,8 +26,11 @@ Future<void> uiApp({
     ),
   );
 
-  // 强制应用占满全屏（包括状态栏和导航栏区域）
-  //await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  // 强制应用占满全屏
+  // 包括状态栏和导航栏区域，光靠removePadding 和 safeArea 没法覆盖底部手势指示器
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
+  //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
   //关闭键盘
   await SystemChannels.textInput.invokeMethod('TextInput.hide');

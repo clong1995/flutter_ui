@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui_theme/ui_theme.dart';
 
 class UiSkeleton extends StatefulWidget {
   const UiSkeleton({
@@ -26,7 +27,13 @@ class _UiSkeletonState extends State<UiSkeleton> {
       replacement: Visibility(
         visible: widget.state == UiSkeletonState.hold,
         replacement: widget.none ?? const Center(child: Text('No data')),
-        child: widget.hold ?? const Center(child: CircularProgressIndicator()),
+        child:
+            widget.hold ??
+            Center(
+              child: CircularProgressIndicator(
+                color: UiTheme.primaryColor,
+              ),
+            ),
       ),
       child: widget.child,
     );

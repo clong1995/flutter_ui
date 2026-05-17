@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
+import 'package:fn_device/fn_device.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
@@ -13,20 +14,22 @@ class UiPage extends StatelessWidget {
     this.appbarLeading,
     this.appbarAction,
     this.bottomBar,
+    this.bottomBarColor = UiTheme.white,
     this.backgroundColor = const Color(0xFFF7F8FA),
-    this.appbarTextColor = const Color(0xFFFFFFFF),
+    this.appbarTextColor = UiTheme.white,
     super.key,
   });
 
   // final double? appbarBetweenSpace;
   final EdgeInsetsGeometry? bodyPadding;
   final Widget? appbarTitle;
-  final Widget? bottomBar;
-  final Widget body;
-  final Color backgroundColor;
   final List<Widget>? appbarLeading;
   final List<Widget>? appbarAction;
   final Color? appbarTextColor;
+  final Widget body;
+  final Widget? bottomBar;
+  final Color backgroundColor;
+  final Color bottomBarColor;
 
   @override
   Widget build(BuildContext context) {
@@ -37,34 +40,36 @@ class UiPage extends StatelessWidget {
           if (appbarTitle != null)
             _appBar(context: context, title: appbarTitle!),
           Expanded(
-            child: _body(context),
+            child: Container(
+              width: double.infinity,
+              padding: bodyPadding ?? EdgeInsets.fromLTRB(10.r, 10.r, 10.r, 0),
+              child: body,
+            ),
           ),
-          ?bottomBar,
+          if (bottomBar != null)
+            _bottomBar(),
         ],
       ),
     );
   }
 
-  Widget _body(BuildContext context) => MediaQuery.removePadding(
-    removeLeft: true,
-    removeTop: true,
-    removeRight: true,
-    removeBottom: true,
-    context: context,
-    child: Container(
-      width: double.infinity,
-      padding: bodyPadding ?? EdgeInsets.fromLTRB(10.r, 10.r, 10.r, 0),
-      child: body,
-    ),
-  );
+  Widget _bottomBar(){
+    final bottomSafeHeight = FnDevice.bottomSafeHeight;
+    return Container(
+      color: bottomBarColor,
+      height: 55.r + bottomSafeHeight,
+      padding: EdgeInsets.only(bottom: bottomSafeHeight),
+      child: bottomBar,
+    );
+  }
 
   Widget _appBar({required BuildContext context, required Widget title}) {
-    final padding = MediaQuery.of(context).padding;
+    final statusBarHeight = FnDevice.statusBarHeight;
     return Container(
       color: UiTheme.primaryColor,
       width: double.infinity,
-      height: 40.r + padding.top,
-      padding: EdgeInsets.fromLTRB(10.r, padding.top, 10.r, 0),
+      height: 40.r + statusBarHeight,
+      padding: EdgeInsets.fromLTRB(10.r, statusBarHeight, 10.r, 0),
       child: DefaultTextStyle.merge(
         style: TextStyle(color: appbarTextColor),
         child: IconTheme.merge(

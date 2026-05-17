@@ -49,8 +49,12 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
   @override
   void didUpdateWidget(UiTree<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
+    //print(widget.selectedId);
+    //print(oldWidget.selectedId);
     if (!listEquals(widget.data, oldWidget.data) ||
-        widget.selectedId != oldWidget.selectedId) {
+        widget.selectedId != oldWidget.selectedId
+        //|| widget.selectedId != selectedId
+    ) {
       buildTree();
     }
   }
@@ -132,6 +136,7 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
   }
 
   void buildTree() {
+    selectedId = widget.selectedId;
     expandedId = widget.expandedId ?? <String>[];
     if (widget.selectedId.isNotEmpty) {
       expandedId.add(widget.selectedId);

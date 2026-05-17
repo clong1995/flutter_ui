@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:fn_device/src/guid/guid.dart';
+import 'package:fn_device/src/height.dart';
 import 'package:fn_device/src/user_agent/user_agent.dart';
 import 'package:fn_device/src/wake_lock.dart';
 
@@ -66,4 +67,13 @@ class FnDevice {
   static Future<void> Function() lockEnable = wakeLockEnable;
 
   static Future<void> Function() lockDisable = wakeLockDisable;
+
+
+  static double get statusBarHeight {
+    return Height.statusBarHeight;
+  }
+
+  static double get bottomSafeHeight {
+    return Height.bottomSafeHeight;
+  }
 }

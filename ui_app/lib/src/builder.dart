@@ -64,21 +64,13 @@ Widget appBuilder(
     child: iconTheme,
   );
 
-  //媒体查询
   final mediaQueryData = MediaQuery.of(context);
-  final safePadding = mediaQueryData.padding.copyWith(
-    //top: mediaQueryData.padding.top * .75,
-    left: 0,
-    right: 0,
-    bottom: mediaQueryData.viewPadding.bottom * .3,
-  );
   final mediaQuery = MediaQuery(
     data: mediaQueryData.copyWith(
       //去掉字体缩放
       textScaler: TextScaler.noScaling,
       //自定义安全区
-      padding: safePadding,
-      viewPadding: safePadding,
+      padding: EdgeInsets.zero,
     ),
     child: scrollConfiguration,
   );
