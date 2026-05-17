@@ -55,10 +55,14 @@ class UiPage extends StatelessWidget {
 
   Widget _bottomBar(){
     final bottomSafeHeight = FnDevice.bottomSafeHeight;
+    var top = 8.r;
+    var bottom = 8.r;
+    if(bottomSafeHeight != 0){
+      bottom = bottomSafeHeight/2 + top;
+    }
     return Container(
       color: bottomBarColor,
-      height: 55.r + bottomSafeHeight,
-      padding: EdgeInsets.only(bottom: bottomSafeHeight),
+      padding: EdgeInsets.fromLTRB(0,top,0,bottom),
       child: bottomBar,
     );
   }
