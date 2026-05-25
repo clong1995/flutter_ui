@@ -1,7 +1,5 @@
 //从任意位置跳到连续的PhotoViewPage，比如聊天里的图，缩略图的某一个图
-import 'package:flutter/material.dart';
 import 'package:fn_nav/fn_nav.dart';
-
 import 'package:ui_photo_view/src/photo_view.dart';
 
 Future<void> pushPhotoViewPage({
@@ -9,7 +7,5 @@ Future<void> pushPhotoViewPage({
   int index = 0,
   void Function(int)? onChanged,
 }) => FnNav.push(
-  () => Scaffold(
-    body: UiPhotoView(images: images, index: index, onChanged: onChanged),
-  ),
+  () => UiPhotoView(images: images, index: index, onChanged: onChanged),
 );

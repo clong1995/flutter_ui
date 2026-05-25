@@ -1,17 +1,24 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Icons;
+import 'package:flutter/widgets.dart';
+import 'package:fn_device/fn_device.dart';
 import 'package:http/http.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:photo_view/photo_view_gallery.dart';
+import 'package:rpx/ext.dart';
+import 'package:ui_button/ui_button.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
+import 'package:ui_theme/ui_theme.dart';
+import 'package:ui_toast/ui_toast.dart';
 
 //PhotoView 的实现
 class UiPhotoView extends StatefulWidget {
-
   const UiPhotoView({
-    required this.images, super.key,
+    required this.images,
+    super.key,
     this.index = 0,
     this.onChanged,
   });
+
   final List<String> images;
   final int index;
   final void Function(int)? onChanged;
@@ -33,14 +40,13 @@ class _UiPhotoViewState extends State<UiPhotoView> {
 
   @override
   Widget build(BuildContext context) {
-    final padding = MediaQuery.of(context).padding;
     return Stack(
       children: [
         PhotoViewGallery.builder(
           onPageChanged: (index) {
             currIndex = index;
           },
-          builder: (BuildContext context, int index) {
+          builder: (context, index) {
             if (currIndex != index) {
               widget.onChanged?.call(index);
             }
@@ -53,24 +59,27 @@ class _UiPhotoViewState extends State<UiPhotoView> {
           pageController: PageController(initialPage: widget.index),
         ),
         Positioned(
-          top: padding.top + 15,
-          left: padding.left + 15,
+          top: FnDevice.statusBarHeight,
+          left: 15.r,
           child: Container(
+            height: 35.r,
+            padding: EdgeInsets.symmetric(horizontal: 5.r),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.white,
+              borderRadius: BorderRadius.circular(5.r),
+              color: UiTheme.white,
             ),
             child: Row(
+              spacing: 5.r,
               children: [
-                IconButton(
-                  padding: const EdgeInsets.all(10),
-                  onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.arrow_back_ios_new),
+                UiIconButton(
+                  background: false,
+                  icon: Icons.arrow_back_ios_new_rounded,
+                  onTap: () => Navigator.pop(context),
                 ),
-                IconButton(
-                  padding: const EdgeInsets.all(10),
-                  onPressed: () => saveImage(images[currIndex]),
-                  icon: const Icon(Icons.save_alt),
+                UiIconButton(
+                  background: false,
+                  icon: Icons.save_alt,
+                  onTap: () => saveImage(images[currIndex]),
                 ),
               ],
             ),
@@ -86,13 +95,15 @@ class _UiPhotoViewState extends State<UiPhotoView> {
     final result = await ImageGallerySaverPlus.saveImage(bytes, quality: 100);
 
     if (result['isSuccess'] == true) {
-      snackBar('保存成功');
+      //snackBar('保存成功');
+      UiToast.show(UiToastMessage.success()..text = '保存成功');
     } else {
-      snackBar('保存失败');
+      // snackBar('保存失败');
+      UiToast.show(UiToastMessage.failure()..text = '保存失败');
     }
   }
 
-  void snackBar(String str) {
+  /*void snackBar(String str) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(str)));
-  }
+  }*/
 }

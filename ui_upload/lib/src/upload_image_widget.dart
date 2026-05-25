@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
+import 'package:fn_device/fn_device.dart';
 import 'package:fn_nav/fn_nav.dart';
+import 'package:rpx/ext.dart';
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 import 'package:ui_photo_view/ui_photo_view.dart';
@@ -12,7 +14,7 @@ import 'package:ui_upload/src/upload.dart';
 class UiUploadImageWidget extends StatefulWidget {
   const UiUploadImageWidget({
     required this.signUrl,
-    required this.crossAxisCount,
+    this.crossAxisCount,
     required this.onChanged,
     // required this.path,
     super.key,
@@ -25,7 +27,7 @@ class UiUploadImageWidget extends StatefulWidget {
     this.limit,
   });
 
-  final int crossAxisCount;
+  final int? crossAxisCount;
   final void Function(List<String> images) onChanged;
   final List<String>? list;
   final double? spacing;
@@ -51,7 +53,7 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
   @override
   void initState() {
     super.initState();
-    spacing = widget.spacing ?? 5;
+    spacing = widget.spacing ?? 5.r;
   }
 
   @override
@@ -69,7 +71,7 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
     padding: EdgeInsets.zero,
     itemCount: imageList.length + 1,
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: widget.crossAxisCount,
+      crossAxisCount: widget.crossAxisCount??3,
       mainAxisSpacing: spacing,
       crossAxisSpacing: spacing,
     ),
@@ -107,7 +109,7 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
   Widget single() => AspectRatio(
     aspectRatio: 1,
     child: DecoratedBox(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.r)),
       child: Stack(
         children: [
           if (imageList.isNotEmpty)
@@ -249,28 +251,19 @@ class _PhotoViewerState extends State<_PhotoViewer> {
           currIndex = index;
         },
       ),
-      Positioned(
-        left: 10,
-        top: 10,
-        child: UiIconButton(
-          //color: appbarTextColor,
-          background: false,
-          icon: Icons.arrow_back_ios_new_rounded,
-          onTap: () => Navigator.pop(context),
-        ),
-      ),
       if (widget.onDelete != null)
         Positioned(
           left: 0,
           right: 0,
-          bottom: 10,
+          bottom: FnDevice.bottomSafeHeight,
           child: Center(
             child: UiButton(
+              height: 35.r,
               color: UiTheme.red,
               onTap: remove,
               child: const Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [Icon(Icons.delete_forever_outlined), Text('删除')],
+                mainAxisAlignment : MainAxisAlignment.center,
+                children: [Icon(Icons.delete_forever_outlined), Text(' 删 除')],
               ),
             ),
           ),
