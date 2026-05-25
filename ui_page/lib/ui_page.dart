@@ -58,7 +58,7 @@ class UiPage extends StatelessWidget {
     final top = 8.r;
     var bottom = 8.r;
     if(bottomSafeHeight != 0){
-      bottom = bottomSafeHeight/2 + bottom;
+      bottom = bottomSafeHeight;
     }
     return Container(
       color: bottomBarColor,
