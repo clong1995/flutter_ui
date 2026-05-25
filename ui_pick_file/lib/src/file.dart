@@ -10,7 +10,7 @@ class UiPickFile {
 
   //单选任意单文件
   static Future<PickerFile?> single({List<String>? allowedExtensions}) async {
-    final result = await FilePicker.platform.pickFiles(
+    final result = await FilePicker.pickFiles(
       type: allowedExtensions == null ? FileType.any : FileType.custom,
       allowedExtensions: allowedExtensions,
     );
@@ -26,7 +26,7 @@ class UiPickFile {
     int? limit, // TODO(user): xxx
     List<String>? allowedExtensions,
   }) async {
-    final result = await FilePicker.platform.pickFiles(
+    final result = await FilePicker.pickFiles(
       allowMultiple: true,
       type: allowedExtensions == null ? FileType.any : FileType.custom,
       allowedExtensions: allowedExtensions,
@@ -43,7 +43,7 @@ class UiPickFile {
 
   //选择任意目录
   static Future<String?> dir() async {
-    return FilePicker.platform.getDirectoryPath();
+    return FilePicker.getDirectoryPath();
   }
 
   //保存任意文件
@@ -52,7 +52,7 @@ class UiPickFile {
     String? dialogTitle,
     String? fileName,
   }) async {
-    final outputFile = await FilePicker.platform.saveFile(
+    final outputFile = await FilePicker.saveFile(
       dialogTitle: dialogTitle,
       fileName: fileName,
       bytes: bytes,

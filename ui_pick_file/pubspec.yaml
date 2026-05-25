@@ -10,18 +10,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  file_picker: ^10.3.7
-  image_picker: ^1.2.1
+  file_picker: ^11.0.2
+  image_picker: ^1.2.2
   image_gallery_saver_plus: ^4.0.1
   path: ^1.9.1
   path_provider: ^2.1.5
   http: ^1.6.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  #flutter_test:
+  #  sdk: flutter
   #flutter_lints: ^5.0.0
-  very_good_analysis: ^10.0.0
+  very_good_analysis: ^10.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
