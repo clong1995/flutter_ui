@@ -8,12 +8,12 @@ Future<bool> uploadFile({
   required Uint8List bytes,
 }) async {
   //出现loading
-  UiToast.show(UiToastMessage.loading());
+  final pop = UiToast.show(UiToastMessage.loading());
   //发起上传
   final url = Uri.parse(signUrl);
   final response = await put(url, body: bytes);
   //关闭loading
-  UiToast.dismiss();
+  pop?.call();
   if (response.statusCode == 200) {
     return true;
   }

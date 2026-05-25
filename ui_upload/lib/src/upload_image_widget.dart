@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fn_nav/fn_nav.dart';
-import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 import 'package:ui_photo_view/ui_photo_view.dart';
 import 'package:ui_toast/ui_toast.dart';
@@ -74,38 +73,35 @@ class _UploadImageWidgetState extends State<UploadImageWidget> {
     itemBuilder: (BuildContext context, int index) {
       return index == imageList.length
           ? InkWell(
-        onTap: onMultiTap,
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          color: Colors.grey.shade50,
-          margin: EdgeInsets.zero,
-          child: Icon(
-            Icons.add_photo_alternate_outlined,
-            size: widget.iconSize,
-            color: Colors.grey,
-          ),
-        ),
-      )
-          : Card(
-        clipBehavior: Clip.antiAlias,
-        color: Colors.grey.shade50,
-        margin: EdgeInsets.zero,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            GestureDetector(
-              onTap: () async {
-                await imageWidget(index);
-              },
-              child: UiCacheImage(
-                imageList[index],
-                fit: BoxFit.contain,
+              onTap: onMultiTap,
+              child: Card(
+                clipBehavior: Clip.antiAlias,
+                color: Colors.grey.shade50,
+                margin: EdgeInsets.zero,
+                child: Icon(
+                  Icons.add_photo_alternate_outlined,
+                  size: widget.iconSize,
+                  color: Colors.grey,
+                ),
               ),
-            ),
-            removeWidget(index),
-          ],
-        ),
-      );
+            )
+          : Card(
+              clipBehavior: Clip.antiAlias,
+              color: Colors.grey.shade50,
+              margin: EdgeInsets.zero,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  GestureDetector(
+                    onTap: () async {
+                      await imageWidget(index);
+                    },
+                    child: UiCacheImage(imageList[index], fit: BoxFit.contain),
+                  ),
+                  removeWidget(index),
+                ],
+              ),
+            );
     },
   );
 
@@ -203,7 +199,7 @@ class _UploadImageWidgetState extends State<UploadImageWidget> {
 
   Future<void> imageWidget(int index) async {
     await FnNav.push(
-          () => _PhotoViewer(
+      () => _PhotoViewer(
         index: index,
         images: [...imageList],
         onDelete: (int index) {
@@ -278,11 +274,16 @@ class _PhotoViewerState extends State<_PhotoViewer> {
   );
 
   Future<void> remove() async {
-    final flag = await UiAlert.confirm(
-      content: '确定删除这张图片?',
+    UiToast.show(
+      UiToastMessage.info()
+        ..text = '确定删除这张图片?'
+        ..autoPopSeconds = 0
+        ..callback = toastCallback,
     );
+  }
 
-    if (flag ?? false) {
+  void toastCallback(bool flag) {
+    if (flag) {
       //
       images.removeAt(currIndex);
       //删除

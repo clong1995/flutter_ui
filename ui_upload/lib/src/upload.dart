@@ -14,7 +14,7 @@ class Upload {
     double? maxHeight,
     int? imageQuality,
   }) async {
-    final pf = await PickImage.camera(
+    final pf = await UiPickImage.camera(
       maxWidth: maxWidth,
       maxHeight: maxHeight,
       imageQuality: imageQuality,
@@ -67,7 +67,7 @@ class Upload {
   }) async {
     if (type == 'video') {
       //视频
-      final pf = await PickVideo.gallery();
+      final pf = await UiPickVideo.gallery();
       if (pf == null) {
         return null;
       }
@@ -102,7 +102,7 @@ class Upload {
       return [sign.download];
     } else {
       //图片
-      final pfs = await PickImage.multiple(
+      final pfs = await UiPickImage.multiple(
         maxWidth: maxWidth,
         maxHeight: maxHeight,
         imageQuality: imageQuality,
@@ -154,7 +154,7 @@ class Upload {
     int? limit,
     void Function(String download)? uploadStep,
   }) async {
-    final pfs = await PickFile.multiple(
+    final pfs = await UiPickFile.multiple(
       limit: limit,
       allowedExtensions: allowedExtensions,
     );
