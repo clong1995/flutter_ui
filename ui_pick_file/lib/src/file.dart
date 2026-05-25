@@ -23,11 +23,10 @@ class UiPickFile {
 
   //多选任意文件
   static Future<List<PickerFile>?> multiple({
-    int? limit, // TODO(user): xxx
+    int? limit,
     List<String>? allowedExtensions,
   }) async {
     final result = await FilePicker.pickFiles(
-      allowMultiple: true,
       type: allowedExtensions == null ? FileType.any : FileType.custom,
       allowedExtensions: allowedExtensions,
     );
@@ -49,8 +48,8 @@ class UiPickFile {
   //保存任意文件
   static Future<String?> save({
     required Uint8List bytes,
+    required String fileName,
     String? dialogTitle,
-    String? fileName,
   }) async {
     final outputFile = await FilePicker.saveFile(
       dialogTitle: dialogTitle,

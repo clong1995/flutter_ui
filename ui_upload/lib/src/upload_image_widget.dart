@@ -1,13 +1,16 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Icons;
+import 'package:flutter/widgets.dart';
 import 'package:fn_nav/fn_nav.dart';
+import 'package:ui_button/ui_button.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 import 'package:ui_photo_view/ui_photo_view.dart';
+import 'package:ui_theme/ui_theme.dart';
 import 'package:ui_toast/ui_toast.dart';
 import 'package:ui_upload/src/sign_url.dart';
 import 'package:ui_upload/src/upload.dart';
 
-class UploadImageWidget extends StatefulWidget {
-  const UploadImageWidget({
+class UiUploadImageWidget extends StatefulWidget {
+  const UiUploadImageWidget({
     required this.signUrl,
     required this.crossAxisCount,
     required this.onChanged,
@@ -37,10 +40,10 @@ class UploadImageWidget extends StatefulWidget {
   final Future<List<SignUrl>?> Function(List<String> fileName) signUrl;
 
   @override
-  State<UploadImageWidget> createState() => _UploadImageWidgetState();
+  State<UiUploadImageWidget> createState() => _UiUploadImageWidgetState();
 }
 
-class _UploadImageWidgetState extends State<UploadImageWidget> {
+class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
   List<String> imageList = [];
 
   double spacing = 0;
@@ -72,30 +75,26 @@ class _UploadImageWidgetState extends State<UploadImageWidget> {
     ),
     itemBuilder: (BuildContext context, int index) {
       return index == imageList.length
-          ? InkWell(
+          ? GestureDetector(
               onTap: onMultiTap,
-              child: Card(
+              child: Container(
                 clipBehavior: Clip.antiAlias,
-                color: Colors.grey.shade50,
-                margin: EdgeInsets.zero,
+                color: UiTheme.grey50,
                 child: Icon(
                   Icons.add_photo_alternate_outlined,
                   size: widget.iconSize,
-                  color: Colors.grey,
+                  color: UiTheme.grey,
                 ),
               ),
             )
-          : Card(
+          : Container(
               clipBehavior: Clip.antiAlias,
-              color: Colors.grey.shade50,
-              margin: EdgeInsets.zero,
+              color: UiTheme.grey50,
               child: Stack(
                 fit: StackFit.expand,
                 children: [
                   GestureDetector(
-                    onTap: () async {
-                      await imageWidget(index);
-                    },
+                    onTap: () => imageWidget(index),
                     child: UiCacheImage(imageList[index], fit: BoxFit.contain),
                   ),
                   removeWidget(index),
@@ -128,7 +127,7 @@ class _UploadImageWidgetState extends State<UploadImageWidget> {
                   child: Icon(
                     Icons.add_photo_alternate_outlined,
                     size: widget.iconSize,
-                    color: Colors.grey,
+                    color: UiTheme.grey,
                   ),
                 ),
               ),
@@ -149,7 +148,7 @@ class _UploadImageWidgetState extends State<UploadImageWidget> {
           widget.onChanged(imageList);
           setState(() {});
         },
-        child: const Icon(Icons.cancel, color: Colors.red),
+        child: const Icon(Icons.cancel, color: UiTheme.red),
       ),
     ),
   );
@@ -250,22 +249,28 @@ class _PhotoViewerState extends State<_PhotoViewer> {
           currIndex = index;
         },
       ),
-      const Positioned(left: 10, top: 10, child: BackButton()),
+      Positioned(
+        left: 10,
+        top: 10,
+        child: UiIconButton(
+          //color: appbarTextColor,
+          background: false,
+          icon: Icons.arrow_back_ios_new_rounded,
+          onTap: () => Navigator.pop(context),
+        ),
+      ),
       if (widget.onDelete != null)
         Positioned(
           left: 0,
           right: 0,
           bottom: 10,
           child: Center(
-            child: FilledButton(
-              style: FilledButton.styleFrom(backgroundColor: Colors.red),
-              onPressed: remove,
+            child: UiButton(
+              color: UiTheme.red,
+              onTap: remove,
               child: const Row(
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.delete_forever_outlined),
-                  Text('删除', style: TextStyle(color: Colors.white)),
-                ],
+                children: [Icon(Icons.delete_forever_outlined), Text('删除')],
               ),
             ),
           ),

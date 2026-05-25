@@ -8,14 +8,12 @@ import 'package:ui_pick_file/ui_pick_file.dart' show PickerFile;
 class UiPickVideo {
   UiPickVideo._();
 
-  //TODO(user): 压缩
   //拍摄视频
   static Future<PickerFile?> camera() async {
     final xf = await imagePicker.pickVideo(source: ImageSource.camera);
     return pickerFile(xf);
   }
 
-  //TODO(user): 压缩
   //单选 从相册选择视频
   static Future<PickerFile?> gallery() async {
     final xf = await imagePicker.pickVideo(source: ImageSource.gallery);
