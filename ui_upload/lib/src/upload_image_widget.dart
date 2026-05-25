@@ -71,23 +71,18 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
     padding: EdgeInsets.zero,
     itemCount: imageList.length + 1,
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: widget.crossAxisCount??3,
+      crossAxisCount: widget.crossAxisCount ?? 3,
       mainAxisSpacing: spacing,
       crossAxisSpacing: spacing,
     ),
     itemBuilder: (BuildContext context, int index) {
       return index == imageList.length
-          ? GestureDetector(
-              onTap: onMultiTap,
-              child: Container(
-                clipBehavior: Clip.antiAlias,
-                color: UiTheme.grey50,
-                child: Icon(
-                  Icons.add_photo_alternate_outlined,
-                  size: widget.iconSize,
-                  color: UiTheme.grey,
-                ),
-              ),
+          ? UiIconButton(
+              onTap: onSingleTap,
+              width: 45.r,
+              height: 45.r,
+              size: 25.r,
+              icon: Icons.add_photo_alternate_outlined,
             )
           : Container(
               clipBehavior: Clip.antiAlias,
@@ -122,16 +117,12 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
           if (imageList.isNotEmpty) removeWidget(0),
           if (imageList.isEmpty)
             Center(
-              child: GestureDetector(
+              child: UiIconButton(
                 onTap: onSingleTap,
-                child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: Icon(
-                    Icons.add_photo_alternate_outlined,
-                    size: widget.iconSize,
-                    color: UiTheme.grey,
-                  ),
-                ),
+                width: 45.r,
+                height: 45.r,
+                size: 25.r,
+                icon: Icons.add_photo_alternate_outlined,
               ),
             ),
         ],
@@ -140,18 +131,17 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
   );
 
   Widget removeWidget(int index) => Positioned(
-    top: spacing * 2,
-    right: spacing * 2,
-    child: MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () {
-          imageList.removeAt(index);
-          widget.onChanged(imageList);
-          setState(() {});
-        },
-        child: const Icon(Icons.cancel, color: UiTheme.red),
-      ),
+    top: 0,
+    right: 0,
+    child: UiIconButton(
+      onTap: () {
+        imageList.removeAt(index);
+        widget.onChanged(imageList);
+        setState(() {});
+      },
+      background: false,
+      icon: Icons.cancel,
+      color: UiTheme.red,
     ),
   );
 
@@ -253,8 +243,8 @@ class _PhotoViewerState extends State<_PhotoViewer> {
       ),
       if (widget.onDelete != null)
         Positioned(
-          left: 0,
-          right: 0,
+          left: 15.r,
+          right: 15.r,
           bottom: FnDevice.bottomSafeHeight,
           child: Center(
             child: UiButton(
@@ -262,7 +252,7 @@ class _PhotoViewerState extends State<_PhotoViewer> {
               color: UiTheme.red,
               onTap: remove,
               child: const Row(
-                mainAxisAlignment : MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [Icon(Icons.delete_forever_outlined), Text(' 删 除')],
               ),
             ),
