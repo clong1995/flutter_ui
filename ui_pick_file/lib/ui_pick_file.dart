@@ -4,3 +4,4 @@ export 'src/file.dart';
 export 'src/image.dart';
 export 'src/picker_file.dart';
 export 'src/video.dart';
+export 'src/save_gallery.dart';

@@ -5,7 +5,7 @@ import 'dart:typed_data';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
-Future<String> saveImageToGallery({
+Future<String> UiPickSaveImage({
   required Uint8List bytes,
   String? fileName,
 }) async {
