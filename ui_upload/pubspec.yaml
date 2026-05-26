@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^1.6.0
+  image_size_getter: ^2.4.1
   #kit:
   #  path: ../kit
   ui_pick_file:

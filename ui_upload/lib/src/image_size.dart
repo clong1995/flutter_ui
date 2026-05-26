@@ -1,63 +1,27 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
-import 'dart:ui';
+
+import 'package:image_size_getter/file_input.dart';
+import 'package:image_size_getter/image_size_getter.dart';
 
 class ImageSize {
   int width = 0;
   int height = 0;
 }
 
-Future<ImageSize> imageSize(File file) async {
-  /*final image = Image.file(file);
-  final completer = Completer<Size>();
-  image.image
-      .resolve(ImageConfiguration.empty)
-      .addListener(
-        ImageStreamListener((ImageInfo info, bool _) {
-          final size = info.image;
-          completer.complete(
-            Size(size.width.toDouble(), size.height.toDouble()),
-          );
-        }),
-      );
-  return completer.future;*/
-
-  final bytes = await file.readAsBytes();
-  final codec = await instantiateImageCodec(
-    bytes,
-    targetWidth: 1,
-    targetHeight: 1,
-  );
-
-  final frame = await codec.getNextFrame();
-  return ImageSize()
-    ..width = frame.image.width
-    ..height = frame.image.height;
-}
-
-Future<ImageSize> imageSizeFromBytes(Uint8List imageBytes) async {
-  /*final image = Image.memory(imageBytes);
-  final completer = Completer<Size>();
-  image.image
-      .resolve(ImageConfiguration.empty)
-      .addListener(
-        ImageStreamListener((ImageInfo info, bool _) {
-          final size = info.image;
-          completer.complete(
-            Size(size.width.toDouble(), size.height.toDouble()),
-          );
-        }),
-      );
-  return completer.future;*/
-
-  final codec = await instantiateImageCodec(
-    imageBytes,
-    targetWidth: 1,
-    targetHeight: 1,
-  );
-  final frame = await codec.getNextFrame();
-  return ImageSize()
-    ..width = frame.image.width
-    ..height = frame.image.height;
+Future<ImageSize> imageSizeFromPath(String path) async {
+  final sizeResult = ImageSizeGetter.getSizeResult(FileInput(File(path)));
+  Size size = sizeResult.size;
+  int width = size.width;
+  int height = size.height;
+  final imageSize = ImageSize();
+  if (size.needRotate) {
+    return imageSize
+      ..width = height
+      ..height = width;
+  } else {
+    return imageSize
+      ..width = width
+      ..height = height;
+  }
 }

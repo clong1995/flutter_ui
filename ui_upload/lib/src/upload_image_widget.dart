@@ -16,11 +16,9 @@ class UiUploadImageWidget extends StatefulWidget {
     required this.signUrl,
     this.crossAxisCount,
     required this.onChanged,
-    // required this.path,
     super.key,
     this.list,
     this.spacing,
-    this.iconSize,
     this.maxWidth,
     this.maxHeight,
     this.imageQuality,
@@ -31,7 +29,6 @@ class UiUploadImageWidget extends StatefulWidget {
   final void Function(List<String> images) onChanged;
   final List<String>? list;
   final double? spacing;
-  final double? iconSize;
   final double? maxWidth;
   final double? maxHeight;
   final int? imageQuality;
@@ -39,7 +36,7 @@ class UiUploadImageWidget extends StatefulWidget {
 
   //final String path;
 
-  final Future<List<SignUrl>?> Function(List<String> fileName) signUrl;
+  final Future<List<SignUrl>> Function(List<String> fileName) signUrl;
 
   @override
   State<UiUploadImageWidget> createState() => _UiUploadImageWidgetState();
@@ -161,7 +158,7 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
       imageQuality: widget.imageQuality,
       limit: widget.limit,
       signUrl: widget.signUrl,
-      uploadStep: (String download) {
+      uploadStep: (download) {
         imageList.add(download);
         if (widget.limit != null) {
           if (imageList.length > widget.limit!) {
@@ -175,17 +172,19 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
   }
 
   Future<void> onSingleTap() async {
-    final images = await Upload.gallery(
+    await Upload.gallery(
       type: 'photo',
       // path: widget.path,
       maxWidth: widget.maxWidth,
       maxHeight: widget.maxHeight,
       imageQuality: widget.imageQuality,
       signUrl: widget.signUrl,
+      uploadStep: (download){
+        imageList = [download];
+        widget.onChanged(imageList);
+        setState(() {});
+      }
     );
-    if (images == null || images.isEmpty) return;
-    widget.onChanged(imageList);
-    setState(() {});
   }
 
   Future<void> imageWidget(int index) async {
