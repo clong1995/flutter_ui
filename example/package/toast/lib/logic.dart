@@ -39,8 +39,8 @@ class ToastLogic extends Logic<_State> {
   }
 
   void onLoadingTap() {
-    //final pop = UiToast.show(UiToastMessage.loading());
-    //Future.delayed(const Duration(seconds: 10), pop);
+    final pop = UiToast.showLoading();
+    Future.delayed(const Duration(seconds: 10), pop);
   }
 
   Future<void> onCustomTap() async {

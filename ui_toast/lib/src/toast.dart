@@ -26,8 +26,7 @@ class UiToast {
     );
   }
 
-  static void Function()? showLoading(
-    UiToastMessage message, {
+  static void Function()? showLoading( {
     bool root = false,
   }) {
     final navContext = _navigatorKey?.currentContext;
@@ -36,34 +35,6 @@ class UiToast {
     }
 
     final route = _route(const ToastLoadingWidget());
-
-    /*void pop() {
-      if (route.isActive) {
-        //避免重复关闭
-        Navigator.of(navContext).removeRoute<bool?>(route, true);
-      }
-    }*/
-
-    /*route = PageRouteBuilder<bool?>(
-      opaque: false,
-      fullscreenDialog: true,
-      barrierColor: const Color(0x00000000),
-      transitionDuration: Duration.zero,
-      reverseTransitionDuration: Duration.zero,
-      pageBuilder: (context, animation, secondaryAnimation) {
-        return PopScope(
-          canPop: false, //false 时
-          onPopInvokedWithResult: (didPop, result) {
-            //didPop 是否实际发生了返回
-          },
-          child: const ToastLoadingWidget(),
-        );
-      },
-      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-          child,
-    );*/
-
-
 
     unawaited(Navigator.of(navContext, rootNavigator: root).push<bool?>(route));
 

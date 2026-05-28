@@ -16,7 +16,7 @@ adb_tcpip: # 华为手机必须选择“仅充电模式下允许ADB调试”
 	~/Library/Android/sdk/platform-tools/adb tcpip 5555
 
 adb_connect:
-	~/Library/Android/sdk/platform-tools/adb connect 192.168.10.101:5555
+	~/Library/Android/sdk/platform-tools/adb connect 192.168.10.107:43687
 
 adb_disconnect:
 	~/Library/Android/sdk/platform-tools/adb disconnect
