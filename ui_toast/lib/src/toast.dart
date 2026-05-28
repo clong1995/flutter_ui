@@ -15,49 +15,81 @@ class UiToast {
     _navigatorKey = value;
   }
 
-  static void Function()? show(UiToastMessage message, {bool root = false}) {
+  static Future<bool?>? show(UiToastMessage message, {bool root = false}) {
     final navContext = _navigatorKey?.currentContext;
     if (navContext == null) {
       return null;
     }
 
-    late PageRouteBuilder<void> route;
+    return Navigator.of(navContext, rootNavigator: root).push<bool?>(
+      _route(ToastWidget(message: message)),
+    );
+  }
 
-    void pop() {
-      if (route.isActive) {
-        Navigator.of(navContext).removeRoute(route);
-      }
+  static void Function()? showLoading(
+    UiToastMessage message, {
+    bool root = false,
+  }) {
+    final navContext = _navigatorKey?.currentContext;
+    if (navContext == null) {
+      return null;
     }
 
-    route = PageRouteBuilder<void>(
+    final route = _route(const ToastLoadingWidget());
+
+    /*void pop() {
+      if (route.isActive) {
+        //避免重复关闭
+        Navigator.of(navContext).removeRoute<bool?>(route, true);
+      }
+    }*/
+
+    /*route = PageRouteBuilder<bool?>(
       opaque: false,
+      fullscreenDialog: true,
       barrierColor: const Color(0x00000000),
       transitionDuration: Duration.zero,
       reverseTransitionDuration: Duration.zero,
       pageBuilder: (context, animation, secondaryAnimation) {
-        Timer? timer;
-        if (message.autoPopSeconds > 0 && message.callback == null) {
-          timer = Timer(
-            Duration(seconds: message.autoPopSeconds),
-            pop,
-          );
-        }
         return PopScope(
-          canPop: false,
+          canPop: false, //false 时
           onPopInvokedWithResult: (didPop, result) {
-            if (didPop) return;
-            timer?.cancel();
-            if (message.autoPopSeconds > 0 && message.callback == null) pop();
+            //didPop 是否实际发生了返回
           },
-          child: ToastWidget(message: message),
+          child: const ToastLoadingWidget(),
         );
       },
       transitionsBuilder: (context, animation, secondaryAnimation, child) =>
           child,
-    );
+    );*/
 
-    unawaited(Navigator.of(navContext, rootNavigator: root).push<void>(route));
 
-    return pop;
+
+    unawaited(Navigator.of(navContext, rootNavigator: root).push<bool?>(route));
+
+    return () {
+      if (route.isActive) {
+        //避免重复关闭
+        Navigator.of(navContext).removeRoute<bool?>(route, true);
+      }
+    };
   }
+
+  static PageRouteBuilder<bool?> _route(Widget child) =>
+      PageRouteBuilder<bool?>(
+        opaque: false,
+        fullscreenDialog: true,
+        barrierColor: const Color(0x00000000),
+        transitionDuration: Duration.zero,
+        reverseTransitionDuration: Duration.zero,
+        pageBuilder: (context, animation, secondaryAnimation) => PopScope(
+          canPop: false,
+          /*onPopInvokedWithResult: (didPop, result) {
+        //didPop 是否实际发生了返回
+      },*/
+          child: child,
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+            child,
+      );
 }

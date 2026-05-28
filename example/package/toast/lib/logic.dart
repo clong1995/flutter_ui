@@ -15,36 +15,36 @@ class ToastLogic extends Logic<_State> {
     state = _State();
   }
 
-  void onSuccessTap() {
-    UiToast.show(UiToastMessage.success());
+  Future<void> onSuccessTap() async {
+    final res = await UiToast.show(UiToastMessage.success());
+    print(res);
   }
 
-  void onInfoTap() {
-    UiToast.show(UiToastMessage.info());
+  Future<void> onInfoTap() async {
+    await UiToast.show(UiToastMessage.info());
   }
 
-  void onFailureTap() {
-    UiToast.show(UiToastMessage.failure());
+  Future<void> onFailureTap() async {
+    await UiToast.show(UiToastMessage.failure());
   }
 
-  void onChoiceTap() {
-    UiToast.show(
+  Future<void> onChoiceTap() async {
+    final res = await UiToast.show(
       UiToastMessage.failure()
         ..text = '是否重试'
         ..autoPopSeconds = 0
-        ..callback = (value) {
-          logger('$value');
-        },
+        ..select = true,
     );
+    print(res);
   }
 
   void onLoadingTap() {
-    final pop = UiToast.show(UiToastMessage.loading());
-    Future.delayed(const Duration(seconds: 10), pop);
+    //final pop = UiToast.show(UiToastMessage.loading());
+    //Future.delayed(const Duration(seconds: 10), pop);
   }
 
-  void onCustomTap() {
-    UiToast.show(
+  Future<void> onCustomTap() async {
+    await UiToast.show(
       UiToastMessage()
         ..text = '自定义文本'
         ..icon = const Icon(Icons.flutter_dash),

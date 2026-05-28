@@ -40,7 +40,10 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(
   switch (res.state) {
     case 'OK':
       break;
-    case 'nosign':
+    case 'verification failed'://没有权限或者被下线
+
+      break;
+    /*case 'nosign':
     case 'signerr':
     case 'nostate':
     case 'nots':
@@ -49,7 +52,7 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(
     case 'limit exists':
     case 'disable replay':
       //print('=========>${res.state}<=========');
-      return res;
+      return res;*/
     default:
       if (!reTey) {
         break;

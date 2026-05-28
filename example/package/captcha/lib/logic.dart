@@ -13,8 +13,8 @@ class CaptchaLogic extends Logic<_State> {
 
   void onCaptchaTap() {
     uiCaptcha(
-      context: context,
       verify: (String json) async => true,
+      html: '',
     );
   }
 }

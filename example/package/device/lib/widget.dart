@@ -10,7 +10,7 @@ class _Build extends Build<DeviceLogic> {
   @override
   Widget build() {
     return UiPage(
-      title: const Text('device'),
+      appbarTitle: const Text('device'),
       body: Column(
         children: [
           UiButton(

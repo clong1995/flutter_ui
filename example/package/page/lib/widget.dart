@@ -11,7 +11,7 @@ class _Build extends Build<PageLogic> {
   @override
   Widget build() {
     return UiPage(
-       title: const Text('title'),
+      appbarTitle: const Text('title'),
       appbarAction: [
         UiIconButton(
           color: const Color(0xFFFFFFFF),

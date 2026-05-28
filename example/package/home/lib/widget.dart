@@ -10,7 +10,7 @@ class _Build extends Build<HomeLogic> {
   @override
   Widget build() {
     return UiPage(
-      title: const Text('flutter ui'),
+      appbarTitle: const Text('flutter ui'),
       body: ListView.separated(
         padding: EdgeInsets.zero,
         itemBuilder: tile,

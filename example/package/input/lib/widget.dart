@@ -10,7 +10,7 @@ class _Build extends Build<InputLogic> {
   @override
   Widget build() {
     return UiPage(
-      title: const Text('input'),
+      appbarTitle: const Text('input'),
       body: ListView(
         children: [
           Row(

@@ -10,7 +10,7 @@ class _Build extends Build<ToastLogic> {
   @override
   Widget build() {
     return UiPage(
-      title: const Text('toast'),
+      appbarTitle: const Text('toast'),
       body: ListView(
         children: [
           Row(

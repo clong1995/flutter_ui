@@ -11,7 +11,7 @@ class _Build extends Build<ButtonLogic> {
   @override
   Widget build() {
     return UiPage(
-      title: const Text('button'),
+      appbarTitle: const Text('button'),
       body: ListView(
         children: [
           Row(

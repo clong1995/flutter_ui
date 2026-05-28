@@ -10,7 +10,7 @@ class _Build extends Build<CaptchaLogic> {
   @override
   Widget build() {
     return UiPage(
-      title: const Text('captcha'),
+      appbarTitle: const Text('captcha'),
       body: Center(
         child: UiButton(
           onTap: logic.onCaptchaTap,

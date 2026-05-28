@@ -10,7 +10,7 @@ class _Build extends Build<AlertLogic> {
   @override
   Widget build() {
     return UiPage(
-      title: const Text('alert'),
+      appbarTitle: const Text('alert'),
       body: ListView(
         children: [
           Row(
