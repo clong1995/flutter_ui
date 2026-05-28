@@ -261,35 +261,33 @@ class _PhotoViewerState extends State<_PhotoViewer> {
   );
 
   Future<void> remove() async {
-    UiToast.show(
+   final select = await UiToast.show(
       UiToastMessage.info()
         ..text = '确定删除这张图片?'
         ..autoPopSeconds = 0
-        ..callback = toastCallback,
+        ..select = true,
     );
+   if (select == true) {
+     //
+     images.removeAt(currIndex);
+     //删除
+     widget.onDelete?.call(currIndex);
+     if (images.isNotEmpty) {
+       //还有照片
+       if (images.length > currIndex) {
+         //后面还有，则下一张
+         initialIndex = currIndex;
+       } else if (images.length == currIndex) {
+         //后面没有了，则前一张
+         initialIndex = currIndex - 1;
+       }
+       setState(() {});
+     } else {
+       //没有了
+       if (!mounted) return;
+       FnNav.pop();
+     }
+   }
   }
 
-  void toastCallback(bool flag) {
-    if (flag) {
-      //
-      images.removeAt(currIndex);
-      //删除
-      widget.onDelete?.call(currIndex);
-      if (images.isNotEmpty) {
-        //还有照片
-        if (images.length > currIndex) {
-          //后面还有，则下一张
-          initialIndex = currIndex;
-        } else if (images.length == currIndex) {
-          //后面没有了，则前一张
-          initialIndex = currIndex - 1;
-        }
-        setState(() {});
-      } else {
-        //没有了
-        if (!mounted) return;
-        FnNav.pop();
-      }
-    }
-  }
 }
