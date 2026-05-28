@@ -57,16 +57,21 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(
       if (!reTey) {
         break;
       }
-      final completer = Completer<bool>();
+      /*final completer = Completer<bool>();
       UiToast.show(
         UiToastMessage.failure()
           ..text = '${res.state}, 是否重试?'
           ..callback = completer.complete,
       );
+      final choice = await completer.future;*/
 
-      final choice = await completer.future;
+     final select =  await UiToast.show(
+        UiToastMessage.failure()
+          ..text = '${res.state}, 是否重试?'
+          ..select = true,
+      );
 
-      if (choice) {
+      if (select == true) {
         return nio<S, T>(uri, req: req, res: res);
       }
   }

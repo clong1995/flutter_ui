@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 import 'package:fn_device/fn_device.dart';
@@ -96,10 +98,10 @@ class _UiPhotoViewState extends State<UiPhotoView> {
 
     if (result['isSuccess'] == true) {
       //snackBar('保存成功');
-      UiToast.show(UiToastMessage.success()..text = '保存成功');
+      unawaited(UiToast.show(UiToastMessage.success()..text = '保存成功'));
     } else {
       // snackBar('保存失败');
-      UiToast.show(UiToastMessage.failure()..text = '保存失败');
+      unawaited(UiToast.show(UiToastMessage.failure()..text = '保存失败'));
     }
   }
 

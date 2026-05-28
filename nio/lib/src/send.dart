@@ -22,9 +22,9 @@ Future<Map<String, dynamic>> send(
   int? timeout,
 }) async {
   //loading
-  void Function()? toastPop;
+  void Function()? loadingPop;
   final timer = Timer(const Duration(seconds: 3), () {
-    toastPop = UiToast.show(UiToastMessage.loading());
+    loadingPop = UiToast.showLoading();
   });
 
   //请求地址
@@ -57,7 +57,7 @@ Future<Map<String, dynamic>> send(
   } finally {
     //请求结束，关闭loading等待
     timer.cancel();
-    toastPop?.call();
+    loadingPop?.call();
   }
   final code = resp.statusCode;
 
