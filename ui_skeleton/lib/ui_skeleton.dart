@@ -34,7 +34,7 @@ class _UiSkeletonState extends State<UiSkeleton> {
       );
     } else if (widget.state == UiSkeletonState.none) {
       return Image.asset(
-        'images/not_found.png',
+        'images/not_data.png',
         package: 'ui_skeleton',
         fit: BoxFit.fitWidth,
       );
