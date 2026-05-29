@@ -6,14 +6,10 @@ class UiSkeleton extends StatefulWidget {
     required this.child,
     super.key,
     this.state = UiSkeletonState.data,
-    this.hold,
-    this.none,
   });
 
   final UiSkeletonState state;
   final Widget child;
-  final Widget? hold;
-  final Widget? none;
 
   @override
   State<UiSkeleton> createState() => _UiSkeletonState();
@@ -24,19 +20,26 @@ class _UiSkeletonState extends State<UiSkeleton> {
   Widget build(BuildContext context) {
     return Visibility(
       visible: widget.state == UiSkeletonState.data,
-      replacement: Visibility(
-        visible: widget.state == UiSkeletonState.hold,
-        replacement: widget.none ?? const Center(child: Text('No data')),
-        child:
-            widget.hold ??
-            Center(
-              child: CircularProgressIndicator(
-                color: UiTheme.primaryColor,
-              ),
-            ),
-      ),
+      replacement: replacement(),
       child: widget.child,
     );
+  }
+
+  Widget replacement() {
+    if (widget.state == UiSkeletonState.hold) {
+      return Center(
+        child: CircularProgressIndicator(
+          color: UiTheme.primaryColor,
+        ),
+      );
+    } else if (widget.state == UiSkeletonState.none) {
+      return Image.asset(
+        'images/not_found.png',
+        package: 'ui_skeleton',
+        fit: BoxFit.fitWidth,
+      );
+    }
+    return const SizedBox.shrink();
   }
 }
 
