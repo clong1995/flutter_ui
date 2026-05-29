@@ -25,6 +25,10 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: logger
+  package:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: package
 
 dev_dependencies:
   very_good_analysis: ^10.2.0

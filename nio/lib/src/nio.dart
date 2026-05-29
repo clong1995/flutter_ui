@@ -6,10 +6,10 @@ import 'package:logger/logger.dart';
 import 'package:nio/src/base.dart';
 import 'package:nio/src/empty.dart';
 import 'package:nio/src/send.dart';
+import 'package:package/package.dart';
 import 'package:ui_toast/ui_toast.dart';
 
-Future<T> nio<S extends BaseReq, T extends BaseRes>(
-  String uri, {
+Future<T> nio<S extends BaseReq, T extends BaseRes>(String uri, {
   bool reTey = true,
   int? timeout,
   S? req,
@@ -20,7 +20,8 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(
 
   if (uri.isEmpty) {
     res.state = 'url为空';
-    UiToast.show(UiToastMessage.failure()..text = res.state);
+    unawaited(UiToast.show(UiToastMessage.failure()
+      ..text = res.state));
     return res;
   }
 
@@ -28,22 +29,31 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(
 
   //参数
   req
-    ..t = DateTime.now().millisecondsSinceEpoch ~/ 1000
+    ..t = DateTime
+        .now()
+        .millisecondsSinceEpoch ~/ 1000
     ..a = FnAuth.ak;
 
   //转string
   final jsonString = jsonEncode(req);
   //发送数据
   final result = await send(uri, jsonString, timeout: timeout);
-  res.state = result['state'] as String;
+  res.state = result['state']?.toString() ?? '';
 
   switch (res.state) {
     case 'OK':
       break;
-    case 'verification failed'://没有权限或者被下线
-
-      break;
-    /*case 'nosign':
+    case 'verification failed': //没有权限或者被下线
+      final select = await UiToast.show(
+        UiToastMessage.failure()
+          ..text = '登录过期或无权限,是否重新登录?'
+          ..select = true,
+      );
+      if (select == true) {
+        unawaited(Package.pushAndRemove('splash'));
+      }
+      return res;
+  /*case 'nosign':
     case 'signerr':
     case 'nostate':
     case 'nots':
@@ -65,7 +75,7 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(
       );
       final choice = await completer.future;*/
 
-     final select =  await UiToast.show(
+      final select = await UiToast.show(
         UiToastMessage.failure()
           ..text = '${res.state}, 是否重试?'
           ..select = true,
@@ -87,15 +97,16 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(
     res.fromJson();
   } catch (e) {
     final text = e.toString();
-    UiToast.show(UiToastMessage.failure()..text = text);
+    unawaited(UiToast.show(UiToastMessage.failure()
+      ..text = text));
 
     logger(
       '\x1B[31m'
-      '┏━━━━━━━━━━━━━━━━━━━━━━━━━ ERROR ━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n'
-      '┃ 地址: $uri\n'
-      '┃ 序列化错误: $text\n'
-      '┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛'
-      '\x1B[0m',
+          '┏━━━━━━━━━━━━━━━━━━━━━━━━━ ERROR ━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n'
+          '┃ 地址: $uri\n'
+          '┃ 序列化错误: $text\n'
+          '┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛'
+          '\x1B[0m',
       stack: false,
     );
     rethrow;
