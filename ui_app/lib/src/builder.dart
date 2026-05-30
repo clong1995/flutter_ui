@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui_app/src/no_scroll_behavior.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 Widget appBuilder(
@@ -60,7 +61,7 @@ Widget appBuilder(
 
   //滚动条
   final scrollConfiguration = ScrollConfiguration(
-    behavior: const ScrollBehavior().copyWith(scrollbars: false),
+    behavior: NoScrollBehavior().copyWith(scrollbars: false),
     child: iconTheme,
   );
 
