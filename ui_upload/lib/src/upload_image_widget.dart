@@ -73,18 +73,24 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
       crossAxisSpacing: spacing,
     ),
     itemBuilder: (BuildContext context, int index) {
-      return index == imageList.length
-          ? UiIconButton(
-              onTap: onSingleTap,
-              width: 45.r,
-              height: 45.r,
-              size: 25.r,
-              icon: Icons.add_photo_alternate_outlined,
-            )
-          : Container(
-              clipBehavior: Clip.antiAlias,
-              color: UiTheme.grey50,
-              child: Stack(
+      return Container(
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          color: UiTheme.grey50,
+          border: Border.all(color: UiTheme.grey100),
+          borderRadius: BorderRadius.circular(5.r)
+        ),
+        child: index == imageList.length
+            ? Center(
+                child: UiIconButton(
+                  onTap: onMultiTap,
+                  width: 45.r,
+                  height: 45.r,
+                  size: 25.r,
+                  icon: Icons.add_photo_alternate_outlined,
+                ),
+              )
+            : Stack(
                 fit: StackFit.expand,
                 children: [
                   GestureDetector(
@@ -94,7 +100,7 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
                   removeWidget(index),
                 ],
               ),
-            );
+      );
     },
   );
 
@@ -179,11 +185,11 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
       maxHeight: widget.maxHeight,
       imageQuality: widget.imageQuality,
       signUrl: widget.signUrl,
-      uploadStep: (download){
+      uploadStep: (download) {
         imageList = [download];
         widget.onChanged(imageList);
         setState(() {});
-      }
+      },
     );
   }
 
@@ -218,7 +224,7 @@ class _PhotoViewer extends StatefulWidget {
 }
 
 class _PhotoViewerState extends State<_PhotoViewer> {
-  late int initialIndex;
+  //late int initialIndex;
   late int currIndex;
   late List<String> images;
 
@@ -227,14 +233,15 @@ class _PhotoViewerState extends State<_PhotoViewer> {
     super.initState();
     images = widget.images;
     currIndex = widget.index;
-    initialIndex = widget.index;
+    //initialIndex = widget.index;
   }
 
   @override
   Widget build(BuildContext context) => Stack(
     children: [
       UiPhotoView(
-        index: initialIndex,
+        // index: initialIndex,
+        index: currIndex,
         images: images,
         onChanged: (int index) {
           currIndex = index;
@@ -261,33 +268,29 @@ class _PhotoViewerState extends State<_PhotoViewer> {
   );
 
   Future<void> remove() async {
-   final select = await UiToast.show(
+    final select = await UiToast.show(
       UiToastMessage.info()
         ..text = '确定删除这张图片?'
         ..autoPopSeconds = 0
         ..select = true,
     );
-   if (select == true) {
-     //
-     images.removeAt(currIndex);
-     //删除
-     widget.onDelete?.call(currIndex);
-     if (images.isNotEmpty) {
-       //还有照片
-       if (images.length > currIndex) {
-         //后面还有，则下一张
-         initialIndex = currIndex;
-       } else if (images.length == currIndex) {
-         //后面没有了，则前一张
-         initialIndex = currIndex - 1;
-       }
-       setState(() {});
-     } else {
-       //没有了
-       if (!mounted) return;
-       FnNav.pop();
-     }
-   }
+    if (select == true) {
+      final isLast = currIndex == images.length - 1;
+      //
+      images.removeAt(currIndex);
+      //删除
+      widget.onDelete?.call(currIndex);
+      if (images.isNotEmpty) {
+]
+        if(isLast){ //删掉的是最后一张
+          currIndex = images.length - 1;
+        }
+        setState(() {});
+      } else {
+        //没有了
+        //if (!mounted) return;
+        FnNav.pop();
+      }
+    }
   }
-
 }
