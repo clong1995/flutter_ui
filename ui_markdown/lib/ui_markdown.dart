@@ -11,6 +11,7 @@ class UiMarkdown extends StatelessWidget {
     data,
     imageBuilder: (context, uri, title, alt) => Image.network(
       uri,
+      width: double.infinity,
       fit: BoxFit.fitWidth,
     ),
   );
