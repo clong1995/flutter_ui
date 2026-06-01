@@ -281,7 +281,6 @@ class _PhotoViewerState extends State<_PhotoViewer> {
       //删除
       widget.onDelete?.call(currIndex);
       if (images.isNotEmpty) {
-]
         if(isLast){ //删掉的是最后一张
           currIndex = images.length - 1;
         }
