@@ -1,49 +1,49 @@
-import 'package:flutter/cupertino.dart'
-    show CupertinoDatePicker, CupertinoDatePickerMode, showCupertinoModalPopup;
+import 'package:flutter/material.dart'
+    show
+        ColorScheme,
+        DatePickerThemeData,
+        DialogThemeData,
+        MaterialTapTargetSize,
+        Theme,
+        ThemeData,
+        showDatePicker;
 import 'package:flutter/widgets.dart';
+import 'package:fn_datetime/fn_datetime.dart';
 import 'package:rpx/ext.dart';
-import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 Future<dynamic> uiPickDate({
   required BuildContext context,
+  DateTime? firstDate,
+  DateTime? lastDate,
   DateTime? initDate,
-}) {
-  var tempDate = DateTime.now();
+  bool root = true,
+}) async {
+  initDate ??= DateTime.now();
+  firstDate ??= initDate;
+  lastDate ??= FnDatetime.add(initDate, months: 1);
 
-  return showCupertinoModalPopup(
+  final picked = await showDatePicker(
     context: context,
-    builder: (context) {
-      return Container(
-        height: 260.r,
-        color: UiTheme.primaryColor,
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                UiButton(
-                  onTap: () => Navigator.pop(context),
-                  child: const Text('取消'),
-                ),
-                UiButton(
-                  onTap: () {
-                    Navigator.pop<DateTime>(context, tempDate);
-                  },
-                  child: const Text('确定'),
-                ),
-              ],
+    initialDate: initDate,
+    firstDate: firstDate,
+    lastDate: lastDate,
+    barrierDismissible: false,
+    useRootNavigator: root,
+
+    builder: (context, child) {
+      return Theme(
+        data: ThemeData().copyWith(
+          datePickerTheme: DatePickerThemeData(
+            backgroundColor: UiTheme.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(0.r)), // 弹窗圆角
             ),
-            Expanded(
-              child: CupertinoDatePicker(
-                mode: CupertinoDatePickerMode.date,
-                initialDateTime: tempDate,
-                onDateTimeChanged: (date) => tempDate = date,
-              ),
-            ),
-          ],
+          ),
         ),
+        child: child!,
       );
+      //return child!;
     },
   );
 }
