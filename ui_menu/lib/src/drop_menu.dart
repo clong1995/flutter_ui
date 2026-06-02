@@ -2,6 +2,7 @@ import 'package:flutter/material.dart'
     show Icons, MenuAnchor, MenuItemButton, MenuStyle;
 import 'package:flutter/widgets.dart';
 import 'package:rpx/ext.dart';
+import 'package:ui_theme/ui_theme.dart';
 
 class UiDropMenu<T> extends StatefulWidget {
   const UiDropMenu({
@@ -51,11 +52,13 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
     return MenuAnchor(
       //reservedPadding: EdgeInsets.zero,
       style: MenuStyle(
-        backgroundColor: WidgetStatePropertyAll(Color(0xFFFFFFFF)),
+        backgroundColor: const WidgetStatePropertyAll(UiTheme.white),
         maximumSize: WidgetStatePropertyAll(
           Size.fromHeight(dropHeight),
         ),
-        padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: dropPadding)),
+        padding: WidgetStatePropertyAll(
+          EdgeInsets.symmetric(vertical: dropPadding),
+        ),
       ),
       builder: (context, controller, child) => GestureDetector(
         onTap: () {
@@ -75,9 +78,9 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
           ),
           width: widget.width,
           decoration: BoxDecoration(
-            border: Border.all(color: const Color(0x42000000)),
+            border: Border.all(color: UiTheme.grey400),
             borderRadius: BorderRadius.circular(5.r),
-            color: const Color(0xFFFFFFFF),
+            color: UiTheme.white,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -93,7 +96,7 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
               ),
               Icon(
                 Icons.arrow_drop_down,
-                color: const Color(0xDD000000),
+                color: UiTheme.black,
                 size: 16.r,
               ),
             ],
