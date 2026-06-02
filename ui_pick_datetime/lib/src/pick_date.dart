@@ -8,7 +8,6 @@ import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 Future<DateTime?> uiPickDate({
-  required BuildContext context,
   DateTime? selectedDate,
   DateTime? minDate,
   DateTime? maxDate,

@@ -11,6 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  date_picker_plus: ^7.0.0
   rpx:
     git:
       url: https://github.com/clong1995/flutter_ui.git
@@ -27,7 +28,14 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: fn_nav
-  date_picker_plus: ^7.0.0
+  ui_button:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_button
+  ui_menu:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_menu
 
 dev_dependencies:
   very_good_analysis: ^10.2.0

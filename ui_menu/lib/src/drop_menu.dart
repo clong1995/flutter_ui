@@ -1,5 +1,5 @@
-
-import 'package:flutter/material.dart' show Icons, MenuAnchor, MenuItemButton, MenuStyle;
+import 'package:flutter/material.dart'
+    show Icons, MenuAnchor, MenuItemButton, MenuStyle;
 import 'package:flutter/widgets.dart';
 import 'package:rpx/ext.dart';
 
@@ -43,61 +43,68 @@ class _UiDropMenuState<T> extends State<UiDropMenu<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final dropPadding = widget.height ?? 5.r;
+    final itemHeight = widget.height ?? 28.r;
+    final dropHeight =
+        itemHeight * (widget.items.length > 8 ? 8 : widget.items.length) +
+        dropPadding * 2;
     return MenuAnchor(
-      style: const MenuStyle(
+      //reservedPadding: EdgeInsets.zero,
+      style: MenuStyle(
         backgroundColor: WidgetStatePropertyAll(Color(0xFFFFFFFF)),
+        maximumSize: WidgetStatePropertyAll(
+          Size.fromHeight(dropHeight),
+        ),
+        padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: dropPadding)),
       ),
-      builder:
-          (context, controller, child) {
-            return GestureDetector(
-              onTap: () {
-                if (controller.isOpen) {
-                  controller.close();
-                } else {
-                  controller.open();
-                }
-              },
-              child: Container(
-                height: widget.height ?? 28.r,
-                padding: EdgeInsets.only(
-                  left: 10.r,
-                  top: 5.r,
-                  right: 5.r,
-                  bottom: 5.r,
-                ),
-                width: widget.width,
-                decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0x42000000)),
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: const Color(0xFFFFFFFF),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          value == null ? '未选择' : widget.items[value] ?? '无选项',
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(height: 1.r),
-                        ),
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_drop_down,
-                      color: const Color(0xDD000000),
-                      size: 16.r,
-                    ),
-                  ],
+      builder: (context, controller, child) => GestureDetector(
+        onTap: () {
+          if (controller.isOpen) {
+            controller.close();
+          } else {
+            controller.open();
+          }
+        },
+        child: Container(
+          height: itemHeight,
+          padding: EdgeInsets.only(
+            left: 10.r,
+            top: 5.r,
+            right: 5.r,
+            bottom: 5.r,
+          ),
+          width: widget.width,
+          decoration: BoxDecoration(
+            border: Border.all(color: const Color(0x42000000)),
+            borderRadius: BorderRadius.circular(5.r),
+            color: const Color(0xFFFFFFFF),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(
+                child: Center(
+                  child: Text(
+                    value == null ? '未选择' : widget.items[value] ?? '无选项',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(height: 1.r),
+                  ),
                 ),
               ),
-            );
-          },
+              Icon(
+                Icons.arrow_drop_down,
+                color: const Color(0xDD000000),
+                size: 16.r,
+              ),
+            ],
+          ),
+        ),
+      ),
       menuChildren: widget.items.entries
           .map(
             (e) => SizedBox(
               width: widget.width,
-              height: widget.height ?? 28.r,
+              height: itemHeight,
               child: MenuItemButton(
                 style: MenuItemButton.styleFrom(padding: EdgeInsets.zero),
                 onPressed: () {
