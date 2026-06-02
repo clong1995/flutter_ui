@@ -24,8 +24,9 @@ Future<DateTime?> uiPickDate({
   const inkResponseTheme = InkResponseTheme(
     splashFactory: NoSplash.splashFactory,
   );
-  DateTime? dateTime;
-  await UiAlert.dialog(() {
+
+  return UiAlert.dialog(() {
+    DateTime? datetime;
     return UiAlertWidget(
       content: SizedBox(
         width: 300.r,
@@ -69,7 +70,7 @@ Future<DateTime?> uiPickDate({
               ),
             ),
           ),
-          onDateSelected: (val) => dateTime = val,
+          onDateSelected: (val) => datetime = val,
         ),
       ),
       title: '选择日期',
@@ -77,12 +78,11 @@ Future<DateTime?> uiPickDate({
         UiButton(
           child: const Text('确 定'),
           onTap: () {
-            FnNav.pop<DateTime>(result: dateTime);
+            FnNav.pop<DateTime>(result: datetime);
           },
         ),
       ],
     );
   }, root: root);
 
-  return dateTime;
 }
