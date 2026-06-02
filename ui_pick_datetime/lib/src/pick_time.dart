@@ -9,14 +9,13 @@ import 'package:ui_theme/ui_theme.dart';
 
 Future<TimeOfDay?> uiPickTime({
   TimeOfDay? selectedDate,
-  TimeOfDay? minDate,
-  TimeOfDay? maxDate,
   bool root = true,
 }) async {
-  final now = TimeOfDay.now();
+  var timeOfDay = selectedDate ?? TimeOfDay.now();
+  var hour = timeOfDay.hour;
+  var minute = timeOfDay.minute;
 
   return UiAlert.dialog(() {
-    DateTime? datetime;
     return UiAlertWidget(
       content: SizedBox(
         width: 300.r,
@@ -33,12 +32,12 @@ Future<TimeOfDay?> uiPickTime({
                   width: 70.r,
                   child: const Center(
                     child: Text(
-                      '小时',
+                      '小时 24h',
                       style: TextStyle(color: UiTheme.grey),
                     ),
                   ),
                 ),
-                Text(''),
+                const Text(':'),
                 SizedBox(
                   width: 70.r,
                   child: const Center(
@@ -55,21 +54,31 @@ Future<TimeOfDay?> uiPickTime({
               spacing: 10.r,
               children: [
                 UiDropMenu<int>(
-                  value: 10,
+                  value: hour,
                   items: {
                     for (var i = 0; i < 24; i++) i: '$i',
                   },
                   width: 70.r,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    if (value == null) {
+                      return;
+                    }
+                    hour = value;
+                  },
                 ),
-                Text(':'),
+                const Text(':'),
                 UiDropMenu<int>(
-                  value: 34,
+                  value: minute,
                   items: {
                     for (var i = 0; i < 60; i++) i: '$i',
                   },
                   width: 70.r,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    if (value == null) {
+                      return;
+                    }
+                    minute = value;
+                  },
                 ),
               ],
             ),
@@ -81,10 +90,25 @@ Future<TimeOfDay?> uiPickTime({
         UiButton(
           child: const Text('确 定'),
           onTap: () {
-            FnNav.pop<DateTime>(result: datetime);
+            timeOfDay = TimeOfDay(hour: hour, minute: minute);
+            FnNav.pop<TimeOfDay>(
+              result: timeOfDay,
+            );
           },
         ),
       ],
     );
   }, root: root);
+}
+
+String uiPickTimeFormat(TimeOfDay timeOfDay) {
+  return '${timeOfDay.hour.toString().padLeft(2, '0')}'
+      ':'
+      '${timeOfDay.minute.toString().padLeft(2, '0')}';
+}
+
+TimeOfDay uiPickTimeParse(String timeOfDay) {
+  return TimeOfDay.fromDateTime(
+    DateTime.parse('0000-00-00 $timeOfDay:00'),
+  );
 }

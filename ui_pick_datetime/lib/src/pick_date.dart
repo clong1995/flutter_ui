@@ -13,7 +13,7 @@ Future<DateTime?> uiPickDate({
   DateTime? maxDate,
   bool root = true,
 }) async {
-  final now = DateTime.now();
+  var datetime = selectedDate ?? DateTime.now();
 
   final textStyle = TextStyle(
     fontSize: UiTheme.fontSize,
@@ -25,16 +25,15 @@ Future<DateTime?> uiPickDate({
   );
 
   return UiAlert.dialog(() {
-    DateTime? datetime;
     return UiAlertWidget(
       content: SizedBox(
         width: 300.r,
         height: 250.r,
         child: DatePicker(
-          selectedDate: selectedDate ?? now,
+          selectedDate: datetime,
           padding: EdgeInsets.zero,
-          minDate: minDate ?? DateTime(now.year, now.month),
-          maxDate: maxDate ?? DateTime(now.year, now.month + 1, 0),
+          minDate: minDate ?? DateTime(datetime.year, datetime.month),
+          maxDate: maxDate ?? DateTime(datetime.year, datetime.month + 1, 0),
           theme: DatePickerPlusTheme(
             headerTheme: HeaderTheme(
               centerLeadingDate: true,
