@@ -19,14 +19,18 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_theme
-  ui_button:
-    git:
-      url: https://github.com/clong1995/flutter_ui.git
-      path: ui_button
   fn_datetime:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: fn_datetime
+  ui_alert:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_alert
+  fn_nav:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: fn_nav
   date_picker_plus: ^7.0.0
 
 dev_dependencies:

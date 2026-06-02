@@ -30,7 +30,10 @@ class UiAlert {
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
         settings: RouteSettings(arguments: args),
-        pageBuilder: (context, animation, secondaryAnimation) => builder(),
+        pageBuilder: (context, animation, secondaryAnimation) => PopScope(
+          canPop: false,
+          child: builder(),
+        ),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             child,
       ),
