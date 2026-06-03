@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:http/http.dart';
@@ -17,6 +18,6 @@ Future<bool> uploadFile({
   if (response.statusCode == 200) {
     return true;
   }
-  UiToast.show(UiToastMessage.failure()..text = response.body);
+  unawaited(UiToast.show(UiToastMessage.failure()..text = response.body));
   return false;
 }

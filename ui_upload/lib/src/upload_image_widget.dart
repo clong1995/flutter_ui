@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 import 'package:fn_device/fn_device.dart';
@@ -14,8 +16,8 @@ import 'package:ui_upload/src/upload.dart';
 class UiUploadImageWidget extends StatefulWidget {
   const UiUploadImageWidget({
     required this.signUrl,
-    this.crossAxisCount,
     required this.onChanged,
+    this.crossAxisCount,
     super.key,
     this.list,
     this.spacing,
@@ -72,13 +74,13 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
       mainAxisSpacing: spacing,
       crossAxisSpacing: spacing,
     ),
-    itemBuilder: (BuildContext context, int index) {
+    itemBuilder: (context, index) {
       return Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: UiTheme.grey50,
           border: Border.all(color: UiTheme.grey100),
-          borderRadius: BorderRadius.circular(5.r)
+          borderRadius: BorderRadius.circular(5.r),
         ),
         child: index == imageList.length
             ? Center(
@@ -151,7 +153,9 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
   Future<void> onMultiTap() async {
     if (widget.limit != null) {
       if (imageList.length >= widget.limit!) {
-        UiToast.show(UiToastMessage.info()..text = '最多上传 ${widget.limit} 张');
+        unawaited(
+          UiToast.show(UiToastMessage.info()..text = '最多上传 ${widget.limit} 张'),
+        );
         return;
       }
     }
@@ -198,7 +202,7 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
       () => _PhotoViewer(
         index: index,
         images: [...imageList],
-        onDelete: (int index) {
+        onDelete: (index) {
           imageList.removeAt(index);
           widget.onChanged(imageList);
           setState(() {});
@@ -243,7 +247,7 @@ class _PhotoViewerState extends State<_PhotoViewer> {
         // index: initialIndex,
         index: currIndex,
         images: images,
-        onChanged: (int index) {
+        onChanged: (index) {
           currIndex = index;
         },
       ),
@@ -281,7 +285,8 @@ class _PhotoViewerState extends State<_PhotoViewer> {
       //删除
       widget.onDelete?.call(currIndex);
       if (images.isNotEmpty) {
-        if(isLast){ //删掉的是最后一张
+        if (isLast) {
+          //删掉的是最后一张
           currIndex = images.length - 1;
         }
         setState(() {});

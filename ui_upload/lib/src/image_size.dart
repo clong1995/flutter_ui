@@ -11,9 +11,9 @@ class ImageSize {
 
 Future<ImageSize> imageSizeFromPath(String path) async {
   final sizeResult = ImageSizeGetter.getSizeResult(FileInput(File(path)));
-  Size size = sizeResult.size;
-  int width = size.width;
-  int height = size.height;
+  final size = sizeResult.size;
+  final width = size.width;
+  final height = size.height;
   final imageSize = ImageSize();
   if (size.needRotate) {
     return imageSize
