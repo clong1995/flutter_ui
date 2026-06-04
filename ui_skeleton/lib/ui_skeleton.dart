@@ -20,6 +20,7 @@ class _UiSkeletonState extends State<UiSkeleton> {
   Widget build(BuildContext context) {
     return Visibility(
       visible: widget.state == UiSkeletonState.data,
+      maintainState: true,
       replacement: replacement(),
       child: widget.child,
     );
