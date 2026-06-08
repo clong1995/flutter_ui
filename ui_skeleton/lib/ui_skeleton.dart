@@ -18,29 +18,34 @@ class UiSkeleton extends StatefulWidget {
 class _UiSkeletonState extends State<UiSkeleton> {
   @override
   Widget build(BuildContext context) {
-    return Visibility(
-      visible: widget.state == UiSkeletonState.data,
-      maintainState: true,
-      replacement: replacement(),
-      child: widget.child,
+    final visible = widget.state == UiSkeletonState.data;
+    return Stack(
+      children: [
+        Offstage(
+          offstage: !visible,
+          child: widget.child,
+        ),
+        if (!visible) replacement(),
+      ],
     );
   }
 
   Widget replacement() {
+    Widget child = const SizedBox.shrink();
     if (widget.state == UiSkeletonState.hold) {
-      return Center(
-        child: CircularProgressIndicator(
-          color: UiTheme.primaryColor,
-        ),
+      child = CircularProgressIndicator(
+        color: UiTheme.primaryColor,
       );
     } else if (widget.state == UiSkeletonState.none) {
-      return Image.asset(
+      child = Image.asset(
         'images/not_data.png',
         package: 'ui_skeleton',
         fit: BoxFit.fitWidth,
       );
     }
-    return const SizedBox.shrink();
+    return Center(
+      child: child,
+    );
   }
 }
 
