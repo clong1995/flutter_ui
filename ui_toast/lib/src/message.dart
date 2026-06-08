@@ -5,23 +5,17 @@ class UiToastMessage {
   UiToastMessage();
 
   factory UiToastMessage.success() => UiToastMessage()
-    ..icon = const Icon(
-      Icons.check_circle_outline,
-      color: Color(0xFF4CAF50),
-    )
+    ..icon = Icons.check_circle_outline
     ..text = '成功'
     ..color = const Color(0xFF4CAF50);
 
   factory UiToastMessage.info() => UiToastMessage()
-    ..icon = const Icon(Icons.info_outline, color: Color(0xFFFF9800))
+    ..icon = Icons.info_outline
     ..text = '提示'
     ..color = const Color(0xFFFF9800);
 
   factory UiToastMessage.failure() => UiToastMessage()
-    ..icon = const Icon(
-      Icons.highlight_off,
-      color: Color(0xFFF44336),
-    )
+    ..icon = Icons.highlight_off
     ..text = '失败'
     ..color = const Color(0xFFF44336);
 
@@ -34,7 +28,7 @@ class UiToastMessage {
     ..color = const Color(0xFF2196F3)
     ..autoPopSeconds = -1;*/
 
-  Widget icon = const Icon(Icons.circle);
+  IconData icon = Icons.circle;
   String text = '无';
   Color color = const Color(0xFF000000);
   int autoPopSeconds = 1; //自动关闭的时间

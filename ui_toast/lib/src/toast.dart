@@ -26,7 +26,7 @@ class UiToast {
     );
   }
 
-  static void Function()? showLoading( {
+  static void Function()? showLoading({
     bool root = false,
   }) {
     final navContext = _navigatorKey?.currentContext;

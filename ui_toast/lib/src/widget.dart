@@ -17,12 +17,10 @@ class ToastWidget extends StatefulWidget {
 }
 
 class ToastWidgetState extends State<ToastWidget> {
-
-
   @override
   void initState() {
     super.initState();
-    if(widget.message.select){
+    if (widget.message.select) {
       return;
     }
     /*WidgetsBinding.instance.addPostFrameCallback((duration) {
@@ -30,81 +28,84 @@ class ToastWidgetState extends State<ToastWidget> {
     });*/
     Timer(
       Duration(seconds: widget.message.autoPopSeconds),
-          ()=>Navigator.of(context).pop<bool?>(true),
+      () => Navigator.of(context).pop<bool?>(true),
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: IntrinsicWidth(
-        child: Container(
-          padding: EdgeInsets.all(10.r),
-          constraints: BoxConstraints(
-            minWidth: 140.r,
-            maxWidth: 350.r,
+    //Center->IntrinsicWidth
+    return Container(
+      color: widget.message.select ? UiTheme.black.withAlpha(50) : null,
+      alignment: Alignment.center,
+      child: Container(
+        padding: EdgeInsets.all(10.r),
+        constraints: BoxConstraints(
+          minWidth: 140.r,
+          maxWidth: 350.r,
+        ),
+        decoration: BoxDecoration(
+          color: Color.lerp(
+            widget.message.color,
+            const Color(0xFFFFFFFF),
+            .95,
           ),
-          decoration: BoxDecoration(
-            color: Color.lerp(
-              widget.message.color,
-              const Color(0xFFFFFFFF),
-              .95,
-            ),
-            border: Border.all(
-              color: widget.message.color,
-              width: 1.r,
-            ),
-            borderRadius: BorderRadius.circular(10.r),
+          border: Border.all(
+            color: widget.message.color,
+            width: 1.r,
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+          borderRadius: BorderRadius.circular(10.r),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  widget.message.icon,
+                  color: widget.message.color,
+                  size: 24.r,
+                ),
+                SizedBox(width: 5.r),
+                Text(
+                  widget.message.text,
+                  style: TextStyle(
+                    color: widget.message.color,
+                    decoration: TextDecoration.none,
+                  ),
+                ),
+              ],
+            ),
+            if (widget.message.select) ...[
+              SizedBox(height: 10.r),
               Row(
+                mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  widget.message.icon,
-                  SizedBox(width: 5.r),
-                  Text(
-                    widget.message.text,
-                    style: TextStyle(
-                      color: widget.message.color,
-                      decoration: TextDecoration.none,
-                    ),
+                  UiButton(
+                    background: false,
+                    onTap: () => Navigator.of(context).pop<bool?>(false),
+                    child: const Text('取 消'),
+                  ),
+                  SizedBox(
+                    width: 10.r,
+                  ),
+                  UiButton(
+                    onTap: () => Navigator.of(context).pop<bool?>(true),
+                    child: const Text('确 定'),
                   ),
                 ],
               ),
-              if (widget.message.select) ...[
-                SizedBox(height: 10.r),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    UiButton(
-                      background: false,
-                      onTap: () => Navigator.of(context).pop<bool?>(false),
-                      child: const Text('取消'),
-                    ),
-                    SizedBox(
-                      width: 10.r,
-                    ),
-                    UiButton(
-                      onTap: () => Navigator.of(context).pop<bool?>(true),
-                      child: const Text('确定'),
-                    ),
-                  ],
-                ),
-              ],
             ],
-          ),
+          ],
         ),
       ),
     );
   }
 }
-
-
 
 class ToastLoadingWidget extends StatefulWidget {
   const ToastLoadingWidget({super.key});
@@ -168,7 +169,7 @@ class _ToastLoadingWidgetState extends State<ToastLoadingWidget> {
                   Text(
                     '加载中',
                     style: TextStyle(
-                      color:  UiTheme.primaryColor,
+                      color: UiTheme.primaryColor,
                       decoration: TextDecoration.none,
                     ),
                   ),
