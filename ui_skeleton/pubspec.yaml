@@ -14,6 +14,10 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_theme
+  ui_button:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_button
 
 dev_dependencies:
   very_good_analysis: ^10.0.0

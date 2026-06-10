@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show CircularProgressIndicator, Icons;
+import 'package:flutter/widgets.dart';
+import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiSkeleton extends StatefulWidget {
@@ -6,10 +8,12 @@ class UiSkeleton extends StatefulWidget {
     required this.child,
     super.key,
     this.state = UiSkeletonState.data,
+    this.none,
   });
 
   final UiSkeletonState state;
   final Widget child;
+  final Widget? none;
 
   @override
   State<UiSkeleton> createState() => _UiSkeletonState();
@@ -37,11 +41,13 @@ class _UiSkeletonState extends State<UiSkeleton> {
         color: UiTheme.primaryColor,
       );
     } else if (widget.state == UiSkeletonState.none) {
-      child = Image.asset(
-        'images/not_data.png',
-        package: 'ui_skeleton',
-        fit: BoxFit.fitWidth,
-      );
+      child =
+          widget.none ??
+          Image.asset(
+            'images/not_data.png',
+            package: 'ui_skeleton',
+            fit: BoxFit.fitWidth,
+          );
     }
     return Center(
       child: child,
@@ -50,3 +56,29 @@ class _UiSkeletonState extends State<UiSkeleton> {
 }
 
 enum UiSkeletonState { data, hold, none }
+
+class UiSkeletonRefreshNone extends StatelessWidget {
+  const UiSkeletonRefreshNone({required this.onRefreshTap, super.key});
+
+  final void Function() onRefreshTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          'images/not_data.png',
+          package: 'ui_skeleton',
+          fit: BoxFit.fitWidth,
+        ),
+        UiTextButton(
+          icon: Icons.refresh,
+          text: '刷 新',
+          onTap: onRefreshTap,
+        ),
+      ],
+    );
+  }
+}
