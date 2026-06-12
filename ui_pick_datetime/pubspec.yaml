@@ -36,6 +36,10 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_menu
+  fn_datetime:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: fn_datetime
 
 dev_dependencies:
   very_good_analysis: ^10.2.0

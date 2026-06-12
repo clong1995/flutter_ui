@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart' show TimeOfDay;
 import 'package:flutter/widgets.dart';
 import 'package:fn_nav/fn_nav.dart';
 import 'package:rpx/ext.dart';
@@ -7,16 +6,19 @@ import 'package:ui_button/ui_button.dart';
 import 'package:ui_menu/ui_menu.dart';
 import 'package:ui_theme/ui_theme.dart';
 
-Future<TimeOfDay?> uiPickTime({
-  TimeOfDay? selectedDate,
+Future<String?> uiPickTime({
+  String? selectedTime,
   bool root = true,
 }) async {
-  var timeOfDay = selectedDate ?? TimeOfDay.now();
-  var hour = timeOfDay.hour;
-  var minute = timeOfDay.minute;
+  final timeDay = selectedTime == null
+      ? DateTime.now()
+      : _timeParse(selectedTime);
 
-  return UiAlert.dialog(() {
-    return UiAlertWidget(
+  var hour = timeDay.hour;
+  var minute = timeDay.minute;
+
+  return UiAlert.dialog(
+    () => UiAlertWidget(
       content: SizedBox(
         width: 300.r,
         height: 70.r,
@@ -56,7 +58,8 @@ Future<TimeOfDay?> uiPickTime({
                 UiDropMenu<int>(
                   value: hour,
                   items: {
-                    for (var i = 0; i < 24; i++) i: '$i',
+                    for (var i = 0; i < 24; i++)
+                      i: i.toString().padLeft(2, '0'),
                   },
                   width: 70.r,
                   onChanged: (value) {
@@ -70,7 +73,8 @@ Future<TimeOfDay?> uiPickTime({
                 UiDropMenu<int>(
                   value: minute,
                   items: {
-                    for (var i = 0; i < 60; i++) i: '$i',
+                    for (var i = 0; i < 60; i++)
+                      i: i.toString().padLeft(2, '0'),
                   },
                   width: 70.r,
                   onChanged: (value) {
@@ -90,25 +94,70 @@ Future<TimeOfDay?> uiPickTime({
         UiButton(
           child: const Text('确 定'),
           onTap: () {
-            timeOfDay = TimeOfDay(hour: hour, minute: minute);
-            FnNav.pop<TimeOfDay>(
-              result: timeOfDay,
+            FnNav.pop<String>(
+              result: _timeFormat(hour, minute),
             );
           },
         ),
       ],
-    );
-  }, root: root);
-}
-
-String uiPickTimeFormat(TimeOfDay timeOfDay) {
-  return '${timeOfDay.hour.toString().padLeft(2, '0')}'
-      ':'
-      '${timeOfDay.minute.toString().padLeft(2, '0')}';
-}
-
-TimeOfDay uiPickTimeParse(String timeOfDay) {
-  return TimeOfDay.fromDateTime(
-    DateTime.parse('0000-00-00 $timeOfDay:00'),
+    ),
+    root: root,
   );
+}
+
+String _timeFormat(int hour, int minute) {
+  return '${hour.toString().padLeft(2, '0')}'
+      ':'
+      '${minute.toString().padLeft(2, '0')}';
+}
+
+DateTime _timeParse(String timeDay) {
+  return DateTime.parse('0000-00-00 $timeDay:00');
+}
+
+class UiPickTime extends StatefulWidget {
+  const UiPickTime({
+    this.selected,
+    this.root = true,
+    this.onChanged,
+    super.key,
+  });
+
+  final String? selected;
+  final bool root;
+  final void Function(String)? onChanged;
+
+  @override
+  State<UiPickTime> createState() => _UiPickTimeState();
+}
+
+class _UiPickTimeState extends State<UiPickTime> {
+  String selected = '';
+
+  @override
+  void initState() {
+    super.initState();
+    selected = widget.selected ?? '选择时间';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return UiTextButton(
+      text: selected,
+      onTap: widget.onChanged == null
+          ? null
+          : () async {
+              final timeDay = await uiPickTime(
+                selectedTime: widget.selected,
+                root: widget.root,
+              );
+              if (timeDay != null) {
+                setState(() {
+                  selected = timeDay;
+                });
+                widget.onChanged?.call(timeDay);
+              }
+            },
+    );
+  }
 }

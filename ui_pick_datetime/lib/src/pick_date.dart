@@ -1,19 +1,28 @@
 import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:flutter/material.dart' show Icons, NoSplash;
 import 'package:flutter/widgets.dart';
+import 'package:fn_datetime/fn_datetime.dart';
 import 'package:fn_nav/fn_nav.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
 
-Future<DateTime?> uiPickDate({
-  DateTime? selectedDate,
-  DateTime? minDate,
-  DateTime? maxDate,
+Future<String?> uiPickDate({
+  String? selectedDate,
+  String? minDate,
+  String? maxDate,
   bool root = true,
 }) async {
-  var datetime = selectedDate ?? DateTime.now();
+  final now = DateTime.now();
+
+  final selected = selectedDate == null ? now : DateTime.parse(selectedDate);
+  final min = minDate == null
+      ? DateTime(now.year, now.month)
+      : DateTime.parse(minDate);
+  final max = maxDate == null
+      ? DateTime(now.year, now.month + 1, 0)
+      : DateTime.parse(maxDate);
 
   final textStyle = TextStyle(
     fontSize: UiTheme.fontSize,
@@ -24,16 +33,18 @@ Future<DateTime?> uiPickDate({
     splashFactory: NoSplash.splashFactory,
   );
 
-  return UiAlert.dialog(() {
-    return UiAlertWidget(
+  var dateTime = selectedDate;
+
+  return UiAlert.dialog(
+    () => UiAlertWidget(
       content: SizedBox(
         width: 300.r,
         height: 250.r,
         child: DatePicker(
-          selectedDate: datetime,
+          selectedDate: selected,
           padding: EdgeInsets.zero,
-          minDate: minDate ?? DateTime(datetime.year, datetime.month),
-          maxDate: maxDate ?? DateTime(datetime.year, datetime.month + 1, 0),
+          minDate: min,
+          maxDate: max,
           theme: DatePickerPlusTheme(
             headerTheme: HeaderTheme(
               centerLeadingDate: true,
@@ -68,7 +79,7 @@ Future<DateTime?> uiPickDate({
               ),
             ),
           ),
-          onDateSelected: (val) => datetime = val,
+          onDateSelected: (val) => dateTime = FnDatetime.toStr(val,'date'),
         ),
       ),
       title: '选择日期',
@@ -76,11 +87,65 @@ Future<DateTime?> uiPickDate({
         UiButton(
           child: const Text('确 定'),
           onTap: () {
-            FnNav.pop<DateTime>(result: datetime);
+            FnNav.pop<String>(result: dateTime);
           },
         ),
       ],
-    );
-  }, root: root);
+    ),
+    root: root,
+  );
+}
 
+class UiPickDate extends StatefulWidget {
+  const UiPickDate({
+    this.selected,
+    this.root = true,
+    this.minDate,
+    this.maxDate,
+    this.onChanged,
+    super.key,
+  });
+
+  final String? selected;
+  final String? minDate;
+  final String? maxDate;
+  final bool root;
+  final void Function(String)? onChanged;
+
+  @override
+  State<UiPickDate> createState() => _UiPickDateState();
+}
+
+class _UiPickDateState extends State<UiPickDate> {
+
+  String selected = '';
+
+  @override
+  void initState() {
+    super.initState();
+    selected = widget.selected?? '选择日期';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return UiTextButton(
+      text: selected,
+      onTap: widget.onChanged == null
+          ? null
+          : () async {
+              final date = await uiPickDate(
+                selectedDate: widget.selected,
+                minDate: widget.minDate,
+                maxDate: widget.maxDate,
+                root: widget.root,
+              );
+              if (date != null) {
+                setState(() {
+                  selected = date;
+                });
+                widget.onChanged?.call(date);
+              }
+            },
+    );
+  }
 }
