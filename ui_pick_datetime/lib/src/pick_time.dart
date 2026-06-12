@@ -117,6 +117,8 @@ DateTime _timeParse(String timeDay) {
 
 class UiPickTime extends StatefulWidget {
   const UiPickTime({
+    this.icon,
+    this.color,
     this.selected,
     this.root = true,
     this.onChanged,
@@ -126,6 +128,9 @@ class UiPickTime extends StatefulWidget {
   final String? selected;
   final bool root;
   final void Function(String)? onChanged;
+
+  final IconData? icon;
+  final Color? color;
 
   @override
   State<UiPickTime> createState() => _UiPickTimeState();
@@ -143,6 +148,8 @@ class _UiPickTimeState extends State<UiPickTime> {
   @override
   Widget build(BuildContext context) {
     return UiTextButton(
+      icon: widget.icon,
+      color: widget.color,
       text: selected,
       onTap: widget.onChanged == null
           ? null

@@ -79,7 +79,7 @@ Future<String?> uiPickDate({
               ),
             ),
           ),
-          onDateSelected: (val) => dateTime = FnDatetime.toStr(val,'date'),
+          onDateSelected: (val) => dateTime = FnDatetime.toStr(val, 'date'),
         ),
       ),
       title: '选择日期',
@@ -98,6 +98,8 @@ Future<String?> uiPickDate({
 
 class UiPickDate extends StatefulWidget {
   const UiPickDate({
+    this.icon,
+    this.color,
     this.selected,
     this.root = true,
     this.minDate,
@@ -112,23 +114,27 @@ class UiPickDate extends StatefulWidget {
   final bool root;
   final void Function(String)? onChanged;
 
+  final IconData? icon;
+  final Color? color;
+
   @override
   State<UiPickDate> createState() => _UiPickDateState();
 }
 
 class _UiPickDateState extends State<UiPickDate> {
-
   String selected = '';
 
   @override
   void initState() {
     super.initState();
-    selected = widget.selected?? '选择日期';
+    selected = widget.selected ?? '选择日期';
   }
 
   @override
   Widget build(BuildContext context) {
     return UiTextButton(
+      icon: widget.icon,
+      color: widget.color,
       text: selected,
       onTap: widget.onChanged == null
           ? null
