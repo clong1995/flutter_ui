@@ -21,12 +21,20 @@ class UiAlertWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final minWidth = 300.r;
+    var maxWidth = 300.r;
+    final width = MediaQuery.of(context).size.width;
+    if (width > minWidth) {
+      maxWidth = width;
+    }
+
     return Center(
       child: IntrinsicWidth(
         child: Container(
           clipBehavior: Clip.hardEdge,
           constraints: BoxConstraints(
             minWidth: 300.r,
+            maxWidth: maxWidth,
           ),
           decoration: BoxDecoration(
             color: UiTheme.white,
