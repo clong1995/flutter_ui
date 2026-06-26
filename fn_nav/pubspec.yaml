@@ -1,19 +1,19 @@
 name: fn_nav
 description: "A new Flutter project."
-version: 0.2.3
+version: 0.3.0
 homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.11.1
-  flutter: ">=3.41.4"
+  sdk: ^3.12.2
+  flutter: ">=3.44.4"
 
 dependencies:
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  very_good_analysis: ^10.2.0
+  very_good_analysis: ^10.3.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

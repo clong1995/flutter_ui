@@ -1,10 +1,10 @@
 name: fn_auth
 description: A new Flutter project.
-version: 0.1.0
+version: 0.3.0
 publish_to: none
 
 environment:
-  sdk: ^3.11.1
+  sdk: ^3.12.2
 
 dependencies:
   shared_preferences: ^2.5.5
@@ -14,4 +14,4 @@ dependencies:
       path: fn_security
 
 dev_dependencies:
-  very_good_analysis: ^10.2.0
+  very_good_analysis: ^10.3.0
