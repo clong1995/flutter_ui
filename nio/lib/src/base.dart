@@ -21,6 +21,9 @@ abstract class BaseRes {
 
   int asInt(dynamic value, [int def = 0]) => (value is int) ? value : def;
 
+  double asDouble(dynamic value, [double def = 0]) =>
+      (value is double) ? value : def;
+
   bool asBool(dynamic value, [bool def = false]) =>
       (value is bool) ? value : def;
 
@@ -30,8 +33,8 @@ abstract class BaseRes {
   List<int> asListInt(dynamic value) =>
       (value is List) ? value.map(asInt).toList() : <int>[];
 
-  Map<String,dynamic> asMap(dynamic value) =>
-      (value is Map<String,dynamic>) ? value : <String,dynamic>{};
+  Map<String, dynamic> asMap(dynamic value) =>
+      (value is Map<String, dynamic>) ? value : <String, dynamic>{};
 
   List<dynamic> asList(dynamic value) =>
       (value is List<dynamic>) ? value : <dynamic>[];
