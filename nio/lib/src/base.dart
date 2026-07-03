@@ -21,8 +21,12 @@ abstract class BaseRes {
 
   int asInt(dynamic value, [int def = 0]) => (value is int) ? value : def;
 
-  double asDouble(dynamic value, [double def = 0]) =>
-      (value is double) ? value : def;
+  double asDouble(dynamic value, [double def = 0]){
+    if(value is num){
+      return value.toDouble();
+    }
+    return def;
+  }
 
   bool asBool(dynamic value, [bool def = false]) =>
       (value is bool) ? value : def;
