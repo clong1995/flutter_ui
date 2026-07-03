@@ -42,10 +42,11 @@ Future<T?> _showPopupMenu<T>({
 }) async {
   final renderBox = key.currentContext!.findRenderObject()! as RenderBox;
   final offset = renderBox.localToGlobal(Offset.zero);
-  double height = 35.r;
+  final height = 35.r;
   final result = await showMenu<T>(
     context: context,
     color: const Color(0xFFFFFFFF),
+    popUpAnimationStyle: AnimationStyle.noAnimation,
     menuPadding: EdgeInsets.zero,
     position: RelativeRect.fromLTRB(
       offset.dx,
