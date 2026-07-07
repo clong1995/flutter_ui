@@ -1,17 +1,25 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 //import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 class UiWebview extends StatefulWidget {
-  const UiWebview({super.key, this.url = '', this.html = '', this.register});
+  const UiWebview({
+    this.onPageFinished,
+    super.key,
+    this.url = '',
+    this.html = '',
+    this.register,
+  });
 
   final String url; //"packages/ui_captcha/html/captcha.html","https://pub.dev"
   final String html;
   final Map<String, Future<dynamic> Function(dynamic json)>? register;
+  final void Function()? onPageFinished;
 
   @override
   State<UiWebview> createState() => _UiWebviewState();
@@ -73,6 +81,7 @@ class _UiWebviewState extends State<UiWebview> {
         setState(() {
           pageReady = true;
         });
+        widget.onPageFinished?.call();
       },
     );
 
@@ -82,16 +91,7 @@ class _UiWebviewState extends State<UiWebview> {
           // Update loading bar.
         },*/
         onPageFinished: (url) async {
-          var script =
-              '''
-              (function() {
-                if (document.readyState === "complete") {
-                  $ready.postMessage("");
-                } else {
-                  window.addEventListener("load", ()=>$ready.postMessage(""));
-                }
-              })();
-          ''';
+          var script = '';
           //有函数需要调用时
           if (isRegister) {
             final callbacks = '_cbs${random}_';
@@ -119,13 +119,28 @@ class _UiWebviewState extends State<UiWebview> {
               };
             ''';
           }
+          script +=
+          '''
+              (function() {
+                if (document.readyState === "complete") {
+                  window.wvReady.?();
+                  $ready.postMessage("");
+                } else {
+                  window.addEventListener("load", ()=>{
+                    window.wvReady.?();
+                    $ready.postMessage("");
+                   });
+                }
+              })();
+          ''';
           await controller.runJavaScript(script);
         },
       ),
     );
     if (widget.html.isNotEmpty) {
       await controller.loadHtmlString(widget.html);
-    } else if (widget.url.startsWith('http://') || widget.url.startsWith('https://')) {
+    } else if (widget.url.startsWith('http://') ||
+        widget.url.startsWith('https://')) {
       await controller.loadRequest(Uri.parse(widget.url));
     } else {
       await controller.loadFlutterAsset(widget.url);
