@@ -23,11 +23,11 @@ class _Captcha extends StatelessWidget {
   Widget build(BuildContext context) {
     return UiAlertWidget(
       content: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: .min,
         children: [
           SizedBox(
-            width: px(context, 325),
-            height: px(context, 290),
+            width: 325,
+            height: 290,
             child: UiWebview(
               // url: 'packages/ui_captcha/html/captcha.html',
               html:html,
@@ -50,10 +50,5 @@ class _Captcha extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  double px(BuildContext context, double size) {
-    //print(MediaQuery.of(context).devicePixelRatio);
-    return size;
   }
 }

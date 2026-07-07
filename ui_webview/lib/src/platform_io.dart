@@ -33,7 +33,7 @@ class _UiWebviewState extends State<UiWebview> {
     //AndroidWebViewController.enableDebugging(true);
 
     controller = WebViewController();
-    await controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+    await controller.setJavaScriptMode(.unrestricted);
 
     //
     final bridge = '_b${random}_';
@@ -43,6 +43,7 @@ class _UiWebviewState extends State<UiWebview> {
         bridge,
         onMessageReceived: (message) async {
           final data = jsonDecode(message.message);
+
           final callbackId = data['callbackId'];
           final action = data['action'];
           final param = data['param'];
