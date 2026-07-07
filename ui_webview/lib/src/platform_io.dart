@@ -1,11 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-//import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 class UiWebview extends StatefulWidget {
   const UiWebview({
