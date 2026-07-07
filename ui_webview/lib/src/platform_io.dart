@@ -94,7 +94,7 @@ class _UiWebviewState extends State<UiWebview> {
           if (isRegister) {
             final callbacks = '_cbs${random}_';
             script +=
-                '''
+              '''
               const $callbacks = {};
               window.$callback = (callbackId, result)=>{
                   if ($callbacks[callbackId]) {
@@ -121,11 +121,11 @@ class _UiWebviewState extends State<UiWebview> {
           '''
               (function() {
                 if (document.readyState === "complete") {
-                  window.wvReady.?();
+                  window.wvReady?.();
                   $ready.postMessage("");
                 } else {
                   window.addEventListener("load", ()=>{
-                    window.wvReady.?();
+                    window.wvReady?.();
                     $ready.postMessage("");
                    });
                 }
