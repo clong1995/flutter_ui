@@ -8,11 +8,11 @@ class UiDisable extends StatelessWidget {
   @override
   Widget build(BuildContext context) => AbsorbPointer(
     child: ColorFiltered(
-      colorFilter: const ColorFilter.matrix(<double>[
-        0.2126, 0.7152, 0.0722, 0, 90, // 红色通道 + 90亮度
-        0.2126, 0.7152, 0.0722, 0, 90, // 绿色通道 + 90亮度
-        0.2126, 0.7152, 0.0722, 0, 90, // 蓝色通道 + 90亮度
-        0, 0, 0, 1, 0,
+      colorFilter: const .matrix(<double>[
+        0.2126, 0.7152, 0.0722, 0, 0, // 红色通道的新值
+        0.2126, 0.7152, 0.0722, 0, 0, // 绿色通道的新值
+        0.2126, 0.7152, 0.0722, 0, 0, // 蓝色通道的新值
+        0,      0,      0,      1, 0, // Alpha通道保持不变
       ]),
       child: child,
     ),
