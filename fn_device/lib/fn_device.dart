@@ -61,7 +61,7 @@ class FnDevice {
       _brand = 'Apple';
     } else {
       final info = await DeviceInfoPlugin().androidInfo;
-      _brand = info.board;
+      _brand = info.brand;
     }
     return _brand ?? 'no-brand';
   }
