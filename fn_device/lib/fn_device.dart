@@ -52,7 +52,7 @@ class FnDevice {
     return _platform ?? 'no-os';
   }
 
-  //Apple、Xiaomi、HUAWEI、HONOR、OPPO、OnePlus、vivo、Meizu、samsung
+  //Apple、Xiaomi、Redmi、HUAWEI、HONOR、OPPO、OnePlus、vivo、Meizu、samsung
   static Future<String> get brand async {
     if (_brand != null) {
       return _brand!;
