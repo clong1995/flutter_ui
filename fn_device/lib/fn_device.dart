@@ -1,3 +1,4 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fn_device/src/guid/guid.dart';
 import 'package:fn_device/src/height.dart';
@@ -8,6 +9,7 @@ class FnDevice {
   FnDevice._();
 
   static String? _platform;
+  static String? _brand;
   static String? _guid;
   static String? _info;
 
@@ -50,6 +52,20 @@ class FnDevice {
     return _platform ?? 'no-os';
   }
 
+  //Apple、Xiaomi、HUAWEI、HONOR、OPPO、OnePlus、vivo、Meizu、samsung
+  static Future<String> get brand async {
+    if (_brand != null) {
+      return _brand!;
+    }
+    if (defaultTargetPlatform == TargetPlatform.iOS) {
+      _brand = 'Apple';
+    } else {
+      final info = await DeviceInfoPlugin().androidInfo;
+      _brand = info.board;
+    }
+    return _brand ?? 'no-brand';
+  }
+
   static Future<String> get guid async {
     if (_guid != null) {
       return _guid!;
@@ -67,7 +83,6 @@ class FnDevice {
   static Future<void> Function() lockEnable = wakeLockEnable;
 
   static Future<void> Function() lockDisable = wakeLockDisable;
-
 
   static double get statusBarHeight {
     return Height.statusBarHeight;
