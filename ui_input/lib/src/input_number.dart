@@ -162,13 +162,13 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
 
   bool limit(T n) {
     if (widget.min != null) {
-      if (widget.min! > n) {
+      if (widget.min! >= n) {
         controller.text = '${widget.min}';
         return false;
       }
     }
     if (widget.max != null) {
-      if (widget.max! < n) {
+      if (widget.max! <= n) {
         controller.text = '${widget.max}';
         return false;
       }
