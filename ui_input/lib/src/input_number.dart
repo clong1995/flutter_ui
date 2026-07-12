@@ -124,8 +124,8 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
     if (n == null) {
       return;
     }
-    final f = limit(n);
-    if(!f){
+    final f = limit(n, false, true);
+    if (!f) {
       return;
     }
     controller.text = '${n - 1}';
@@ -137,8 +137,8 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
     if (n == null) {
       return;
     }
-    final f = limit(n);
-    if(!f){
+    final f = limit(n, true, false);
+    if (!f) {
       return;
     }
     controller.text = '${n + 1}';
@@ -153,21 +153,21 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
     if (n == null) {
       return;
     }
-    final f = limit(n);
-    if(!f){
+    final f = limit(n, true, true);
+    if (!f) {
       return;
     }
     widget.onChanged!(n);
   }
 
-  bool limit(T n) {
-    if (widget.min != null) {
+  bool limit(T n, bool plus, bool sub) {
+    if (sub && widget.min != null) {
       if (widget.min! >= n) {
         controller.text = '${widget.min}';
         return false;
       }
     }
-    if (widget.max != null) {
+    if (plus && widget.max != null) {
       if (widget.max! <= n) {
         controller.text = '${widget.max}';
         return false;
