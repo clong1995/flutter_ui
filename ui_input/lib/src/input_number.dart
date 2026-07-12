@@ -8,6 +8,8 @@ import 'package:ui_input/ui_input.dart';
 class UiInputNumber<T extends num> extends StatefulWidget {
   const UiInputNumber({
     this.num,
+    this.min,
+    this.max,
     super.key,
     this.width,
     this.onChanged,
@@ -20,6 +22,8 @@ class UiInputNumber<T extends num> extends StatefulWidget {
 
   final double? width;
   final T? num;
+  final T? min;
+  final T? max;
   final void Function(T)? onChanged;
   final bool autofocus;
   final TextStyle? style;
@@ -82,7 +86,7 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
 
   @override
   void dispose() {
-    if(widget.controller == null){
+    if (widget.controller == null) {
       controller.dispose();
     }
     super.dispose();
@@ -120,6 +124,10 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
     if (n == null) {
       return;
     }
+    final f = limit(n);
+    if(!f){
+      return;
+    }
     controller.text = '${n - 1}';
     widget.onChanged!((n - 1) as T);
   }
@@ -127,6 +135,10 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
   void onPlusPressed() {
     final n = numberParse();
     if (n == null) {
+      return;
+    }
+    final f = limit(n);
+    if(!f){
       return;
     }
     controller.text = '${n + 1}';
@@ -141,6 +153,27 @@ class _UiInputNumberState<T extends num> extends State<UiInputNumber<T>> {
     if (n == null) {
       return;
     }
+    final f = limit(n);
+    if(!f){
+      return;
+    }
     widget.onChanged!(n);
+  }
+
+  bool limit(T n) {
+    if (widget.min != null) {
+      if (widget.min! > n) {
+        controller.text = '${widget.min}';
+        return false;
+      }
+    }
+    if (widget.max != null) {
+      if (widget.max! < n) {
+        controller.text = '${widget.max}';
+        return false;
+      }
+    }
+
+    return true;
   }
 }
