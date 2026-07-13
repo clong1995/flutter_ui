@@ -145,6 +145,17 @@ class _UiPickTimeState extends State<UiPickTime> {
     selected = widget.selected ?? '选择时间';
   }
 
+
+  @override
+  void didUpdateWidget(covariant UiPickTime oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.selected != oldWidget.selected) {
+      setState(() {
+        selected = widget.selected ?? '选择日期';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return UiTextButton(
