@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart'
-    show AdaptiveTextSelectionToolbar, Icons, materialTextSelectionControls;
+    show Icons, materialTextSelectionControls;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rpx/ext.dart';
@@ -54,7 +54,8 @@ class UiInputText extends StatefulWidget {
 
 class _UiInputTextState extends State<UiInputText> {
   late TextEditingController controller;
-  final FocusNode focusNode = FocusNode();
+  final focusNode = FocusNode();
+  final editableKey = GlobalKey<EditableTextState>();
 
   late EdgeInsets padding;
 
@@ -154,26 +155,32 @@ class _UiInputTextState extends State<UiInputText> {
     },
   );
 
-  Widget editableText() => EditableText(
-    textAlign: widget.textAlign ?? TextAlign.start,
-    autofocus: widget.autofocus,
-    keyboardType: widget.keyboardType,
-    inputFormatters: widget.inputFormatters,
-    controller: controller,
-    focusNode: focusNode,
-    readOnly: widget.onChanged == null,
-    obscureText: widget.obscureText && obscure,
-    style: textStyle(),
-    maxLines: widget.maxLines,
-    cursorColor: UiTheme.primaryColor,
-    backgroundCursorColor: UiTheme.grey200,
-    showSelectionHandles: true,
-    selectionControls: materialTextSelectionControls,
-    contextMenuBuilder: (context, editableTextState) =>
-        AdaptiveTextSelectionToolbar.editableText(
-          editableTextState: editableTextState,
-        ),
-    onChanged: widget.onChanged,
+  Widget editableText() => TextFieldTapRegion(
+    onTapInside: (_) {
+      editableKey.currentState?.showToolbar();
+    },
+    onTapOutside: (_) {
+      focusNode.unfocus();
+    },
+    child: EditableText(
+      key: editableKey,
+      textAlign: widget.textAlign ?? TextAlign.start,
+      autofocus: widget.autofocus,
+      keyboardType: widget.keyboardType,
+      inputFormatters: widget.inputFormatters,
+      controller: controller,
+      focusNode: focusNode,
+      readOnly: widget.onChanged == null,
+      obscureText: widget.obscureText && obscure,
+      style: textStyle(),
+      maxLines: widget.maxLines,
+      cursorColor: UiTheme.primaryColor,
+      backgroundCursorColor: UiTheme.grey200,
+      selectionColor: UiTheme.primaryColor.withAlpha(50),
+      showSelectionHandles: true,
+      selectionControls: materialTextSelectionControls,
+      onChanged: widget.onChanged,
+    ),
   );
 
   double height() =>

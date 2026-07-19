@@ -17,7 +17,8 @@ Widget appBuilder(
   }
 
   //空白收起键盘
-  final keyboard = GestureDetector(
+  //涉及到输入组件，我已经内部处理了
+  /*final keyboard = GestureDetector(
     behavior: HitTestBehavior.translucent,
     onTap: () {
       final currentFocus = FocusScope.of(context);
@@ -26,7 +27,7 @@ Widget appBuilder(
       }
     },
     child: builderWidget,
-  );
+  );*/
 
   //final keyboard = child!;
 
@@ -37,7 +38,7 @@ Widget appBuilder(
       fontSize: UiTheme.fontSize,
       fontFamily: UiTheme.fontFamily,
     ),
-    child: keyboard,
+    child: builderWidget,
   );
 
 
