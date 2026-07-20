@@ -11,7 +11,8 @@ class FnNav {
     _navigatorKey = value;
   }
 
-  static Future<T?> push<T extends Object?>(Widget Function() page, {
+  static Future<T?> push<T extends Object?>(
+    Widget Function() page, {
     bool root = false,
     Object? args,
   }) async {
@@ -22,35 +23,35 @@ class FnNav {
     return Navigator.of(context, rootNavigator: root).push<T>(
       FnNavRouteBuilder<T>(
         RouteSettings(arguments: args),
-            (context) => page(),
+        (context) => page(),
       ),
     );
   }
 
-  static Future<T?> pushAndRemove<T extends Object?>(Widget Function() page, {
+  static Future<T?> pushAndRemove<T extends Object?>(
+    Widget Function() page, {
     bool root = false,
     Object? args,
   }) async {
-    final context = _navigatorKey?.currentContext;
-    if (context == null) {
+    final currentState = _navigatorKey?.currentState;
+    if (currentState == null) {
       return null;
     }
-
-    return Navigator.of(context, rootNavigator: root).pushAndRemoveUntil<T>(
+    return currentState.pushAndRemoveUntil<T>(
       FnNavRouteBuilder<T>(
         RouteSettings(arguments: args),
-            (context) => page(),
+        (context) => page(),
       ),
-          (route) => false,
+      (route) => root,
     );
   }
 
   static Future<T?> pushAndReplace<T extends Object?, TO extends Object?>(
-      Widget Function() page, {
-        bool root = false,
-        Object? args,
-        TO? result,
-      }) async {
+    Widget Function() page, {
+    bool root = false,
+    Object? args,
+    TO? result,
+  }) async {
     final context = _navigatorKey?.currentContext;
     if (context == null) {
       return null;
@@ -58,7 +59,7 @@ class FnNav {
     return Navigator.of(context, rootNavigator: root).pushReplacement<T, TO>(
       FnNavRouteBuilder<T>(
         RouteSettings(arguments: args),
-            (context) => page(),
+        (context) => page(),
       ),
       result: result,
     );
@@ -82,10 +83,7 @@ class FnNav {
     if (context == null) {
       return null;
     }*/
-    final arguments = ModalRoute
-        .of(context)
-        ?.settings
-        .arguments;
+    final arguments = ModalRoute.of(context)?.settings.arguments;
     if (arguments != null) {
       return arguments as T;
     }
@@ -95,14 +93,14 @@ class FnNav {
 
 class FnNavRouteBuilder<T> extends PageRouteBuilder<T> {
   FnNavRouteBuilder(RouteSettings settings, this.builder)
-      : super(
-    settings: settings,
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        builder(context),
-    transitionDuration: Duration.zero,
-    reverseTransitionDuration: Duration.zero,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-    child,
-  );
+    : super(
+        settings: settings,
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            builder(context),
+        transitionDuration: .zero,
+        reverseTransitionDuration: .zero,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+            child,
+      );
   final WidgetBuilder builder;
 }
