@@ -12,6 +12,7 @@ class UiButton extends StatelessWidget {
     this.color,
     this.background = true,
     this.padding,
+    this.decoration,
     this.onTap,
   });
 
@@ -19,6 +20,7 @@ class UiButton extends StatelessWidget {
   final double? height;
   final Widget child;
   final EdgeInsets? padding;
+  final Decoration? decoration;
 
   final Color? color;
   final bool background;
@@ -29,7 +31,7 @@ class UiButton extends StatelessWidget {
     final color = this.color ?? UiTheme.primaryColor;
     final child = Container(
       padding: padding ?? EdgeInsets.symmetric(horizontal: 10.r),
-      decoration: BoxDecoration(
+      decoration: decoration ?? BoxDecoration(
         borderRadius: BorderRadius.circular(5.r),
         border: Border.all(color: color),
         color: background ? color : const Color(0xFFFFFFFF),
