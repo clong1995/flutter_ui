@@ -13,7 +13,7 @@ dependencies:
   device_info_plus: ^13.2.0
   crypto: ^3.0.7
   web: ^1.1.1
-  wakelock_plus: ^1.6.1
+  wakelock_plus: ^1.7.0
 
 dev_dependencies:
   very_good_analysis: ^10.3.0
