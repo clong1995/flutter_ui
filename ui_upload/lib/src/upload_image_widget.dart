@@ -109,14 +109,13 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
   Widget single() => AspectRatio(
     aspectRatio: 1,
     child: DecoratedBox(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.r)),
+      decoration: BoxDecoration(borderRadius: .circular(5.r)),
       child: Stack(
+        fit: StackFit.expand,
         children: [
           if (imageList.isNotEmpty)
             GestureDetector(
-              onTap: () async {
-                await imageWidget(0);
-              },
+              onTap: () => imageWidget(0),
               child: UiCacheImage(imageList[0], fit: BoxFit.contain),
             ),
           if (imageList.isNotEmpty) removeWidget(0),
