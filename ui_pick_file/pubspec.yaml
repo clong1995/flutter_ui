@@ -10,7 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  file_picker: ^11.0.2
+  # file_picker: ^11.0.2
+  file_picker:
+    git:
+      url: https://github.com/clong1995/flutter_file_picker
   image_picker: ^1.2.3
   image_gallery_saver_plus: ^5.1.1
   path: ^1.9.1
