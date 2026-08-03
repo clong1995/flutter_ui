@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fn_device/src/guid/guid.dart';
@@ -51,6 +53,8 @@ class FnDevice {
     }
     return _platform ?? 'no-os';
   }
+
+  static String get system => Platform.operatingSystem;
 
   //Apple、Xiaomi、Redmi、HUAWEI、HONOR、OPPO、OnePlus、vivo、Meizu、samsung
   static Future<String> get brand async {

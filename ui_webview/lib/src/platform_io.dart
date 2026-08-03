@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
+import 'package:fn_device/fn_device.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 class UiWebview extends StatefulWidget {
   const UiWebview({
@@ -152,11 +154,34 @@ class _UiWebviewState extends State<UiWebview> {
   @override
   Widget build(BuildContext context) => Stack(
     children: [
-      WebViewWidget(controller: controller),
+      webview(),
       if (!pageReady)
         const Positioned.fill(
           child: Center(child: Text('加载中...')),
         ),
     ],
   );
+
+  Widget webview(){
+    FnDevice.brand.then((v){
+      print(v);
+    });
+    if (WebViewPlatform.instance is AndroidWebViewPlatform) {
+      final params =
+      AndroidWebViewWidgetCreationParams.fromPlatformWebViewWidgetCreationParams(
+        PlatformWebViewWidgetCreationParams(
+          controller: controller.platform,
+        ),
+        displayWithHybridComposition: true,
+      );
+
+      return WebViewWidget.fromPlatformCreationParams(
+        params: params,
+      );
+    }
+
+    return WebViewWidget(
+      controller: controller,
+    );
+  }
 }
