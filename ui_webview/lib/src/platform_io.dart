@@ -29,6 +29,8 @@ class _UiWebviewState extends State<UiWebview> {
   late WebViewController controller;
 
   bool pageReady = false;
+  bool webviewReady = false;
+  String brand = '';
 
   @override
   void initState() {
@@ -39,6 +41,7 @@ class _UiWebviewState extends State<UiWebview> {
   Future<void> initWebview() async {
     //chrome://inspect/#devices
     //AndroidWebViewController.enableDebugging(true);
+    brand = await FnDevice.brand;
 
     controller = WebViewController();
     await controller.setJavaScriptMode(.unrestricted);
@@ -145,6 +148,9 @@ class _UiWebviewState extends State<UiWebview> {
     } else {
       await controller.loadFlutterAsset(widget.url);
     }
+
+    webviewReady = true;
+    setState(() {});
   }
 
   int get random => Random().nextInt(100);
@@ -163,25 +169,25 @@ class _UiWebviewState extends State<UiWebview> {
   );
 
   Widget webview(){
-    FnDevice.brand.then((v){
-      print(v);//HUAWEI
-    });
-    if (WebViewPlatform.instance is AndroidWebViewPlatform) {
-      final params =
-      AndroidWebViewWidgetCreationParams.fromPlatformWebViewWidgetCreationParams(
-        PlatformWebViewWidgetCreationParams(
-          controller: controller.platform,
-        ),
-        displayWithHybridComposition: true,
-      );
+    if(webviewReady){
+      if (WebViewPlatform.instance is AndroidWebViewPlatform && brand == 'HUAWEI') {
+        final params =
+        AndroidWebViewWidgetCreationParams.fromPlatformWebViewWidgetCreationParams(
+          PlatformWebViewWidgetCreationParams(
+            controller: controller.platform,
+          ),
+          displayWithHybridComposition: true,
+        );
 
-      return WebViewWidget.fromPlatformCreationParams(
-        params: params,
+        return WebViewWidget.fromPlatformCreationParams(
+          params: params,
+        );
+      }
+
+      return WebViewWidget(
+        controller: controller,
       );
     }
-
-    return WebViewWidget(
-      controller: controller,
-    );
+    return const SizedBox.shrink();
   }
 }
