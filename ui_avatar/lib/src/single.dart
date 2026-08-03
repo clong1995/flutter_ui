@@ -9,18 +9,21 @@ class UiAvatarSingle extends StatelessWidget {
     this.size,
     this.package,
     this.border,
+    this.radius,
   });
 
   final String? imageUrl;
   final double? size;
   final String? package;
   final BoxBorder? border;
+  final double? radius;
 
   @override
   Widget build(BuildContext context) {
     final size = this.size ?? 50;
 
     final padding = border?.bottom.width ?? 0;
+    final circularRadius = radius ?? size / 10;
     return SizedBox(
       height: size,
       width: size,
@@ -30,7 +33,7 @@ class UiAvatarSingle extends StatelessWidget {
           decoration: BoxDecoration(
             // shape: BoxShape.circle,
             border: border,
-            borderRadius: BorderRadius.circular(size / 10),
+            borderRadius: BorderRadius.circular(circularRadius),
           ),
           child: Padding(
             padding: EdgeInsets.all(padding),
@@ -41,7 +44,7 @@ class UiAvatarSingle extends StatelessWidget {
                     size: size / 1.3,
                   )
                 : ClipRRect(
-                    borderRadius: BorderRadius.circular(size / 10),
+                    borderRadius: BorderRadius.circular(circularRadius),
                     child: imageUrl!.startsWith('http')
                         ? UiCacheImage(imageUrl!, fit: BoxFit.cover)
                         : Image.asset(
