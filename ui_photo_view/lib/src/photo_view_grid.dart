@@ -10,6 +10,8 @@ class UiPhotoViewGrid extends StatelessWidget {
     super.key,
     this.thumbnail = true,
     this.crossAxisCount = 3,
+    this.fit = BoxFit.contain,
+    this.childAspectRatio = 1,
     this.mainAxisSpacing,
     this.crossAxisSpacing,
     this.onChanged,
@@ -18,8 +20,10 @@ class UiPhotoViewGrid extends StatelessWidget {
   final bool thumbnail;
   final List<String> images;
   final int crossAxisCount;
+  final double childAspectRatio;
   final double? mainAxisSpacing;
   final double? crossAxisSpacing;
+  final BoxFit fit;
   final void Function(int)? onChanged;
 
   @override
@@ -31,6 +35,7 @@ class UiPhotoViewGrid extends StatelessWidget {
     itemCount: images.length,
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: crossAxisCount,
+      childAspectRatio: childAspectRatio,
       mainAxisSpacing: mainAxisSpacing ?? 5.r,
       crossAxisSpacing: crossAxisSpacing ?? 5.r,
     ),
@@ -47,7 +52,7 @@ class UiPhotoViewGrid extends StatelessWidget {
       }
       return GestureDetector(
         onTap: () => onImageTap(index),
-        child: UiCacheImage(image, fit: BoxFit.contain),
+        child: UiCacheImage(image, fit: fit),
       );
     },
   );
