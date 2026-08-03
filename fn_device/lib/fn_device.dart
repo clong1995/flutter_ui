@@ -54,7 +54,15 @@ class FnDevice {
     return _platform ?? 'no-os';
   }
 
-  static String get system => Platform.operatingSystem;
+  static Future<String> get system async{
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      final info = await DeviceInfoPlugin().androidInfo;
+      return '${info.manufacturer} ${info.version.incremental}';
+    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+      return '';
+    }
+    return 'no-system';
+  }
 
   //Apple、Xiaomi、Redmi、HUAWEI、HONOR、OPPO、OnePlus、vivo、Meizu、samsung
   static Future<String> get brand async {

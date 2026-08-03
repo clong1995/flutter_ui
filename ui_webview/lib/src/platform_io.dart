@@ -163,9 +163,7 @@ class _UiWebviewState extends State<UiWebview> {
   );
 
   Widget webview(){
-    FnDevice.brand.then((v){
-      print(v);
-    });
+    print(FnDevice.system);
     if (WebViewPlatform.instance is AndroidWebViewPlatform) {
       final params =
       AndroidWebViewWidgetCreationParams.fromPlatformWebViewWidgetCreationParams(
