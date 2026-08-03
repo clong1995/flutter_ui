@@ -163,7 +163,9 @@ class _UiWebviewState extends State<UiWebview> {
   );
 
   Widget webview(){
-    print(FnDevice.system);
+    FnDevice.brand.then((v){
+      print(v);//HUAWEI
+    });
     if (WebViewPlatform.instance is AndroidWebViewPlatform) {
       final params =
       AndroidWebViewWidgetCreationParams.fromPlatformWebViewWidgetCreationParams(

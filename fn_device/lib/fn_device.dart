@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
@@ -52,16 +51,6 @@ class FnDevice {
       }
     }
     return _platform ?? 'no-os';
-  }
-
-  static Future<String> get system async{
-    if (defaultTargetPlatform == TargetPlatform.android) {
-      final info = await DeviceInfoPlugin().androidInfo;
-      return '${info.manufacturer} ${info.version.incremental}';
-    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-      return '';
-    }
-    return 'no-system';
   }
 
   //Apple、Xiaomi、Redmi、HUAWEI、HONOR、OPPO、OnePlus、vivo、Meizu、samsung
