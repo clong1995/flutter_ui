@@ -14,7 +14,7 @@ class UiPhotoViewGrid extends StatelessWidget {
     this.childAspectRatio = 1,
     this.mainAxisSpacing,
     this.crossAxisSpacing,
-    this.decoration,
+    this.borderRadius = BorderRadius.zero,
     this.onChanged,
   });
 
@@ -25,7 +25,7 @@ class UiPhotoViewGrid extends StatelessWidget {
   final double? mainAxisSpacing;
   final double? crossAxisSpacing;
   final BoxFit fit;
-  final Decoration? decoration;
+  final BorderRadiusGeometry borderRadius;
   final void Function(int)? onChanged;
 
   @override
@@ -54,8 +54,8 @@ class UiPhotoViewGrid extends StatelessWidget {
       }
       return GestureDetector(
         onTap: () => onImageTap(index),
-        child: Container(
-          decoration: decoration,
+        child: ClipRRect(
+          borderRadius: borderRadius,
           child: UiCacheImage(image, fit: fit),
         ),
       );
