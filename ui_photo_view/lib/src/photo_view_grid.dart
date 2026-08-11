@@ -41,26 +41,13 @@ class UiPhotoViewGrid extends StatelessWidget {
       mainAxisSpacing: mainAxisSpacing ?? 5.r,
       crossAxisSpacing: crossAxisSpacing ?? 5.r,
     ),
-    itemBuilder: (context, index) {
-      var image = images[index];
-      if (thumbnail) {
-        final original = Uri.parse(image);
-        final uri = original.replace(
-          queryParameters: {
-            ...original.queryParameters,
-            'x-oss-process': 'style/thumbnail',
-          },
-        );
-        image = uri.toString();
-      }
-      return GestureDetector(
+    itemBuilder: (context, index) => GestureDetector(
         onTap: () => onImageTap(index),
         child: ClipRRect(
           borderRadius: borderRadius,
-          child: UiCacheImage(image, fit: fit),
+          child: UiCacheImage(images[index], fit: fit,thumbnail: thumbnail,),
         ),
-      );
-    },
+      ),
   );
 
   void onImageTap(int index) => pushPhotoViewPage(
