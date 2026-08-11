@@ -44,9 +44,10 @@ class UiPhotoViewGrid extends StatelessWidget {
     itemBuilder: (context, index) {
       var image = images[index];
       if (thumbnail) {
-        final uri = Uri.parse(image).replace(
+        final original = Uri.parse(image);
+        final uri = original.replace(
           queryParameters: {
-            ...Uri.parse(image).queryParameters,
+            ...original.queryParameters,
             'x-oss-process': 'style/thumbnail',
           },
         );

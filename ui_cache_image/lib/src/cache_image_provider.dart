@@ -10,9 +10,13 @@ import 'package:ui_cache_image/src/common.dart';
 
 @immutable
 class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
-  const UiCacheImageProvider(this.src);
+  const UiCacheImageProvider(
+    this.src, {
+    this.thumbnail = false,
+  });
 
   final String src;
+  final bool thumbnail;
 
   @override
   Future<UiCacheImageProvider> obtainKey(ImageConfiguration configuration) =>
@@ -37,9 +41,21 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
     StreamController<ImageChunkEvent> chunkEvents,
     ImageDecoderCallback decode,
   ) async {
+    var imgSrc = src;
+    if(thumbnail){
+      final original = Uri.parse(imgSrc);
+      final uri = original.replace(
+        queryParameters: {
+          ...original.queryParameters,
+          'x-oss-process': 'style/thumbnail',
+        },
+      );
+      imgSrc = uri.toString();
+    }
+
     try {
       final tempDir = await tempDirectory();
-      final md5 = md5str(src);
+      final md5 = md5str(imgSrc);
       final imageFile = File('$tempDir/$md5');
       if (imageFile.existsSync()) {
         try {
@@ -54,7 +70,7 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
       //请求新的图片
       debugPrint('request new image');
 
-      final response = await get(Uri.parse(src));
+      final response = await get(Uri.parse(imgSrc));
       if (response.statusCode != 200) {
         throw Exception('status code: ${response.statusCode}');
       } else if (response.bodyBytes.isEmpty) {
