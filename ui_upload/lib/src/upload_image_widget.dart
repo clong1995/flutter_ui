@@ -25,6 +25,7 @@ class UiUploadImageWidget extends StatefulWidget {
     this.maxHeight,
     this.imageQuality,
     this.limit,
+    this.thumbnail = false,
   });
 
   final int? crossAxisCount;
@@ -35,6 +36,7 @@ class UiUploadImageWidget extends StatefulWidget {
   final double? maxHeight;
   final int? imageQuality;
   final int? limit;
+  final bool thumbnail;
 
   //final String path;
 
@@ -79,8 +81,8 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
           color: UiTheme.grey50,
-          border: Border.all(color: UiTheme.grey100),
-          borderRadius: BorderRadius.circular(5.r),
+          border: .all(color: UiTheme.grey100),
+          borderRadius: .circular(5.r),
         ),
         child: index == imageList.length
             ? Center(
@@ -93,11 +95,15 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
                 ),
               )
             : Stack(
-                fit: StackFit.expand,
+                fit: .expand,
                 children: [
                   GestureDetector(
                     onTap: () => imageWidget(index),
-                    child: UiCacheImage(imageList[index], fit: BoxFit.contain),
+                    child: UiCacheImage(
+                      imageList[index],
+                      fit: .contain,
+                      thumbnail: widget.thumbnail,
+                    ),
                   ),
                   removeWidget(index),
                 ],
@@ -111,12 +117,16 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
     child: DecoratedBox(
       decoration: BoxDecoration(borderRadius: .circular(5.r)),
       child: Stack(
-        fit: StackFit.expand,
+        fit: .expand,
         children: [
           if (imageList.isNotEmpty)
             GestureDetector(
               onTap: () => imageWidget(0),
-              child: UiCacheImage(imageList[0], fit: BoxFit.contain),
+              child: UiCacheImage(
+                imageList[0],
+                fit: .contain,
+                thumbnail: widget.thumbnail,
+              ),
             ),
           if (imageList.isNotEmpty) removeWidget(0),
           if (imageList.isEmpty)
@@ -261,7 +271,7 @@ class _PhotoViewerState extends State<_PhotoViewer> {
               color: UiTheme.red,
               onTap: remove,
               child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: .center,
                 children: [Icon(Icons.delete_forever_outlined), Text(' 删 除')],
               ),
             ),
