@@ -8,13 +8,13 @@ class UiPhotoViewGrid extends StatelessWidget {
   const UiPhotoViewGrid({
     required this.images,
     super.key,
-    this.thumbnail = true,
+    this.thumbnail = false,
     this.crossAxisCount = 3,
     this.fit = BoxFit.contain,
     this.childAspectRatio = 1,
     this.mainAxisSpacing,
     this.crossAxisSpacing,
-    this.borderRadius = BorderRadius.zero,
+    this.borderRadius = .zero,
     this.onChanged,
   });
 
@@ -33,7 +33,7 @@ class UiPhotoViewGrid extends StatelessWidget {
     shrinkWrap: true,
     physics: const NeverScrollableScrollPhysics(),
     primary: false,
-    padding: EdgeInsets.zero,
+    padding: .zero,
     itemCount: images.length,
     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: crossAxisCount,

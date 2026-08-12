@@ -65,9 +65,9 @@ class _UiPhotoViewState extends State<UiPhotoView> {
           left: 15.r,
           child: Container(
             height: 35.r,
-            padding: EdgeInsets.symmetric(horizontal: 5.r),
+            padding: .symmetric(horizontal: 5.r),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.r),
+              borderRadius: .circular(5.r),
               color: UiTheme.white,
             ),
             child: Row(
@@ -98,10 +98,10 @@ class _UiPhotoViewState extends State<UiPhotoView> {
 
     if (result['isSuccess'] == true) {
       //snackBar('保存成功');
-      unawaited(UiToast.show(UiToastMessage.success()..text = '保存成功'));
+      unawaited(UiToast.show(.success()..text = '保存成功'));
     } else {
       // snackBar('保存失败');
-      unawaited(UiToast.show(UiToastMessage.failure()..text = '保存失败'));
+      unawaited(UiToast.show(.failure()..text = '保存失败'));
     }
   }
 
