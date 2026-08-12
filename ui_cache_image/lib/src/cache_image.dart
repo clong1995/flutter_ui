@@ -22,6 +22,8 @@ class _UiCacheImageState extends State<UiCacheImage> {
   late Widget image;
   bool loading = true;
 
+  int _loadId = 0;
+
   @override
   void initState() {
     super.initState();
@@ -30,8 +32,22 @@ class _UiCacheImageState extends State<UiCacheImage> {
   }
 
   Future<void> loadImage() async {
-    image = await cachedImage();
-    setState(() => loading = false);
+    final loadId = ++_loadId;
+
+    final result = await cachedImage(
+      src: widget.src,
+      fit: widget.fit,
+      thumbnail: widget.thumbnail,
+    );
+
+    if (!mounted || loadId != _loadId) {
+      return;
+    }
+
+    setState(() {
+      image = result;
+      loading = false;
+    });
   }
 
   @override
@@ -48,10 +64,14 @@ class _UiCacheImageState extends State<UiCacheImage> {
     }
   }
 
-  Future<Widget> cachedImage() async {
-    var imgSrc = widget.src;
+  Future<Widget> cachedImage({
+    required String src,
+    required BoxFit? fit,
+    required bool thumbnail,
+}) async {
+    var imgSrc = src;
 
-    if(widget.thumbnail){
+    if(thumbnail){
       final original = Uri.parse(imgSrc);
       final uri = original.replace(
         queryParameters: {
@@ -63,7 +83,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
     }
 
     if (kIsWeb) {
-      return Image.network(imgSrc, fit: widget.fit);
+      return Image.network(imgSrc, fit: fit);
     }
 
 
@@ -73,7 +93,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
     final imageFile = File('$tempDir/$md5');
 
     if (imageFile.existsSync()) {
-      return Image.file(imageFile, fit: widget.fit);
+      return Image.file(imageFile, fit: fit);
     }
 
     //请求新的图片
@@ -83,7 +103,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
 
     if (response.statusCode == 200) {
       await imageFile.writeAsBytes(response.bodyBytes);
-      return Image.memory(response.bodyBytes, fit: widget.fit);
+      return Image.memory(response.bodyBytes, fit: fit);
     }
 
     debugPrint('request new image error: ${response.statusCode}');
