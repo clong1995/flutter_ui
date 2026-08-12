@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
+import 'package:rpx/ext.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
 class UiAvatarSingle extends StatelessWidget {
@@ -10,6 +11,7 @@ class UiAvatarSingle extends StatelessWidget {
     this.package,
     this.border,
     this.radius,
+    this.thumbnail = false,
   });
 
   final String? imageUrl;
@@ -17,10 +19,11 @@ class UiAvatarSingle extends StatelessWidget {
   final String? package;
   final BoxBorder? border;
   final double? radius;
+  final bool thumbnail;
 
   @override
   Widget build(BuildContext context) {
-    final size = this.size ?? 50;
+    final size = this.size ?? 50.r;
 
     final padding = border?.bottom.width ?? 0;
     final circularRadius = radius ?? size / 10;
@@ -33,10 +36,10 @@ class UiAvatarSingle extends StatelessWidget {
           decoration: BoxDecoration(
             // shape: BoxShape.circle,
             border: border,
-            borderRadius: BorderRadius.circular(circularRadius),
+            borderRadius: .circular(circularRadius),
           ),
           child: Padding(
-            padding: EdgeInsets.all(padding),
+            padding: .all(padding),
             child: (imageUrl == null || imageUrl == '')
                 ? Icon(
                     Icons.account_circle_outlined,
@@ -44,12 +47,16 @@ class UiAvatarSingle extends StatelessWidget {
                     size: size / 1.3,
                   )
                 : ClipRRect(
-                    borderRadius: BorderRadius.circular(circularRadius),
+                    borderRadius: .circular(circularRadius),
                     child: imageUrl!.startsWith('http')
-                        ? UiCacheImage(imageUrl!, fit: BoxFit.cover)
+                        ? UiCacheImage(
+                            imageUrl!,
+                            fit: .cover,
+                            thumbnail: thumbnail,
+                          )
                         : Image.asset(
                             imageUrl!,
-                            fit: BoxFit.cover,
+                            fit: .cover,
                             package: package,
                           ),
                   ),

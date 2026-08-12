@@ -8,11 +8,13 @@ class UiAvatarStack extends StatelessWidget {
     super.key,
     this.max = 5,
     this.height,
+    this.thumbnail = false,
   });
 
   final int max;
   final double? height;
   final List<String> images;
+  final bool thumbnail;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,8 @@ class UiAvatarStack extends StatelessWidget {
                 child: UiAvatarSingle(
                   imageUrl: entry.value,
                   size: h,
-                  border: Border.all(
+                  thumbnail: thumbnail,
+                  border: .all(
                     color: const Color(0xFFFFFFFF),
                     width: 2.r,
                   ),

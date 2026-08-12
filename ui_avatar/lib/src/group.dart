@@ -3,24 +3,31 @@ import 'package:rpx/ext.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
 class UiAvatarGroup extends StatelessWidget {
-  const UiAvatarGroup({required this.images, super.key, this.wrapSize = 55});
+  const UiAvatarGroup({
+    required this.images,
+    super.key,
+    this.size,
+    this.thumbnail = false,
+  });
 
   final List<String> images;
-  final double wrapSize;
+  final double? size;
+  final bool thumbnail;
 
   @override
   Widget build(BuildContext context) {
+    final wrapSize = size ?? 55.r;
     final decoration = BoxDecoration(
       color: const Color(0xFFEEEEEE),
-      borderRadius: BorderRadius.circular(5.r),
+      borderRadius: .circular(5.r),
     );
 
     if (images.isEmpty) {
       return Container(
         width: wrapSize,
         height: wrapSize,
-        padding: const EdgeInsets.all(2),
-        clipBehavior: Clip.antiAlias,
+        padding: .all(2.r),
+        clipBehavior: .antiAlias,
         decoration: decoration,
       );
     }
@@ -30,30 +37,31 @@ class UiAvatarGroup extends StatelessWidget {
     final avatar = images.length >= 9 ? images.sublist(0, 9) : images;
 
     if (avatar.length == 1) {
-      avatarSize = wrapSize - 4;
+      avatarSize = wrapSize - 4.r;
     } else if (avatar.length >= 2 && avatar.length <= 4) {
-      avatarSize = (wrapSize - 4) / 2;
+      avatarSize = (wrapSize - 4.r) / 2;
     } else if (avatar.length >= 4 && avatar.length <= 9) {
-      avatarSize = (wrapSize - 4) / 3;
+      avatarSize = (wrapSize - 4.r) / 3;
     }
     return Container(
       width: wrapSize,
       height: wrapSize,
-      padding: const EdgeInsets.all(2),
-      clipBehavior: Clip.antiAlias,
+      padding: .all(2.r),
+      clipBehavior: .antiAlias,
       decoration: decoration,
       child: Wrap(
-        alignment: WrapAlignment.center,
-        runAlignment: WrapAlignment.center,
+        alignment: .center,
+        runAlignment: .center,
         children: avatar
             .map(
               (e) => Container(
                 width: avatarSize,
                 height: avatarSize,
-                padding: const EdgeInsets.all(1),
+                padding: .all(1.r),
                 child: UiCacheImage(
                   e,
-                  fit: BoxFit.cover,
+                  fit: .cover,
+                  thumbnail: thumbnail,
                 ),
               ),
             )
