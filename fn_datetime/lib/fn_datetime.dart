@@ -3,6 +3,10 @@ import 'package:jiffy/jiffy.dart';
 class FnDatetime {
   FnDatetime._();
 
+  static Future<void> setLocale() async {
+    await Jiffy.setLocale('zh_cn');
+  }
+
   static String toStr(DateTime dateTime, [String? pattern]) {
     var p = pattern ?? '';
     switch (pattern) {
@@ -41,6 +45,7 @@ class FnDatetime {
       .dateTime;
 
   static String fromNow(DateTime dateTime, [DateTime? now]) {
+
     if (now == null) {
       return Jiffy.parseFromDateTime(dateTime).fromNow();
     }
