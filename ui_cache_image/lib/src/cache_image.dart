@@ -27,7 +27,6 @@ class _UiCacheImageState extends State<UiCacheImage> {
   @override
   void initState() {
     super.initState();
-    //print("initState");
     unawaited(loadImage());
   }
 
@@ -68,10 +67,10 @@ class _UiCacheImageState extends State<UiCacheImage> {
     required String src,
     required BoxFit? fit,
     required bool thumbnail,
-}) async {
+  }) async {
     var imgSrc = src;
 
-    if(thumbnail){
+    if (thumbnail) {
       final original = Uri.parse(imgSrc);
       final uri = original.replace(
         queryParameters: {
@@ -83,9 +82,12 @@ class _UiCacheImageState extends State<UiCacheImage> {
     }
 
     if (kIsWeb) {
-      return Image.network(imgSrc, fit: fit);
+      return Image.network(
+        imgSrc,
+        fit: fit,
+        gaplessPlayback: true,
+      );
     }
-
 
     final tempDir = await tempDirectory();
 
@@ -93,7 +95,11 @@ class _UiCacheImageState extends State<UiCacheImage> {
     final imageFile = File('$tempDir/$md5');
 
     if (imageFile.existsSync()) {
-      return Image.file(imageFile, fit: fit);
+      return Image.file(
+        imageFile,
+        fit: fit,
+        gaplessPlayback: true,
+      );
     }
 
     //请求新的图片
@@ -103,7 +109,11 @@ class _UiCacheImageState extends State<UiCacheImage> {
 
     if (response.statusCode == 200) {
       await imageFile.writeAsBytes(response.bodyBytes);
-      return Image.memory(response.bodyBytes, fit: fit);
+      return Image.memory(
+        response.bodyBytes,
+        fit: fit,
+        gaplessPlayback: true,
+      );
     }
 
     debugPrint('request new image error: ${response.statusCode}');
