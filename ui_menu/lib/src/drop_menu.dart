@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart'
-    show Icons, MenuAnchor, MenuItemButton, MenuStyle;
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart'
+    show Icons, MenuAnchor, MenuItemButton, MenuStyle;
 import 'package:rpx/ext.dart';
 import 'package:ui_theme/ui_theme.dart';
 

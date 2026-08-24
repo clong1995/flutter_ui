@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart' show Icons;
 
 class UiToastMessage {
   UiToastMessage();
@@ -33,8 +33,4 @@ class UiToastMessage {
   Color color = const Color(0xFF000000);
   int autoPopSeconds = 1; //自动关闭的时间
   bool select = false;
-
-  //
-  // ignore:avoid_positional_boolean_parameters
-  //void Function(bool value)? callback;
 }

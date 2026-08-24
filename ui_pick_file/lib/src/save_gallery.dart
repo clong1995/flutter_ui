@@ -9,13 +9,16 @@ Future<String> saveImageToGallery({
   required Uint8List bytes,
   String? fileName,
 }) async {
+  late String name;
   if (fileName == null || fileName.isEmpty) {
-    fileName = '${DateTime.now().millisecondsSinceEpoch}';
+    name = '${DateTime.now().millisecondsSinceEpoch}';
+  }else{
+    name = fileName;
   }
   final result = await ImageGallerySaverPlus.saveImage(
     bytes,
     quality: 100,
-    name: fileName,
+    name: name,
   );
   if (result['isSuccess'] == true) {
     return '';
@@ -31,16 +34,19 @@ Future<String> saveVideoToGallery({
   String? fileName,
 }) async {
   final appDocDir = await getTemporaryDirectory();
+  late String name;
   if (fileName == null || fileName.isEmpty) {
-    fileName = '${DateTime.now().millisecondsSinceEpoch}';
+    name = '${DateTime.now().millisecondsSinceEpoch}';
+  }else{
+    name = fileName;
   }
-  final savePath = appDocDir.path + fileName;
+  final savePath = appDocDir.path + name;
   final file = File(savePath);
   await file.writeAsBytes(bytes);
 
   final result = await ImageGallerySaverPlus.saveFile(
     file.path,
-    name: fileName,
+    name: name,
   );
   if (result['isSuccess'] == true) {
     return '';

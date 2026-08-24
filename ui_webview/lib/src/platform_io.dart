@@ -99,7 +99,7 @@ class _UiWebviewState extends State<UiWebview> {
           if (isRegister) {
             final callbacks = '_cbs${random}_';
             script +=
-              '''
+                '''
               const $callbacks = {};
               window.$callback = (callbackId, result)=>{
                   if ($callbacks[callbackId]) {
@@ -123,7 +123,7 @@ class _UiWebviewState extends State<UiWebview> {
             ''';
           }
           script +=
-          '''
+              '''
               (function() {
                 if (document.readyState === "complete") {
                   window.wvReady?.();
@@ -168,16 +168,17 @@ class _UiWebviewState extends State<UiWebview> {
     ],
   );
 
-  Widget webview(){
-    if(webviewReady){
-      if (WebViewPlatform.instance is AndroidWebViewPlatform && brand == 'HUAWEI') {
+  Widget webview() {
+    if (webviewReady) {
+      if (WebViewPlatform.instance is AndroidWebViewPlatform &&
+          brand == 'HUAWEI') {
         final params =
-        AndroidWebViewWidgetCreationParams.fromPlatformWebViewWidgetCreationParams(
-          PlatformWebViewWidgetCreationParams(
-            controller: controller.platform,
-          ),
-          displayWithHybridComposition: true,
-        );
+            AndroidWebViewWidgetCreationParams.fromPlatformWebViewWidgetCreationParams(
+              PlatformWebViewWidgetCreationParams(
+                controller: controller.platform,
+              ),
+              displayWithHybridComposition: true,
+            );
 
         return WebViewWidget.fromPlatformCreationParams(
           params: params,

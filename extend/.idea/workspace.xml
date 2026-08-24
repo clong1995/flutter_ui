@@ -4,34 +4,113 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8da042d1-7b27-4239-a57f-5ebcd931238c" name="更改" comment="">
+    <list default="true" id="74a021bd-fecd-4308-b8f8-f45c6c8b5240" name="更改" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/extend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/extend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/go.imports.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fn_auth/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../fn_auth/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fn_device/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../fn_device/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fn_device/lib/fn_device.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../fn_device/lib/fn_device.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fn_device/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../fn_device/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fn_nav/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../fn_nav/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fn_nav/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../fn_nav/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fn_security/lib/src/encrypt.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../fn_security/lib/src/encrypt.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fn_security/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../fn_security/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fn_storage/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../fn_storage/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../logger/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../logger/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../package/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../package/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rpx/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../rpx/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rpx/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../rpx/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../state/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../state/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../state/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../state/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_alert/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_alert/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_alert/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_alert/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_app/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_app/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_app/lib/src/builder.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_app/lib/src/builder.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_app/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_avatar/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_avatar/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_avatar/lib/src/single.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_avatar/lib/src/single.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_avatar/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_avatar/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_button/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_button/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_button/lib/src/check_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_button/lib/src/check_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_button/lib/src/delete_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_button/lib/src/delete_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_button/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_button/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_cache_image/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_cache_image/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_cache_image/lib/src/cache_image.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_cache_image/lib/src/cache_image.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_cache_image/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_cache_image/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_captcha/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_captcha/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_captcha/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_captcha/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_captcha/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_captcha/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_disable/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_disable/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_disable/lib/ui_disable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_disable/lib/ui_disable.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_disable/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_disable/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_input/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_input/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_input/lib/src/input_number.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_input/lib/src/input_number.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ui_input/lib/src/input_text.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_input/lib/src/input_text.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_input/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_input/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_menu/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_menu/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_menu/lib/src/drop_menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_menu/lib/src/drop_menu.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_menu/lib/src/pop_menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_menu/lib/src/pop_menu.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_menu/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_menu/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_page/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_page/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_page/lib/ui_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_page/lib/ui_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_page/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_page/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_page_view/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_page_view/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_page_view/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_page_view/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_photo_view/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_photo_view/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_photo_view/lib/src/photo_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_photo_view/lib/src/photo_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_photo_view/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_photo_view/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_pick_file/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_pick_file/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_pick_file/lib/src/save_gallery.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_pick_file/lib/src/save_gallery.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_pick_file/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_pick_file/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_skeleton/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_skeleton/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_skeleton/lib/ui_skeleton.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_skeleton/lib/ui_skeleton.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_skeleton/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_skeleton/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_sliver_refresh/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_sliver_refresh/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_sliver_refresh/lib/ui_sliver_refresh.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_sliver_refresh/lib/ui_sliver_refresh.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_sliver_refresh/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_sliver_refresh/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_theme/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_theme/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_theme/lib/ui_theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_theme/lib/ui_theme.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_theme/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_theme/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_tile/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_tile/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_tile/lib/ui_tile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_tile/lib/ui_tile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_tile/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_tile/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_toast/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_toast/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_toast/lib/src/message.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_toast/lib/src/message.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_toast/lib/src/toast.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_toast/lib/src/toast.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_toast/lib/src/widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_toast/lib/src/widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_toast/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_toast/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_tree/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_tree/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_tree/lib/ui_tree.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_tree/lib/ui_tree.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_tree/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_tree/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_upload/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_upload/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_upload/lib/src/upload_image_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_upload/lib/src/upload_image_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_upload/lib/ui_upload.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_upload/lib/ui_upload.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_upload/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_upload/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_webview/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_webview/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_webview/lib/src/platform_io.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_webview/lib/src/platform_io.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ui_webview/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../ui_webview/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="GOROOT" url="file:///usr/local/opt/go/libexec" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "clong1995"
-  }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/clong1995/flutter_ui.git",
-    "accountId": "88933abb-198b-4f78-bfff-529ff36b09fe"
-  }
-}]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
+  "associatedIndex": 7,
+  "fromUser": false
 }]]></component>
-  <component name="ProjectId" id="3A3xGdZ7tlXOGvWqhkrjRQYm93n" />
+  <component name="ProjectId" id="3IMEUqSjkZeOj6mT2hqhJDRz0wS" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -42,42 +121,34 @@
     "RunOnceActivity.GoLinterPluginOnboardingV2": "true",
     "RunOnceActivity.GoLinterPluginStorageMigration": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.go.analysis.ui.options.defaults": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
-    "go.sdk.automatically.set": "true",
-    "last_opened_file_path": "/Users/markeckles",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
+    "last_opened_file_path": "/home/clong/Desktop/flutter_ui/extend",
+    "settings.editor.selected.configurable": "flutter.settings",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="extend 中的测试" type="DartTestRunConfigurationType" factoryName="Dart Test">
-      <option name="filePath" value="$PROJECT_DIR$" />
-      <option name="scope" value="FOLDER" />
-      <method v="2" />
-    </configuration>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-gosdk-72a9cf600ed8-dfa3e7267ae0-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-253.30387.193" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-GO-253.30387.193" />
+        <option value="bundled-gosdk-63c95d513abe-9addb268e56c-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-262.9437.286" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-GO-262.9437.286" />
       </set>
     </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
-      <changelist id="8da042d1-7b27-4239-a57f-5ebcd931238c" name="更改" comment="" />
-      <created>1771834961361</created>
+      <changelist id="74a021bd-fecd-4308-b8f8-f45c6c8b5240" name="更改" comment="" />
+      <created>1787566055215</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1771834961361</updated>
+      <updated>1787566055215</updated>
     </task>
     <servers />
   </component>

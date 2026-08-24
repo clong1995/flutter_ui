@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart' show CircularProgressIndicator, Icons;
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart' show CircularProgressIndicator, Icons;
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
 

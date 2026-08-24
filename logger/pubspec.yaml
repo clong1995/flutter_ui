@@ -1,10 +1,10 @@
 name: logger
 description: A sample command-line application with basic argument parsing.
-version: 0.3.0
+version: 0.4.0
 # repository: https://github.com/my_org/my_repo
 
 environment:
-  sdk: ^3.12.2
+  sdk: ^3.13.1
 
 # Add regular dependencies here.
 dependencies:

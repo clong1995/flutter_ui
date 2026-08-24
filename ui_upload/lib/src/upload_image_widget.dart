@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 import 'package:fn_device/fn_device.dart';
 import 'package:fn_nav/fn_nav.dart';
+import 'package:material_ui/material_ui.dart' show Icons;
 import 'package:rpx/ext.dart';
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';

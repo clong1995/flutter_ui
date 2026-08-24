@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart'
+import 'package:cupertino_ui/cupertino_ui.dart'
     show CupertinoSliverRefreshControl, CupertinoTheme, CupertinoThemeData;
 import 'package:flutter/widgets.dart';
 import 'package:ui_toast/ui_toast.dart';

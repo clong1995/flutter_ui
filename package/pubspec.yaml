@@ -1,12 +1,11 @@
 name: package
 description: "A new Flutter project."
-version: 0.0.4
-publish_to: none
+version: 0.4.0
 homepage: flutter_ui
 
 environment:
-  sdk: ^3.12.2
-  flutter: ">=3.44.4"
+  sdk: ^3.13.1
+  flutter: ">=3.47.1"
 
 dependencies:
   flutter:

@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 import 'package:fn_device/fn_device.dart';
 import 'package:http/http.dart';
 import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
+import 'package:material_ui/material_ui.dart' show Icons;
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_button/ui_button.dart';

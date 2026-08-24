@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:ui_app/src/no_scroll_behavior.dart';
 import 'package:ui_theme/ui_theme.dart';
 

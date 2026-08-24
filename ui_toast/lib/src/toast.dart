@@ -36,7 +36,7 @@ class UiToast {
 
     final route = _route(const ToastLoadingWidget());
 
-    unawaited(Navigator.of(navContext, rootNavigator: root).push<bool?>(route));
+    Navigator.of(navContext, rootNavigator: root).push<bool?>(route);
 
     return () {
       if (route.isActive) {

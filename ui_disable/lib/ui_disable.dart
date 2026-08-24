@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class UiDisable extends StatelessWidget {
-  const UiDisable({this.disable = true, required this.child, super.key});
+  const UiDisable({required this.child, this.disable = true, super.key});
 
   final Widget child;
   final bool disable;

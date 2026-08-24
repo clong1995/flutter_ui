@@ -1,12 +1,11 @@
 name: ui_toast
 description: "A new Flutter project."
-version: 0.3.0
+version: 0.4.0
 homepage: flutter_ui
-publish_to: none
 
 environment:
-  sdk: ^3.12.2
-  flutter: ">=3.44.4"
+  sdk: ^3.13.1
+  flutter: ">=3.47.1"
 
 dependencies:
   flutter:
@@ -23,6 +22,8 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_theme
+
+  material_ui: ^1.0.1
 
 dev_dependencies:
   #flutter_lints: ^5.0.0

@@ -1,6 +1,6 @@
 
-import 'package:flutter/material.dart' show PopupMenuItem, showMenu;
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart' show PopupMenuItem, showMenu;
 import 'package:rpx/ext.dart';
 
 class UiPopMenu<T> extends StatelessWidget {

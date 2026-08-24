@@ -60,7 +60,7 @@ Future<String> decrypter(String encryptedText) async {
 
 // 辅助函数保持不变...
 Future<Uint8List> _getDeviceKey() async {
-  String deviceId = await FnDevice.guid;
+  var deviceId = await FnDevice.guid;
   if (deviceId.length > 32) {
     deviceId = deviceId.substring(0, 32);
   } else {

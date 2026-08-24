@@ -2,9 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Icons;
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
+import 'package:material_ui/material_ui.dart' show Icons;
 import 'package:ui_cache_image/src/common.dart';
 
 class UiCacheImage extends StatefulWidget {
