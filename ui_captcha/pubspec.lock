@@ -125,7 +125,7 @@ packages:
     description:
       path: fn_device
       ref: HEAD
-      resolved-ref: fae9e268ec42790b0fd157c9bc35a21ebfc5b785
+      resolved-ref: d28d3f4da1fdcac543104282de4c4bb0c03d22ae
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.4.0"
@@ -222,7 +222,7 @@ packages:
     description:
       path: rpx
       ref: HEAD
-      resolved-ref: fae9e268ec42790b0fd157c9bc35a21ebfc5b785
+      resolved-ref: d28d3f4da1fdcac543104282de4c4bb0c03d22ae
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.4.0"
@@ -268,7 +268,7 @@ packages:
     description:
       path: ui_alert
       ref: HEAD
-      resolved-ref: fae9e268ec42790b0fd157c9bc35a21ebfc5b785
+      resolved-ref: d28d3f4da1fdcac543104282de4c4bb0c03d22ae
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.4.0"
@@ -277,7 +277,7 @@ packages:
     description:
       path: ui_button
       ref: HEAD
-      resolved-ref: fae9e268ec42790b0fd157c9bc35a21ebfc5b785
+      resolved-ref: d28d3f4da1fdcac543104282de4c4bb0c03d22ae
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.4.0"
@@ -286,7 +286,7 @@ packages:
     description:
       path: ui_disable
       ref: HEAD
-      resolved-ref: fae9e268ec42790b0fd157c9bc35a21ebfc5b785
+      resolved-ref: d28d3f4da1fdcac543104282de4c4bb0c03d22ae
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.4.0"
@@ -295,7 +295,7 @@ packages:
     description:
       path: ui_theme
       ref: HEAD
-      resolved-ref: fae9e268ec42790b0fd157c9bc35a21ebfc5b785
+      resolved-ref: d28d3f4da1fdcac543104282de4c4bb0c03d22ae
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.4.0"
@@ -304,7 +304,7 @@ packages:
     description:
       path: ui_webview
       ref: HEAD
-      resolved-ref: fae9e268ec42790b0fd157c9bc35a21ebfc5b785
+      resolved-ref: d28d3f4da1fdcac543104282de4c4bb0c03d22ae
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
     version: "0.4.0"

@@ -7,7 +7,7 @@ Future<void> uiCaptcha({
   required String html,
   required Future<bool> Function(String json) verify,
 }) async => UiAlert.dialog(
-  () => _Captcha(html:html,verify: verify),
+  (context) => _Captcha(html:html,verify: verify),
 );
 
 class _Captcha extends StatelessWidget {
