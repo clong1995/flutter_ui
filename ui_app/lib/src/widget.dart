@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart' as flutter_localizations;
 import 'package:fn_nav/fn_nav.dart';
+import 'package:material_ui/material_ui.dart' as material_ui show GlobalMaterialLocalizations;
 import 'package:ui_app/src/builder.dart';
 import 'package:ui_theme/ui_theme.dart';
 
@@ -24,9 +25,9 @@ class App extends StatelessWidget {
       title: title,
       home: home,
       localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+        material_ui.GlobalMaterialLocalizations.delegate,
+        flutter_localizations.GlobalWidgetsLocalizations.delegate,
+        flutter_localizations.GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
         Locale('zh'), // 中文
