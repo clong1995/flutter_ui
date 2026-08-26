@@ -16,7 +16,8 @@ dependencies:
   image_picker: ^1.2.3
   #image_gallery_saver_plus: ^5.1.1
   image_gallery_saver_plus:
-    path: /home/clong/Desktop/flutter_ui/fork/image_gallery_saver_plus
+    git:
+      url: https://github.com/clong1995/image_gallery_saver_plus.git
   path: ^1.9.1
   path_provider: ^2.1.6
   http: ^1.6.0
