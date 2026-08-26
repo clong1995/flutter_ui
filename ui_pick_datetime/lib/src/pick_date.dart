@@ -1,8 +1,8 @@
 import 'package:date_picker_plus/date_picker_plus.dart';
-import 'package:material_ui/material_ui.dart' show Icons, NoSplash;
 import 'package:flutter/widgets.dart';
 import 'package:fn_datetime/fn_datetime.dart';
 import 'package:fn_nav/fn_nav.dart';
+import 'package:material_ui/material_ui.dart' show Icons, InteractiveInkFeatureFactory, NoSplash;
 import 'package:rpx/ext.dart';
 import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_button/ui_button.dart';
@@ -29,69 +29,76 @@ Future<String?> uiPickDate({
     fontFamily: UiTheme.fontFamily,
     fontWeight: FontWeight.normal,
   );
-  const inkResponseTheme = InkResponseTheme(
+
+  /*var inkResponseTheme =  InkResponseTheme(
     splashFactory: NoSplash.splashFactory,
-  );
+  );*/
 
   var dateTime = selectedDate;
 
   return UiAlert.dialog(
-    () => UiAlertWidget(
-      content: SizedBox(
-        width: 300.r,
-        height: 250.r,
-        child: DatePicker(
-          selectedDate: selected,
-          padding: EdgeInsets.zero,
-          minDate: min,
-          maxDate: max,
-          theme: DatePickerPlusTheme(
-            headerTheme: HeaderTheme(
-              centerLeadingDate: true,
-              leadingDateTextStyle: textStyle.copyWith(
-                color: UiTheme.primaryColor,
+    (context){
+      final inkTheme = InkResponseTheme.defaults(context).copyWith(
+        splashFactory: NoSplash.splashFactory,
+      );
+
+      return UiAlertWidget(
+        content: SizedBox(
+          width: 300.r,
+          height: 250.r,
+          child: DatePicker(
+            selectedDate: selected,
+            padding: EdgeInsets.zero,
+            minDate: min,
+            maxDate: max,
+            theme: DatePickerPlusTheme(
+              headerTheme: HeaderTheme(
+                centerLeadingDate: true,
+                leadingDateTextStyle: textStyle.copyWith(
+                  color: UiTheme.primaryColor,
+                ),
+                backwardButtonInkResponseTheme: inkTheme,
+                backwardArrowWidget: Icon(
+                  Icons.arrow_back_ios,
+                  color: UiTheme.primaryColor,
+                ),
+                forwardButtonInkResponseTheme: inkTheme,
+                forwardArrowWidget: Icon(
+                  Icons.arrow_forward_ios,
+                  color: UiTheme.primaryColor,
+                ),
               ),
-              backwardButtonInkResponseTheme: inkResponseTheme,
-              backwardArrowWidget: Icon(
-                Icons.arrow_back_ios,
-                color: UiTheme.primaryColor,
-              ),
-              forwardButtonInkResponseTheme: inkResponseTheme,
-              forwardArrowWidget: Icon(
-                Icons.arrow_forward_ios,
-                color: UiTheme.primaryColor,
+              daysPickerTheme: DaysPickerTheme(
+                daysOfTheWeekTheme: DaysOfTheWeekTheme(
+                  textStyle: textStyle,
+                ),
+                disabledCellsTextStyle: textStyle,
+                enabledCellsTextStyle: textStyle,
+                currentDateTextStyle: textStyle.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+                selectedCellTextStyle: textStyle,
+                inkResponseTheme: inkTheme,
+                selectedCellDecoration: BoxDecoration(
+                  color: UiTheme.primaryColor,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
-            daysPickerTheme: DaysPickerTheme(
-              daysOfTheWeekTheme: DaysOfTheWeekTheme(
-                textStyle: textStyle,
-              ),
-              disabledCellsTextStyle: textStyle,
-              enabledCellsTextStyle: textStyle,
-              currentDateTextStyle: textStyle.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-              selectedCellTextStyle: textStyle,
-              inkResponseTheme: inkResponseTheme,
-              selectedCellDecoration: BoxDecoration(
-                color: UiTheme.primaryColor,
-                shape: BoxShape.circle,
-              ),
-            ),
+            onDateSelected: (val) => dateTime = FnDatetime.toStr(val, 'date'),
           ),
-          onDateSelected: (val) => dateTime = FnDatetime.toStr(val, 'date'),
         ),
-      ),
-      title: '选择日期',
-      action: [
-        UiButton(
-          child: const Text('确 定'),
-          onTap: () {
-            FnNav.pop<String>(result: dateTime);
-          },
-        ),
-      ],
-    ),
+        title: '选择日期',
+        action: [
+          UiButton(
+            child: const Text('确 定'),
+            onTap: () {
+              FnNav.pop<String>(result: dateTime);
+            },
+          ),
+        ],
+      );
+    },
     root: root,
   );
 }

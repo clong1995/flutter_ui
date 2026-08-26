@@ -11,7 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  date_picker_plus: ^7.0.1
+  # date_picker_plus: ^7.0.1
+  date_picker_plus:
+    git:
+      url: https://github.com/clong1995/date_picker.git
   rpx:
     git:
       url: https://github.com/clong1995/flutter_ui.git

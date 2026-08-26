@@ -1,5 +1,7 @@
+//import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fn_nav/fn_nav.dart';
+//import 'package:material_ui/material_ui.dart' show NoSplash;
 import 'package:rpx/ext.dart';
 import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_button/ui_button.dart';
@@ -18,89 +20,94 @@ Future<String?> uiPickTime({
   var minute = timeDay.minute;
 
   return UiAlert.dialog(
-    () => UiAlertWidget(
-      content: SizedBox(
-        width: 300.r,
-        height: 70.r,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 5.r,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 10.r,
-              children: [
-                SizedBox(
-                  width: 70.r,
-                  child: const Center(
-                    child: Text(
-                      '小时 24h',
-                      style: TextStyle(color: UiTheme.grey),
+    (context) {
+      /*final inkTheme = InkResponseTheme.defaults(context).copyWith(
+        splashFactory: NoSplash.splashFactory,
+      );*/
+      return UiAlertWidget(
+        content: SizedBox(
+          width: 300.r,
+          height: 70.r,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 5.r,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 10.r,
+                children: [
+                  SizedBox(
+                    width: 70.r,
+                    child: const Center(
+                      child: Text(
+                        '小时 24h',
+                        style: TextStyle(color: UiTheme.grey),
+                      ),
                     ),
                   ),
-                ),
-                const Text(':'),
-                SizedBox(
-                  width: 70.r,
-                  child: const Center(
-                    child: Text(
-                      '分钟',
-                      style: TextStyle(color: UiTheme.grey),
+                  const Text(':'),
+                  SizedBox(
+                    width: 70.r,
+                    child: const Center(
+                      child: Text(
+                        '分钟',
+                        style: TextStyle(color: UiTheme.grey),
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 10.r,
-              children: [
-                UiDropMenu<int>(
-                  value: hour,
-                  items: {
-                    for (var i = 0; i < 24; i++)
-                      i: i.toString().padLeft(2, '0'),
-                  },
-                  width: 70.r,
-                  onChanged: (value) {
-                    if (value == null) {
-                      return;
-                    }
-                    hour = value;
-                  },
-                ),
-                const Text(':'),
-                UiDropMenu<int>(
-                  value: minute,
-                  items: {
-                    for (var i = 0; i < 60; i++)
-                      i: i.toString().padLeft(2, '0'),
-                  },
-                  width: 70.r,
-                  onChanged: (value) {
-                    if (value == null) {
-                      return;
-                    }
-                    minute = value;
-                  },
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 10.r,
+                children: [
+                  UiDropMenu<int>(
+                    value: hour,
+                    items: {
+                      for (var i = 0; i < 24; i++)
+                        i: i.toString().padLeft(2, '0'),
+                    },
+                    width: 70.r,
+                    onChanged: (value) {
+                      if (value == null) {
+                        return;
+                      }
+                      hour = value;
+                    },
+                  ),
+                  const Text(':'),
+                  UiDropMenu<int>(
+                    value: minute,
+                    items: {
+                      for (var i = 0; i < 60; i++)
+                        i: i.toString().padLeft(2, '0'),
+                    },
+                    width: 70.r,
+                    onChanged: (value) {
+                      if (value == null) {
+                        return;
+                      }
+                      minute = value;
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-      title: '选择时间',
-      action: [
-        UiButton(
-          child: const Text('确 定'),
-          onTap: () {
-            FnNav.pop<String>(
-              result: _timeFormat(hour, minute),
-            );
-          },
-        ),
-      ],
-    ),
+        title: '选择时间',
+        action: [
+          UiButton(
+            child: const Text('确 定'),
+            onTap: () {
+              FnNav.pop<String>(
+                result: _timeFormat(hour, minute),
+              );
+            },
+          ),
+        ],
+      );
+    },
     root: root,
   );
 }
