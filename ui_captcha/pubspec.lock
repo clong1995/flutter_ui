@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.7"
+  cupertino_ui:
+    dependency: transitive
+    description:
+      name: cupertino_ui
+      sha256: "2137c0d41f3b62cc4d3d2495e6c354bd6b6133cd21c6bb155736cc31dbd49a11"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   dbus:
     dependency: transitive
     description:
@@ -102,6 +110,11 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -112,10 +125,10 @@ packages:
     description:
       path: fn_device
       ref: HEAD
-      resolved-ref: "61e8f5386b52078606077c25fcae4874c835e522"
+      resolved-ref: b060de839cf7abe469af226547f7344aaa955792
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.3.0"
+    version: "0.4.0"
   http:
     dependency: transitive
     description:
@@ -132,6 +145,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: "1ca20c894b1717686a2319b8548763d812bc0aabdac580420a44c5178c57a867"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.20.3"
   material_color_utilities:
     dependency: transitive
     description:
@@ -140,6 +161,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.13.0"
+  material_ui:
+    dependency: transitive
+    description:
+      name: material_ui
+      sha256: "7ba1ca315d50a004791dbab290417c52a61466d56db2822fe3c5c2994903110c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   meta:
     dependency: transitive
     description:
@@ -193,10 +222,10 @@ packages:
     description:
       path: rpx
       ref: HEAD
-      resolved-ref: "61e8f5386b52078606077c25fcae4874c835e522"
+      resolved-ref: b060de839cf7abe469af226547f7344aaa955792
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.3.0"
+    version: "0.4.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -239,46 +268,46 @@ packages:
     description:
       path: ui_alert
       ref: HEAD
-      resolved-ref: "61e8f5386b52078606077c25fcae4874c835e522"
+      resolved-ref: b060de839cf7abe469af226547f7344aaa955792
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.3.0"
+    version: "0.4.0"
   ui_button:
     dependency: "direct main"
     description:
       path: ui_button
       ref: HEAD
-      resolved-ref: "61e8f5386b52078606077c25fcae4874c835e522"
+      resolved-ref: b060de839cf7abe469af226547f7344aaa955792
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.3.0"
+    version: "0.4.0"
   ui_disable:
     dependency: transitive
     description:
       path: ui_disable
       ref: HEAD
-      resolved-ref: "61e8f5386b52078606077c25fcae4874c835e522"
+      resolved-ref: b060de839cf7abe469af226547f7344aaa955792
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.3.0"
+    version: "0.4.0"
   ui_theme:
     dependency: transitive
     description:
       path: ui_theme
       ref: HEAD
-      resolved-ref: "61e8f5386b52078606077c25fcae4874c835e522"
+      resolved-ref: b060de839cf7abe469af226547f7344aaa955792
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.3.0"
+    version: "0.4.0"
   ui_webview:
     dependency: "direct main"
     description:
       path: ui_webview
       ref: HEAD
-      resolved-ref: "61e8f5386b52078606077c25fcae4874c835e522"
+      resolved-ref: b060de839cf7abe469af226547f7344aaa955792
       url: "https://github.com/clong1995/flutter_ui.git"
     source: git
-    version: "0.3.0"
+    version: "0.4.0"
   vector_math:
     dependency: transitive
     description:

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_map/src/address_widget.dart';
 

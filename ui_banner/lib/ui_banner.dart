@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart'
+import 'package:material_ui/material_ui.dart'
     show TabAlignment, TabBar, TabController, kTabScrollDuration;
 import 'package:flutter/widgets.dart';
 import 'package:rpx/ext.dart';

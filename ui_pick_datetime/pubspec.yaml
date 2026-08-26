@@ -41,6 +41,7 @@ dependencies:
       url: https://github.com/clong1995/flutter_ui.git
       path: fn_datetime
 
+  material_ui: ^1.0.1
 dev_dependencies:
   very_good_analysis: ^10.3.0
 
