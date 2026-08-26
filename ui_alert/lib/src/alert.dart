@@ -13,7 +13,7 @@ class UiAlert {
   }
 
   static Future<T?> dialog<T extends Object?>(
-    Widget Function() builder, {
+    Widget Function(BuildContext) builder, {
     bool root = false,
     Object? args,
   }) async {
@@ -32,7 +32,7 @@ class UiAlert {
         settings: RouteSettings(arguments: args),
         pageBuilder: (context, animation, secondaryAnimation) => PopScope(
           canPop: false,
-          child: builder(),
+          child: builder(context),
         ),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             child,
