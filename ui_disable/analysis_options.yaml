@@ -1,7 +1,5 @@
 #include: package:flutter_lints/flutter.yaml
-
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+include: package:very_good_analysis/analysis_options.yaml
 
 analyzer:
   exclude:
@@ -12,7 +10,11 @@ analyzer:
     - windows/**
     - macos/**
     - linux/**
-include: package:very_good_analysis/analysis_options.yaml
+
+# Additional information about this file can be found at
+# https://dart.dev/guides/language/analysis-options
 linter:
   rules:
     public_member_api_docs: false
+    use_setters_to_change_properties: false
+    avoid_positional_boolean_parameters: false
