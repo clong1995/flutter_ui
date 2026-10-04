@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class FnNav {
-  FnNav._();
+  new _();
 
   static GlobalKey<NavigatorState>? _navigatorKey;
 
@@ -20,11 +20,8 @@ class FnNav {
     if (context == null) {
       return null;
     }
-    return Navigator.of(context, rootNavigator: root).push<T>(
-      FnNavRouteBuilder<T>(
-        RouteSettings(arguments: args),
-        (context) => page(),
-      ),
+    return await Navigator.of(context, rootNavigator: root).push<T>(
+      FnNavRouteBuilder<T>(RouteSettings(arguments: args), (context) => page()),
     );
   }
 
@@ -37,11 +34,8 @@ class FnNav {
     if (currentState == null) {
       return null;
     }
-    return currentState.pushAndRemoveUntil<T>(
-      FnNavRouteBuilder<T>(
-        RouteSettings(arguments: args),
-        (context) => page(),
-      ),
+    return await currentState.pushAndRemoveUntil<T>(
+      FnNavRouteBuilder<T>(RouteSettings(arguments: args), (context) => page()),
       (route) => root,
     );
   }
@@ -56,19 +50,16 @@ class FnNav {
     if (context == null) {
       return null;
     }
-    return Navigator.of(context, rootNavigator: root).pushReplacement<T, TO>(
-      FnNavRouteBuilder<T>(
-        RouteSettings(arguments: args),
-        (context) => page(),
-      ),
+    return await Navigator.of(
+      context,
+      rootNavigator: root,
+    ).pushReplacement<T, TO>(
+      FnNavRouteBuilder<T>(RouteSettings(arguments: args), (context) => page()),
       result: result,
     );
   }
 
-  static void pop<T extends Object?>({
-    bool root = false,
-    T? result,
-  }) {
+  static void pop<T extends Object?>({bool root = false, T? result}) {
     final context = _navigatorKey?.currentContext;
     if (context == null) {
       return;
@@ -92,7 +83,7 @@ class FnNav {
 }
 
 class FnNavRouteBuilder<T> extends PageRouteBuilder<T> {
-  FnNavRouteBuilder(RouteSettings settings, this.builder)
+  new(RouteSettings settings, this.builder)
     : super(
         settings: settings,
         pageBuilder: (context, animation, secondaryAnimation) =>
