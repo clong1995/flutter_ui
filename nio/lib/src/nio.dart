@@ -9,7 +9,8 @@ import 'package:nio/src/send.dart';
 import 'package:package/package.dart';
 import 'package:ui_toast/ui_toast.dart';
 
-Future<T> nio<S extends BaseReq, T extends BaseRes>(String uri, {
+Future<T> nio<S extends BaseReq, T extends BaseRes>(
+  String uri, {
   bool reTey = true,
   int? timeout,
   S? req,
@@ -20,8 +21,7 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(String uri, {
 
   if (uri.isEmpty) {
     res.state = 'url为空';
-    unawaited(UiToast.show(UiToastMessage.failure()
-      ..text = res.state));
+    unawaited(UiToast.show(UiToastMessage.failure()..text = res.state));
     return res;
   }
 
@@ -29,9 +29,7 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(String uri, {
 
   //参数
   req
-    ..t = DateTime
-        .now()
-        .millisecondsSinceEpoch ~/ 1000
+    ..t = DateTime.now().millisecondsSinceEpoch ~/ 1000
     ..a = FnAuth.ak;
 
   //转string
@@ -53,7 +51,7 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(String uri, {
         unawaited(Package.pushAndRemove('splash'));
       }
       return res;
-  /*case 'nosign':
+    /*case 'nosign':
     case 'signerr':
     case 'nostate':
     case 'nots':
@@ -97,16 +95,15 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(String uri, {
     res.fromJson();
   } catch (e) {
     final text = e.toString();
-    unawaited(UiToast.show(UiToastMessage.failure()
-      ..text = text));
+    unawaited(UiToast.show(UiToastMessage.failure()..text = text));
 
     logger(
       '\x1B[31m'
-          '┏━━━━━━━━━━━━━━━━━━━━━━━━━ ERROR ━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n'
-          '┃ 地址: $uri\n'
-          '┃ 序列化错误: $text\n'
-          '┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛'
-          '\x1B[0m',
+      '┏━━━━━━━━━━━━━━━━━━━━━━━━━ ERROR ━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n'
+      '┃ 地址: $uri\n'
+      '┃ 序列化错误: $text\n'
+      '┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛'
+      '\x1B[0m',
       stack: false,
     );
     rethrow;
