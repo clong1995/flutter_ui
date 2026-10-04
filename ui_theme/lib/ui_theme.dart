@@ -9,6 +9,7 @@ class UiTheme {
   //fontSize
   static double fontSize = 13.r;
   static String? fontFamily;
+
   //全角空格
   static String u3000 = '　';
 
@@ -32,12 +33,16 @@ class UiTheme {
 
   //white
   static const Color white = Color(0xFFFFFFFF);
+
   //white
   static const Color black = Color(0xFF000000);
+
   //green
   static const Color green = Color(0xFF4CAF50);
+
   //red
   static const Color red = Color(0xFFF44336);
+
   //orange
   static const Color orange = Color(0xFFFF9800);
 }
