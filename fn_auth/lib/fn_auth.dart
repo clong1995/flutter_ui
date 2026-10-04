@@ -2,7 +2,7 @@ import 'package:fn_security/fn_security.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FnAuth {
-  FnAuth._();
+  new _();
 
   static String _ak = '';
   static String _sk = '';
@@ -24,11 +24,7 @@ class FnAuth {
       role.any((element) => _role.contains(element));
 
   static Future<void> persist() async {
-    await load(
-        ak: 'AXDngOOBUwIB4M4BxwOnBA',
-        sk: 'AsCdA44HTgk',
-        persist: false
-    );
+    await load(ak: 'AXDngOOBUwIB4M4BxwOnBA', sk: 'AsCdA44HTgk', persist: false);
   }
 
   //载入凭证
