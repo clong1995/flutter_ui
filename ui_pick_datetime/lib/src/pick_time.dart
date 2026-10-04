@@ -19,7 +19,7 @@ Future<String?> uiPickTime({
   var hour = timeDay.hour;
   var minute = timeDay.minute;
 
-  return UiAlert.dialog(
+  return await UiAlert.dialog(
     (context) {
       /*final inkTheme = InkResponseTheme.defaults(context).copyWith(
         splashFactory: NoSplash.splashFactory,
@@ -123,7 +123,7 @@ DateTime _timeParse(String timeDay) {
 }
 
 class UiPickTime extends StatefulWidget {
-  const UiPickTime({
+  const new({
     this.icon,
     this.color,
     this.selected,

@@ -2,7 +2,7 @@ import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fn_datetime/fn_datetime.dart';
 import 'package:fn_nav/fn_nav.dart';
-import 'package:material_ui/material_ui.dart' show Icons, InteractiveInkFeatureFactory, NoSplash;
+import 'package:material_ui/material_ui.dart' show Icons, NoSplash;
 import 'package:rpx/ext.dart';
 import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_button/ui_button.dart';
@@ -36,7 +36,7 @@ Future<String?> uiPickDate({
 
   var dateTime = selectedDate;
 
-  return UiAlert.dialog(
+  return await UiAlert.dialog(
     (context){
       final inkTheme = InkResponseTheme.defaults(context).copyWith(
         splashFactory: NoSplash.splashFactory,
@@ -104,7 +104,7 @@ Future<String?> uiPickDate({
 }
 
 class UiPickDate extends StatefulWidget {
-  const UiPickDate({
+  const new({
     this.icon,
     this.color,
     this.selected,
