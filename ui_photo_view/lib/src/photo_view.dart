@@ -14,7 +14,7 @@ import 'package:ui_toast/ui_toast.dart';
 
 //PhotoView 的实现
 class UiPhotoView extends StatefulWidget {
-  const UiPhotoView({
+  const new({
     required this.images,
     super.key,
     this.index = 0,

@@ -5,7 +5,7 @@ import 'package:ui_cache_image/ui_cache_image.dart';
 import 'package:ui_photo_view/src/push_photo_view_page.dart';
 
 class UiPhotoViewGrid extends StatelessWidget {
-  const UiPhotoViewGrid({
+  const new({
     required this.images,
     super.key,
     this.thumbnail = false,
@@ -42,17 +42,14 @@ class UiPhotoViewGrid extends StatelessWidget {
       crossAxisSpacing: crossAxisSpacing ?? 5.r,
     ),
     itemBuilder: (context, index) => GestureDetector(
-        onTap: () => onImageTap(index),
-        child: ClipRRect(
-          borderRadius: borderRadius,
-          child: UiCacheImage(images[index], fit: fit,thumbnail: thumbnail,),
-        ),
+      onTap: () => onImageTap(index),
+      child: ClipRRect(
+        borderRadius: borderRadius,
+        child: UiCacheImage(images[index], fit: fit, thumbnail: thumbnail),
       ),
+    ),
   );
 
-  void onImageTap(int index) => pushPhotoViewPage(
-    images: images,
-    index: index,
-    onChanged: onChanged,
-  );
+  void onImageTap(int index) =>
+      pushPhotoViewPage(images: images, index: index, onChanged: onChanged);
 }
