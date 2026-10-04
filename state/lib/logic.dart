@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 abstract class Logic<S> {
-  Logic(this.context);
+  new(this.context);
 
   @nonVirtual
   final BuildContext context;
@@ -83,11 +83,7 @@ abstract class Logic<S> {
 }
 
 class _BuilderWidget extends StatefulWidget {
-  const _BuilderWidget({
-    required this.builder,
-    required this.dispose,
-    required this.init,
-  });
+  const new({required this.builder, required this.dispose, required this.init});
 
   final void Function(StateSetter setState) init;
   final VoidCallback dispose;
@@ -115,7 +111,7 @@ class _BuilderWidgetState extends State<_BuilderWidget> {
 }
 
 class _EventBus {
-  _EventBus._internal();
+  new _internal();
 
   static final _EventBus instance = _EventBus._internal();
 

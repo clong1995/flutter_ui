@@ -3,7 +3,7 @@ import 'package:state/logic.dart' show Logic;
 import 'package:state/widget.dart' show Build;
 
 class StateWidget<L extends Logic<dynamic>> extends StatefulWidget {
-  const StateWidget({required this.build, required this.logic, super.key});
+  const new({required this.build, required this.logic, super.key});
 
   final L Function(BuildContext context) logic;
   final Build<L> Function(L logic) build;

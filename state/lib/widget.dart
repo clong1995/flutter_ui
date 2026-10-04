@@ -6,13 +6,10 @@ import 'package:state/src/widget.dart' show StateWidget;
 Widget stateWidget<L extends Logic<dynamic>>(
   L Function(BuildContext context) logic,
   Build<L> Function(L logic) build,
-) => StateWidget(
-  logic: logic,
-  build: build,
-);
+) => StateWidget(logic: logic, build: build);
 
 abstract class Build<L extends Logic<dynamic>> {
-  Build(this.logic);
+  new(this.logic);
 
   @nonVirtual
   final L logic;
