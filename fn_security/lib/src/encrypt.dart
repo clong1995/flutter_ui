@@ -22,11 +22,11 @@ Future<String> encrypter(String plainText) async {
     // --- 修改点：拼接字节后再编码 ---
     final len = iv.length + encrypted.length;
     final combined = Uint8List(len)
-    ..setRange(0, iv.length, iv)
-    ..setRange(iv.length, len, encrypted);
+      ..setRange(0, iv.length, iv)
+      ..setRange(iv.length, len, encrypted);
 
     return base64.encode(combined);
-  } catch (e) {
+  } on FormatException catch (e) {
     logger(e.toString());
     return '';
   }
@@ -52,7 +52,7 @@ Future<String> decrypter(String encryptedText) async {
 
     final decrypted = cipher.process(cipherText);
     return utf8.decode(decrypted);
-  } catch (e) {
+  } on FormatException catch (e) {
     logger(e.toString());
     return '';
   }
