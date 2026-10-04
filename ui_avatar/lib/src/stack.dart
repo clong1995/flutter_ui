@@ -3,7 +3,7 @@ import 'package:rpx/ext.dart';
 import 'package:ui_avatar/src/single.dart';
 
 class UiAvatarStack extends StatelessWidget {
-  const UiAvatarStack({
+  const new({
     required this.images,
     super.key,
     this.max = 5,
@@ -44,10 +44,7 @@ class UiAvatarStack extends StatelessWidget {
                   imageUrl: entry.value,
                   size: h,
                   thumbnail: thumbnail,
-                  border: .all(
-                    color: const Color(0xFFFFFFFF),
-                    width: 2.r,
-                  ),
+                  border: .all(color: const Color(0xFFFFFFFF), width: 2.r),
                 ),
               );
             })

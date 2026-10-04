@@ -4,7 +4,7 @@ import 'package:rpx/ext.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
 class UiAvatarSingle extends StatelessWidget {
-  const UiAvatarSingle({
+  const new({
     super.key,
     this.imageUrl,
     this.size,
@@ -54,11 +54,7 @@ class UiAvatarSingle extends StatelessWidget {
                             fit: .cover,
                             thumbnail: thumbnail,
                           )
-                        : Image.asset(
-                            imageUrl!,
-                            fit: .cover,
-                            package: package,
-                          ),
+                        : Image.asset(imageUrl!, fit: .cover, package: package),
                   ),
           ),
         ),

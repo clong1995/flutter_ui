@@ -3,7 +3,7 @@ import 'package:rpx/ext.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
 
 class UiAvatarGroup extends StatelessWidget {
-  const UiAvatarGroup({
+  const new({
     required this.images,
     super.key,
     this.size,
@@ -58,11 +58,7 @@ class UiAvatarGroup extends StatelessWidget {
                 width: avatarSize,
                 height: avatarSize,
                 padding: .all(1.r),
-                child: UiCacheImage(
-                  e,
-                  fit: .cover,
-                  thumbnail: thumbnail,
-                ),
+                child: UiCacheImage(e, fit: .cover, thumbnail: thumbnail),
               ),
             )
             .toList(),
