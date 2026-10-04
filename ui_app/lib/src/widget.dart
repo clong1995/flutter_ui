@@ -9,7 +9,7 @@ import 'package:ui_app/src/builder.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class App extends StatelessWidget {
-  const App({
+  const new({
     required this.home,
     this.navigatorKey,
     super.key,
