@@ -7,7 +7,7 @@ import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiInputText extends StatefulWidget {
-  const UiInputText({
+  const new({
     super.key,
     this.width,
     this.maxLines = 1,
@@ -96,9 +96,7 @@ class _UiInputTextState extends State<UiInputText> {
         spacing: widget.spacing ?? 5.r,
         children: [
           ...?widget.leading,
-          Expanded(
-            child: widget.hint != null ? hint() : editableText(),
-          ),
+          Expanded(child: widget.hint != null ? hint() : editableText()),
           if (widget.clear) close(),
           ...?widget.action,
           if (widget.obscureText)
@@ -203,11 +201,8 @@ class _UiInputTextState extends State<UiInputText> {
     );
   }
 
-  TextStyle textStyle() => DefaultTextStyle.of(context).style
-      .merge(
-        TextStyle(
-          fontSize: 14.r,
-        ),
-      )
-      .merge(widget.style);
+  TextStyle textStyle() =>
+      DefaultTextStyle.of(context).style
+          .merge(TextStyle(fontSize: 14.r))
+          .merge(widget.style);
 }

@@ -1,12 +1,12 @@
-import 'package:material_ui/material_ui.dart' show Icons;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:material_ui/material_ui.dart' show Icons;
 import 'package:rpx/ext.dart';
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_input/ui_input.dart';
 
 class UiInputNumber<T extends num> extends StatefulWidget {
-  const UiInputNumber({
+  const new({
     this.num,
     this.min,
     this.max,
