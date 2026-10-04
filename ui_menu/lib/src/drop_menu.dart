@@ -5,7 +5,7 @@ import 'package:rpx/ext.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiDropMenu<T> extends StatefulWidget {
-  const UiDropMenu({
+  const new({
     required this.items,
     super.key,
     this.value,

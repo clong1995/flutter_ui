@@ -4,7 +4,7 @@ import 'package:material_ui/material_ui.dart' show PopupMenuItem, showMenu;
 import 'package:rpx/ext.dart';
 
 class UiPopMenu<T> extends StatelessWidget {
-  const UiPopMenu({
+  const new({
     required this.child,
     required this.items,
     super.key,
