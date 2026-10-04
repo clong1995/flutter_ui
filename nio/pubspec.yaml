@@ -5,7 +5,7 @@ homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.13.1
+  sdk: ^3.13.3
 
 dependencies:
   http: ^1.6.0
@@ -31,4 +31,4 @@ dependencies:
       path: package
 
 dev_dependencies:
-  very_good_analysis: ^10.3.0
+  very_good_analysis: ^11.0.0

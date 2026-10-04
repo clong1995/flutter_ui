@@ -82,7 +82,7 @@ Future<T> nio<S extends BaseReq, T extends BaseRes>(String uri, {
       );
 
       if (select == true) {
-        return nio<S, T>(uri, req: req, res: res);
+        return await nio<S, T>(uri, req: req, res: res);
       }
   }
 
