@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class UiPageViewBottomBar extends StatefulWidget {
-  const UiPageViewBottomBar({
+  const new({
     required this.items,
     required this.controller,
     super.key,
@@ -35,33 +35,29 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
   @override
   Widget build(BuildContext context) => Row(
     mainAxisAlignment: widget.mainAxisAlignment ?? MainAxisAlignment.start,
-    children: widget.items.map(
-      (e) {
-        final item = e.itemBuilder(false);
-        final selectedItem = e.itemBuilder(true);
+    children: widget.items.map((e) {
+      final item = e.itemBuilder(false);
+      final selectedItem = e.itemBuilder(true);
 
-        final detectorItem = GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          onTap: () {
-            if (currIndex == e.index) {
-              return;
-            }
-            currIndex = e.index;
-            setState(() {});
-            widget.controller.jumpToPage(e.index);
-          },
-          child: currIndex == e.index ? selectedItem : item,
-        );
+      final detectorItem = GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          if (currIndex == e.index) {
+            return;
+          }
+          currIndex = e.index;
+          setState(() {});
+          widget.controller.jumpToPage(e.index);
+        },
+        child: currIndex == e.index ? selectedItem : item,
+      );
 
-        return e.isSpacer
-            ? item
-            : widget.mainAxisAlignment == null
-            ? Expanded(
-                child: detectorItem,
-              )
-            : detectorItem;
-      },
-    ).toList(),
+      return e.isSpacer
+          ? item
+          : widget.mainAxisAlignment == null
+          ? Expanded(child: detectorItem)
+          : detectorItem;
+    }).toList(),
   );
 
   void indexItem() {
@@ -76,15 +72,11 @@ class _UiPageViewBottomBarState extends State<UiPageViewBottomBar> {
 }
 
 class UiPageViewBottomBarItem {
-  UiPageViewBottomBarItem({
-    required this.itemBuilder,
-    this.isSpacer = false,
-  });
+  new({required this.itemBuilder, this.isSpacer = false});
 
   final bool isSpacer;
 
   //
-  // ignore:avoid_positional_boolean_parameters
   final Widget Function(bool) itemBuilder;
 
   @protected

@@ -1,10 +1,9 @@
-
 // 还可以充当 Keep alive 功能的容器
 import 'package:flutter/widgets.dart';
 import 'package:fn_nav/fn_nav.dart';
 
 class UiPageViewItem extends StatefulWidget {
-  const UiPageViewItem({
+  const new({
     required this.child,
     super.key,
     this.keepAlive = false,
@@ -29,10 +28,8 @@ class _UiPageViewItemState extends State<UiPageViewItem>
     super.build(context);
     return widget.nestRoute
         ? Navigator(
-            onGenerateRoute: (settings) => FnNavRouteBuilder(
-              settings,
-              (context) => widget.child,
-            ),
+            onGenerateRoute: (settings) =>
+                FnNavRouteBuilder(settings, (context) => widget.child),
           )
         : widget.child;
   }
