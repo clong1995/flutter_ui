@@ -14,7 +14,7 @@ import 'package:ui_upload/src/sign_url.dart';
 import 'package:ui_upload/src/upload.dart';
 
 class UiUploadImageWidget extends StatefulWidget {
-  const UiUploadImageWidget({
+  const new({
     required this.signUrl,
     required this.onChanged,
     this.crossAxisCount,
@@ -222,7 +222,7 @@ class _UiUploadImageWidgetState extends State<UiUploadImageWidget> {
 }
 
 class _PhotoViewer extends StatefulWidget {
-  const _PhotoViewer({
+  const new({
     required this.index,
     required this.images,
     this.onDelete,
