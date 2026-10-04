@@ -1,12 +1,12 @@
 name: ui_captcha
 description: "A new Flutter project."
-
+publish_to: none
 version: 0.4.0
 homepage: flutter_ui
 
 environment:
-  sdk: ^3.13.1
-  flutter: ">=3.47.1"
+  sdk: ^3.13.3
+  flutter: ">=3.47.4"
 
 dependencies:
   flutter:
@@ -25,7 +25,7 @@ dependencies:
       path: ui_button
 
 dev_dependencies:
-  very_good_analysis: ^10.3.0
+  very_good_analysis: ^11.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -43,7 +43,7 @@ flutter:
   #
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
-  assets:
+  # assets:
     #- html/captcha.html
   # To add custom fonts to your package, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
