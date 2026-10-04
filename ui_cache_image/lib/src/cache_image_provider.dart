@@ -10,10 +10,7 @@ import 'package:ui_cache_image/src/common.dart';
 
 @immutable
 class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
-  const UiCacheImageProvider(
-    this.src, {
-    this.thumbnail = false,
-  });
+  const new(this.src, {this.thumbnail = false});
 
   final String src;
   final bool thumbnail;
@@ -42,7 +39,7 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
     ImageDecoderCallback decode,
   ) async {
     var imgSrc = src;
-    if(thumbnail){
+    if (thumbnail) {
       final original = Uri.parse(imgSrc);
       final uri = original.replace(
         queryParameters: {
@@ -85,7 +82,7 @@ class UiCacheImageProvider extends ImageProvider<UiCacheImageProvider> {
         'packages/ui_cache_image/images/image.png',
       );
       final bytes = data.buffer.asUint8List();
-      return ui.instantiateImageCodec(bytes);
+      return await ui.instantiateImageCodec(bytes);
     } finally {
       await chunkEvents.close();
     }

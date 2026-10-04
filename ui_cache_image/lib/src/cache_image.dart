@@ -8,7 +8,7 @@ import 'package:material_ui/material_ui.dart' show Icons;
 import 'package:ui_cache_image/src/common.dart';
 
 class UiCacheImage extends StatefulWidget {
-  const UiCacheImage(this.src, {super.key, this.fit, this.thumbnail = false});
+  const new(this.src, {super.key, this.fit, this.thumbnail = false});
 
   final String src;
   final BoxFit? fit;
@@ -82,11 +82,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
     }
 
     if (kIsWeb) {
-      return Image.network(
-        imgSrc,
-        fit: fit,
-        gaplessPlayback: true,
-      );
+      return Image.network(imgSrc, fit: fit, gaplessPlayback: true);
     }
 
     final tempDir = await tempDirectory();
@@ -95,11 +91,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
     final imageFile = File('$tempDir/$md5');
 
     if (imageFile.existsSync()) {
-      return Image.file(
-        imageFile,
-        fit: fit,
-        gaplessPlayback: true,
-      );
+      return Image.file(imageFile, fit: fit, gaplessPlayback: true);
     }
 
     //请求新的图片
@@ -109,11 +101,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
 
     if (response.statusCode == 200) {
       await imageFile.writeAsBytes(response.bodyBytes);
-      return Image.memory(
-        response.bodyBytes,
-        fit: fit,
-        gaplessPlayback: true,
-      );
+      return Image.memory(response.bodyBytes, fit: fit, gaplessPlayback: true);
     }
 
     debugPrint('request new image error: ${response.statusCode}');
@@ -125,11 +113,7 @@ class _UiCacheImageState extends State<UiCacheImage> {
   Widget build(BuildContext context) {
     //print(loading);
     if (loading) {
-      return const Center(
-        child: Icon(
-          Icons.downloading,
-        ),
-      );
+      return const Center(child: Icon(Icons.downloading));
     }
     return image;
   }
