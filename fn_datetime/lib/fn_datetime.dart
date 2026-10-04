@@ -1,7 +1,7 @@
 import 'package:jiffy/jiffy.dart';
 
 class FnDatetime {
-  FnDatetime._();
+  new _();
 
   static Future<void> setLocale() async {
     await Jiffy.setLocale('zh_cn');
@@ -45,7 +45,6 @@ class FnDatetime {
       .dateTime;
 
   static String fromNow(DateTime dateTime, [DateTime? now]) {
-
     if (now == null) {
       return Jiffy.parseFromDateTime(dateTime).fromNow();
     }

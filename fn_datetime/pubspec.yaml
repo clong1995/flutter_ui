@@ -3,10 +3,10 @@ description: A new Flutter project.
 version: 0.4.0
 
 environment:
-  sdk: ^3.13.1
+  sdk: ^3.13.3
 
 dependencies:
   jiffy: ^6.4.5
 
 dev_dependencies:
-  very_good_analysis: ^10.3.0
+  very_good_analysis: ^11.0.0
