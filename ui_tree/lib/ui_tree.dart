@@ -5,7 +5,7 @@ import 'package:rpx/ext.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiTree<T extends Object?> extends StatefulWidget {
-  const UiTree({
+  const new({
     required this.data,
     this.itemBuilder,
     super.key,
@@ -108,18 +108,8 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
               widget.onTap?.call(treeBranch.item.item.id, expandedId);
             },
             child: widget.itemBuilder == null
-                ? uiItemBuilder<T>(
-                    context,
-                    treeBranch.item,
-                    index,
-                    len,
-                  )
-                : widget.itemBuilder!(
-                    context,
-                    treeBranch.item,
-                    index,
-                    len,
-                  ),
+                ? uiItemBuilder<T>(context, treeBranch.item, index, len)
+                : widget.itemBuilder!(context, treeBranch.item, index, len),
           ),
           if (treeBranch.children.isNotEmpty)
             Visibility(
@@ -205,7 +195,7 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
 
 @immutable
 class UiTreeItem<T extends Object?> {
-  const UiTreeItem({this.id = '', this.pid = '', this.title = '', this.data});
+  const new({this.id = '', this.pid = '', this.title = '', this.data});
 
   final String id;
   final String pid;
@@ -262,9 +252,7 @@ Widget uiItemBuilder<T>(
     child: Row(
       children: [
         if (item.len == 0)
-          SizedBox(
-            width: 5.r,
-          )
+          SizedBox(width: 5.r)
         else
           Icon(
             item.expand ? Icons.arrow_drop_down : Icons.arrow_right,
@@ -282,10 +270,7 @@ Widget uiItemBuilder<T>(
           ),
         ),
         if (item.selected)
-          Icon(
-            Icons.chevron_right_rounded,
-            color: selectedFontColor,
-          ),
+          Icon(Icons.chevron_right_rounded, color: selectedFontColor),
       ],
     ),
   );
