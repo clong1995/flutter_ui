@@ -6,7 +6,7 @@ import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiPage extends StatelessWidget {
-  const UiPage({
+  const new({
     required this.body,
     // this.appbarBetweenSpace,
     this.bodyPadding,
@@ -46,24 +46,23 @@ class UiPage extends StatelessWidget {
               child: body,
             ),
           ),
-          if (bottomBar != null)
-            _bottomBar(),
+          if (bottomBar != null) _bottomBar(),
         ],
       ),
     );
   }
 
-  Widget _bottomBar(){
+  Widget _bottomBar() {
     final bottomSafeHeight = FnDevice.bottomSafeHeight;
     final top = 8.r;
     var bottom = 8.r;
-    if(bottomSafeHeight != 0){
+    if (bottomSafeHeight != 0) {
       bottom /= 2;
     }
     return Container(
       color: bottomBarColor,
       height: top + 35.r + bottom + bottomSafeHeight,
-      padding: EdgeInsets.fromLTRB(0,top,0,bottom+bottomSafeHeight),
+      padding: EdgeInsets.fromLTRB(0, top, 0, bottom + bottomSafeHeight),
       child: bottomBar,
     );
   }
@@ -78,9 +77,7 @@ class UiPage extends StatelessWidget {
       child: DefaultTextStyle.merge(
         style: TextStyle(color: appbarTextColor),
         child: IconTheme.merge(
-          data: IconThemeData(
-            color: appbarTextColor,
-          ),
+          data: IconThemeData(color: appbarTextColor),
           child: Stack(
             children: [
               Positioned.fill(
@@ -104,9 +101,7 @@ class UiPage extends StatelessWidget {
               if (title is Text)
                 Center(
                   child: DefaultTextStyle.merge(
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                     child: title,
                   ),
                 )
