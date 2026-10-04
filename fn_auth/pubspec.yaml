@@ -1,9 +1,11 @@
 name: fn_auth
-description: A new Flutter project.
+description: A starting point for Dart libraries or applications.
 version: 0.4.0
+homepage: flutter_ui
+publish_to: none
 
 environment:
-  sdk: ^3.13.1
+  sdk: ^3.13.3
 
 dependencies:
   shared_preferences: ^2.5.5
@@ -13,4 +15,4 @@ dependencies:
       path: fn_security
 
 dev_dependencies:
-  very_good_analysis: ^10.3.0
+  very_good_analysis: ^11.0.0

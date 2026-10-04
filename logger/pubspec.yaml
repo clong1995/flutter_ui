@@ -4,11 +4,11 @@ version: 0.4.0
 # repository: https://github.com/my_org/my_repo
 
 environment:
-  sdk: ^3.13.1
+  sdk: ^3.13.3
 
 # Add regular dependencies here.
 dependencies:
 
 dev_dependencies:
   # lints: ^6.0.0
-  very_good_analysis: ^10.3.0
+  very_good_analysis: ^11.0.0

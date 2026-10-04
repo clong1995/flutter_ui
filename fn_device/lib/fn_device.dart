@@ -6,7 +6,7 @@ import 'package:fn_device/src/user_agent/user_agent.dart';
 import 'package:fn_device/src/wake_lock.dart';
 
 class FnDevice {
-  FnDevice._();
+  new _();
 
   static String? _platform;
   static String? _brand;
@@ -70,14 +70,14 @@ class FnDevice {
     if (_guid != null) {
       return _guid!;
     }
-    return Guid.id;
+    return await Guid.id;
   }
 
   static Future<String> get info async {
     if (_info != null) {
       return _info!;
     }
-    return Guid.info;
+    return await Guid.info;
   }
 
   static Future<void> Function() lockEnable = wakeLockEnable;

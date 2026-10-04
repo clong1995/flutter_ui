@@ -5,7 +5,7 @@ import 'package:fn_device/fn_device.dart';
 
 class Height {
   // 私有构造函数防止实例化
-  Height._();
+  new _();
 
   // 获取当前唯一的 FlutterView
   static FlutterView get _view =>
@@ -15,7 +15,7 @@ class Height {
   static double get statusBarHeight {
     var height = _view.viewPadding.top / _view.devicePixelRatio;
     if (FnDevice.platform == 'iOS') {
-      height *=.8;
+      height *= .8;
     }
     return height;
   }
