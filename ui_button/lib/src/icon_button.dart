@@ -4,7 +4,7 @@ import 'package:ui_disable/ui_disable.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiIconButton extends StatelessWidget {
-  const UiIconButton({
+  const new({
     required this.icon,
     this.size,
     super.key,
@@ -32,19 +32,12 @@ class UiIconButton extends StatelessWidget {
     }
     final child = Container(
       decoration: background
-          ? BoxDecoration(
-              shape: BoxShape.circle,
-              color: color.withAlpha(20),
-            )
+          ? BoxDecoration(shape: BoxShape.circle, color: color.withAlpha(20))
           : null,
       alignment: Alignment.center,
       width: width ?? 28.r,
       height: height ?? 28.r,
-      child: Icon(
-        icon,
-        size: iconSize,
-        color: color,
-      ),
+      child: Icon(icon, size: iconSize, color: color),
     );
     return onTap == null
         ? UiDisable(child: child)

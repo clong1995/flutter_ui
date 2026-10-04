@@ -5,11 +5,7 @@ import 'package:ui_disable/ui_disable.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiDeleteButton extends StatelessWidget {
-  const UiDeleteButton({
-    required this.title,
-    super.key,
-    this.onTap,
-  });
+  const new({required this.title, super.key, this.onTap});
 
   final String title;
   final GestureTapCallback? onTap;
@@ -30,15 +26,17 @@ class UiDeleteButton extends StatelessWidget {
           SizedBox(width: 5.r),
           Text(title, style: TextStyle(color: color)),
           SizedBox(width: 5.r),
-          const Icon(Icons.highlight_remove_rounded,color: UiTheme.red,),
+          const Icon(Icons.highlight_remove_rounded, color: UiTheme.red),
           SizedBox(width: 5.r),
         ],
       ),
     );
-    return onTap == null ? UiDisable(child: child) : GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onTap,
-      child: child,
-    );
+    return onTap == null
+        ? UiDisable(child: child)
+        : GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: onTap,
+            child: child,
+          );
   }
 }

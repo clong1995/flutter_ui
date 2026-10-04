@@ -4,7 +4,7 @@ import 'package:ui_disable/ui_disable.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiTextButton extends StatelessWidget {
-  const UiTextButton({
+  const new({
     required this.text,
     this.icon,
     this.fontSize,
@@ -62,12 +62,7 @@ class UiTextButton extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (icon != null)
-            Icon(
-              icon,
-              color: color,
-              size: fontSize,
-            ),
+          if (icon != null) Icon(icon, color: color, size: fontSize),
           Text(
             text,
             style: TextStyle(color: color, fontSize: fontSize),

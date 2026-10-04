@@ -5,7 +5,7 @@ import 'package:ui_disable/ui_disable.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiCheckButton extends StatefulWidget {
-  const UiCheckButton({
+  const new({
     required this.title,
     super.key,
     this.checked = false,
@@ -14,9 +14,7 @@ class UiCheckButton extends StatefulWidget {
 
   final String title;
   final bool checked;
-  
-  //
-  // ignore:avoid_positional_boolean_parameters
+
   final void Function(bool)? onChanged;
 
   @override
@@ -59,8 +57,8 @@ class _UiCheckButtonState extends State<UiCheckButton> {
     return widget.onChanged == null
         ? UiDisable(child: child)
         : GestureDetector(
-      behavior: HitTestBehavior.opaque,
-            onTap: () =>widget.onChanged!(!widget.checked),
+            behavior: HitTestBehavior.opaque,
+            onTap: () => widget.onChanged!(!widget.checked),
             child: child,
           );
   }

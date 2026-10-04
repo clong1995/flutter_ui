@@ -4,7 +4,7 @@ import 'package:ui_disable/ui_disable.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiButton extends StatelessWidget {
-  const UiButton({
+  const new({
     required this.child,
     super.key,
     this.width,
@@ -31,11 +31,13 @@ class UiButton extends StatelessWidget {
     final color = this.color ?? UiTheme.primaryColor;
     final child = Container(
       padding: padding ?? EdgeInsets.symmetric(horizontal: 10.r),
-      decoration: decoration ?? BoxDecoration(
-        borderRadius: BorderRadius.circular(5.r),
-        border: Border.all(color: color),
-        color: background ? color : const Color(0xFFFFFFFF),
-      ),
+      decoration:
+          decoration ??
+          BoxDecoration(
+            borderRadius: BorderRadius.circular(5.r),
+            border: Border.all(color: color),
+            color: background ? color : const Color(0xFFFFFFFF),
+          ),
       width: width,
       height: height ?? 28.r,
       alignment: Alignment.center,
