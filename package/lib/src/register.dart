@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 typedef PkgReg = Map<String, Widget Function()>;
 
 class Register {
-  Register._();
+  new _();
 
   static late PkgReg _pkgReg;
 
