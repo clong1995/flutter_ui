@@ -8,7 +8,7 @@ import 'package:ui_theme/ui_theme.dart';
 import 'package:ui_toast/src/message.dart';
 
 class ToastWidget extends StatefulWidget {
-  const ToastWidget({required this.message, super.key});
+  const new({required this.message, super.key});
 
   final UiToastMessage message;
 
@@ -40,20 +40,10 @@ class ToastWidgetState extends State<ToastWidget> {
       alignment: Alignment.center,
       child: Container(
         padding: EdgeInsets.all(10.r),
-        constraints: BoxConstraints(
-          minWidth: 140.r,
-          maxWidth: 350.r,
-        ),
+        constraints: BoxConstraints(minWidth: 140.r, maxWidth: 350.r),
         decoration: BoxDecoration(
-          color: Color.lerp(
-            widget.message.color,
-            const Color(0xFFFFFFFF),
-            .95,
-          ),
-          border: Border.all(
-            color: widget.message.color,
-            width: 1.r,
-          ),
+          color: Color.lerp(widget.message.color, const Color(0xFFFFFFFF), .95),
+          border: Border.all(color: widget.message.color, width: 1.r),
           borderRadius: BorderRadius.circular(10.r),
         ),
         child: Column(
@@ -90,9 +80,7 @@ class ToastWidgetState extends State<ToastWidget> {
                     onTap: () => Navigator.of(context).pop<bool?>(false),
                     child: const Text('取 消'),
                   ),
-                  SizedBox(
-                    width: 10.r,
-                  ),
+                  SizedBox(width: 10.r),
                   UiButton(
                     onTap: () => Navigator.of(context).pop<bool?>(true),
                     child: const Text('确 定'),
@@ -108,7 +96,7 @@ class ToastWidgetState extends State<ToastWidget> {
 }
 
 class ToastLoadingWidget extends StatefulWidget {
-  const ToastLoadingWidget({super.key});
+  const new({super.key});
 
   @override
   State<ToastLoadingWidget> createState() => _ToastLoadingWidgetState();
@@ -138,20 +126,14 @@ class _ToastLoadingWidgetState extends State<ToastLoadingWidget> {
       child: IntrinsicWidth(
         child: Container(
           padding: EdgeInsets.all(10.r),
-          constraints: BoxConstraints(
-            minWidth: 140.r,
-            maxWidth: 350.r,
-          ),
+          constraints: BoxConstraints(minWidth: 140.r, maxWidth: 350.r),
           decoration: BoxDecoration(
             color: Color.lerp(
               UiTheme.primaryColor,
               const Color(0xFFFFFFFF),
               .95,
             ),
-            border: Border.all(
-              color: UiTheme.primaryColor,
-              width: 1.r,
-            ),
+            border: Border.all(color: UiTheme.primaryColor, width: 1.r),
             borderRadius: BorderRadius.circular(10.r),
           ),
           child: Column(
@@ -161,10 +143,7 @@ class _ToastLoadingWidgetState extends State<ToastLoadingWidget> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
-                    Icons.pending_outlined,
-                    color: UiTheme.primaryColor,
-                  ),
+                  Icon(Icons.pending_outlined, color: UiTheme.primaryColor),
                   SizedBox(width: 5.r),
                   Text(
                     '加载中',

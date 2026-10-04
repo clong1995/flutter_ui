@@ -5,7 +5,7 @@ import 'package:ui_toast/src/message.dart';
 import 'package:ui_toast/src/widget.dart';
 
 class UiToast {
-  UiToast._();
+  new _();
 
   static GlobalKey<NavigatorState>? _navigatorKey;
 
@@ -21,14 +21,13 @@ class UiToast {
       return null;
     }
 
-    return Navigator.of(navContext, rootNavigator: root).push<bool?>(
-      _route(ToastWidget(message: message)),
-    );
+    return Navigator.of(
+      navContext,
+      rootNavigator: root,
+    ).push<bool?>(_route(ToastWidget(message: message)));
   }
 
-  static void Function()? showLoading({
-    bool root = false,
-  }) {
+  static void Function()? showLoading({bool root = false}) {
     final navContext = _navigatorKey?.currentContext;
     if (navContext == null) {
       return null;

@@ -2,19 +2,19 @@ import 'package:flutter/widgets.dart';
 import 'package:material_ui/material_ui.dart' show Icons;
 
 class UiToastMessage {
-  UiToastMessage();
+  new();
 
-  factory UiToastMessage.success() => UiToastMessage()
+  factory success() => UiToastMessage()
     ..icon = Icons.check_circle_outline
     ..text = '成功'
     ..color = const Color(0xFF4CAF50);
 
-  factory UiToastMessage.info() => UiToastMessage()
+  factory info() => UiToastMessage()
     ..icon = Icons.info_outline
     ..text = '提示'
     ..color = const Color(0xFFFF9800);
 
-  factory UiToastMessage.failure() => UiToastMessage()
+  factory failure() => UiToastMessage()
     ..icon = Icons.highlight_off
     ..text = '失败'
     ..color = const Color(0xFFF44336);
