@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:ui_toast/ui_toast.dart';
 
 class UiSliverRefresh extends StatefulWidget {
-  const UiSliverRefresh({required this.onRefresh, super.key});
+  const new({required this.onRefresh, super.key});
 
   final void Function() onRefresh;
 
@@ -18,9 +18,7 @@ class _UiSliverRefreshState extends State<UiSliverRefresh> {
   @override
   Widget build(BuildContext context) {
     return CupertinoTheme(
-      data: const CupertinoThemeData(
-        brightness: Brightness.light,
-      ),
+      data: const CupertinoThemeData(brightness: Brightness.light),
       child: CupertinoSliverRefreshControl(
         onRefresh: () async {
           widget.onRefresh();
