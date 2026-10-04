@@ -1,10 +1,11 @@
 import 'package:flutter/widgets.dart';
-import 'package:material_ui/material_ui.dart' show CircularProgressIndicator, Icons;
+import 'package:material_ui/material_ui.dart'
+    show CircularProgressIndicator, Icons;
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiSkeleton extends StatefulWidget {
-  const UiSkeleton({
+  const new({
     required this.child,
     super.key,
     this.state = UiSkeletonState.data,
@@ -25,10 +26,7 @@ class _UiSkeletonState extends State<UiSkeleton> {
     final visible = widget.state == UiSkeletonState.data;
     return Stack(
       children: [
-        Offstage(
-          offstage: !visible,
-          child: widget.child,
-        ),
+        Offstage(offstage: !visible, child: widget.child),
         if (!visible) replacement(),
       ],
     );
@@ -37,9 +35,7 @@ class _UiSkeletonState extends State<UiSkeleton> {
   Widget replacement() {
     Widget child = const SizedBox.shrink();
     if (widget.state == UiSkeletonState.hold) {
-      child = CircularProgressIndicator(
-        color: UiTheme.primaryColor,
-      );
+      child = CircularProgressIndicator(color: UiTheme.primaryColor);
     } else if (widget.state == UiSkeletonState.none) {
       child =
           widget.none ??
@@ -49,16 +45,14 @@ class _UiSkeletonState extends State<UiSkeleton> {
             fit: BoxFit.fitWidth,
           );
     }
-    return Center(
-      child: child,
-    );
+    return Center(child: child);
   }
 }
 
 enum UiSkeletonState { data, hold, none }
 
 class UiSkeletonRefreshNone extends StatelessWidget {
-  const UiSkeletonRefreshNone({required this.onRefreshTap, super.key});
+  const new({required this.onRefreshTap, super.key});
 
   final void Function() onRefreshTap;
 
@@ -73,11 +67,7 @@ class UiSkeletonRefreshNone extends StatelessWidget {
           package: 'ui_skeleton',
           fit: BoxFit.fitWidth,
         ),
-        UiTextButton(
-          icon: Icons.refresh,
-          text: '刷 新',
-          onTap: onRefreshTap,
-        ),
+        UiTextButton(icon: Icons.refresh, text: '刷 新', onTap: onRefreshTap),
       ],
     );
   }
