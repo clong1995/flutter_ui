@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class UiWebview extends StatefulWidget {
-  const UiWebview({this.url = '', this.html = '', this.register, super.key});
+  const new({this.url = '', this.html = '', this.register, super.key});
 
   final String url;
 
@@ -31,9 +31,7 @@ class _UiWebviewState extends State<UiWebview> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const Positioned.fill(
-          child: Center(child: Text('加载中...')),
-        ),
+        const Positioned.fill(child: Center(child: Text('加载中...'))),
         WebViewWidget(controller: controller),
       ],
     );

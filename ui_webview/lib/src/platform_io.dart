@@ -8,7 +8,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 class UiWebview extends StatefulWidget {
-  const UiWebview({
+  const new({
     this.onPageFinished,
     super.key,
     this.url = '',
@@ -162,9 +162,7 @@ class _UiWebviewState extends State<UiWebview> {
     children: [
       webview(),
       if (!pageReady)
-        const Positioned.fill(
-          child: Center(child: Text('加载中...')),
-        ),
+        const Positioned.fill(child: Center(child: Text('加载中...'))),
     ],
   );
 
@@ -180,14 +178,10 @@ class _UiWebviewState extends State<UiWebview> {
               displayWithHybridComposition: true,
             );
 
-        return WebViewWidget.fromPlatformCreationParams(
-          params: params,
-        );
+        return WebViewWidget.fromPlatformCreationParams(params: params);
       }
 
-      return WebViewWidget(
-        controller: controller,
-      );
+      return WebViewWidget(controller: controller);
     }
     return const SizedBox.shrink();
   }

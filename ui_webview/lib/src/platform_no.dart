@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class UiWebview extends StatefulWidget {
-  const UiWebview({this.register, this.url = '', this.html = '', super.key});
+  const new({this.register, this.url = '', this.html = '', super.key});
 
   final String url;
   final String html;
