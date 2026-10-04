@@ -1,7 +1,10 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_localizations/flutter_localizations.dart' as flutter_localizations;
+import 'package:flutter_localizations/flutter_localizations.dart'
+    as flutter_localizations;
 import 'package:fn_nav/fn_nav.dart';
-import 'package:material_ui/material_ui.dart' as material_ui show GlobalMaterialLocalizations;
+import 'package:material_ui/material_ui.dart'
+    as material_ui
+    show GlobalMaterialLocalizations;
 import 'package:ui_app/src/builder.dart';
 import 'package:ui_theme/ui_theme.dart';
 
@@ -37,8 +40,8 @@ class App extends StatelessWidget {
       pageRouteBuilder: FnNavRouteBuilder.new,
       debugShowCheckedModeBanner: false,
       color: UiTheme.primaryColor,
-      builder: (context, child){
-       return appBuilder(context,child,builder);
+      builder: (context, child) {
+        return appBuilder(context, child, builder);
       },
       locale: const Locale('zh', 'CN'),
     );

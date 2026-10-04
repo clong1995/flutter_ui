@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiAlert {
-  UiAlert._();
+  new _();
 
   static GlobalKey<NavigatorState>? _navigatorKey;
 
@@ -22,7 +22,7 @@ class UiAlert {
       return null;
     }
 
-    return Navigator.of(navContext, rootNavigator: root).push<T>(
+    return await Navigator.of(navContext, rootNavigator: root).push<T>(
       PageRouteBuilder<T>(
         opaque: false,
         fullscreenDialog: true,
@@ -30,10 +30,8 @@ class UiAlert {
         transitionDuration: Duration.zero,
         reverseTransitionDuration: Duration.zero,
         settings: RouteSettings(arguments: args),
-        pageBuilder: (context, animation, secondaryAnimation) => PopScope(
-          canPop: false,
-          child: builder(context),
-        ),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            PopScope(canPop: false, child: builder(context)),
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             child,
       ),

@@ -4,7 +4,7 @@ import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiAlertWidget extends StatelessWidget {
-  const UiAlertWidget({
+  const new({
     required this.content,
     this.title,
     this.cancelText = '取 消',
@@ -32,15 +32,10 @@ class UiAlertWidget extends StatelessWidget {
       child: IntrinsicWidth(
         child: Container(
           clipBehavior: Clip.hardEdge,
-          constraints: BoxConstraints(
-            minWidth: 300.r,
-            maxWidth: maxWidth,
-          ),
+          constraints: BoxConstraints(minWidth: 300.r, maxWidth: maxWidth),
           decoration: BoxDecoration(
             color: UiTheme.white,
-            border: Border.all(
-              color: UiTheme.grey,
-            ),
+            border: Border.all(color: UiTheme.grey),
             borderRadius: BorderRadius.circular(10.r),
           ),
           child: Column(
@@ -54,9 +49,7 @@ class UiAlertWidget extends StatelessWidget {
                   alignment: Alignment.center,
                   child: Text(
                     title!,
-                    style: const TextStyle(
-                      color: UiTheme.white,
-                    ),
+                    style: const TextStyle(color: UiTheme.white),
                   ),
                 ),
               Padding(
@@ -65,9 +58,7 @@ class UiAlertWidget extends StatelessWidget {
                   children: [
                     content,
                     if (action != null) ...[
-                      SizedBox(
-                        height: 10.r,
-                      ),
+                      SizedBox(height: 10.r),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         spacing: 10.r,

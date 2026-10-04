@@ -41,8 +41,6 @@ Widget appBuilder(
     child: builderWidget,
   );
 
-
-
   //光标
   final textSelectionTheme = TextSelectionTheme(
     data: TextSelectionThemeData(
@@ -55,10 +53,7 @@ Widget appBuilder(
 
   //图标
   final iconTheme = IconTheme(
-    data: IconThemeData(
-      color: color,
-      size: UiTheme.fontSize,
-    ),
+    data: IconThemeData(color: color, size: UiTheme.fontSize),
     child: textSelectionTheme,
   );
 

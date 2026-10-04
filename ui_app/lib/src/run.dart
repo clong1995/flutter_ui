@@ -36,12 +36,10 @@ Future<void> uiApp({
   await SystemChannels.textInput.invokeMethod('TextInput.hide');
 
   //竖屏
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   //屏幕常亮
-  if(!kIsWeb){
+  if (!kIsWeb) {
     await FnDevice.lockEnable();
   }
 
@@ -56,13 +54,7 @@ Future<void> uiApp({
   //alert
   UiAlert.navigatorKey = navigatorKey;
 
-
   runApp(
-    App(
-      navigatorKey: navigatorKey,
-      title: title,
-      home: home,
-      builder: builder,
-    ),
+    App(navigatorKey: navigatorKey, title: title, home: home, builder: builder),
   );
 }
