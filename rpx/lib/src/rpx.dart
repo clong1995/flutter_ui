@@ -1,11 +1,10 @@
 import 'dart:math';
 import 'dart:ui';
 
-
 double? _width;
 
 void setWidth([double? width]) {
-  if (_width != null){
+  if (_width != null) {
     return;
   }
 
@@ -37,7 +36,6 @@ void setWidth([double? width]) {
   final pw = flutterView.physicalSize.width;
   final ph = flutterView.physicalSize.height;
   _width = min(pw, ph) / flutterView.devicePixelRatio;
-
 }
 
 double rpx(double size) {
