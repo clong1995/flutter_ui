@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FnStorage {
-  FnStorage._();
+  new _();
 
   static final SharedPreferencesAsync _asyncPrefs = SharedPreferencesAsync();
 
