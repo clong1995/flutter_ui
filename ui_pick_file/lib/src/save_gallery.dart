@@ -12,7 +12,7 @@ Future<String> saveImageToGallery({
   late String name;
   if (fileName == null || fileName.isEmpty) {
     name = '${DateTime.now().millisecondsSinceEpoch}';
-  }else{
+  } else {
     name = fileName;
   }
   final result = await ImageGallerySaverPlus.saveImage(
@@ -37,17 +37,14 @@ Future<String> saveVideoToGallery({
   late String name;
   if (fileName == null || fileName.isEmpty) {
     name = '${DateTime.now().millisecondsSinceEpoch}';
-  }else{
+  } else {
     name = fileName;
   }
   final savePath = appDocDir.path + name;
   final file = File(savePath);
   await file.writeAsBytes(bytes);
 
-  final result = await ImageGallerySaverPlus.saveFile(
-    file.path,
-    name: name,
-  );
+  final result = await ImageGallerySaverPlus.saveFile(file.path, name: name);
   if (result['isSuccess'] == true) {
     return '';
   }

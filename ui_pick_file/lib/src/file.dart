@@ -6,7 +6,7 @@ import 'package:ui_pick_file/src/picker.dart';
 import 'package:ui_pick_file/ui_pick_file.dart' show PickerFile;
 
 class UiPickFile {
-  UiPickFile._();
+  new _();
 
   //单选任意单文件
   static Future<PickerFile?> single({List<String>? allowedExtensions}) async {
@@ -14,11 +14,8 @@ class UiPickFile {
       type: allowedExtensions == null ? FileType.any : FileType.custom,
       allowedExtensions: allowedExtensions,
     );
-    if (result == null) {
-      return null;
-    }
-    final xf = result.files.first.xFile;
-    return pickerFile(xf);
+    final xf = result.first.xFile;
+    return await pickerFile(xf);
   }
 
   //多选任意文件
@@ -30,11 +27,8 @@ class UiPickFile {
       type: allowedExtensions == null ? FileType.any : FileType.custom,
       allowedExtensions: allowedExtensions,
     );
-    if (result == null) {
-      return null;
-    }
     final l = <PickerFile>[];
-    for (final file in result.files) {
+    for (final file in result) {
       l.add(await pickerFile(file.xFile));
     }
     return l;
@@ -42,7 +36,7 @@ class UiPickFile {
 
   //选择任意目录
   static Future<String?> dir() async {
-    return FilePicker.getDirectoryPath();
+    return await FilePicker.getDirectoryPath();
   }
 
   //保存任意文件
@@ -56,10 +50,11 @@ class UiPickFile {
       fileName: fileName,
       bytes: bytes,
     );
-    if (outputFile != null) {
-      final file = File(outputFile);
+    final p = outputFile?.path;
+    if (p != null) {
+      final file = File(p);
       await file.writeAsBytes(bytes);
     }
-    return outputFile;
+    return p;
   }
 }

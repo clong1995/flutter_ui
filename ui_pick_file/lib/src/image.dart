@@ -9,7 +9,7 @@ import 'package:ui_pick_file/ui_pick_file.dart' show PickerFile;
 //Image.file(File(_imageFile!.path))
 
 class UiPickImage {
-  UiPickImage._();
+  new _();
 
   //拍照文件
   static Future<PickerFile?> camera({
@@ -23,7 +23,7 @@ class UiPickImage {
       maxHeight: maxHeight,
       imageQuality: imageQuality,
     );
-    return pickerFile(xf);
+    return await pickerFile(xf);
   }
 
   //单选 从相册选择照片
@@ -38,7 +38,7 @@ class UiPickImage {
       maxHeight: maxHeight,
       imageQuality: imageQuality,
     );
-    return pickerFile(xf);
+    return await pickerFile(xf);
   }
 
   //多选 从相册选择照片
@@ -69,7 +69,7 @@ class UiPickImage {
   static Future<String> save({
     required Uint8List bytes,
     String? fileName,
-  }) async => saveImageToGallery(fileName: fileName, bytes: bytes);
+  }) async => await saveImageToGallery(fileName: fileName, bytes: bytes);
 
   static Future<void> saveUrl({required String url, String? fileName}) async {
     final response = await get(Uri.parse(url));

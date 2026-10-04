@@ -6,18 +6,18 @@ import 'package:ui_pick_file/src/save_gallery.dart';
 import 'package:ui_pick_file/ui_pick_file.dart' show PickerFile;
 
 class UiPickVideo {
-  UiPickVideo._();
+  new _();
 
   //拍摄视频
   static Future<PickerFile?> camera() async {
     final xf = await imagePicker.pickVideo(source: ImageSource.camera);
-    return pickerFile(xf);
+    return await pickerFile(xf);
   }
 
   //单选 从相册选择视频
   static Future<PickerFile?> gallery() async {
     final xf = await imagePicker.pickVideo(source: ImageSource.gallery);
-    return pickerFile(xf);
+    return await pickerFile(xf);
   }
 
   // 保存视频到相册
