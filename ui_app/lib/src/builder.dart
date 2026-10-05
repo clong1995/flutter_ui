@@ -7,8 +7,6 @@ Widget appBuilder(
   Widget? child,
   Widget Function(BuildContext, Widget?)? builder,
 ) {
-  const color = UiTheme.grey900;
-
   late Widget builderWidget;
   if (builder == null) {
     builderWidget = child!;
@@ -32,14 +30,14 @@ Widget appBuilder(
   //final keyboard = child!;
 
   //文字
-  final defaultTextStyle = DefaultTextStyle(
+  /*final defaultTextStyle = DefaultTextStyle(
     style: TextStyle(
       color: color,
       fontSize: UiTheme.fontSize,
       fontFamily: UiTheme.fontFamily,
     ),
     child: builderWidget,
-  );
+  );*/
 
   //光标
   final textSelectionTheme = TextSelectionTheme(
@@ -48,12 +46,12 @@ Widget appBuilder(
       selectionColor: UiTheme.primaryColor.withAlpha(100),
       selectionHandleColor: UiTheme.primaryColor,
     ),
-    child: defaultTextStyle,
+    child: builderWidget,
   );
 
   //图标
   final iconTheme = IconTheme(
-    data: IconThemeData(color: color, size: UiTheme.fontSize),
+    data: IconThemeData(color: UiTheme.grey900, size: UiTheme.fontSize),
     child: textSelectionTheme,
   );
 

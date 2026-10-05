@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:fn_datetime/fn_datetime.dart';
 import 'package:fn_device/fn_device.dart';
 import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_alert/ui_alert.dart';
@@ -12,7 +13,6 @@ Future<void> uiApp({
   required Widget home,
   String? title,
   Widget Function(BuildContext, Widget?)? builder,
-  Future<void> Function(void Function() runApp)? wrapRunApp,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -27,6 +27,8 @@ Future<void> uiApp({
       systemNavigationBarColor: UiTheme.transparent,
     ),
   );
+
+  await FnDatetime.setLocale();
 
   // 强制应用占满全屏
   // 包括状态栏和导航栏区域，光靠removePadding 和 safeArea 没法覆盖底部手势指示器
@@ -56,21 +58,12 @@ Future<void> uiApp({
   //alert
   UiAlert.navigatorKey = navigatorKey;
 
-  void ra() {
-    runApp(
-      App(
-        navigatorKey: navigatorKey,
-        title: title,
-        home: home,
-        builder: builder,
-      ),
-    );
-  }
-
-  if (wrapRunApp != null) {
-    await wrapRunApp(ra);
-  } else {
-    ra();
-  }
-
+  runApp(
+    App(
+      navigatorKey: navigatorKey,
+      title: title,
+      home: home,
+      builder: builder,
+    ),
+  );
 }

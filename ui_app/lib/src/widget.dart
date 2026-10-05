@@ -43,6 +43,11 @@ class App extends StatelessWidget {
       builder: (context, child) {
         return appBuilder(context, child, builder);
       },
+      textStyle: TextStyle(
+        color: UiTheme.grey900,
+        fontSize: UiTheme.fontSize,
+        fontFamily: UiTheme.fontFamily,
+      ),
       locale: const Locale('zh', 'CN'),
     );
   }
