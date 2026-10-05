@@ -11,7 +11,7 @@ class UiTheme {
   static String? fontFamily = 'PuHuiTi';
 
   //全角空格
-  static String u3000 = '　';
+  static const String u3000 = '　';
 
   //grey
   static const Color grey = Color(0xFF9E9E9E);
