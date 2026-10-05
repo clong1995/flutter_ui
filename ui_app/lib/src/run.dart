@@ -12,8 +12,10 @@ Future<void> uiApp({
   required Widget home,
   String? title,
   Widget Function(BuildContext, Widget?)? builder,
+  Future<void> Function(void Function() runApp)? wrapRunApp,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
+
   //增加图片缓存
   PaintingBinding.instance.imageCache.maximumSizeBytes = 500 << 20; // 500MB
   //状态栏
@@ -54,7 +56,25 @@ Future<void> uiApp({
   //alert
   UiAlert.navigatorKey = navigatorKey;
 
-  runApp(
-    App(navigatorKey: navigatorKey, title: title, home: home, builder: builder),
-  );
+  if (wrapRunApp != null) {
+    await wrapRunApp(
+      () => runApp(
+        App(
+          navigatorKey: navigatorKey,
+          title: title,
+          home: home,
+          builder: builder,
+        ),
+      ),
+    );
+  } else {
+    runApp(
+      App(
+        navigatorKey: navigatorKey,
+        title: title,
+        home: home,
+        builder: builder,
+      ),
+    );
+  }
 }
