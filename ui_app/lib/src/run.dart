@@ -56,18 +56,7 @@ Future<void> uiApp({
   //alert
   UiAlert.navigatorKey = navigatorKey;
 
-  if (wrapRunApp != null) {
-    await wrapRunApp(
-      () => runApp(
-        App(
-          navigatorKey: navigatorKey,
-          title: title,
-          home: home,
-          builder: builder,
-        ),
-      ),
-    );
-  } else {
+  void ra() {
     runApp(
       App(
         navigatorKey: navigatorKey,
@@ -77,4 +66,11 @@ Future<void> uiApp({
       ),
     );
   }
+
+  if (wrapRunApp != null) {
+    await wrapRunApp(ra);
+  } else {
+    ra();
+  }
+
 }
