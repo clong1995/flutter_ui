@@ -8,6 +8,7 @@ class UiTheme {
 
   //fontSize
   static double fontSize = 13.r;
+  static String? fontFamily = 'PuHuiTi';
 
   //全角空格
   static String u3000 = '　';

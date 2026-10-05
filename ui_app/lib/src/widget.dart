@@ -46,7 +46,7 @@ class App extends StatelessWidget {
       textStyle: TextStyle(
         color: UiTheme.grey900,
         fontSize: UiTheme.fontSize,
-        fontFamily: 'PuHuiTi',
+        fontFamily: UiTheme.fontFamily,
       ),
       locale: const Locale('zh', 'CN'),
     );
