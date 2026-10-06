@@ -27,7 +27,9 @@ Future<void> uiApp({
     if (!await FlutterSingleInstance().isFirstInstance()) {
       final err = await FlutterSingleInstance().focus();
       if (err != null) {
-        print(err);
+        if (kDebugMode) {
+          print(err);
+        }
       }
       exit(0);
     }
