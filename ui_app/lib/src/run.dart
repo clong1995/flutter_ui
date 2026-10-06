@@ -11,6 +11,7 @@ import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_app/src/widget.dart';
 import 'package:ui_theme/ui_theme.dart';
 import 'package:ui_toast/ui_toast.dart';
+import 'package:window_manager/window_manager.dart';
 
 Future<void> uiApp({
   required Widget home,
@@ -30,6 +31,19 @@ Future<void> uiApp({
       }
       exit(0);
     }
+
+    const windowOptions = WindowOptions(
+      center: true,
+      titleBarStyle: TitleBarStyle.hidden,
+    );
+
+    await windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.setSize(const Size(1024, 768));
+      await windowManager.setResizable(false);
+      await windowManager.show();
+      await windowManager.focus();
+    });
+
   } else if (FnDevice.platform == PlatformType.iOS ||
       FnDevice.platform == PlatformType.android) {
     //状态栏
