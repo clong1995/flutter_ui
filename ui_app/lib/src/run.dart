@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -16,39 +18,48 @@ Future<void> uiApp({
   Widget Function(BuildContext, Widget?)? builder,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
-  if(FnDevice.platform == '' || FnDevice.platform == ''){
 
-  }
+  if (FnDevice.platform == PlatformType.macOS ||
+      FnDevice.platform == PlatformType.linux ||
+      FnDevice.platform == PlatformType.windows) {
+    await windowManager.ensureInitialized();
+    if (!await FlutterSingleInstance().isFirstInstance()) {
+      final err = await FlutterSingleInstance().focus();
+      if (err != null) {
+        print(err);
+      }
+      exit(0);
+    }
+  } else if (FnDevice.platform == PlatformType.iOS ||
+      FnDevice.platform == PlatformType.android) {
+    //状态栏
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.light,
+        statusBarColor: UiTheme.transparent,
+        systemNavigationBarColor: UiTheme.transparent,
+      ),
+    );
 
-  if (await FlutterSingleInstance().isFirstInstance()) {
+    // 强制应用占满全屏
+    // 包括状态栏和导航栏区域，光靠removePadding 和 safeArea 没法覆盖底部手势指示器
+    await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
+    //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
+    //关闭键盘
+    await SystemChannels.textInput.invokeMethod('TextInput.hide');
+
+    //竖屏
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 
   //增加图片缓存
   PaintingBinding.instance.imageCache.maximumSizeBytes = 500 << 20; // 500MB
-  //状态栏
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.light,
-      statusBarColor: UiTheme.transparent,
-      systemNavigationBarColor: UiTheme.transparent,
-    ),
-  );
 
+  //本地时间显示
   await FnDatetime.setLocale();
-
-  // 强制应用占满全屏
-  // 包括状态栏和导航栏区域，光靠removePadding 和 safeArea 没法覆盖底部手势指示器
-  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-
-  //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-
-  //关闭键盘
-  await SystemChannels.textInput.invokeMethod('TextInput.hide');
-
-  //竖屏
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   //屏幕常亮
   if (!kIsWeb) {
@@ -67,11 +78,6 @@ Future<void> uiApp({
   UiAlert.navigatorKey = navigatorKey;
 
   runApp(
-    App(
-      navigatorKey: navigatorKey,
-      title: title,
-      home: home,
-      builder: builder,
-    ),
+    App(navigatorKey: navigatorKey, title: title, home: home, builder: builder),
   );
 }
