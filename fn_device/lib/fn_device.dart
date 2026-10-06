@@ -8,12 +8,12 @@ import 'package:fn_device/src/wake_lock.dart';
 class FnDevice {
   new _();
 
-  static String? _platform;
+  static PlatformType? _platform;
   static String? _brand;
   static String? _guid;
   static String? _info;
 
-  static String get platform {
+  static PlatformType get platform {
     if (_platform != null) {
       return _platform!;
     }
@@ -21,35 +21,35 @@ class FnDevice {
       if (userAgent.contains('iPad') ||
           userAgent.contains('iPhone') ||
           userAgent.contains('iPod')) {
-        _platform = 'web-ios';
+        _platform = PlatformType.webIOS;
       } else if (userAgent.contains('Android')) {
-        _platform = 'web-android';
+        _platform = PlatformType.webAndroid;
       } else if (userAgent.contains('Windows')) {
-        _platform = 'web-windows';
+        _platform = PlatformType.webWindows;
       } else if (userAgent.contains('macOS')) {
-        _platform = 'web-macOS';
+        _platform = PlatformType.webMacOS;
       } else if (userAgent.contains('linux')) {
-        _platform = 'web-linux';
+        _platform = PlatformType.webLinux;
       } else if (userAgent.contains('fuchsia')) {
-        _platform = 'web-fuchsia';
+        _platform = PlatformType.webFuchsia;
       }
     } else {
       switch (defaultTargetPlatform) {
         case TargetPlatform.android:
-          _platform = 'android';
+          _platform = PlatformType.android;
         case TargetPlatform.iOS:
-          _platform = 'iOS';
+          _platform = PlatformType.iOS;
         case TargetPlatform.windows:
-          _platform = 'windows';
+          _platform = PlatformType.windows;
         case TargetPlatform.macOS:
-          _platform = 'macOS';
+          _platform = PlatformType.macOS;
         case TargetPlatform.linux:
-          _platform = 'linux';
+          _platform = PlatformType.linux;
         case TargetPlatform.fuchsia:
-          _platform = 'fuchsia';
+          _platform = PlatformType.fuchsia;
       }
     }
-    return _platform ?? 'no-os';
+    return _platform ?? PlatformType.unknown;
   }
 
   //Apple、Xiaomi、Redmi、HUAWEI、HONOR、OPPO、OnePlus、vivo、Meizu、samsung
@@ -91,4 +91,28 @@ class FnDevice {
   static double get bottomSafeHeight {
     return Height.bottomSafeHeight;
   }
+}
+
+enum PlatformType {
+  android('Android'),
+  iOS('iOS'),
+  windows('Windows'),
+  macOS('macOS'),
+  linux('Linux'),
+  fuchsia('Fuchsia'),
+  webIOS('Web-iOS'),
+  webAndroid('Web-Android'),
+  webWindows('Web-Windows'),
+  webMacOS('Web-macOS'),
+  webLinux('Web-Linux'),
+  webFuchsia('Web-Fuchsia'),
+  unknown('');
+
+  new(this.label);
+
+  /// 平台的显示名称
+  final String label;
+
+  @override
+  String toString() => label;
 }

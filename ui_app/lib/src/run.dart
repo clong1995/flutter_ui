@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_single_instance/flutter_single_instance.dart';
 import 'package:fn_datetime/fn_datetime.dart';
 import 'package:fn_device/fn_device.dart';
 import 'package:fn_nav/fn_nav.dart';
@@ -15,6 +16,13 @@ Future<void> uiApp({
   Widget Function(BuildContext, Widget?)? builder,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
+  if(FnDevice.platform == '' || FnDevice.platform == ''){
+
+  }
+
+  if (await FlutterSingleInstance().isFirstInstance()) {
+
+  }
 
   //增加图片缓存
   PaintingBinding.instance.imageCache.maximumSizeBytes = 500 << 20; // 500MB
