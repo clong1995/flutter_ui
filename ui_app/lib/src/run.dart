@@ -36,6 +36,7 @@ Future<void> uiApp({
 
     const windowOptions = WindowOptions(
       size: Size(1024, 680),
+      minimumSize: Size(1024, 680),
       center: true,
       titleBarStyle: TitleBarStyle.hidden,
     );
