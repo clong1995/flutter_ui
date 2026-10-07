@@ -66,13 +66,7 @@ class FnNav {
       return;
     }
 
-    final navigator = Navigator.of(currentState, rootNavigator: root);
-
-    final stopwatch = Stopwatch()..start();
-
-    navigator.pop<T>(result);
-
-    print('Navigator.pop synchronous: ${stopwatch.elapsedMicroseconds} us');
+    Navigator.of(currentState, rootNavigator: root).pop<T>(result);
   }
 
   static T? routeArgs<T>(BuildContext context) {
