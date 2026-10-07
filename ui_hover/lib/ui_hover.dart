@@ -14,6 +14,7 @@ class _UiHoverState extends State<UiHover> {
 
   @override
   Widget build(BuildContext context) => MouseRegion(
+    cursor: SystemMouseCursors.click,
     onEnter: (_) => setState(() => hover = true),
     onExit: (_) => setState(() => hover = false),
     child: widget.builder(true),
