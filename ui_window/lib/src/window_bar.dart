@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
+import 'package:fn_nav/fn_nav.dart';
 import 'package:material_ui/material_ui.dart' show Icons;
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_theme/ui_theme.dart';
@@ -75,11 +76,9 @@ class _UiWindowBarState extends State<UiWindowBar> {
           if (widget.leading != null)
             ...?widget.leading
           else if (ModalRoute.of(context)?.canPop ?? false)
-            UiIconButton(
-              // color: UiTheme.white,
-              // background: false,
+            const UiIconButton(
               icon: Icons.arrow_back_ios_new_rounded,
-              onTap: () => Navigator.pop(context),
+              onTap: FnNav.pop,
             ),
           if (widget.title == null)
             const Spacer()
@@ -91,10 +90,7 @@ class _UiWindowBarState extends State<UiWindowBar> {
             children: [
               // 最小化
               if (widget.minimize)
-                _BarButton(
-                  icon: Icons.remove,
-                  onTap: windowManager.minimize,
-                ),
+                _BarButton(icon: Icons.remove, onTap: windowManager.minimize),
 
               // 最大化 / 还原
               if (widget.maximize)
@@ -133,11 +129,7 @@ class _UiWindowBarState extends State<UiWindowBar> {
 }
 
 class _BarButton extends StatefulWidget {
-  const new({
-    required this.icon,
-    required this.onTap,
-    this.isClose = false,
-  });
+  const new({required this.icon, required this.onTap, this.isClose = false});
 
   final IconData icon;
   final VoidCallback onTap;
