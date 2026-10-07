@@ -98,5 +98,10 @@ class FnNavRouteBuilder<T> extends PageRouteBuilder<T> {
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             child,
       );
+  @override
+  Duration get transitionDuration => Duration.zero;
+
+  @override
+  Duration get reverseTransitionDuration => Duration.zero;
   final WidgetBuilder builder;
 }
