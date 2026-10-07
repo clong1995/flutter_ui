@@ -77,7 +77,7 @@ class _UiWindowBarState extends State<UiWindowBar> {
           else if (ModalRoute.of(context)?.canPop ?? false)
             UiIconButton(
               // color: UiTheme.white,
-              background: false,
+              // background: false,
               icon: Icons.arrow_back_ios_new_rounded,
               onTap: () => Navigator.pop(context),
             ),
