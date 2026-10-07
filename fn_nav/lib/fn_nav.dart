@@ -59,12 +59,22 @@ class FnNav {
     );
   }
 
-  static void pop<T extends Object?>({bool root = false, T? result}) {
-    final context = _navigatorKey?.currentContext;
+  static Future<void> pop<T extends Object?>({
+    bool root = false,
+    T? result,
+  }) async {
+    /*final context = _navigatorKey?.currentContext;
     if (context == null) {
       return;
     }
-    return Navigator.of(context, rootNavigator: root).pop<T>(result);
+    return Navigator.of(context, rootNavigator: root).pop<T>(result);*/
+
+    final currentState = _navigatorKey?.currentState;
+    if (currentState == null) {
+      return;
+    }
+
+    return currentState.pop<T>(result);
   }
 
   static T? routeArgs<T>(BuildContext context) {
