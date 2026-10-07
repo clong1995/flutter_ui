@@ -8,6 +8,7 @@ import 'package:window_manager/window_manager.dart';
 
 class UiWindowBar extends StatefulWidget {
   const new({
+    this.height = 36.0,
     this.minimize = true,
     this.maximize = true,
     this.close = true,
@@ -18,6 +19,7 @@ class UiWindowBar extends StatefulWidget {
     super.key,
   });
 
+  final double height;
   final bool minimize;
   final bool maximize;
   final bool close;
@@ -60,7 +62,7 @@ class _UiWindowBarState extends State<UiWindowBar> {
 
   Widget bar() {
     return Container(
-      height: 36,
+      height: widget.height,
       decoration:
           widget.decoration ??
           const BoxDecoration(
@@ -89,7 +91,10 @@ class _UiWindowBarState extends State<UiWindowBar> {
             children: [
               // 最小化
               if (widget.minimize)
-                _BarButton(icon: Icons.remove, onTap: windowManager.minimize),
+                _BarButton(
+                  icon: Icons.remove,
+                  onTap: windowManager.minimize,
+                ),
 
               // 最大化 / 还原
               if (widget.maximize)
@@ -128,7 +133,11 @@ class _UiWindowBarState extends State<UiWindowBar> {
 }
 
 class _BarButton extends StatefulWidget {
-  const new({required this.icon, required this.onTap, this.isClose = false});
+  const new({
+    required this.icon,
+    required this.onTap,
+    this.isClose = false,
+  });
 
   final IconData icon;
   final VoidCallback onTap;
@@ -161,12 +170,12 @@ class _BarButtonState extends State<_BarButton> {
           width: size,
           height: size,
           decoration: BoxDecoration(
-            borderRadius: .circular(size/2),
+            borderRadius: .circular(size / 2),
             color: _hover
                 ? (widget.isClose ? UiTheme.red : UiTheme.grey300)
                 : UiTheme.grey200,
           ),
-          child: Icon(widget.icon, size: size/1.5, color: UiTheme.grey900),
+          child: Icon(widget.icon, size: size / 1.5, color: UiTheme.grey900),
         ),
       ),
     );

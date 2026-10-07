@@ -35,17 +35,19 @@ Future<void> uiApp({
     }
 
     const windowOptions = WindowOptions(
+      size: Size(1024, 680),
       center: true,
       titleBarStyle: TitleBarStyle.hidden,
     );
 
     await windowManager.waitUntilReadyToShow(windowOptions, () async {
-      await windowManager.setSize(const Size(1024, 768));
-      await windowManager.setResizable(false);
+      if(FnDevice.platform != PlatformType.linux){
+        //linux下有bug
+        await windowManager.setResizable(false);
+      }
       await windowManager.show();
       await windowManager.focus();
     });
-
   } else if (FnDevice.platform == PlatformType.iOS ||
       FnDevice.platform == PlatformType.android) {
     //状态栏

@@ -1,5 +1,6 @@
 import 'dart:math';
-import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
 
 double? _width;
 
@@ -43,6 +44,14 @@ double rpx(double size) {
     return 0;
   }
 
+  //桌面端不适配
+  if (defaultTargetPlatform == TargetPlatform.windows ||
+      defaultTargetPlatform == TargetPlatform.macOS ||
+      defaultTargetPlatform == TargetPlatform.linux ||
+      defaultTargetPlatform == TargetPlatform.fuchsia) {
+    return size;
+  }
+
   if (_width == null) {
     setWidth();
   }
@@ -50,5 +59,6 @@ double rpx(double size) {
   if (_width == 0) {
     return size;
   }
+
   return _width! / 375 * size;
 }
