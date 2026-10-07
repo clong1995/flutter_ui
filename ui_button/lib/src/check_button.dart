@@ -56,10 +56,13 @@ class _UiCheckButtonState extends State<UiCheckButton> {
     );
     return widget.onChanged == null
         ? UiDisable(child: child)
-        : GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () => widget.onChanged!(!widget.checked),
-            child: child,
+        : MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => widget.onChanged!(!widget.checked),
+              child: child,
+            ),
           );
   }
 }

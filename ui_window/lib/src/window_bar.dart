@@ -75,14 +75,11 @@ class _UiWindowBarState extends State<UiWindowBar> {
           if (widget.leading != null)
             ...?widget.leading
           else if (ModalRoute.of(context)?.canPop ?? false)
-            MouseRegion(
-              cursor: SystemMouseCursors.click,
-              child: UiIconButton(
-                // color: UiTheme.white,
-                // background: false,
-                icon: Icons.arrow_back_ios_new_rounded,
-                onTap: () => Navigator.pop(context),
-              ),
+            UiIconButton(
+              // color: UiTheme.white,
+              // background: false,
+              icon: Icons.arrow_back_ios_new_rounded,
+              onTap: () => Navigator.pop(context),
             ),
           if (widget.title == null)
             const Spacer()

@@ -72,10 +72,13 @@ class UiTextButton extends StatelessWidget {
     );
     return onTap == null
         ? UiDisable(child: child)
-        : GestureDetector(
-            onTap: onTap,
-            behavior: HitTestBehavior.opaque,
-            child: child,
+        : MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: onTap,
+              behavior: HitTestBehavior.opaque,
+              child: child,
+            ),
           );
   }
 }

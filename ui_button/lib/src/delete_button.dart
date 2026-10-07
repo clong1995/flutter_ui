@@ -33,10 +33,13 @@ class UiDeleteButton extends StatelessWidget {
     );
     return onTap == null
         ? UiDisable(child: child)
-        : GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: onTap,
-            child: child,
+        : MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: onTap,
+              child: child,
+            ),
           );
   }
 }
