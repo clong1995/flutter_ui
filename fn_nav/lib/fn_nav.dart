@@ -66,10 +66,13 @@ class FnNav {
       return;
     }
 
-    Navigator.of(
-      currentState,
-      rootNavigator: root,
-    ).pop<T>(result);
+    final navigator = Navigator.of(currentState, rootNavigator: root);
+
+    final stopwatch = Stopwatch()..start();
+
+    navigator.pop<T>(result);
+
+    print('Navigator.pop synchronous: ${stopwatch.elapsedMicroseconds} us');
   }
 
   static T? routeArgs<T>(BuildContext context) {
@@ -98,6 +101,7 @@ class FnNavRouteBuilder<T> extends PageRouteBuilder<T> {
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             child,
       );
+
   @override
   Duration get transitionDuration => Duration.zero;
 
