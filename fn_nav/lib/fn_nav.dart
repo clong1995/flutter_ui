@@ -16,11 +16,11 @@ class FnNav {
     bool root = false,
     Object? args,
   }) async {
-    final context = _navigatorKey?.currentContext;
-    if (context == null) {
+    final currentState = _navigatorKey?.currentContext;
+    if (currentState == null) {
       return null;
     }
-    return await Navigator.of(context, rootNavigator: root).push<T>(
+    return await Navigator.of(currentState, rootNavigator: root).push<T>(
       FnNavRouteBuilder<T>(RouteSettings(arguments: args), (context) => page()),
     );
   }
@@ -46,12 +46,12 @@ class FnNav {
     Object? args,
     TO? result,
   }) async {
-    final context = _navigatorKey?.currentContext;
-    if (context == null) {
+    final currentState = _navigatorKey?.currentContext;
+    if (currentState == null) {
       return null;
     }
     return await Navigator.of(
-      context,
+      currentState,
       rootNavigator: root,
     ).pushReplacement<T, TO>(
       FnNavRouteBuilder<T>(RouteSettings(arguments: args), (context) => page()),
@@ -59,22 +59,17 @@ class FnNav {
     );
   }
 
-  static Future<void> pop<T extends Object?>({
-    bool root = false,
-    T? result,
-  }) async {
-    /*final context = _navigatorKey?.currentContext;
-    if (context == null) {
-      return;
-    }
-    return Navigator.of(context, rootNavigator: root).pop<T>(result);*/
+  static void pop<T extends Object?>({bool root = false, T? result}) {
+    final currentState = _navigatorKey?.currentContext;
 
-    final currentState = _navigatorKey?.currentState;
     if (currentState == null) {
       return;
     }
 
-    return currentState.pop<T>(result);
+    Navigator.of(
+      currentState,
+      rootNavigator: root,
+    ).pop<T>(result);
   }
 
   static T? routeArgs<T>(BuildContext context) {
