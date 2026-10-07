@@ -37,7 +37,7 @@ class App extends StatelessWidget {
         Locale('en'), // 英语
       ],
       navigatorKey: navigatorKey,
-      pageRouteBuilder: FnNavRouteBuilder.new,
+      // pageRouteBuilder: FnNavRouteBuilder.new,
       debugShowCheckedModeBanner: false,
       color: UiTheme.primaryColor,
       builder: (context, child) {
