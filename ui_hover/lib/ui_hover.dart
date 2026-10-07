@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class UiHover extends StatefulWidget {
-  const UiHover({super.key, required this.builder});
+  const new({super.key, required this.builder});
 
   final Widget Function(bool hover) builder;
 
