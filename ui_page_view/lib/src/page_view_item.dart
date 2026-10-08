@@ -28,8 +28,10 @@ class _UiPageViewItemState extends State<UiPageViewItem>
     super.build(context);
     return widget.nestRoute
         ? Navigator(
-            onGenerateRoute: (settings) =>
-                FnNavRouteBuilder(settings, (context) => widget.child),
+            onGenerateRoute: (settings) => FnNavRoute(
+              settings: settings,
+              builder: (context) => widget.child,
+            ),
           )
         : widget.child;
   }
