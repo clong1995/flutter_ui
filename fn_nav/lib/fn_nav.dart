@@ -148,30 +148,3 @@ class FnNavScope extends InheritedWidget {
     return arguments != oldWidget.arguments;
   }
 }
-
-///
-/// 这个类继续保留。
-///
-/// WidgetsApp 的 pageRouteBuilder 需要它，
-/// 所以不要删除。
-///
-/*class FnNavRouteBuilder<T> extends PageRouteBuilder<T> {
-  new(
-      RouteSettings settings,
-      this.builder,
-      ) : super(
-    settings: settings,
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        builder(context),
-    transitionDuration: .zero,
-    reverseTransitionDuration: .zero,
-    transitionsBuilder: (
-        context,
-        animation,
-        secondaryAnimation,
-        child,
-        ) => child,
-  );
-
-  final WidgetBuilder builder;
-}*/
