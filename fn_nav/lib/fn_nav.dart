@@ -70,12 +70,6 @@ class FnNav {
   }
 
   static T? routeArgs<T>(BuildContext context) {
-    /*
-    //这个context拿不到参数
-    final context = _navigatorKey?.currentContext;
-    if (context == null) {
-      return null;
-    }*/
     final arguments = ModalRoute.of(context)?.settings.arguments;
     if (arguments != null) {
       return arguments as T;
@@ -95,11 +89,5 @@ class FnNavRouteBuilder<T> extends PageRouteBuilder<T> {
         transitionsBuilder: (context, animation, secondaryAnimation, child) =>
             child,
       );
-
-  @override
-  Duration get transitionDuration => Duration.zero;
-
-  @override
-  Duration get reverseTransitionDuration => Duration.zero;
   final WidgetBuilder builder;
 }
