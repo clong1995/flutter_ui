@@ -10,19 +10,16 @@ class FnNav {
   }
 
   static Future<T?> push<T extends Object?>(
-      Widget Function() page, {
-        bool root = false,
-        Object? args,
-      }) async {
+    Widget Function() page, {
+    bool root = false,
+    Object? args,
+  }) async {
     final currentState = _navigatorKey?.currentContext;
     if (currentState == null) {
       return null;
     }
 
-    return await Navigator.of(
-      currentState,
-      rootNavigator: root,
-    ).push<T>(
+    return await Navigator.of(currentState, rootNavigator: root).push<T>(
       FnNavRoute<T>(
         settings: RouteSettings(arguments: args),
         builder: (context) => page(),
@@ -31,35 +28,32 @@ class FnNav {
   }
 
   static Future<T?> pushAndRemove<T extends Object?>(
-      Widget Function() page, {
-        bool root = false,
-        Object? args,
-      }) async {
+    Widget Function() page, {
+    bool root = false,
+    Object? args,
+  }) async {
     final currentState = _navigatorKey?.currentContext;
     if (currentState == null) {
       return null;
     }
 
-    final navigator = Navigator.of(
-      currentState,
-      rootNavigator: root,
-    );
+    final navigator = Navigator.of(currentState, rootNavigator: root);
 
     return await navigator.pushAndRemoveUntil<T>(
       FnNavRoute<T>(
         settings: RouteSettings(arguments: args),
         builder: (context) => page(),
       ),
-          (route) => false,
+      (route) => false,
     );
   }
 
   static Future<T?> pushAndReplace<T extends Object?, TO extends Object?>(
-      Widget Function() page, {
-        bool root = false,
-        Object? args,
-        TO? result,
-      }) async {
+    Widget Function() page, {
+    bool root = false,
+    Object? args,
+    TO? result,
+  }) async {
     final currentState = _navigatorKey?.currentContext;
     if (currentState == null) {
       return null;
@@ -77,20 +71,14 @@ class FnNav {
     );
   }
 
-  static void pop<T extends Object?>({
-    bool root = false,
-    T? result,
-  }) {
+  static void pop<T extends Object?>({bool root = false, T? result}) {
     final currentState = _navigatorKey?.currentContext;
 
     if (currentState == null) {
       return;
     }
 
-    Navigator.of(
-      currentState,
-      rootNavigator: root,
-    ).pop<T>(result);
+    Navigator.of(currentState, rootNavigator: root).pop<T>(result);
   }
 
   static T? routeArgs<T>(BuildContext context) {
@@ -102,8 +90,16 @@ class FnNav {
 
     return null;
   }
-}
 
+  static bool canPop({bool root = false}) {
+    final currentState = _navigatorKey?.currentContext;
+    if (currentState == null) {
+      return false;
+    }
+
+    return Navigator.of(currentState, rootNavigator: root).canPop();
+  }
+}
 
 ///
 /// 不带任何动画的 Route。
@@ -112,10 +108,7 @@ class FnNav {
 /// 因此不存在 transitionDuration / reverseTransitionDuration。
 ///
 class FnNavRoute<T> extends OverlayRoute<T> {
-  new({
-    required this.builder,
-    super.settings,
-  });
+  new({required this.builder, super.settings});
 
   final WidgetBuilder builder;
 
@@ -135,7 +128,6 @@ class FnNavRoute<T> extends OverlayRoute<T> {
   }
 }
 
-
 ///
 /// 给页面提供 route arguments。
 ///
@@ -143,16 +135,12 @@ class FnNavRoute<T> extends OverlayRoute<T> {
 /// 所以不能继续使用 ModalRoute.of(context)。
 ///
 class FnNavScope extends InheritedWidget {
-  const new({
-    required this.arguments, required super.child, super.key,
-  });
+  const new({required this.arguments, required super.child, super.key});
 
   final Object? arguments;
 
   static Object? argumentsOf(BuildContext context) {
-    return context
-        .dependOnInheritedWidgetOfExactType<FnNavScope>()
-        ?.arguments;
+    return context.dependOnInheritedWidgetOfExactType<FnNavScope>()?.arguments;
   }
 
   @override
@@ -160,7 +148,6 @@ class FnNavScope extends InheritedWidget {
     return arguments != oldWidget.arguments;
   }
 }
-
 
 ///
 /// 这个类继续保留。
