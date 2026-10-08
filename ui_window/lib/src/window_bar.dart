@@ -75,7 +75,7 @@ class _UiWindowBarState extends State<UiWindowBar> {
           const SizedBox(width: 12),
           if (widget.leading != null)
             ...?widget.leading
-          else if (ModalRoute.of(context)?.canPop ?? false)
+          else if (FnNav.canPop())
             const UiIconButton(
               icon: Icons.arrow_back_ios_new_rounded,
               onTap: FnNav.pop,
