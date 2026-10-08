@@ -26,7 +26,12 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return WidgetsApp(
       title: title,
-      home: home,
+      // home: home,
+
+      onGenerateRoute: (settings) {
+        return FnNavRoute(settings: settings, builder: (context) => home);
+      },
+
       localizationsDelegates: const [
         material_ui.GlobalMaterialLocalizations.delegate,
         flutter_localizations.GlobalWidgetsLocalizations.delegate,
@@ -37,7 +42,7 @@ class App extends StatelessWidget {
         Locale('en'), // 英语
       ],
       navigatorKey: navigatorKey,
-      pageRouteBuilder: FnNavRouteBuilder.new,
+      //pageRouteBuilder: FnNavRouteBuilder.new,
       debugShowCheckedModeBanner: false,
       color: UiTheme.primaryColor,
       builder: (context, child) {
