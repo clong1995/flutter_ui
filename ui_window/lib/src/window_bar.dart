@@ -33,21 +33,48 @@ class UiWindowBar extends StatefulWidget {
   State<UiWindowBar> createState() => _UiWindowBarState();
 }
 
-class _UiWindowBarState extends State<UiWindowBar> {
+class _UiWindowBarState extends State<UiWindowBar> with WindowListener {
   bool _isMaximized = false;
 
   @override
   void initState() {
     super.initState();
-    unawaited(_updateMaximized());
+
+    windowManager.addListener(this);
+
+    unawaited(_initWindowState());
   }
 
-  Future<void> _updateMaximized() async {
+  Future<void> _initWindowState() async {
     final maximized = await windowManager.isMaximized();
 
     if (mounted) {
       setState(() {
         _isMaximized = maximized;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    windowManager.removeListener(this);
+    super.dispose();
+  }
+
+  @override
+  void onWindowMaximize() {
+    if (mounted) {
+      setState(() {
+        _isMaximized = true;
+      });
+    }
+  }
+
+  @override
+  void onWindowUnmaximize() {
+    if (mounted) {
+      setState(() {
+        _isMaximized = false;
       });
     }
   }
@@ -73,6 +100,7 @@ class _UiWindowBarState extends State<UiWindowBar> {
       child: Row(
         children: [
           const SizedBox(width: 12),
+
           if (widget.leading != null)
             ...?widget.leading
           else if (FnNav.canPop())
@@ -80,11 +108,14 @@ class _UiWindowBarState extends State<UiWindowBar> {
               icon: Icons.arrow_back_ios_new_rounded,
               onTap: FnNav.pop,
             ),
+
           if (widget.title == null)
             const Spacer()
           else
             Expanded(child: widget.title!),
+
           ...?widget.action,
+
           Row(
             spacing: 10,
             children: [
@@ -97,12 +128,11 @@ class _UiWindowBarState extends State<UiWindowBar> {
                 _BarButton(
                   icon: _isMaximized ? Icons.filter_none : Icons.crop_square,
                   onTap: () async {
-                    if (await windowManager.isMaximized()) {
+                    if (_isMaximized) {
                       await windowManager.unmaximize();
                     } else {
                       await windowManager.maximize();
                     }
-                    await _updateMaximized();
                   },
                 ),
 
@@ -121,6 +151,7 @@ class _UiWindowBarState extends State<UiWindowBar> {
                 ),
             ],
           ),
+
           const SizedBox(width: 12),
         ],
       ),
@@ -145,6 +176,7 @@ class _BarButtonState extends State<_BarButton> {
   @override
   Widget build(BuildContext context) {
     const size = 20.0;
+
     return MouseRegion(
       onEnter: (_) {
         setState(() {
