@@ -33,7 +33,7 @@ Future<void> uiApp({
 
     //规定桌面显示
     setViewWidth(desktop.width);
-    UiTheme.fontSize = desktop.fontSize ?? 18.r;
+    UiTheme.fontSize = desktop.fontSize ?? 10.r;
 
     //
     await windowManager.ensureInitialized();
@@ -52,7 +52,7 @@ Future<void> uiApp({
     final windowOptions = WindowOptions(
       size: size,
       minimumSize: size,
-      //center: true,
+      center: true,
       titleBarStyle: desktop.titleBar ? null : TitleBarStyle.hidden,
     );
 
