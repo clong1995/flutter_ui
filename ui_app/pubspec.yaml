@@ -5,8 +5,8 @@ homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.13.3
-  flutter: ">=3.47.4"
+  sdk: ^3.13.7
+  flutter: ">=3.47.8"
 
 dependencies:
   flutter:
@@ -41,6 +41,10 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: fn_datetime
+  rpx:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: rpx
 
   flutter_localizations:
     sdk: flutter

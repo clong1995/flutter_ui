@@ -45,12 +45,12 @@ double rpx(double size) {
   }
 
   //桌面端不适配
-  if (defaultTargetPlatform == TargetPlatform.windows ||
+  /*if (defaultTargetPlatform == TargetPlatform.windows ||
       defaultTargetPlatform == TargetPlatform.macOS ||
       defaultTargetPlatform == TargetPlatform.linux ||
       defaultTargetPlatform == TargetPlatform.fuchsia) {
     return size;
-  }
+  }*/
 
   if (_width == null) {
     setWidth();

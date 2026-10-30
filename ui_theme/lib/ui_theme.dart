@@ -1,13 +1,12 @@
 import 'dart:ui';
 
 import 'package:material_ui/material_ui.dart';
-import 'package:rpx/ext.dart';
 
 class UiTheme {
   static Color primaryColor = const Color(0xFF2D7AFF);
 
   //fontSize
-  static double fontSize = 13.r;
+  static double fontSize = 15;
   static String? fontFamily = 'PuHuiTi';
 
   //全角空格

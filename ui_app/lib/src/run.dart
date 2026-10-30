@@ -7,6 +7,7 @@ import 'package:flutter_single_instance/flutter_single_instance.dart';
 import 'package:fn_datetime/fn_datetime.dart';
 import 'package:fn_device/fn_device.dart';
 import 'package:fn_nav/fn_nav.dart';
+import 'package:rpx/ext.dart';
 import 'package:ui_alert/ui_alert.dart';
 import 'package:ui_app/src/widget.dart';
 import 'package:ui_theme/ui_theme.dart';
@@ -17,12 +18,24 @@ Future<void> uiApp({
   required Widget home,
   String? title,
   Widget Function(BuildContext, Widget?)? builder,
+  Desktop? desktop,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (FnDevice.platform == PlatformType.macOS ||
-      FnDevice.platform == PlatformType.linux ||
-      FnDevice.platform == PlatformType.windows) {
+  //提前设置宽度
+  setViewWidth();
+  UiTheme.fontSize =13.r;
+
+  if (desktop != null &&
+      (FnDevice.platform == PlatformType.macOS ||
+          FnDevice.platform == PlatformType.linux ||
+          FnDevice.platform == PlatformType.windows)) {
+
+    //规定桌面显示
+    setViewWidth(desktop.width);
+    UiTheme.fontSize = desktop.fontSize ?? 18.r;
+
+    //
     await windowManager.ensureInitialized();
     if (!await FlutterSingleInstance().isFirstInstance()) {
       final err = await FlutterSingleInstance().focus();
@@ -34,18 +47,17 @@ Future<void> uiApp({
       exit(0);
     }
 
-    const windowOptions = WindowOptions(
-      size: Size(1024, 680),
-      minimumSize: Size(1024, 680),
-      center: true,
-      titleBarStyle: TitleBarStyle.hidden,
+    final size = Size(desktop.width, desktop.height);
+
+    final windowOptions = WindowOptions(
+      size: size,
+      minimumSize: size,
+      //center: true,
+      titleBarStyle: desktop.titleBar ? null : TitleBarStyle.hidden,
     );
 
     await windowManager.waitUntilReadyToShow(windowOptions, () async {
-      if(FnDevice.platform != PlatformType.linux){
-        //linux下有bug
-        await windowManager.setResizable(false);
-      }
+      await windowManager.setResizable(desktop.resizable);
       await windowManager.show();
       await windowManager.focus();
     });
@@ -99,4 +111,20 @@ Future<void> uiApp({
   runApp(
     App(navigatorKey: navigatorKey, title: title, home: home, builder: builder),
   );
+}
+
+class Desktop {
+  new({
+    this.width = 1152,
+    this.height = 720,
+    this.titleBar = true,
+    this.resizable = true,
+    this.fontSize,
+  });
+
+  final double width;
+  final double height;
+  final bool titleBar;
+  final bool resizable;
+  final double? fontSize;
 }
