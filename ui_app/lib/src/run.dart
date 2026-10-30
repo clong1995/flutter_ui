@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -24,18 +26,13 @@ Future<void> uiApp({
 
   //提前设置宽度
   setViewWidth();
-  UiTheme.fontSize =13.r;
+  UiTheme.fontSize = 13.r;
 
   if (desktop != null &&
       (FnDevice.platform == PlatformType.macOS ||
           FnDevice.platform == PlatformType.linux ||
           FnDevice.platform == PlatformType.windows)) {
-
-    //规定桌面显示
-    setViewWidth(desktop.width);
-    UiTheme.fontSize = desktop.fontSize ?? 10.r;
-
-    //
+    //单实例
     await windowManager.ensureInitialized();
     if (!await FlutterSingleInstance().isFirstInstance()) {
       final err = await FlutterSingleInstance().focus();
@@ -47,7 +44,38 @@ Future<void> uiApp({
       exit(0);
     }
 
-    final size = Size(desktop.width, desktop.height);
+    //检查分辨率
+    final display = PlatformDispatcher.instance.views.first.display;
+    final pixelRatio = display.devicePixelRatio;
+    final physicalWidth = display.size.width;
+    final physicalHeight = display.size.height;
+
+    //逻辑分辨率
+    final dprWidth = physicalWidth / pixelRatio;
+    final dprHeight = physicalHeight / pixelRatio;
+
+    //
+    var width = desktop.width;
+    var height = desktop.height;
+
+    //留出安全
+    final safeWidth = (dprWidth * .9).floorToDouble();
+    final safeHeight = (dprHeight * .9).floorToDouble();
+
+    //cover算法
+    if (safeWidth <= width || safeHeight <= height) {
+      final scaleW = safeWidth / desktop.width;
+      final scaleH = safeHeight / desktop.height;
+      final scale = min(scaleW, scaleH);
+      width = width * scale;
+      height = height * scale;
+    }
+
+    //规定桌面显示
+    setViewWidth(width);
+    UiTheme.fontSize = desktop.fontSize ?? 10.r;
+
+    final size = Size(width, height);
 
     final windowOptions = WindowOptions(
       size: size,
@@ -57,7 +85,10 @@ Future<void> uiApp({
     );
 
     await windowManager.waitUntilReadyToShow(windowOptions, () async {
-      await windowManager.setResizable(desktop.resizable);
+      if(!desktop.resizable){
+        await windowManager.setResizable(desktop.resizable);
+        await windowManager.setMaximizable(false);
+      }
       await windowManager.show();
       await windowManager.focus();
     });

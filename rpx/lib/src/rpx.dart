@@ -33,10 +33,11 @@ void setWidth([double? width]) {
       break;
   }*/
 
-  final flutterView = PlatformDispatcher.instance.views.first;
-  final pw = flutterView.physicalSize.width;
-  final ph = flutterView.physicalSize.height;
-  _width = min(pw, ph) / flutterView.devicePixelRatio;
+  final display = PlatformDispatcher.instance.views.first.display;
+  final displayWidth = display.size.width;
+  final displayHeight = display.size.height;
+  final displayPixelRatio = display.devicePixelRatio;
+  _width = min(displayWidth, displayHeight) / displayPixelRatio;
 }
 
 double rpx(double size) {
