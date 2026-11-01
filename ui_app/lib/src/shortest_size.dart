@@ -7,8 +7,8 @@ Size shortestSize (){
   final display = PlatformDispatcher.instance.views.first.display;
   final pixelRatio = display.devicePixelRatio;
   //物理分辨率
-  final physicalWidth = display.size.shortestSide;
-  final physicalHeight = display.size.longestSide;
+  final physicalWidth = display.size.width;
+  final physicalHeight = display.size.height;
   //逻辑分辨率
   final dprWidth = physicalWidth / pixelRatio;
   final dprHeight = physicalHeight / pixelRatio;

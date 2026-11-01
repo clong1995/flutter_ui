@@ -25,7 +25,6 @@ Future<void> uiApp({
   WidgetsFlutterBinding.ensureInitialized();
 
   final size = shortestSize();
-  setViewWidth(size.width);
 
   if (FnDevice.platform == PlatformType.macOS ||
       FnDevice.platform == PlatformType.linux ||
@@ -41,6 +40,12 @@ Future<void> uiApp({
       exit(0);
     }
 
+
+    setViewWidth(size.shortestSide);
+    UiTheme.fontSize = 10.r;
+
+
+    await windowManager.ensureInitialized();
     final windowOptions = WindowOptions(
       size: size,
       minimumSize: size,
@@ -63,6 +68,10 @@ Future<void> uiApp({
 
   } else if (FnDevice.platform == PlatformType.iOS ||
       FnDevice.platform == PlatformType.android) {
+
+
+    setViewWidth(size.shortestSide);
+    UiTheme.fontSize = 14.r;
 
     //状态栏
     SystemChrome.setSystemUIOverlayStyle(
@@ -91,9 +100,6 @@ Future<void> uiApp({
         DeviceOrientation.landscapeLeft,
     ]);
   }
-
-  //标准字体大小
-  UiTheme.fontSize = 13.r;
 
   //增加图片缓存
   PaintingBinding.instance.imageCache.maximumSizeBytes = 500 << 20; // 500MB
