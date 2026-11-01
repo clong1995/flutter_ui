@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +9,7 @@ import 'package:fn_device/fn_device.dart';
 import 'package:fn_nav/fn_nav.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_alert/ui_alert.dart';
+import 'package:ui_app/src/shortest_size.dart';
 import 'package:ui_app/src/widget.dart';
 import 'package:ui_theme/ui_theme.dart';
 import 'package:ui_toast/ui_toast.dart';
@@ -21,19 +20,17 @@ Future<void> uiApp({
   String? title,
   Widget Function(BuildContext, Widget?)? builder,
   Desktop? desktop,
+  bool portraitUp = true,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  //提前设置宽度
-  setViewWidth();
-  UiTheme.fontSize = 13.r;
+  final size = shortestSize();
+  setViewWidth(size.width);
 
-  if (desktop != null &&
-      (FnDevice.platform == PlatformType.macOS ||
-          FnDevice.platform == PlatformType.linux ||
-          FnDevice.platform == PlatformType.windows)) {
+  if (FnDevice.platform == PlatformType.macOS ||
+      FnDevice.platform == PlatformType.linux ||
+      FnDevice.platform == PlatformType.windows) {
     //单实例
-    await windowManager.ensureInitialized();
     if (!await FlutterSingleInstance().isFirstInstance()) {
       final err = await FlutterSingleInstance().focus();
       if (err != null) {
@@ -44,56 +41,29 @@ Future<void> uiApp({
       exit(0);
     }
 
-    //检查分辨率
-    final display = PlatformDispatcher.instance.views.first.display;
-    final pixelRatio = display.devicePixelRatio;
-    final physicalWidth = display.size.width;
-    final physicalHeight = display.size.height;
-
-    //逻辑分辨率
-    final dprWidth = physicalWidth / pixelRatio;
-    final dprHeight = physicalHeight / pixelRatio;
-
-    //
-    var width = desktop.width;
-    var height = desktop.height;
-
-    //留出安全
-    final safeWidth = (dprWidth * .9).floorToDouble();
-    final safeHeight = (dprHeight * .9).floorToDouble();
-
-    //cover算法
-    if (safeWidth <= width || safeHeight <= height) {
-      final scaleW = safeWidth / desktop.width;
-      final scaleH = safeHeight / desktop.height;
-      final scale = min(scaleW, scaleH);
-      width = width * scale;
-      height = height * scale;
-    }
-
-    //规定桌面显示
-    setViewWidth(width);
-    UiTheme.fontSize = desktop.fontSize ?? 10.r;
-
-    final size = Size(width, height);
-
     final windowOptions = WindowOptions(
       size: size,
       minimumSize: size,
       center: true,
-      titleBarStyle: desktop.titleBar ? null : TitleBarStyle.hidden,
+      titleBarStyle: desktop == null
+          ? null
+          : desktop.titleBar
+          ? null
+          : TitleBarStyle.hidden,
     );
 
     await windowManager.waitUntilReadyToShow(windowOptions, () async {
-      if(!desktop.resizable){
-        await windowManager.setResizable(desktop.resizable);
+      if (desktop != null && !desktop.resizable) {
+        await windowManager.setResizable(false);
         await windowManager.setMaximizable(false);
       }
       await windowManager.show();
       await windowManager.focus();
     });
+
   } else if (FnDevice.platform == PlatformType.iOS ||
       FnDevice.platform == PlatformType.android) {
+
     //状态栏
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
@@ -114,8 +84,16 @@ Future<void> uiApp({
     await SystemChannels.textInput.invokeMethod('TextInput.hide');
 
     //竖屏
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+    await SystemChrome.setPreferredOrientations([
+      if (portraitUp)
+        DeviceOrientation.portraitUp
+      else
+        DeviceOrientation.landscapeLeft,
+    ]);
   }
+
+  //标准字体大小
+  UiTheme.fontSize = 13.r;
 
   //增加图片缓存
   PaintingBinding.instance.imageCache.maximumSizeBytes = 500 << 20; // 500MB
@@ -145,17 +123,8 @@ Future<void> uiApp({
 }
 
 class Desktop {
-  new({
-    this.width = 1152,
-    this.height = 720,
-    this.titleBar = true,
-    this.resizable = true,
-    this.fontSize,
-  });
+  new({this.titleBar = true, this.resizable = true});
 
-  final double width;
-  final double height;
   final bool titleBar;
   final bool resizable;
-  final double? fontSize;
 }
