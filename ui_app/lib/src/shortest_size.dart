@@ -45,12 +45,8 @@ Size shortestSize (){
       FnDevice.platform == PlatformType.webAndroid ||
       FnDevice.platform == PlatformType.webIOS
   ) {
-    if (dprWidth > 600) {
-      //平板
-      return Size(dprWidth/2, dprHeight/2);
-    }
-    return Size(dprWidth, dprWidth);
+    return Size(dprWidth, dprHeight);
   }
 
-  return Size(dprWidth, dprWidth);
+  return Size(dprWidth, dprHeight);
 }

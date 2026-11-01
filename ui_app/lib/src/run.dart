@@ -71,7 +71,11 @@ Future<void> uiApp({
 
 
     setViewWidth(size.shortestSide);
-    UiTheme.fontSize = 14.r;
+    if (size.shortestSide > 600) {
+      UiTheme.fontSize = 8.r;
+    }else{
+      UiTheme.fontSize = 13.r;
+    }
 
     //状态栏
     SystemChrome.setSystemUIOverlayStyle(
