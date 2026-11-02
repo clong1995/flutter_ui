@@ -7,7 +7,8 @@ class UiTheme {
 
   //fontSize
   static double fontSize = 15;
-  static String? fontFamily = 'PuHuiTi';
+  static String? fontFamily;
+  static List<FontVariation>? fontVariations;
 
   //全角空格
   static const String u3000 = '　';

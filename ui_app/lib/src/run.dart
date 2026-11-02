@@ -72,7 +72,7 @@ Future<void> uiApp({
 
     setViewWidth(size.shortestSide);
     if (size.shortestSide > 600) {
-      UiTheme.fontSize = 8.r;
+      UiTheme.fontSize = 6.5.r;
     }else{
       UiTheme.fontSize = 13.r;
     }
