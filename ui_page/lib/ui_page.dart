@@ -85,7 +85,6 @@ class UiPage extends StatelessWidget {
                 child: Row(
                   spacing: 5.r,
                   children: [
-                    // if (Navigator.canPop(context))
                     if (FnNav.canPop())
                       UiIconButton(
                         color: appbarTextColor,
