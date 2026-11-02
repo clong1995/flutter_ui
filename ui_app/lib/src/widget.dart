@@ -52,7 +52,7 @@ class App extends StatelessWidget {
         color: UiTheme.grey900,
         fontSize: UiTheme.fontSize,
         fontFamily: UiTheme.fontFamily,
-        fontWeight: ,
+        fontWeight: UiTheme.fontWeight,
         fontVariations: UiTheme.fontVariations,
       ),
       locale: const Locale('zh', 'CN'),
