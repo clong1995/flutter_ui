@@ -29,6 +29,10 @@ Future<void> uiApp({
   if (FnDevice.platform == PlatformType.macOS ||
       FnDevice.platform == PlatformType.linux ||
       FnDevice.platform == PlatformType.windows) {
+
+
+    await windowManager.ensureInitialized();
+
     //单实例
     if (!await FlutterSingleInstance().isFirstInstance()) {
       final err = await FlutterSingleInstance().focus();
@@ -42,10 +46,7 @@ Future<void> uiApp({
 
 
     setViewWidth(size.shortestSide);
-    UiTheme.fontSize = 10.r;
-
-
-    await windowManager.ensureInitialized();
+    UiTheme.fontSize = 6.5.r;
     final windowOptions = WindowOptions(
       size: size,
       minimumSize: size,
