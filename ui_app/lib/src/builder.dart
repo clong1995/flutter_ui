@@ -32,9 +32,11 @@ Widget appBuilder(
   //文字
   /*final defaultTextStyle = DefaultTextStyle(
     style: TextStyle(
-      color: color,
+      color: UiTheme.grey900,
       fontSize: UiTheme.fontSize,
       fontFamily: UiTheme.fontFamily,
+      fontWeight: UiTheme.fontWeight,
+      fontVariations: UiTheme.fontVariations,
     ),
     child: builderWidget,
   );*/

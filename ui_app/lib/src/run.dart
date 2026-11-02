@@ -44,7 +44,6 @@ Future<void> uiApp({
       exit(0);
     }
 
-
     setViewWidth(size.shortestSide);
     UiTheme.fontSize = 6.5.r;
     final windowOptions = WindowOptions(
@@ -69,8 +68,6 @@ Future<void> uiApp({
 
   } else if (FnDevice.platform == PlatformType.iOS ||
       FnDevice.platform == PlatformType.android) {
-
-
     setViewWidth(size.shortestSide);
     if (size.shortestSide > 600) {
       UiTheme.fontSize = 6.5.r;
