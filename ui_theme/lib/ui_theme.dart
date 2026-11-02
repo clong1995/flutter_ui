@@ -8,6 +8,7 @@ class UiTheme {
   //fontSize
   static double fontSize = 15;
   static String? fontFamily;
+  static FontWeight? fontWeight;
   static List<FontVariation>? fontVariations;
 
   //全角空格
