@@ -45,7 +45,7 @@ Future<void> uiApp({
     }
 
     setViewWidth(size.shortestSide);
-    UiTheme.fontSize = 6.5.r;
+
     final windowOptions = WindowOptions(
       size: size,
       minimumSize: size,
@@ -68,11 +68,10 @@ Future<void> uiApp({
 
   } else if (FnDevice.platform == PlatformType.iOS ||
       FnDevice.platform == PlatformType.android) {
-    setViewWidth(size.shortestSide);
     if (size.shortestSide > 600) {
-      UiTheme.fontSize = 6.5.r;
+      setViewWidth(size.shortestSide/2);
     }else{
-      UiTheme.fontSize = 13.r;
+      setViewWidth(size.shortestSide);
     }
 
     //状态栏
@@ -102,6 +101,8 @@ Future<void> uiApp({
         DeviceOrientation.landscapeLeft,
     ]);
   }
+
+  UiTheme.fontSize = 13.r;
 
   //增加图片缓存
   PaintingBinding.instance.imageCache.maximumSizeBytes = 500 << 20; // 500MB
