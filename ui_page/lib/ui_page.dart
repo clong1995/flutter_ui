@@ -90,7 +90,7 @@ class UiPage extends StatelessWidget {
                         color: appbarTextColor,
                         background: false,
                         icon: Icons.arrow_back_ios_new_rounded,
-                        onTap: () => Navigator.pop(context),
+                        onTap: FnNav.pop,
                       ),
                     ...?appbarLeading,
                     const Spacer(),
