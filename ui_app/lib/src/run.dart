@@ -29,8 +29,6 @@ Future<void> uiApp({
   if (FnDevice.platform == PlatformType.macOS ||
       FnDevice.platform == PlatformType.linux ||
       FnDevice.platform == PlatformType.windows) {
-
-
     await windowManager.ensureInitialized();
 
     //单实例
@@ -44,7 +42,7 @@ Future<void> uiApp({
       exit(0);
     }
 
-    setViewWidth(size.shortestSide);
+    setViewWidth(size.shortestSide / 2);
 
     final windowOptions = WindowOptions(
       size: size,
@@ -65,12 +63,11 @@ Future<void> uiApp({
       await windowManager.show();
       await windowManager.focus();
     });
-
   } else if (FnDevice.platform == PlatformType.iOS ||
       FnDevice.platform == PlatformType.android) {
     if (size.shortestSide > 600) {
-      setViewWidth(size.shortestSide/2);
-    }else{
+      setViewWidth(size.shortestSide / 2);
+    } else {
       setViewWidth(size.shortestSide);
     }
 
