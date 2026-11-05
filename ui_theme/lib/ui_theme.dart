@@ -47,6 +47,9 @@ class UiTheme {
   //orange
   static const Color orange = Color(0xFFFF9800);
 
+  //blue
+  static const Color blue = Color(0xFF2196F3);
+
   //font
   static const FontWeight thick = .w200;
   static const FontWeight light = .w300;

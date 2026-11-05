@@ -90,7 +90,7 @@ class _UiInputTextState extends State<UiInputText> {
     return Container(
       padding: padding,
       width: widget.width ?? 128.r,
-      height: height(),
+      //height: height(),
       decoration: decoration(),
       child: Row(
         spacing: widget.spacing ?? 5.r,
@@ -126,6 +126,7 @@ class _UiInputTextState extends State<UiInputText> {
                   style: textStyle().copyWith(
                     color: textStyle().color?.withAlpha(100) ?? UiTheme.grey,
                     fontWeight: FontWeight.normal,
+                    height: 1.25
                   ),
                 )
               : const SizedBox.shrink();
@@ -181,13 +182,13 @@ class _UiInputTextState extends State<UiInputText> {
     ),
   );
 
-  double height() =>
+  /*double height() =>
       padding.top +
       padding.bottom +
       widget.maxLines *
           (textStyle().fontSize ?? 14.r) *
           (textStyle().height ?? 1.25) +
-      (decoration().border?.top.width ?? 1) * 2;
+      (decoration().border?.top.width ?? 1) * 2;*/
 
   BoxDecoration decoration() {
     if (widget.decoration == null) {
@@ -203,6 +204,6 @@ class _UiInputTextState extends State<UiInputText> {
 
   TextStyle textStyle() =>
       DefaultTextStyle.of(context).style
-          .merge(TextStyle(fontSize: 14.r))
+          .merge(TextStyle(fontSize: 14.r, height: 1.25))
           .merge(widget.style);
 }
