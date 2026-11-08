@@ -1,10 +1,12 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:fn_device/fn_device.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:rpx/ext.dart';
 
 class UiSafePadding extends StatelessWidget {
-  const UiSafePadding({
+  const new({
     this.addBottom = 0,
     this.addLeft = 0,
     this.addRight = 0,
@@ -42,24 +44,11 @@ class UiSafePadding extends StatelessWidget {
   }
 }
 
-EdgeInsets? _paddingData;
-
 EdgeInsets uiSafePaddingData(BuildContext context) {
-  if (_paddingData != null) {
-    return _paddingData!;
-  }
-  final mediaQueryData = MediaQuery.of(context);
-  final padding = mediaQueryData.padding;
-  final viewPadding = mediaQueryData.viewPadding;
-
-  final bottom = viewPadding.bottom * .3;
-
-  final flutterView = PlatformDispatcher.instance.views.first;
-  final pw = flutterView.physicalSize.width;
-  final ph = flutterView.physicalSize.height;
-  final width = min(pw, ph) / flutterView.devicePixelRatio;
-  final left = width / 375 * 10;
-
-  _paddingData = EdgeInsets.fromLTRB(left, padding.top * .75, left, bottom);
-  return _paddingData!;
+  return EdgeInsets.fromLTRB(
+    10.r,
+    FnDevice.statusBarHeight == 0 ? 10.r : FnDevice.statusBarHeight,
+    10.r,
+    FnDevice.bottomSafeHeight == 0 ? 10.r : FnDevice.bottomSafeHeight,
+  );
 }
