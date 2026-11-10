@@ -21,6 +21,7 @@ Future<void> uiApp({
   Widget Function(BuildContext, Widget?)? builder,
   Desktop? desktop,
   bool portraitUp = true,
+  Brightness statusBarBrightness = Brightness.light,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -73,9 +74,9 @@ Future<void> uiApp({
 
     //状态栏
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarBrightness: Brightness.light,
-        statusBarIconBrightness: Brightness.light,
+      SystemUiOverlayStyle(
+        statusBarBrightness: statusBarBrightness,
+        statusBarIconBrightness: statusBarBrightness,
         statusBarColor: UiTheme.transparent,
         systemNavigationBarColor: UiTheme.transparent,
       ),
