@@ -5,15 +5,14 @@ version: 0.4.0
 homepage: flutter_ui
 
 environment:
-  sdk: ^3.13.3
-  flutter: ">=3.47.4"
+  sdk: ^3.13.7
+  flutter: ">=3.47.8"
 
 dependencies:
   flutter:
     sdk: flutter
-  webview_flutter: ^4.14.1
-  webview_flutter_web: ^0.2.3+4
-  webview_flutter_android: ^4.14.1
+  webview_all: ^1.5.0
+  webview_all_android: ^1.5.0
   fn_device:
     git:
       url: https://github.com/clong1995/flutter_ui.git

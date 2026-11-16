@@ -4,8 +4,8 @@ import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 import 'package:fn_device/fn_device.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_android/webview_flutter_android.dart';
+import 'package:webview_all/webview_all.dart';
+import 'package:webview_all_android/webview_all_android.dart';
 
 class UiWebview extends StatefulWidget {
   const new({
@@ -44,6 +44,10 @@ class _UiWebviewState extends State<UiWebview> {
     brand = await FnDevice.brand;
 
     controller = WebViewController();
+    if (await controller.supportsSetScrollBarsEnabled()) {
+      await controller.setVerticalScrollBarEnabled(false);
+    }
+
     await controller.setJavaScriptMode(.unrestricted);
 
     //
