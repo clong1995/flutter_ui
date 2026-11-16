@@ -116,7 +116,6 @@ class FnNavRoute<T> extends OverlayRoute<T> {
   Iterable<OverlayEntry> createOverlayEntries() {
     return <OverlayEntry>[
       OverlayEntry(
-        opaque: true,
         builder: (context) {
           return FnNavScope(
             arguments: settings.arguments,

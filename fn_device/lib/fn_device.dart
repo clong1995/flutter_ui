@@ -62,12 +62,6 @@ class FnDevice {
     } else if (defaultTargetPlatform == TargetPlatform.android) {
       final info = await DeviceInfoPlugin().androidInfo;
       _brand = info.brand;
-    }else if (defaultTargetPlatform == TargetPlatform.windows) {
-      _brand = 'windows';
-    }else if (defaultTargetPlatform == TargetPlatform.linux) {
-      _brand = 'linux';
-    }else if (defaultTargetPlatform == TargetPlatform.macOS) {
-      _brand = 'macOS';
     }
     return _brand ?? 'no-brand';
   }
