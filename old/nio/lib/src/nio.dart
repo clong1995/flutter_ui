@@ -1,0 +1,112 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:fn_auth/fn_auth.dart';
+import 'package:logger/logger.dart';
+import 'package:nio/src/base.dart';
+import 'package:nio/src/empty.dart';
+import 'package:nio/src/send.dart';
+import 'package:package/package.dart';
+import 'package:ui_toast/ui_toast.dart';
+
+Future<T> nio<S extends BaseReq, T extends BaseRes>(
+  String uri, {
+  bool reTey = true,
+  int? timeout,
+  S? req,
+  T? res,
+}) async {
+  //初始化返回值
+  res ??= EmptyRes() as T;
+
+  if (uri.isEmpty) {
+    res.state = 'url为空';
+    unawaited(UiToast.show(UiToastMessage.failure()..text = res.state));
+    return res;
+  }
+
+  req ??= EmptyReq() as S;
+
+  //参数
+  req
+    ..t = DateTime.now().millisecondsSinceEpoch ~/ 1000
+    ..a = FnAuth.ak;
+
+  //转string
+  final jsonString = jsonEncode(req);
+  //发送数据
+  final result = await send(uri, jsonString, timeout: timeout);
+  res.state = result['state']?.toString() ?? '';
+
+  switch (res.state) {
+    case 'OK':
+      break;
+    case 'verification failed': //没有权限或者被下线
+      final select = await UiToast.show(
+        UiToastMessage.failure()
+          ..text = '登录过期或无权限,是否重新登录?'
+          ..select = true,
+      );
+      if (select == true) {
+        unawaited(Package.pushAndRemove('splash'));
+      }
+      return res;
+    /*case 'nosign':
+    case 'signerr':
+    case 'nostate':
+    case 'nots':
+    case 'nullify':
+      UiToast.show(UiToastMessage.failure()..text = res.state);
+    case 'limit exists':
+    case 'disable replay':
+      //print('=========>${res.state}<=========');
+      return res;*/
+    default:
+      if (!reTey) {
+        break;
+      }
+      /*final completer = Completer<bool>();
+      UiToast.show(
+        UiToastMessage.failure()
+          ..text = '${res.state}, 是否重试?'
+          ..callback = completer.complete,
+      );
+      final choice = await completer.future;*/
+
+      final select = await UiToast.show(
+        UiToastMessage.failure()
+          ..text = '${res.state}, 是否重试?'
+          ..select = true,
+      );
+
+      if (select == true) {
+        return await nio<S, T>(uri, req: req, res: res);
+      }
+  }
+
+  final dynamic data = result['data'];
+  if (data == null) {
+    return res;
+  }
+
+  res.data = data as Map<String, dynamic>;
+  //序列化数据
+  try {
+    res.fromJson();
+  } catch (e) {
+    final text = e.toString();
+    unawaited(UiToast.show(UiToastMessage.failure()..text = text));
+
+    logger(
+      '\x1B[31m'
+      '┏━━━━━━━━━━━━━━━━━━━━━━━━━ ERROR ━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n'
+      '┃ 地址: $uri\n'
+      '┃ 序列化错误: $text\n'
+      '┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛'
+      '\x1B[0m',
+      stack: false,
+    );
+    rethrow;
+  }
+  return res;
+}

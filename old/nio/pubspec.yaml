@@ -1,0 +1,34 @@
+name: nio
+description: A starting point for Dart libraries or applications.
+version: 0.3.0
+homepage: flutter_ui
+publish_to: none
+
+environment:
+  sdk: ^3.13.3
+
+dependencies:
+  http: ^1.6.0
+  fn_auth:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: fn_auth
+  fn_security:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: fn_security
+  ui_toast:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: ui_toast
+  logger:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: logger
+  package:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: package
+
+dev_dependencies:
+  very_good_analysis: ^11.0.0

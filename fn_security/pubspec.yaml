@@ -5,10 +5,10 @@ homepage: flutter_ui
 publish_to: none
 
 environment:
-  sdk: ^3.13.3
+  sdk: ^3.13.7
 
 dependencies:
-  crypto: ^3.0.7
+  crypto: ^3.0.8
   pointycastle: ^4.0.0
   fn_device:
     git:
