@@ -174,7 +174,7 @@ String _sign(String message) {
   if (message == '') {
     return '';
   }
-  return FnSecurity.md5(message + FnAuth.sk);
+  return FnSecurity.hmacSha256(message, FnAuth.sk);
 }
 
 //验证
