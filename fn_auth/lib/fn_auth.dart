@@ -23,8 +23,12 @@ class FnAuth {
   static bool roleAllow(List<String> role) =>
       role.any((element) => _role.contains(element));
 
-  static Future<void> persist() async {
-    await load(ak: 'AXDngOOBUwIB4M4BxwOnBA', sk: 'AsCdA44HTgk', persist: false);
+  // 非持久存储
+  static Future<void> volatile({
+    required String ak,
+    required String sk,
+  }) async {
+    await load(ak: ak, sk: sk, persist: false);
   }
 
   //载入凭证
