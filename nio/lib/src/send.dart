@@ -35,6 +35,12 @@ Future<Map<String, dynamic>> send(
 
   final paramSig = _sign(jsonString + uri);
 
+
+  /*print(jsonString+uri);
+  print(FnAuth.sk);
+  print('=====');
+  print(paramSig);*/
+
   Response resp;
   final headers = <String, String>{
     'content-sign': paramSig,
