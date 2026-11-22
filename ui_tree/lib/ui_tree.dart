@@ -202,6 +202,16 @@ class UiTreeItem<T extends Object?> {
   final String title;
   final T? data;
 
+
+  UiTreeItem<T> copyWith({String? id, String? pid, String? title, T? data}) {
+    return UiTreeItem<T>(
+      id: id ?? this.id,
+      pid: pid ?? this.pid,
+      title: title ?? this.title,
+      data: data ?? this.data, // 注意：无法把已有 data 置为 null，需要 sentinel
+    );
+  }
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
