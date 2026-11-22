@@ -206,6 +206,7 @@ class UiTreeItem<T extends Object?> {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! UiTreeItem<T>) return false;
+    if (other.runtimeType != runtimeType) return false;
     return id == other.id &&
         pid == other.pid &&
         title == other.title &&
