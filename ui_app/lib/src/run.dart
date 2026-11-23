@@ -45,9 +45,11 @@ Future<void> uiApp({
 
     setViewWidth(size.shortestSide / 2);
 
+    final titleBarHeight = await windowManager.getTitleBarHeight();
+    final windowSize = Size(size.width, size.width + titleBarHeight);
     final windowOptions = WindowOptions(
-      size: size,
-      minimumSize: size,
+      size: windowSize,
+      minimumSize: windowSize,
       center: true,
       titleBarStyle: desktop == null
           ? null
