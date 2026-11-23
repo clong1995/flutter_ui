@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:fn_nav/fn_nav.dart';
 import 'package:ui_theme/ui_theme.dart';
 
 class UiAlert {
@@ -23,17 +24,14 @@ class UiAlert {
     }
 
     return await Navigator.of(navContext, rootNavigator: root).push<T>(
-      PageRouteBuilder<T>(
+      FnNavRoute<T>(
         opaque: false,
-        fullscreenDialog: true,
         barrierColor: UiTheme.black.withAlpha(50),
-        transitionDuration: Duration.zero,
-        reverseTransitionDuration: Duration.zero,
         settings: RouteSettings(arguments: args),
-        pageBuilder: (context, animation, secondaryAnimation) =>
-            PopScope(canPop: false, child: builder(context)),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-            child,
+        builder: (context) => PopScope(
+          canPop: false,
+          child: builder(context),
+        ),
       ),
     );
   }
