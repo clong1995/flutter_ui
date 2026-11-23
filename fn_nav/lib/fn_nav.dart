@@ -108,14 +108,30 @@ class FnNav {
 /// 因此不存在 transitionDuration / reverseTransitionDuration。
 ///
 class FnNavRoute<T> extends OverlayRoute<T> {
-  new({required this.builder, super.settings});
+  new({
+    required this.builder,
+    super.settings,
+    this.opaque = true,
+    this.barrierColor,
+  });
 
   final WidgetBuilder builder;
+
+  final bool opaque;
+  final Color? barrierColor;
 
   @override
   Iterable<OverlayEntry> createOverlayEntries() {
     return <OverlayEntry>[
+      if (barrierColor != null)
+        OverlayEntry(
+          maintainState: true,
+          builder: (context) =>
+              ModalBarrier(color: barrierColor, dismissible: false),
+        ),
       OverlayEntry(
+        opaque: opaque,
+        maintainState: true,
         builder: (context) {
           return FnNavScope(
             arguments: settings.arguments,
