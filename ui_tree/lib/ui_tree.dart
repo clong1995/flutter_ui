@@ -49,12 +49,8 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
   @override
   void didUpdateWidget(UiTree<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    //print(widget.selectedId);
-    //print(oldWidget.selectedId);
     if (!listEquals(widget.data, oldWidget.data) ||
-        widget.selectedId != oldWidget.selectedId
-    //|| widget.selectedId != selectedId
-    ) {
+        widget.selectedId != oldWidget.selectedId) {
       buildTree();
     }
   }
@@ -131,7 +127,7 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
 
   void buildTree() {
     selectedId = widget.selectedId;
-    expandedId = widget.expandedId ?? <String>[];
+    expandedId = widget.expandedId?.toList() ?? [];
     if (widget.selectedId.isNotEmpty) {
       expandedId.add(widget.selectedId);
     }
@@ -177,22 +173,6 @@ class _UiTreeState<T extends Object?> extends State<UiTree<T>> {
   }
 }
 
-/*class UiTreeItem<T>{
-  String id = "";
-  String pid = "";
-  T? data;
-
-  @override
-  bool operator ==(Object other) =>
-      other is UiTreeItem &&
-      id == other.id &&
-      pid == other.pid &&
-      data == other.data;
-
-  @override
-  int get hashCode => id.hashCode ^ pid.hashCode ^ data.hashCode;
-}*/
-
 @immutable
 class UiTreeItem<T extends Object?> {
   const new({this.id = '', this.pid = '', this.title = '', this.data});
@@ -201,7 +181,6 @@ class UiTreeItem<T extends Object?> {
   final String pid;
   final String title;
   final T? data;
-
 
   UiTreeItem<T> copyWith({String? id, String? pid, String? title, T? data}) {
     return UiTreeItem<T>(

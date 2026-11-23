@@ -90,7 +90,7 @@ class _UiInputTextState extends State<UiInputText> {
     return Container(
       padding: padding,
       width: widget.width ?? 128.r,
-      //height: height(),
+      height: height(),
       decoration: decoration(),
       child: Row(
         spacing: widget.spacing ?? 5.r,
@@ -122,13 +122,13 @@ class _UiInputTextState extends State<UiInputText> {
         builder: (_, value, _) {
           return value.text.isEmpty
               ? Text(
-                  widget.hint!,
-                  style: textStyle().copyWith(
-                    color: textStyle().color?.withAlpha(100) ?? UiTheme.grey,
-                    fontWeight: FontWeight.normal,
-                    height: 1.25
-                  ),
-                )
+            widget.hint!,
+            style: textStyle().copyWith(
+                color: textStyle().color?.withAlpha(100) ?? UiTheme.grey,
+                fontWeight: FontWeight.normal,
+                height: 1.25
+            ),
+          )
               : const SizedBox.shrink();
         },
       ),
@@ -142,15 +142,15 @@ class _UiInputTextState extends State<UiInputText> {
       return value.text.isEmpty
           ? const SizedBox.shrink()
           : UiIconButton(
-              background: false,
-              color: UiTheme.red,
-              size: 16.r,
-              icon: Icons.highlight_remove_outlined,
-              onTap: () {
-                controller.clear();
-                widget.onChanged?.call('');
-              },
-            );
+        background: false,
+        color: UiTheme.red,
+        size: 16.r,
+        icon: Icons.highlight_remove_outlined,
+        onTap: () {
+          controller.clear();
+          widget.onChanged?.call('');
+        },
+      );
     },
   );
 
@@ -182,13 +182,13 @@ class _UiInputTextState extends State<UiInputText> {
     ),
   );
 
-  /*double height() =>
+  double height() =>
       padding.top +
-      padding.bottom +
-      widget.maxLines *
-          (textStyle().fontSize ?? 14.r) *
-          (textStyle().height ?? 1.25) +
-      (decoration().border?.top.width ?? 1) * 2;*/
+          padding.bottom +
+          widget.maxLines *
+              (textStyle().fontSize ?? 14.r) *
+              (textStyle().height ?? 1.25) +
+          (decoration().border?.top.width ?? 1) * 2;
 
   BoxDecoration decoration() {
     if (widget.decoration == null) {
@@ -198,7 +198,7 @@ class _UiInputTextState extends State<UiInputText> {
       color: widget.decoration!.color ?? defaultDecoration.color,
       border: widget.decoration!.border ?? defaultDecoration.border,
       borderRadius:
-          widget.decoration!.borderRadius ?? defaultDecoration.borderRadius,
+      widget.decoration!.borderRadius ?? defaultDecoration.borderRadius,
     );
   }
 
