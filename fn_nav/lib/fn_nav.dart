@@ -116,12 +116,16 @@ class FnNavRoute<T> extends OverlayRoute<T> {
   });
 
   final WidgetBuilder builder;
-
   final bool opaque;
   final Color? barrierColor;
 
   @override
   Iterable<OverlayEntry> createOverlayEntries() {
+    final content = FnNavScope(
+      arguments: settings.arguments,
+      child: Builder(builder: builder),
+    );
+
     return <OverlayEntry>[
       if (barrierColor != null)
         OverlayEntry(
@@ -132,12 +136,7 @@ class FnNavRoute<T> extends OverlayRoute<T> {
       OverlayEntry(
         opaque: opaque,
         maintainState: true,
-        builder: (context) {
-          return FnNavScope(
-            arguments: settings.arguments,
-            child: builder(context),
-          );
-        },
+        builder: (context) => content,
       ),
     ];
   }
