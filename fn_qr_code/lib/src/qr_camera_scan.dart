@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
@@ -66,7 +68,7 @@ class _UiQrCameraScanState extends State<UiQrCameraScan> {
 
   @override
   void dispose() {
-    _controller.dispose();
+    unawaited(_controller.dispose());
     super.dispose();
   }
 }

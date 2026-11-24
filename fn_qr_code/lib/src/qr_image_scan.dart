@@ -1,10 +1,15 @@
-import 'dart:typed_data';
-
 import 'package:image/image.dart' as img;
+import 'package:ui_pick_file/ui_pick_file.dart';
 import 'package:zxing2/qrcode.dart';
 
 /// 从图片识别二维码
-String? fnQrImageScan(Uint8List bytes) {
+Future<String?> fnQrImageScan() async {
+  final pf = await UiPickFile.single();
+  if (pf == null) {
+    return null;
+  }
+
+  final bytes = await pf.bytes();
   final image = img.decodeImage(bytes);
 
   if (image == null) return null;

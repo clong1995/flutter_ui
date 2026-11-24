@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:gal/gal.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:ui_pick_file/ui_pick_file.dart';
 
 // 生成二维码
 Widget uiQrGenerate(
@@ -28,7 +28,7 @@ Widget uiQrGenerate(
 
             final timestamp = DateTime.now().millisecondsSinceEpoch;
 
-            await Gal.putImageBytes(bytes, name: 'qrcode_$timestamp');
+            await UiPickImage.save(bytes: bytes, fileName: 'qrcode_$timestamp');
           }
         : null,
     child: SizedBox(
