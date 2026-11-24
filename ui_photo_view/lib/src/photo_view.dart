@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:fn_device/fn_device.dart';
+import 'package:gal/gal.dart';
 import 'package:http/http.dart';
-import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
 import 'package:material_ui/material_ui.dart' show Icons;
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:rpx/ext.dart';
@@ -14,12 +14,7 @@ import 'package:ui_toast/ui_toast.dart';
 
 //PhotoView 的实现
 class UiPhotoView extends StatefulWidget {
-  const new({
-    required this.images,
-    super.key,
-    this.index = 0,
-    this.onChanged,
-  });
+  const new({required this.images, super.key, this.index = 0, this.onChanged});
 
   final List<String> images;
   final int index;
@@ -92,15 +87,13 @@ class _UiPhotoViewState extends State<UiPhotoView> {
   }
 
   Future<void> saveImage(String imageUrl) async {
-    final response = await get(Uri.parse(imageUrl));
-    final bytes = response.bodyBytes;
-    final result = await ImageGallerySaverPlus.saveImage(bytes, quality: 100);
-
-    if (result['isSuccess'] == true) {
-      //snackBar('保存成功');
+    try {
+      final bytes = await readBytes(Uri.parse(imageUrl));
+      await Gal.putImageBytes(bytes);
+      // 保存成功
       unawaited(UiToast.show(.success()..text = '保存成功'));
-    } else {
-      // snackBar('保存失败');
+    } on Exception {
+      // 下载或保存失败
       unawaited(UiToast.show(.failure()..text = '保存失败'));
     }
   }

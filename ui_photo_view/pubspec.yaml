@@ -13,9 +13,7 @@ dependencies:
     sdk: flutter
   photo_view: ^0.15.0
   #image_gallery_saver_plus: ^5.1.1
-  image_gallery_saver_plus:
-    git:
-      url: https://github.com/clong1995/image_gallery_saver_plus.git
+  gal: ^3.0.1
   http: ^1.6.0
   ui_cache_image:
     git:
