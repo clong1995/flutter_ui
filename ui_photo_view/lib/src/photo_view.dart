@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:fn_device/fn_device.dart';
-import 'package:gal/gal.dart';
 import 'package:http/http.dart';
 import 'package:material_ui/material_ui.dart' show Icons;
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:rpx/ext.dart';
 import 'package:ui_button/ui_button.dart';
 import 'package:ui_cache_image/ui_cache_image.dart';
+import 'package:ui_pick_file/ui_pick_file.dart';
 import 'package:ui_theme/ui_theme.dart';
 import 'package:ui_toast/ui_toast.dart';
 
@@ -89,7 +89,7 @@ class _UiPhotoViewState extends State<UiPhotoView> {
   Future<void> saveImage(String imageUrl) async {
     try {
       final bytes = await readBytes(Uri.parse(imageUrl));
-      await Gal.putImageBytes(bytes);
+      await UiPickImage.save(bytes: bytes);
       // 保存成功
       unawaited(UiToast.show(.success()..text = '保存成功'));
     } on Exception {
