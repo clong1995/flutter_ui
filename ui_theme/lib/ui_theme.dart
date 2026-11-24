@@ -5,6 +5,8 @@ import 'package:material_ui/material_ui.dart';
 class UiTheme {
   static Color primaryColor = const Color(0xFF2D7AFF);
 
+  static Color backgroundColor = const Color(0xFFF7F8FA);
+
   //fontSize
   static double fontSize = 15;
   static String? fontFamily;
