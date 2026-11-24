@@ -4,7 +4,7 @@ import 'package:image/image.dart' as img;
 import 'package:zxing2/qrcode.dart';
 
 /// 从图片识别二维码
-String? qrImageScan(Uint8List bytes) {
+String? fnQrImageScan(Uint8List bytes) {
   final image = img.decodeImage(bytes);
 
   if (image == null) return null;

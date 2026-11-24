@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 /// 生成二维码
-Widget qrGenerate(
+Widget uiQrGenerate(
   String data, {
   double size = 200,
   EdgeInsets padding = EdgeInsets.zero,

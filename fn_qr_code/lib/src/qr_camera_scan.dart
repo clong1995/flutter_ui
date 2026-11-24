@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 /// 摄像头扫码
-class QrCameraScan extends StatefulWidget {
+class UiQrCameraScan extends StatefulWidget {
   const new({
     required this.onResult, super.key,
     this.fit = BoxFit.cover,
@@ -12,10 +12,10 @@ class QrCameraScan extends StatefulWidget {
   final BoxFit fit;
 
   @override
-  State<QrCameraScan> createState() => _QrCameraScanState();
+  State<UiQrCameraScan> createState() => _UiQrCameraScanState();
 }
 
-class _QrCameraScanState extends State<QrCameraScan> {
+class _UiQrCameraScanState extends State<UiQrCameraScan> {
   late final MobileScannerController _controller;
 
   bool _handled = false;
