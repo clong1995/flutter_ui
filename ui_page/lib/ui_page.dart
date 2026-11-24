@@ -16,7 +16,7 @@ class UiPage extends StatelessWidget {
     this.appbarAction,
     this.bottomBar,
     this.bottomBarColor = UiTheme.white,
-    this.backgroundColor = const Color(0xFFF7F8FA),
+    this.backgroundColor,
     this.appbarTextColor = UiTheme.white,
     super.key,
   });
@@ -29,13 +29,13 @@ class UiPage extends StatelessWidget {
   final Color? appbarTextColor;
   final Widget body;
   final Widget? bottomBar;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final Color bottomBarColor;
 
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: backgroundColor,
+      color: backgroundColor ?? UiTheme.backgroundColor,
       child: Column(
         children: [
           if (appbarTitle != null)
