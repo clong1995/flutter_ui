@@ -1,6 +1,5 @@
 //import 'package:kit/kit.dart';
 import 'package:ui_pick_file/ui_pick_file.dart';
-import 'package:ui_upload/src/image_size.dart';
 import 'package:ui_upload/src/sign_url.dart';
 import 'package:ui_upload/src/upload_file.dart';
 
@@ -23,8 +22,7 @@ class Upload {
       //获取文件内容
       String fileName;
       if (type == 'photo') {
-        final size = await imageSizeFromPath(pf.path);
-        fileName = '_s_${size.width}x${size.height}.${pf.extension}';
+        fileName = '_s_${pf.width}x${pf.height}.${pf.extension}';
       } else {
         fileName = '.${pf.extension}';
       }
@@ -104,8 +102,7 @@ class Upload {
       final fileList = <String>[];
       for (var i = 0; i < pfs.length; i++) {
         final pf = pfs[i];
-        final size = await imageSizeFromPath(pf.path);
-        final fileName = '_${i}_s_${size.width}x${size.height}.${pf.extension}';
+        final fileName = '_${i}_s_${pf.width}x${pf.height}.${pf.extension}';
         fileList.add(fileName);
       }
 

@@ -18,6 +18,7 @@ dependencies:
   path_provider: ^2.1.6
   http: ^1.6.0
   gal: ^3.0.1
+  image_size_getter: ^2.4.1
   ui_toast:
     git:
       url: https://github.com/clong1995/flutter_ui.git

@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ui_pick_file/src/image_size.dart';
 import 'package:ui_pick_file/src/picker.dart';
 import 'package:ui_pick_file/src/save_gallery.dart';
 import 'package:ui_pick_file/ui_pick_file.dart' show PickerFile;
@@ -23,7 +24,14 @@ class UiPickImage {
       maxHeight: maxHeight,
       imageQuality: imageQuality,
     );
-    return await pickerFile(xf);
+
+    final pf = await pickerFile(xf);
+
+    final size = await imageSizeFromPath(pf.path);
+    pf
+      ..width = size.width
+      ..height = size.height;
+    return pf;
   }
 
   //单选 从相册选择照片
@@ -38,7 +46,13 @@ class UiPickImage {
       maxHeight: maxHeight,
       imageQuality: imageQuality,
     );
-    return await pickerFile(xf);
+    final pf = await pickerFile(xf);
+
+    final size = await imageSizeFromPath(pf.path);
+    pf
+      ..width = size.width
+      ..height = size.height;
+    return pf;
   }
 
   //多选 从相册选择照片
@@ -60,6 +74,10 @@ class UiPickImage {
     final l = <PickerFile>[];
     for (final xf in list) {
       final pf = await pickerFile(xf);
+      final size = await imageSizeFromPath(pf.path);
+      pf
+        ..width = size.width
+        ..height = size.height;
       l.add(pf);
     }
     return l;
