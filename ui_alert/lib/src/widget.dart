@@ -34,7 +34,7 @@ class UiAlertWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           constraints: BoxConstraints(minWidth: 300.r, maxWidth: maxWidth),
           decoration: BoxDecoration(
-            color: UiTheme.,
+            color: UiTheme.backgroundColor,
             border: Border.all(color: UiTheme.grey),
             borderRadius: BorderRadius.circular(10.r),
           ),
