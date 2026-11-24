@@ -66,14 +66,13 @@ class UiPickImage {
   }
 
   // 保存图片到相册
-  static Future<String> save({
+  static Future<void> save({
     required Uint8List bytes,
     String? fileName,
   }) async => await saveImageToGallery(fileName: fileName, bytes: bytes);
 
   static Future<void> saveUrl({required String url, String? fileName}) async {
-    final response = await get(Uri.parse(url));
-    final bytes = response.bodyBytes;
+    final bytes = await readBytes(Uri.parse(url));
     await save(bytes: bytes, fileName: fileName);
   }
 }

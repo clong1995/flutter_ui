@@ -1,11 +1,13 @@
 //保存图片到相册
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:image_gallery_saver_plus/image_gallery_saver_plus.dart';
+import 'package:gal/gal.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:ui_toast/ui_toast.dart';
 
-Future<String> saveImageToGallery({
+Future<void> saveImageToGallery({
   required Uint8List bytes,
   String? fileName,
 }) async {
@@ -15,21 +17,18 @@ Future<String> saveImageToGallery({
   } else {
     name = fileName;
   }
-  final result = await ImageGallerySaverPlus.saveImage(
-    bytes,
-    quality: 100,
-    name: name,
-  );
-  if (result['isSuccess'] == true) {
-    return '';
+
+  try {
+    await Gal.putImageBytes(bytes,name: name);
+    // 保存成功
+    unawaited(UiToast.show(.success()..text = '保存成功'));
+  } on GalException catch (e) {
+    // 下载或保存失败
+    unawaited(UiToast.show(.failure()..text = e.type.message));
   }
-  if (result.errorMessage == null) {
-    return 'saver gallery error';
-  }
-  return result.errorMessage.toString();
 }
 
-Future<String> saveVideoToGallery({
+Future<void> saveVideoToGallery({
   required Uint8List bytes,
   String? fileName,
 }) async {
@@ -43,13 +42,12 @@ Future<String> saveVideoToGallery({
   final savePath = appDocDir.path + name;
   final file = File(savePath);
   await file.writeAsBytes(bytes);
-
-  final result = await ImageGallerySaverPlus.saveFile(file.path, name: name);
-  if (result['isSuccess'] == true) {
-    return '';
+  try {
+    await Gal.putVideo(file.path);
+    // 保存成功
+    unawaited(UiToast.show(.success()..text = '保存成功'));
+  } on GalException catch (e) {
+    // 下载或保存失败
+    unawaited(UiToast.show(.failure()..text = e.type.message));
   }
-  if (result.errorMessage == null) {
-    return 'saver gallery error';
-  }
-  return result.errorMessage.toString();
 }
