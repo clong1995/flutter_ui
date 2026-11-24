@@ -5,25 +5,31 @@ import 'package:qr_flutter/qr_flutter.dart';
 Widget uiQrGenerate(
   String data, {
   double size = 200,
-  EdgeInsets padding = EdgeInsets.zero,
+  EdgeInsetsGeometry padding = EdgeInsets.zero,
   Color backgroundColor = const Color(0xFFFFFFFF),
   Color foregroundColor = const Color(0xFF000000),
   int errorCorrectionLevel = QrErrorCorrectLevel.M,
 }) {
-  return QrImageView(
+  final painter = QrPainter(
     data: data,
-    size: size,
-    padding: padding,
-    backgroundColor: backgroundColor,
+    version: QrVersions.auto,
     errorCorrectionLevel: errorCorrectionLevel,
-
-    // 定位眼颜色
     eyeStyle: QrEyeStyle(eyeShape: QrEyeShape.square, color: foregroundColor),
-
-    // 数据模块颜色
     dataModuleStyle: QrDataModuleStyle(
       dataModuleShape: QrDataModuleShape.square,
       color: foregroundColor,
+    ),
+  );
+
+  return Padding(
+    padding: padding,
+    child: SizedBox(
+      width: size,
+      height: size,
+      child: CustomPaint(
+        painter: painter,
+        child: ColoredBox(color: backgroundColor),
+      ),
     ),
   );
 }
