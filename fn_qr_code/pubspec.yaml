@@ -22,6 +22,18 @@ dependencies:
     git:
       url: https://github.com/clong1995/flutter_ui.git
       path: ui_pick_file
+  fn_nav:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: fn_nav
+  rpx:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: rpx
+  fn_device:
+    git:
+      url: https://github.com/clong1995/flutter_ui.git
+      path: fn_device
 
 
 dev_dependencies:

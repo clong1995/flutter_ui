@@ -3,7 +3,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:ui_pick_file/ui_pick_file.dart';
 
 // 生成二维码
-Widget uiQrGenerate(
+Widget qrGenerate(
   String data, {
   double size = 200,
   int errorCorrectionLevel = QrErrorCorrectLevel.M,

@@ -3,7 +3,7 @@ import 'package:ui_pick_file/ui_pick_file.dart';
 import 'package:zxing2/qrcode.dart';
 
 /// 从图片识别二维码
-Future<String?> fnQrImageScan() async {
+Future<String?> qrImageScan() async {
   final pf = await UiPickFile.single();
   if (pf == null) {
     return null;

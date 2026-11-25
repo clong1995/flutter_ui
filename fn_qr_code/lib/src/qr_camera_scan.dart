@@ -1,23 +1,20 @@
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
+import 'package:fn_device/fn_device.dart';
+import 'package:fn_nav/fn_nav.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:rpx/ext.dart';
 
 /// 摄像头扫码
-class UiQrCameraScan extends StatefulWidget {
-  const new({
-    required this.onResult, super.key,
-    this.fit = BoxFit.cover,
-  });
-
-  final ValueChanged<String> onResult;
-  final BoxFit fit;
+class _QrCameraScan extends StatefulWidget {
+  const new();
 
   @override
-  State<UiQrCameraScan> createState() => _UiQrCameraScanState();
+  State<_QrCameraScan> createState() => _QrCameraScanState();
 }
 
-class _UiQrCameraScanState extends State<UiQrCameraScan> {
+class _QrCameraScanState extends State<_QrCameraScan> {
   late final MobileScannerController _controller;
 
   bool _handled = false;
@@ -28,9 +25,7 @@ class _UiQrCameraScanState extends State<UiQrCameraScan> {
 
     _controller = MobileScannerController(
       detectionSpeed: DetectionSpeed.noDuplicates,
-      formats: const [
-        BarcodeFormat.qrCode,
-      ],
+      formats: const [BarcodeFormat.qrCode],
     );
   }
 
@@ -54,15 +49,32 @@ class _UiQrCameraScanState extends State<UiQrCameraScan> {
 
     if (!mounted) return;
 
-    widget.onResult(value);
+    FnNav.pop<String?>(result: value);
   }
 
   @override
   Widget build(BuildContext context) {
-    return MobileScanner(
-      controller: _controller,
-      fit: widget.fit,
-      onDetect: _onDetect,
+    return Stack(
+      children: [
+        MobileScanner(controller: _controller, onDetect: _onDetect),
+        Positioned(
+          top: FnDevice.statusBarHeight + 10.r,
+          left: 20.r,
+          child: GestureDetector(
+            onTap: FnNav.pop,
+            child: Container(
+              width: 40.r,
+              height: 40.r,
+              alignment: .center,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: .circular(20.r),
+              ),
+              child: Icon(Icons.close, color: Colors.white, size: 20.r),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -72,3 +84,6 @@ class _UiQrCameraScanState extends State<UiQrCameraScan> {
     super.dispose();
   }
 }
+
+Future<String?> qrCameraScan() async =>
+    await FnNav.push<String?>(_QrCameraScan.new);
